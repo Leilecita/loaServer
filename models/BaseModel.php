@@ -18,8 +18,8 @@ abstract class BaseModel
     function __construct(){
         global $DBCONFIG;
         $this->db = new dbhelper();
-        $this->db->connect('pdo', 'mysql', '127.0.0.1', 'root', null, 'loa', 3306);
-       // $this->db->connect('pdo', 'mysql', $DBCONFIG['HOST'], $DBCONFIG['USERNAME'], $DBCONFIG['PASSWORD'],$DBCONFIG['DATABASE'],$DBCONFIG['PORT']);
+        //$this->db->connect('pdo', 'mysql', '127.0.0.1', 'root', null, 'loa', 3306);
+        $this->db->connect('pdo', 'mysql', $DBCONFIG['HOST'], $DBCONFIG['USERNAME'], $DBCONFIG['PASSWORD'],$DBCONFIG['DATABASE'],$DBCONFIG['PORT']);
     }
 
     function findById($id){
