@@ -35,8 +35,6 @@ class ClientModel extends BaseModel
         if(empty($data['imageData'])) {
             unset($data['imageData']);
 
-            // $this->updateTransactions($id,$data['name']);
-
             return $this->getDb()->update($this->tableName, $data,['id' => "$id"]);
         }else{
             $filePath = '/uploads/users/'.time().'.jpg';

@@ -54,7 +54,19 @@ abstract class BaseModel
         return $this->db->fetch_all($query);
     }
 
+    function findAllByDebt($filters=array(),$paginator=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY debt ASC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->db->fetch_all($query);
+    }
+
     function findAllByClientId($filters=array(),$paginator=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->db->fetch_all($query);
+    }
+
+    function findAllByEmployeeId($filters=array(),$paginator=array()){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
         return $this->db->fetch_all($query);
@@ -69,6 +81,16 @@ abstract class BaseModel
 
     function sum($client_id){
         $response = $this->db->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE client_id = ? ORDER BY created ASC',$client_id);
+        if($response['total']!=null){
+            return $response;
+        }else{
+            $response['total']=0;
+            return $response;
+        }
+    }
+
+    function sumAllOperations(){
+        $response = $this->db->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' ORDER BY created ASC');
         if($response['total']!=null){
             return $response;
         }else{

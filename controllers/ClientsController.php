@@ -20,7 +20,13 @@ class ClientsController extends BaseController
     }
 
     function getClients(){
-        $list_clients=$this->getModel()->findAllByName($this->getFilters(),$this->getPaginator());
+
+        if($_GET['order'] == "name"){
+            $list_clients=$this->getModel()->findAllByName($this->getFilters(),$this->getPaginator());
+        }else{
+            $list_clients=$this->getModel()->findAllByDebt($this->getFilters(),$this->getPaginator());
+        }
+
 
         for ($i = 0; $i < count($list_clients); ++$i) {
 

@@ -60,6 +60,13 @@ class ItemsFileController extends BaseController
 
     }
 
+    function totalAmount(){
+
+        $totalAmount=$this->getModel()->sumAllOperations();
+        $this->returnSuccess(200,$totalAmount);
+
+    }
+
     public function post()
     {
 
