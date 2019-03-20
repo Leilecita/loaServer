@@ -33,8 +33,14 @@ abstract class BaseController
         if(isset($_GET['since'])){
             $filters[] = 'created >= "'.$_GET['since'].'"';
         }
+        if(isset($_GET['to'])){
+            $filters[] = 'created < "'.$_GET['to'].'"';
+        }
         if(isset($_GET['observation'])){
             $filters[] = 'observation = "'.$_GET['observation'].'"';
+        }
+        if(isset($_GET['employee_id'])){
+            $filters[] = 'employee_id = "'.$_GET['employee_id'].'"';
         }
         return $filters;
     }
@@ -61,7 +67,6 @@ abstract class BaseController
             }else{
                 $this->returnError(404,"ENTITY NOT FOUND");
             }
-
         }else{
             $this->returnSuccess(200,$this->getModel()->findAll($this->getFilters(),$this->getPaginator()));
         }

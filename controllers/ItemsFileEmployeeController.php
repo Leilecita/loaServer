@@ -24,6 +24,14 @@ class ItemsFileEmployeeController extends BaseController
         }
     }
 
+    function amountHoursByMonth(){
+        if(isset($_GET['since']) && isset($_GET['to'])){
+
+            $totalAmount=$this->getModel()->amountHoursByMonth($_GET['since'],$_GET['to'],$_GET['employee_id']);
+            $this->returnSuccess(200,$totalAmount);
+        }
+    }
+
     public function get()
     {
         if(isset($_GET['method'])){

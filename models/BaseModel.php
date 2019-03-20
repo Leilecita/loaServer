@@ -99,6 +99,30 @@ abstract class BaseModel
         }
     }
 
+    function amountByExtractionsDay($date1,$date2){
+        $response = $this->db->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? ORDER BY created DESC',$date1,$date2);
+        if($response['total']!=null){
+            return $response;
+        }else{
+            $response['total']=0;
+            return $response;
+        }
+    }
+
+    function amountHoursByMonth($date1,$date2,$employee_id){
+
+        $response1 = $this->db->fetch_row('SELECT SUM(time_worked) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? AND employee_id = ? ORDER BY created DESC',$date1,$date2,$employee_id);
+        $response2 = $this->db->fetch_row('SELECT SUM(time_worked_aft) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? AND employee_id = ? ORDER BY created DESC',$date1,$date2,$employee_id);
+
+        $response['total']=$response1['total']+$response2['total'];
+        if($response['total']!=null){
+            return $response;
+        }else{
+            $response['total']=0;
+            return $response;
+        }
+    }
+
     function sumPreviousBalance($client_id,$created){
         $response = $this->db->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE client_id = ? AND created < ? ORDER BY created DESC',$client_id,$created);
         if($response['total']!=null){
