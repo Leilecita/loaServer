@@ -21,6 +21,28 @@ class BoxesController extends BaseController
         $this->extractions = new ExtractionModel();
     }
 
+    function updateBoxes(){
+        $boxes=$this->getModel()->findAll($this->getFilters(),$this->getPaginator());
+        for ($i = 0; $i < count($boxes); ++$i) {
+
+            $created=$boxes[$i]['created'];
+
+            $parts = explode(" ", $created);
+            $date=$parts[0]." 00:00:00";
+
+            $next_date = date('Y-m-d', strtotime( $parts[0].' +1 day'));
+
+
+            $dateTo=$next_date." 00:00:00";
+
+            $totalAmount=$this->extractions->amountByExtractionsDay($date,$dateTo);
+
+            $this->model->update($boxes[$i]['id'],array('deposit' => $totalAmount));
+
+        }
+
+    }
+
     function getBoxes(){
 
         $boxes=$this->getModel()->findAll($this->getFilters(),$this->getPaginator());
@@ -43,7 +65,7 @@ class BoxesController extends BaseController
         }
 
         $this->returnSuccess(200,$boxes);
+    }
 
-        }
 
 }
