@@ -21,7 +21,7 @@ class BoxesController extends BaseController
         $this->extractions = new ExtractionModel();
     }
 
-    function updateBoxes(){
+    /*function updateBoxes(){
         $boxes=$this->getModel()->findAll($this->getFilters(),$this->getPaginator());
         for ($i = 0; $i < count($boxes); ++$i) {
 
@@ -41,7 +41,7 @@ class BoxesController extends BaseController
 
         }
 
-    }
+    }*/
 
     function getBoxes(){
 
