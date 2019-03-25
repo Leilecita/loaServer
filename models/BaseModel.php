@@ -35,6 +35,12 @@ abstract class BaseModel
         return $this->db;
     }
 
+    function find($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC';
+        return $this->db->fetch_row($query);
+    }
+
     function findAll($filters=array(),$paginator=array()){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
