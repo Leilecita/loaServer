@@ -42,6 +42,9 @@ abstract class BaseController
         if(isset($_GET['employee_id'])){
             $filters[] = 'employee_id = "'.$_GET['employee_id'].'"';
         }
+        if(isset($_GET['client_id'])){
+            $filters[] = 'client_id = "'.$_GET['client_id'].'"';
+        }
         return $filters;
     }
 
