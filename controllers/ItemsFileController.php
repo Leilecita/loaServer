@@ -118,9 +118,9 @@ class ItemsFileController extends BaseController
            parent::get();
        }
     }
-    function logEvent($employee_name,$description,$value,$previous_description,$previous_value,$state){
+    function logEvent($employee_name,$description,$value,$previous_description,$previous_value,$state,$client_id){
         $this->events->save(array('employee_name' => $employee_name, 'description' => $description, 'value' => $value,'state' => $state,
-            'previous' => $previous_description, 'previous_value' => $previous_value));
+            'previous' => $previous_description, 'previous_value' => $previous_value,'client_id' => $client_id));
     }
 
     function generateLogevent($data,$state,$previous_descr,$previous_value){
@@ -128,7 +128,7 @@ class ItemsFileController extends BaseController
         $client= $this->clients->findById($data['client_id']);
         $value=$data['value'];
         $desc=$client['name']."".$data['observation']." ".$data['product_kind']." ".$data['brand']." ".$data['size']." ".$data['code'];
-        $this->logEvent($client['employee_creator_id'],$desc,$value,$previous_descr,$previous_value,$state);
+        $this->logEvent($client['employee_creator_id'],$desc,$value,$previous_descr,$previous_value,$state,$data['client_id']);
     }
 
 
