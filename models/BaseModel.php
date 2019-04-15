@@ -47,6 +47,15 @@ abstract class BaseModel
         return $this->db->fetch_all($query);
     }
 
+
+    function getSpinner($filters=array(),$type){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT DISTINCT '.$type.' FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC';
+
+        return $this->db->fetch_all($query);
+
+    }
+
     function findAllByDate($filters=array()){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC';

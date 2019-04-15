@@ -46,5 +46,36 @@ class BoxesController extends BaseController
         $this->returnSuccess(200,$boxes);
     }
 
+    function getAmountExtractions($data){
+        $created=$data['created'];
+
+        $parts = explode(" ", $created);
+        $date=$parts[0]." 00:00:00";
+        $next_date = date('Y-m-d', strtotime( $parts[0].' +1 day'));
+        $dateTo=$next_date." 00:00:00";
+        $filters= array();
+        $filters[] = 'created >= "'.$date.'"';
+        $filters[] = 'created < "'.$dateTo.'"';
+
+        $totalAmount=$this->extractions->amountByExtractionsDay($date,$dateTo);
+
+        $this->getModel()->update($data['id'],array('deposit'=> $totalAmount));
+
+    }
+
+    function post(){
+        $data = (array)json_decode(file_get_contents("php://input"));
+        unset($data['id']);
+        $res = $this->getModel()->save($data);
+        if($res<0){
+            $this->returnError(404,null);
+        }else{
+            $inserted = $this->getModel()->findById($res);
+            $this->getAmountExtractions($inserted);
+            $this->returnSuccess(201,$inserted);
+        }
+    }
+
+
 
 }
