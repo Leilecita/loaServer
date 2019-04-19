@@ -16,11 +16,13 @@ class ProductsController extends BaseController
         $this->model = new ProductModel();
     }
 
-    function getSpinner(){
+    function spinner(){
 
-        $this->returnSuccess(200,$this->getModel()->getSpinner(array(),$_GET['type']));
+
+         $this->returnSuccess(200,$this->getModel()->getSpinner(array(),$_GET['type']));
 
     }
+
 
 
     function getProducts(){
