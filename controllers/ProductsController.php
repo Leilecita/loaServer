@@ -19,8 +19,8 @@ class ProductsController extends BaseController
     function spinner(){
 
         if($_GET['type']){
-
-            $this->returnSuccess(200,$this->getModel()->getSpinner(array(),$_GET['type']));
+            $filters= array();
+            $this->returnSuccess(200,$this->getModel()->getSpinner($filters,$_GET['type']));
 
         }
 
