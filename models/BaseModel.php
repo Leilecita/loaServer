@@ -54,6 +54,7 @@ abstract class BaseModel
 
         return $this->db->fetch_all($query);
 
+
     }
 
     function findAllByDate($filters=array()){
