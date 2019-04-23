@@ -49,7 +49,6 @@ abstract class BaseModel
 
 
     function getSpinner($filters=array(),$type){
-        $conditions = join(' AND ',$filters);
         $query = 'SELECT DISTINCT '.$type.' FROM '.$this->tableName;
         return $this->db->fetch_all($query);
 

@@ -21,7 +21,6 @@ class ProductsController extends BaseController
         if($_GET['tt']){
             $filters= array();
             $this->returnSuccess(200,$this->getModel()->getSpinner($filters,$_GET['tt']));
-
         }
 
     }
