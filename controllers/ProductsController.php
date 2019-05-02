@@ -6,10 +6,10 @@
  * Time: 12:21
  */
 
-require_once 'BaseController.php';
+require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/ProductModel.php';
 
-class ProductsController extends BaseController
+class ProductsController extends SecureBaseController
 {
     function __construct(){
         parent::__construct();

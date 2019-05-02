@@ -6,9 +6,9 @@
  * Time: 12:35
  */
 
-require_once 'BaseController.php';
+require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/ClientFileModel.php';
-class ClientsFileController extends BaseController
+class ClientsFileController extends SecureBaseController
 {
     function __construct(){
         parent::__construct();

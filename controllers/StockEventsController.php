@@ -6,11 +6,11 @@
  * Time: 14:41
  */
 
-require_once 'BaseController.php';
+require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/StockEventModel.php';
 require_once  __DIR__.'/../models/ProductModel.php';
 
-class StockEventsController extends BaseController
+class StockEventsController extends SecureBaseController
 {
     private $products;
     function __construct(){

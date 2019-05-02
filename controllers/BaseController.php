@@ -19,6 +19,11 @@ abstract class BaseController
         return $this->model;
     }
 
+    function beforeMethod(){
+
+    }
+
+
     function getPaginator(){
         $paginator = array('offset' => 0, 'limit' => PAGE_SIZE);
         if(isset($_GET['page'])){
@@ -69,6 +74,7 @@ abstract class BaseController
     }
 
     function get(){
+        $this->beforeMethod();
         if(isset($_GET['method'])){
             $this->method();
         }else if($this->validateId()){
@@ -84,6 +90,7 @@ abstract class BaseController
     }
 
     function post(){
+        $this->beforeMethod();
         $data = (array)json_decode(file_get_contents("php://input"));
         unset($data['id']);
         $res = $this->getModel()->save($data);
@@ -96,6 +103,7 @@ abstract class BaseController
     }
 
     function put(){
+        $this->beforeMethod();
         $data = (array) json_decode(file_get_contents("php://input"));
 
         if(isset($data['id'])){
@@ -119,6 +127,7 @@ abstract class BaseController
     }
 
     function delete(){
+        $this->beforeMethod();
         if($this->getModel()->delete($_GET['id'])){
             $this->returnSuccess(204,null);
         }else{

@@ -6,11 +6,11 @@
  * Time: 11:50
  */
 
-require_once 'BaseController.php';
+require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/ClientModel.php';
 require_once  __DIR__.'/../models/ItemFileModel.php';
 
-class ClientsController extends BaseController
+class ClientsController extends SecureBaseController
 {
     private $items;
     function __construct(){
@@ -39,7 +39,9 @@ class ClientsController extends BaseController
     }
 
     function get(){
-        //error_log("ale");
+
+       $this->beforeMethod();
+        error_log("ale");
         //error_log("SERVER: ".print_r($_SERVER,true));
         if(isset($_GET['method'])){
             $this->method();

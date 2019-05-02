@@ -7,11 +7,11 @@
  */
 
 
-require_once 'BaseController.php';
+require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/ItemFileModel.php';
 require_once  __DIR__.'/../models/ClientModel.php';
 require_once  __DIR__.'/../models/EventModel.php';
-class ItemsFileController extends BaseController
+class ItemsFileController extends SecureBaseController
 {
     private $clients;
     private $events;
@@ -113,6 +113,7 @@ class ItemsFileController extends BaseController
 
     public function get()
     {
+       // $this->beforeMethod();
        if(isset($_GET['method'])){
            $this->method();
        }else{

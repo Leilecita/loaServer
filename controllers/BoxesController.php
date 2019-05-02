@@ -7,11 +7,11 @@
  */
 
 
-require_once 'BaseController.php';
+require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/BoxModel.php';
 require_once  __DIR__.'/../models/ExtractionModel.php';
 
-class BoxesController extends BaseController
+class BoxesController extends SecureBaseController
 {
     private $extractions;
 
@@ -23,6 +23,7 @@ class BoxesController extends BaseController
 
 
     function getBoxes(){
+        //$this->beforeMethod();
 
         $boxes=$this->getModel()->findAll($this->getFilters(),$this->getPaginator());
        /* for ($i = 0; $i < count($boxes); ++$i) {

@@ -5,9 +5,9 @@
  * Date: 16/12/2018
  * Time: 14:20
  */
-require_once 'BaseController.php';
+require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/ItemFileEmployeeModel.php';
-class ItemsFileEmployeeController extends BaseController
+class ItemsFileEmployeeController extends SecureBaseController
 {
 
     function __construct(){
@@ -34,6 +34,7 @@ class ItemsFileEmployeeController extends BaseController
 
     public function get()
     {
+        $this->beforeMethod();
         if(isset($_GET['method'])){
             $this->method();
         }else{

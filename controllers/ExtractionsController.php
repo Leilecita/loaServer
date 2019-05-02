@@ -6,11 +6,11 @@
  * Time: 17:36
  */
 
-require_once 'BaseController.php';
+require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/ExtractionModel.php';
 require_once  __DIR__.'/../models/BoxModel.php';
 
-class ExtractionsController extends BaseController
+class ExtractionsController extends SecureBaseController
 {
 
     private $boxes;
@@ -18,26 +18,6 @@ class ExtractionsController extends BaseController
         parent::__construct();
         $this->model = new ExtractionModel();
         $this->boxes= new BoxModel();
-    }
-
-    function updateBox($data){
-
-        $created=$data['created'];
-
-        $parts = explode(" ", $created);
-        $date=$parts[0]." 00:00:00";
-        $next_date = date('Y-m-d', strtotime( $parts[0].' +1 day'));
-        $dateTo=$next_date." 00:00:00";
-        $filters= array();
-        $filters[] = 'created >= "'.$date.'"';
-        $filters[] = 'created < "'.$dateTo.'"';
-
-        $box=$this->boxes->find($filters);
-
-        $totalAmount=$this->getModel()->amountByExtractionsDay($date,$dateTo);
-
-        $this->boxes->update($box['id'],array('deposit'=> $totalAmount));
-
     }
 
     function put(){
@@ -66,10 +46,30 @@ class ExtractionsController extends BaseController
     function amountExtractions(){
 
         if(isset($_GET['date']) && isset($_GET['dateTo'])){
-
             $totalAmount=$this->getModel()->amountByExtractionsDay($_GET['date'],$_GET['dateTo']);
             $this->returnSuccess(200,$totalAmount);
         }
+    }
+
+
+    function updateBox($data){
+
+        $created=$data['created'];
+
+        $parts = explode(" ", $created);
+        $date=$parts[0]." 00:00:00";
+        $next_date = date('Y-m-d', strtotime( $parts[0].' +1 day'));
+        $dateTo=$next_date." 00:00:00";
+        $filters= array();
+        $filters[] = 'created >= "'.$date.'"';
+        $filters[] = 'created < "'.$dateTo.'"';
+
+        $box=$this->boxes->find($filters);
+
+        $totalAmount=$this->getModel()->amountByExtractionsDay($date,$dateTo);
+
+        $this->boxes->update($box['id'],array('deposit'=> $totalAmount));
+
     }
 
 }
