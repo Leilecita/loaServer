@@ -47,13 +47,37 @@ abstract class BaseModel
         return $this->db->fetch_all($query);
     }
 
+    function sumAll($filters=array(),$paginator=array()){
+        $conditions = join(' AND ',$filters);
 
-    function getSpinner($filters=array(),$type){
-        $query = 'SELECT DISTINCT '.$type.' FROM '.$this->tableName;
-        return $this->db->fetch_all($query);
+        $response =  $this->db->fetch_row('SELECT SUM(stock) AS total FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created 
+        DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset']);
 
+        if($response['total']!=null){
+            return $response['total'];
+        }else{
+            $response['total']=0;
+            return $response['total'];
+        }
 
     }
+
+
+
+    function getSpinner($filters=array(),$type){
+        $conditions = join(' AND ',$filters);
+
+       // $query = 'SELECT DISTINCT '.$type.' FROM '.$this->tableName;
+        $query = 'SELECT DISTINCT '.$type.' FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions );
+        return $this->db->fetch_all($query);
+    }
+
+    /*
+
+        SELECT DISTINCT(emp_name) FROM sto_emp_salary_paid
+
+        WHERE emp_sal_paid >= 4500;
+     */
 
     function findAllByDate($filters=array()){
         $conditions = join(' AND ',$filters);
