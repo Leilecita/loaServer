@@ -6,7 +6,7 @@
  * Time: 11:34
  */
 date_default_timezone_set('UTC');
-define('PAGE_SIZE',10);
+define('PAGE_SIZE',5);
 abstract class BaseController
 {
     protected $model;
@@ -74,7 +74,7 @@ abstract class BaseController
     }
 
     function get(){
-        $this->beforeMethod();
+       // $this->beforeMethod();
         if(isset($_GET['method'])){
             $this->method();
         }else if($this->validateId()){

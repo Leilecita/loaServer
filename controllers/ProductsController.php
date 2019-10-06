@@ -16,16 +16,13 @@ class ProductsController extends SecureBaseController
         $this->model = new ProductModel();
     }
 
-    function assignFilter()
-    {
+    function assignFilter(){
         $filters = array();
-
         if(isset($_GET['brand'])){
             if ($_GET['brand'] != "Todos") {
                 $filters[] = 'brand = "' . $_GET['brand'] . '"';
             }
         }
-
         if(isset($_GET['type'])) {
             if ($_GET['type'] != "Todos") {
                 $filters[] = 'type = "' . $_GET['type'] . '"';
@@ -36,9 +33,19 @@ class ProductsController extends SecureBaseController
                 $filters[] = 'item = "' . $_GET['item'] . '"';
             }
         }
+        if(isset($_GET['deleted'])) {
+            $filters[] = 'deleted = "' . $_GET['deleted'] . '"';
+        }
         return $filters;
     }
 
+    public function deleteProduct()
+    {
+        $this->model->update($_GET['id'],array('deleted' => 'true'));
+
+        $resp=array('brand'=>"ok");
+        $this->returnSuccess(200,$resp);
+    }
 
     function spinner(){
         if($_GET['tt']){
@@ -46,13 +53,28 @@ class ProductsController extends SecureBaseController
         }
     }
 
-    function getProducts2()
-    {
+    function getDeletedProducts(){
+        $this->returnSuccess(200, $this->getModel()->findAll($this->assignFilter(), $this->getPaginator()));
+    }
+
+    function getProducts2(){
         $this->returnSuccess(200, $this->getModel()->findAll($this->assignFilter(), $this->getPaginator()));
     }
 
     function sumAllStock(){
         $this->returnSuccess(200, $this->getModel()->sumAll($this->assignFilter(), $this->getPaginator()));
+    }
+
+
+    function getSpinners(){
+        $listItems=$this->getModel()->getSpinner($this->assignFilter(),"item");
+        $listBrands=$this->getModel()->getSpinner($this->assignFilter(),"brand");
+        $listType=$this->getModel()->getSpinner($this->assignFilter(),"type");
+
+        $resp=array("items" => $listItems,"brands" => $listBrands,"types" => $listType);
+
+        $this->returnSuccess(200,$resp);
+
     }
 
     function getProducts()

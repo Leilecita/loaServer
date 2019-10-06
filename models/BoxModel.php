@@ -17,6 +17,7 @@ class BoxModel extends BaseModel
         $this->tableName = 'item_box';
     }
 
+
     function save($data){
         if(empty($data['imageData'])) {
             unset($data['imageData']);

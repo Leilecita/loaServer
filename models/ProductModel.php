@@ -14,4 +14,5 @@ class ProductModel extends BaseModel
         parent::__construct();
         $this->tableName = 'products';
     }
+
 }

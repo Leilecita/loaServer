@@ -64,6 +64,8 @@ abstract class BaseModel
 
 
 
+
+
     function getSpinner($filters=array(),$type){
         $conditions = join(' AND ',$filters);
 
