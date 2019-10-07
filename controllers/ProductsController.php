@@ -66,6 +66,39 @@ class ProductsController extends SecureBaseController
         $this->returnSuccess(200, $this->getModel()->sumAll($this->assignFilter(), $this->getPaginator()));
     }
 
+    function checkExistProduct(){
+
+
+
+        $filters2=array();
+        $filters2[] = 'brand = "' . $_GET['brand'] . '"';
+        $filters2[] = 'item = "' . $_GET['item'] . '"';
+        $filters2[] = 'type = "' . $_GET['type'] . '"';
+
+        $res=$this->getModel()->findAll($filters2, $this->getPaginator());
+        if(count($res)>0){
+
+            $resp=array('res' => "existe");
+            $this->returnSuccess(200,$resp);
+
+        }else{
+
+            $product=array('item' => $_GET['item'] ,'type' => $_GET['type'],'brand' => $_GET['brand'], 'stock' => 0, 'deleted' => "false");
+
+            $res = $this->getModel()->save($product);
+            if($res<0){
+
+                $resp=array('res' => "error al crear el prod");
+                $this->returnError(400,$resp);
+            }else{
+                $resp=array('res' => "creado");
+                $this->returnSuccess(200,$resp);
+            }
+
+        }
+
+    }
+
 
     function getSpinners(){
         $listItems=$this->getModel()->getSpinner($this->assignFilter(),"item");
