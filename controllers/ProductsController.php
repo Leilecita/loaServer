@@ -47,6 +47,7 @@ class ProductsController extends SecureBaseController
         $this->returnSuccess(200,$resp);
     }
 
+
     function spinner(){
         if($_GET['tt']){
             $this->returnSuccess(200,$this->getModel()->getSpinner($this->assignFilter(),$_GET['tt']));
