@@ -18,6 +18,13 @@ class ProductsController extends SecureBaseController
 
     function assignFilter(){
         $filters = array();
+
+        if(isset($_GET['model'])){
+            if ($_GET['model'] != "Todos" && $_GET['model'] != "" ) {
+                $filters[] = 'model = "' . $_GET['model'] . '"';
+            }
+        }
+
         if(isset($_GET['brand'])){
             if ($_GET['brand'] != "Todos") {
                 $filters[] = 'brand = "' . $_GET['brand'] . '"';
@@ -74,6 +81,7 @@ class ProductsController extends SecureBaseController
         $filters2[] = 'brand = "' . $_GET['brand'] . '"';
         $filters2[] = 'item = "' . $_GET['item'] . '"';
         $filters2[] = 'type = "' . $_GET['type'] . '"';
+        $filters2[] = 'model = "' . $_GET['model'] . '"';
 
         $res=$this->getModel()->findAll($filters2, $this->getPaginator());
         if(count($res)>0){
@@ -83,7 +91,7 @@ class ProductsController extends SecureBaseController
 
         }else{
 
-            $product=array('item' => $_GET['item'] ,'type' => $_GET['type'],'brand' => $_GET['brand'], 'stock' => 0, 'deleted' => "false");
+            $product=array('item' => $_GET['item'] ,'type' => $_GET['type'],'brand' => $_GET['brand'],'model' => $_GET['model'] ,'stock' => 0, 'deleted' => "false");
 
             $res = $this->getModel()->save($product);
             if($res<0){
@@ -94,24 +102,23 @@ class ProductsController extends SecureBaseController
                 $resp=array('res' => "creado");
                 $this->returnSuccess(200,$resp);
             }
-
         }
-
     }
 
-
     function getSpinners(){
+
         $listItems=$this->getModel()->getSpinner($this->assignFilter(),"item");
         $listBrands=$this->getModel()->getSpinner($this->assignFilter(),"brand");
         $listType=$this->getModel()->getSpinner($this->assignFilter(),"type");
+        $listModel=$this->getModel()->getSpinner($this->assignFilter(),"model");
 
-        $resp=array("items" => $listItems,"brands" => $listBrands,"types" => $listType);
+        $resp=array("items" => $listItems,"brands" => $listBrands,"types" => $listType, "models" => $listModel);
 
         $this->returnSuccess(200,$resp);
 
     }
 
-    function getProducts()
+   /* function getProducts()
     {
         $filters = array();
 
@@ -142,5 +149,5 @@ class ProductsController extends SecureBaseController
             }
             $this->returnSuccess(200, $this->getModel()->findAll($filters, $this->getPaginator()));
         }
-    }
-    }
+    }*/
+}
