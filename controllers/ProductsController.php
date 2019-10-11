@@ -20,7 +20,7 @@ class ProductsController extends SecureBaseController
         $filters = array();
 
         if(isset($_GET['model'])){
-            if ($_GET['model'] != "Todos" && $_GET['model'] != "" ) {
+            if ($_GET['model'] != "Todos") {
                 $filters[] = 'model = "' . $_GET['model'] . '"';
             }
         }
