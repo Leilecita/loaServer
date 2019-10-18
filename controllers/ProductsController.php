@@ -82,6 +82,7 @@ class ProductsController extends SecureBaseController
         $filters2[] = 'item = "' . $_GET['item'] . '"';
         $filters2[] = 'type = "' . $_GET['type'] . '"';
         $filters2[] = 'model = "' . $_GET['model'] . '"';
+        $filters2[] = 'deleted = "false"';
 
         $res=$this->getModel()->findAll($filters2, $this->getPaginator());
         if(count($res)>0){
