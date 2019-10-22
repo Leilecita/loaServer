@@ -75,8 +75,6 @@ class ProductsController extends SecureBaseController
 
     function checkExistProduct(){
 
-
-
         $filters2=array();
         $filters2[] = 'brand = "' . $_GET['brand'] . '"';
         $filters2[] = 'item = "' . $_GET['item'] . '"';
