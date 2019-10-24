@@ -1,20 +1,45 @@
-body {
-	background-color: #f1d1b5;
+
+body,html{
+	/* The image used */
+	background: url("fondo2.jpg") no-repeat ;
+
+	/* para que se mueva lo de adentro */
+
+	background-size: cover;
+	background-position: top center;
 }
+
+* {
+
+}
+
 h2 {
 	color: #FFFFff;
 	font-family:"Comic Sans MS";
 	font-size: 22px;
 	font-style: normal;
 	font-weight: normal;
-	margin: 25px;
-	margin-bottom: 20px;
+	margin-top: 15px;
+	margin-bottom: 0px;
 	text-align: center;
+}
 
+.alumno {
+	width: 500px;
+	color: #333333;
+	font-size: 22px;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	font-family: "PT Sans";
+	font-style: normal;
+	padding-top: 5px;
 }
 
 .group {
-	padding: 10px;
+
+	padding: 0px;
 	width: 400px;
 	color: #555555;
 	background-color: transparent;
@@ -25,30 +50,14 @@ h2 {
 	margin-left: auto;
 }
 
-.obs {
-	width: 500px;
-	color: #555555;
-	margin-top: 0;
-	margin-right: auto;
-	margin-bottom: 0;
-	margin-left: auto;
-	font-family: "PT Sans";
-	font-style: normal;
-}
-
-
-.contact-form {
-	width: 400px;
-	text-align: left;
-
-}
 
 /* Form input box style */
 .form-input {
-	display: block;
-	width: 200px;
+	display: block; /*inline para hacerlo horizontal*/
+	width: 250px;
 	height: 15px;
 	margin-bottom: 15px;
+	border-radius: 4px;
 	color: #000;
 	background-color: #FFf;
 	border: 1px solid #999;
@@ -65,6 +74,23 @@ h2 {
 	padding-right: 10px;
 	padding-bottom: 5px;
 	padding-left: 10px;
+}
+
+.contact-form {
+	width: 400px;
+	text-align: left;
+
+
+}
+.obs {
+	width: 500px;
+	color: #555555;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	font-family: "PT Sans";
+	font-style: normal;
 }
 
 /* Focus style */
@@ -129,7 +155,7 @@ label {
 	display: block;
 	width: 300px;
 	color: #305f72;
-	font-size: 14px;
+	font-size: 18px;
 	font-weight: normal;
 	font-family: "PT Sans","Comic Sans MS";
 }
@@ -145,6 +171,11 @@ label span {
 	border: 1px solid #CCCCCC;
 	padding: 20px;
 }
+
+
+
+
+
 
 /*
 background-image: url("loa.jpeg");
