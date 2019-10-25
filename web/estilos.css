@@ -5,11 +5,11 @@ body,html{
 	background: url("fondo2.jpg") ;
 	background-color: #f9c6c0;
 
-	background-repeat: no-repeat no-repeat;
+	background-repeat: no-repeat;
 
 	/* para que se mueva lo de adentro */
 
-	background-position: top center;
+	background-position: center center;
 
 	background-size:auto  100%;
 }
