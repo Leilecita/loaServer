@@ -46,7 +46,6 @@ input {
 
 .withLogo{
 	position: relative;
-
 }
 
 .logoloa {
@@ -67,4 +66,9 @@ fieldset{
 	color:white;
 	font-size: 130%;
 
+}
+
+.btn-primary{
+
+	position: center;
 }

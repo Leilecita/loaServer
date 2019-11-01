@@ -3,10 +3,15 @@
 include __DIR__ . '/../config/config.php';
 require __DIR__ . '/../libs/dbhelper.php';
 
-$db_host="localhost";
+
+global $DBCONFIG;
+
+// $this->db->connect('pdo', 'mysql', $DBCONFIG['HOST'], $DBCONFIG['USERNAME'], $DBCONFIG['PASSWORD'],$DBCONFIG['DATABASE'],$DBCONFIG['PORT']);
+
+$db_host=$DBCONFIG['HOST'];
 $db_user="root";
-$db_password=null;
-$db_name='loa';
+$db_password= $DBCONFIG['PASSWORD'];
+$db_name=$DBCONFIG['DATABASE'];
 $db_table_name="students";
 
 $db_connection = mysqli_connect($db_host, $db_user, $db_password);
@@ -26,7 +31,7 @@ $subs_dni = utf8_decode($_POST['dni']);
 
 $resultado=mysqli_query($db_connection,"SELECT * FROM ".$db_table_name." WHERE dni = '".$subs_dni."'" );
 
-var_dump($resultado);
+//var_dump($resultado);
 
 if (mysqli_num_rows($resultado)>0)
 {
