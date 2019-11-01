@@ -1,0 +1,66 @@
+
+body {
+	/* The image used */
+	background-color: white;
+
+}
+
+.background{
+
+	background:linear-gradient(to bottom,rgba(142, 119, 102, 0.55) 0,rgba(92, 77, 66, 0.45) 100%), url(../img/fondoloa3.jpg);
+
+	background-color: white;
+	background-repeat: no-repeat;
+	background-position: top center;
+	background-size:cover;
+	position: fixed;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+
+input {
+	width: 50%;
+}
+
+.form-control{
+	width: 50%;
+}
+
+.front{
+	position: relative;
+	z-index: 1;
+}
+
+.container{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+.withLogo{
+	position: relative;
+
+}
+
+.logoloa {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top:0;
+	right: 0;
+}
+
+legend{
+
+	font-size: 26px;
+	margin-top: 10px;
+}
+
+fieldset{
+	color:white;
+	font-size: 130%;
+
+}
