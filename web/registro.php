@@ -45,7 +45,7 @@ if (mysqli_num_rows($resultado)>0)
     $retry_value = mysqli_query( $db_connection,$insert_value);
 
     if (!$retry_value) {
-        die('Error: ' . mysqli_error());
+        die('Error: ' . mysqli_error($db_connection));
     }
 
     header('Location: Success.html');
