@@ -29,6 +29,10 @@ input {
 	width: 50%;
 }
 
+.form-group{
+	padding-right: 40px;
+}
+
 .front{
 	position: relative;
 	z-index: 1;
@@ -46,8 +50,8 @@ input {
 }
 
 .logoloa {
-	width: 50px;
-	height: 50px;
+	width: 65px;
+	height: 65px;
 	position: absolute;
 	top:0;
 	right: 0;
