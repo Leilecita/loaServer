@@ -25,7 +25,7 @@ $subs_name = utf8_decode($_POST['nombre']);
 $subs_last = utf8_decode($_POST['apellido']);
 //$subs_email = utf8_decode($_POST['email']);
 $subs_nacimiento = utf8_decode($_POST['fecha_nacimiento']);
-$subs_edad = utf8_decode($_POST['edad']);
+$subs_edad = intval(utf8_decode($_POST['edad']),10);
 $subs_dni = utf8_decode($_POST['dni']);
 
 
