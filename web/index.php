@@ -37,20 +37,25 @@
                     <input type="text" name="apellido" class="form-control"  placeholder=""/>
                 </div>
                 <div class="form-group">
+                    <label for="dni">DNI</label>
+                    <input type="text" name="dni" class="form-control" text required placeholder=""/>
+                </div>
+                <div class="form-group">
                     <label for="fecha_nacimiento">Fecha de nacimiento</label>
-                    <input type="text" name="fecha_nacimiento" class="form-control" text placeholder=""/>
+                    <input type="date" name="fecha_nacimiento" class="form-control" text placeholder=""/>
                 </div>
                 <div class="form-group">
                     <label for="edad">Edad</label>
                     <input type="text" name="edad" class="form-control" text placeholder=""/>
                 </div>
-                <div class="form-group">
-                    <label for="dni">DNI</label>
-                    <input type="text" name="dni" class="form-control" text required placeholder=""/>
-                </div>
+
                 <div class="form-group">
                     <label for="direccion">Dirección</label>
                     <input type="text" name="direccion" class="form-control" text placeholder=""/>
+                </div>
+                <div class="form-group">
+                    <label for="localidad">Localidad</label>
+                    <input type="text" name="localidad" class="form-control" text placeholder=""/>
                 </div>
 
                 <div class="row">

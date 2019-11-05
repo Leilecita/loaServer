@@ -23,10 +23,22 @@ if (!$db_connection) {
 }
 $subs_name = utf8_decode($_POST['nombre']);
 $subs_last = utf8_decode($_POST['apellido']);
-//$subs_email = utf8_decode($_POST['email']);
 $subs_nacimiento = utf8_decode($_POST['fecha_nacimiento']);
 $subs_edad = intval(utf8_decode($_POST['edad']),10);
 $subs_dni = utf8_decode($_POST['dni']);
+
+$subs_direccion = utf8_decode($_POST['direccion']);
+$subs_localidad = utf8_decode($_POST['localidad']);
+$subs_nombre_mama = utf8_decode($_POST['nombre_mama']);
+
+$subs_tel_mama = utf8_decode($_POST['tel_mama']);
+$subs_email_mama = utf8_decode($_POST['email_mama']);
+$subs_instagram_mama = utf8_decode($_POST['instagram_mama']);
+
+$subs_nombre_papa = utf8_decode($_POST['nombre_papa']);
+$subs_tel_papa = utf8_decode($_POST['tel_papa']);
+$subs_email_papa = utf8_decode($_POST['email_papa']);
+$subs_instagram_papa = utf8_decode($_POST['instagram_papa']);
 
 
 $resultado=mysqli_query($db_connection,"SELECT * FROM ".$db_table_name." WHERE dni = '".$subs_dni."'" );
@@ -39,10 +51,14 @@ if (mysqli_num_rows($resultado)>0)
 
 } else {
 
-    $insert_value = 'INSERT INTO `' . $db_name . '`.`'.$db_table_name.'` (`nombre` , `apellido` ,`dni` , `edad` ,`fecha_nacimiento`) VALUES ("' . $subs_name . '", "' . $subs_last  . '",
-     "' . $subs_dni . '", "' . $subs_edad . '",  "' . $subs_nacimiento . '")';
+    $insert_value = 'INSERT INTO `' . $db_name . '`.`'.$db_table_name.'` (`nombre` , `apellido` ,`dni` , `edad` ,`fecha_nacimiento`, `direccion`,`localidad`,
+     `nombre_mama`, `tel_mama`,`email_mama`,`instagram_mama`, `nombre_papa`, `tel_papa`,`email_papa`,`instagram_papa`)
+      VALUES ("' . $subs_name . '", "' . $subs_last  . '",
+     "' . $subs_dni . '", "' . $subs_edad . '",  "' . $subs_nacimiento . '","' . $subs_direccion . '","' . $subs_localidad . '","' . $subs_nombre_mama . '","' . $subs_tel_mama . '","' . $subs_email_mama . '","' . $subs_instagram_mama . '",
+     "' . $subs_nombre_papa . '","' . $subs_tel_papa . '","' . $subs_email_papa . '","' . $subs_instagram_papa . '")';
 
     $retry_value = mysqli_query( $db_connection,$insert_value);
+
 
     if (!$retry_value) {
         die('Error: ' . mysqli_error($db_connection));
