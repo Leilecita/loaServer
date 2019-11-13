@@ -17,6 +17,12 @@ class BoxModel extends BaseModel
         $this->tableName = 'item_box';
     }
 
+    function findAll($filters=array(),$paginator=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->getDb()->fetch_all($query);
+    }
+
 
     function save($data){
         if(empty($data['imageData'])) {

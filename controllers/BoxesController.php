@@ -6,7 +6,6 @@
  * Time: 16:20
  */
 
-
 require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/BoxModel.php';
 require_once  __DIR__.'/../models/ExtractionModel.php';
@@ -20,6 +19,8 @@ class BoxesController extends SecureBaseController
         $this->model = new BoxModel();
         $this->extractions = new ExtractionModel();
     }
+
+
 
 
     function getBoxes(){
@@ -76,7 +77,6 @@ class BoxesController extends SecureBaseController
             $this->returnSuccess(201,$inserted);
         }
     }
-
 
 
 }

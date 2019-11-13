@@ -33,7 +33,7 @@
                     <input type="text" name="nombre" class="form-control" required placeholder=""/>
                 </div>
                 <div class="form-group">
-                    <label for="apellido">Apellido</label>
+                   <label for="apellido">Apellido</label>
                     <input type="text" name="apellido" class="form-control"  placeholder=""/>
                 </div>
                 <div class="form-group">

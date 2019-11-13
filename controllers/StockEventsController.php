@@ -19,6 +19,20 @@ class StockEventsController extends SecureBaseController
         $this->products = new ProductModel();
     }
 
+
+    function getStockEventsDay(){
+        $res= $this->model->getAllEvents($this->getFilters(),$this->getPaginator());
+
+        $report=array();
+        for ($i = 0; $i < count($res); ++$i) {
+
+            $report[]=array('item' => $res[$i]['item'],'type' => $res[$i]['type'],'brand' => $res[$i]['brand'],'model' => $res[$i]['model'],
+                'stock_in' => $res[$i]['stock_in'],'stock_out' => $res[$i]['stock_out']);
+
+        }
+
+    }
+
     function getBalance(){
         $this->returnSuccess(200,$this->getModel()->findAll($this->getFilters(),$this->getPaginator()));
     }
