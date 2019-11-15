@@ -20,6 +20,29 @@ class StockEventsController extends SecureBaseController
     }
 
 
+    function getFilters(){
+        $filters= array();
+
+        if(isset($_GET['since_s'])){
+
+            $created=$_GET['since_s'];
+
+            $parts = explode(" ", $created);
+            $date=$parts[0]." 00:00:00";
+            $filters[] = 's.created >= "'.$date.'"';
+        }
+        if(isset($_GET['to_s'])){
+
+            $created=$_GET['to_s'];
+            $parts = explode(" ", $created);
+            $date=$parts[0]." 00:00:00";
+
+            $filters[] = 's.created < "'.$date.'"';
+        }
+
+        return $filters;
+    }
+
     function getStockEventsDay(){
         $res= $this->model->getAllEvents($this->getFilters(),$this->getPaginator());
 
@@ -27,10 +50,45 @@ class StockEventsController extends SecureBaseController
         for ($i = 0; $i < count($res); ++$i) {
 
             $report[]=array('item' => $res[$i]['item'],'type' => $res[$i]['type'],'brand' => $res[$i]['brand'],'model' => $res[$i]['model'],
-                'stock_in' => $res[$i]['stock_in'],'stock_out' => $res[$i]['stock_out']);
-
+                'stock_in' => $res[$i]['stock_in'],'stock_out' => $res[$i]['stock_out'],'stock_event_created' => $res[$i]['stock_event_created'],
+                'value' => $res[$i]['value'], 'payment_method'=> $res[$i]['payment_method']);
         }
 
+        $this->returnSuccess(200,$report);
+    }
+
+    function getAmountSaleByDate(){
+
+        $created=$_GET['created'];
+
+        $parts = explode(" ", $created);
+        $date=$parts[0]." 00:00:00";
+        $next_date = date('Y-m-d', strtotime( $parts[0].' +1 day'));
+        $dateTo=$next_date." 00:00:00";
+        $filters= array();
+        $filters[] = 'created >= "'.$date.'"';
+        $filters[] = 'created < "'.$dateTo.'"';
+
+        $totalAmount=$this->getModel()->amountSaleByDateEf($date,$dateTo,"efectivo");
+
+        $this->returnSuccess(200,$totalAmount);
+    }
+
+    function getAmountSaleByDateCard(){
+
+        $created=$_GET['created'];
+
+        $parts = explode(" ", $created);
+        $date=$parts[0]." 00:00:00";
+        $next_date = date('Y-m-d', strtotime( $parts[0].' +1 day'));
+        $dateTo=$next_date." 00:00:00";
+        $filters= array();
+        $filters[] = 'created >= "'.$date.'"';
+        $filters[] = 'created < "'.$dateTo.'"';
+
+        $totalAmount=$this->getModel()->amountSaleByDateCardDeb($date,$dateTo,"efectivo");
+
+        $this->returnSuccess(200,$totalAmount);
     }
 
     function getBalance(){

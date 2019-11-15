@@ -28,9 +28,39 @@ class StockEventModel extends BaseModel
 
     function getAllEvents($filters=array(),$paginator=array()){
         $conditions = join(' AND ',$filters);
-        $query = 'SELECT *, p.created as product_created FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY s.created DESC
+        $query = 'SELECT *, p.created as product_created, s.created as stock_event_created FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY stock_event_created DESC
         LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
         return $this->getDb()->fetch_all($query);
 
+    }
+
+    function amountSaleByDate($date1,$date2){
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? ORDER BY created DESC',$date1,$date2);
+        if($response['total']!=null){
+            return $response;
+        }else{
+            $response['total']=0;
+            return $response;
+        }
+    }
+
+    function amountSaleByDateEf($date1,$date2,$payment_method){
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? AND payment_method = ? ORDER BY created DESC',$date1,$date2,$payment_method);
+        if($response['total']!=null){
+            return $response;
+        }else{
+            $response['total']=0;
+            return $response;
+        }
+    }
+
+    function amountSaleByDateCardDeb($date1,$date2,$payment_method){
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? AND payment_method != ? ORDER BY created DESC',$date1,$date2,$payment_method);
+        if($response['total']!=null){
+            return $response;
+        }else{
+            $response['total']=0;
+            return $response;
+        }
     }
 }

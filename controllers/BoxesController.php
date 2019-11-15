@@ -21,8 +21,6 @@ class BoxesController extends SecureBaseController
     }
 
 
-
-
     function getBoxes(){
         //$this->beforeMethod();
 
