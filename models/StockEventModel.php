@@ -28,11 +28,18 @@ class StockEventModel extends BaseModel
 
     function getAllEvents($filters=array(),$paginator=array()){
         $conditions = join(' AND ',$filters);
-        $query = 'SELECT *, p.created as product_created, s.created as stock_event_created FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY stock_event_created DESC
+        $query = 'SELECT *, p.created as product_created, s.created as stock_event_created, s.id as stock_event_id FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY stock_event_created DESC
         LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
         return $this->getDb()->fetch_all($query);
 
     }
+
+    function getEvent($id_stock_event){
+        $query = 'SELECT *, p.created as product_created, s.created as stock_event_created, s.id as stock_event_id FROM stock_events s INNER JOIN products p ON '.$id_stock_event.' = s.id ';
+        return $this->getDb()->fetch_row($query);
+
+    }
+
 
     function amountSaleByDate($date1,$date2){
         $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? ORDER BY created DESC',$date1,$date2);

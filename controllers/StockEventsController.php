@@ -20,7 +20,7 @@ class StockEventsController extends SecureBaseController
     }
 
 
-    function getFilters(){
+    function getFiltersEvents(){
         $filters= array();
 
         if(isset($_GET['since_s'])){
@@ -40,21 +40,52 @@ class StockEventsController extends SecureBaseController
             $filters[] = 's.created < "'.$date.'"';
         }
 
+        if(isset($_GET['item'])) {
+            if ($_GET['item'] != "Todos") {
+                $filters[] = 'item = "' . $_GET['item'] . '"';
+            }
+        }
+
         return $filters;
     }
 
+
+
     function getStockEventsDay(){
-        $res= $this->model->getAllEvents($this->getFilters(),$this->getPaginator());
+        $res= $this->model->getAllEvents($this->getFiltersEvents(),$this->getPaginator());
 
         $report=array();
         for ($i = 0; $i < count($res); ++$i) {
 
             $report[]=array('item' => $res[$i]['item'],'type' => $res[$i]['type'],'brand' => $res[$i]['brand'],'model' => $res[$i]['model'],
                 'stock_in' => $res[$i]['stock_in'],'stock_out' => $res[$i]['stock_out'],'stock_event_created' => $res[$i]['stock_event_created'],
-                'value' => $res[$i]['value'], 'payment_method'=> $res[$i]['payment_method']);
+                'value' => $res[$i]['value'], 'payment_method'=> $res[$i]['payment_method'], 'detail'=> $res[$i]['detail'],'stock_event_id' => $res[$i]['stock_event_id']);
         }
 
         $this->returnSuccess(200,$report);
+    }
+
+    function updateStockEvent(){
+
+        $stock_event=$this->model->findById($_GET['id']);
+
+        if($stock_event){
+
+            $this->model->update($_GET['id'],array('created' => $_GET['date']));
+            $this->model->update($_GET['id'],array('value' => $_GET['value']));
+            $this->model->update($_GET['id'],array('payment_method' => $_GET['payment_method']));
+            $this->model->update($_GET['id'],array('detail' => $_GET['detail']));
+
+            //DEVUELVE SOLO UN EVENTO DE STOCK JOIN CON PRODUCTO_ID
+            $repot_stock_event=$this->model->getEvent($_GET['id']);
+
+            $report=array('item' => $repot_stock_event['item'],'type' => $repot_stock_event['type'],'brand' => $repot_stock_event['brand'],'model' => $repot_stock_event['model'],
+                'stock_in' =>$repot_stock_event['stock_in'],'stock_out' => $repot_stock_event['stock_out'],'stock_event_created' => $repot_stock_event['stock_event_created'],
+                'value' => $repot_stock_event['value'], 'payment_method'=> $repot_stock_event['payment_method'], 'detail'=> $repot_stock_event['detail'],'stock_event_id' => $repot_stock_event['stock_event_id']);
+            $this->returnSuccess(200,$report);
+        }else{
+            $this->returnError(400, "entity not found");
+        }
     }
 
     function getAmountSaleByDate(){
@@ -126,6 +157,9 @@ class StockEventsController extends SecureBaseController
             $this->model->update($inserted['id'],array('ideal_stock'=> $last));
         }
     }
+
+
+
 
     function updateStockProduct($id,$valueIn,$valueOut){
 
