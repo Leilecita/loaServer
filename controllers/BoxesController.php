@@ -78,15 +78,26 @@ class BoxesController extends SecureBaseController
     function getBoxesByMonth(){
 
         $boxesByMonth=$this->getModel()->getAmountBoxByMonth($this->getFilters(),$this->getPaginator());
+
+        $list= array();
         for ($i = 0; $i < count($boxesByMonth); ++$i) {
 
+            $listBoxes= $this->getModel()->getBoxesByMonthYear($boxesByMonth[$i]['m'],$boxesByMonth[$i]['y']);
 
+            $list[]=array('y' => $boxesByMonth[$i]['y'], 'm' =>$boxesByMonth[$i]['m'], 'card' => $boxesByMonth[$i]['card'],'sale'=> $boxesByMonth[$i]['sale'],'dep' => $boxesByMonth[$i]['dep'],
+            'listBoxesByMonth' => $listBoxes);
         }
 
 
-        $this->returnSuccess(200, $this->getModel()->getAmountBoxByMonth($this->getFilters(),$this->getPaginator()));
+       // $this->returnSuccess(200, $this->getModel()->getAmountBoxByMonth($this->getFilters(),$this->getPaginator()));
+        $this->returnSuccess(200, $list);
 
 
+    }
+
+    function getListBoxesByMonth(){
+
+        $this->returnSuccess(200, $this->getModel()->getBoxesByMonthYear("11","2019"));
     }
 
 

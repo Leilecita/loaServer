@@ -82,5 +82,12 @@ class BoxModel extends BaseModel
         return $this->getDb()->fetch_all($query);
     }
 
+    function getBoxesByMonthYear($month,$year){
+
+       // SELECT * FROM `item_box` ib where EXTRACT(YEAR FROM created)=2019 and EXTRACT(MONTH FROM created)=10
+        $query= 'SELECT * FROM '.$this->tableName.' ib where EXTRACT(YEAR FROM created)='.$year.' and EXTRACT(MONTH FROM created)= '.$month;
+        return $this->getDb()->fetch_all($query);
+    }
+
 }
 
