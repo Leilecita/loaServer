@@ -60,7 +60,6 @@ class BoxesController extends SecureBaseController
         $totalAmount=$this->extractions->amountByExtractionsDay($date,$dateTo);
 
         $this->getModel()->update($data['id'],array('deposit'=> $totalAmount));
-
     }
 
     function post(){
@@ -74,6 +73,20 @@ class BoxesController extends SecureBaseController
             $this->getAmountExtractions($inserted);
             $this->returnSuccess(201,$inserted);
         }
+    }
+
+    function getTotalAmountByMonth(){
+
+        $boxesByMonth=$this->getModel()->getAmountBoxByMonth($this->getFilters(),$this->getPaginator());
+        for ($i = 0; $i < count($boxesByMonth); ++$i) {
+
+
+        }
+
+
+        $this->returnSuccess(200, $this->getModel()->getAmountBoxByMonth($this->getFilters(),$this->getPaginator()));
+
+
     }
 
 

@@ -133,4 +133,59 @@ class ItemsFileController extends SecureBaseController
         $this->logEvent($client['employee_creator_id'],$desc,$value,$previous_descr,$previous_value,$state,$data['client_id'],$modify);
     }
 
+
+
+    function getFiltersItemsFile(){
+        $filters= array();
+
+        if(isset($_GET['since'])){
+
+            $created=$_GET['since'];
+
+            $parts = explode(" ", $created);
+            $date=$parts[0]." 00:00:00";
+            $filters[] = 'i.created >= "'.$date.'"';
+        }
+        if(isset($_GET['to'])){
+
+            $created=$_GET['to'];
+            $parts = explode(" ", $created);
+            $date=$parts[0]." 00:00:00";
+
+            $filters[] = 'i.created < "'.$date.'"';
+        }
+
+        return $filters;
+    }
+
+    function getItemsClientByDate(){
+        $res= $this->model->getItemsFileClient($this->getFiltersItemsFile());
+
+        $report=array();
+        for ($i = 0; $i < count($res); ++$i) {
+            $report[]=array('name' => $res[$i]['name'],'value' => $res[$i]['value'],'item_file_created' => $res[$i]['item_file_created'],
+                'description' => $res[$i]['description']);
+        }
+
+        $this->returnSuccess(200,$report);
+    }
+
+    function getAmountItemsFileByDay(){
+
+        $created=$_GET['created'];
+
+        $parts = explode(" ", $created);
+        $date=$parts[0]." 00:00:00";
+        $next_date = date('Y-m-d', strtotime( $parts[0].' +1 day'));
+        $dateTo=$next_date." 00:00:00";
+        $filters= array();
+        $filters[] = 'created >= "'.$date.'"';
+        $filters[] = 'created < "'.$dateTo.'"';
+
+        $totalAmount=$this->getModel()->amountByDay($date,$dateTo);
+
+        $this->returnSuccess(200,$totalAmount);
+
+    }
+
 }

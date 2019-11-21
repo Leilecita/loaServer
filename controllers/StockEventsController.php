@@ -9,14 +9,17 @@
 require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/StockEventModel.php';
 require_once  __DIR__.'/../models/ProductModel.php';
+require_once  __DIR__.'/../models/ItemFileModel.php';
 
 class StockEventsController extends SecureBaseController
 {
     private $products;
+    private $items_file;
     function __construct(){
         parent::__construct();
         $this->model = new StockEventModel();
         $this->products = new ProductModel();
+        $this->items_file = new ItemFileModel();
     }
 
 
@@ -100,9 +103,13 @@ class StockEventsController extends SecureBaseController
         $filters[] = 'created >= "'.$date.'"';
         $filters[] = 'created < "'.$dateTo.'"';
 
+        $totalAmountItemsFileClientSales=$this->items_file->amountByDay($date,$dateTo);
+
         $totalAmount=$this->getModel()->amountSaleByDateEf($date,$dateTo,"efectivo");
 
-        $this->returnSuccess(200,$totalAmount);
+        $total=array('total' => $totalAmount['total']+$totalAmountItemsFileClientSales['total']);
+
+        $this->returnSuccess(200,$total);
     }
 
     function getAmountSaleByDateCard(){

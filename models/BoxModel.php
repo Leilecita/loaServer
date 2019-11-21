@@ -53,5 +53,34 @@ class BoxModel extends BaseModel
             return $this->getDb()->update($this->tableName, $data,['id' => "$id"]);
         }
     }
+
+
+    function amountSaleByMonth($date1,$date2){
+        $response = $this->getDb()->fetch_row('SELECT SUM(counted_sale) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? ORDER BY created DESC',$date1,$date2);
+        if($response['total']!=null){
+            return $response;
+        }else{
+            $response['total']=0;
+            return $response;
+        }
+    }
+
+    function amountCardByMonth($date1,$date2){
+        $response = $this->getDb()->fetch_row('SELECT SUM(credit_card) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? ORDER BY created DESC',$date1,$date2);
+        if($response['total']!=null){
+            return $response;
+        }else{
+            $response['total']=0;
+            return $response;
+        }
+    }
+
+    function getAmountBoxByMonth($filters=array(),$paginator=array()){
+        $query = 'SELECT sum(counted_sale) as sale,sum(credit_card) as card,sum(deposit) as dep, EXTRACT(YEAR FROM created) as year, EXTRACT(MONTH FROM created) as month FROM '.$this->tableName.'
+        group by EXTRACT(YEAR FROM created), EXTRACT(MONTH FROM created) ORDER BY created DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+
+        return $this->getDb()->fetch_all($query);
+    }
+
 }
 

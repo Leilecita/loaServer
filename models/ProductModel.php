@@ -15,4 +15,7 @@ class ProductModel extends BaseModel
         $this->tableName = 'products';
     }
 
+
+
+
 }
