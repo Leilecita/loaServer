@@ -76,7 +76,7 @@ class BoxModel extends BaseModel
     }
 
     function getAmountBoxByMonth($filters=array(),$paginator=array()){
-        $query = 'SELECT sum(counted_sale) as sale,sum(credit_card) as card,sum(deposit) as dep, EXTRACT(YEAR FROM created) as year, EXTRACT(MONTH FROM created) as month FROM '.$this->tableName.'
+        $query = 'SELECT sum(counted_sale) as sale,sum(credit_card) as card,sum(deposit) as dep, EXTRACT(YEAR FROM created) as y, EXTRACT(MONTH FROM created) as m FROM '.$this->tableName.'
         group by EXTRACT(YEAR FROM created), EXTRACT(MONTH FROM created) ORDER BY created DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
 
         return $this->getDb()->fetch_all($query);
