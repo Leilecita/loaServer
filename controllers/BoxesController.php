@@ -75,7 +75,7 @@ class BoxesController extends SecureBaseController
         }
     }
 
-    function getTotalAmountByMonth(){
+    function getBoxesByMonth(){
 
         $boxesByMonth=$this->getModel()->getAmountBoxByMonth($this->getFilters(),$this->getPaginator());
         for ($i = 0; $i < count($boxesByMonth); ++$i) {
