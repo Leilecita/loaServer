@@ -25,33 +25,58 @@ class BoxModel extends BaseModel
 
 
     function save($data){
+
         if(empty($data['imageData'])) {
             unset($data['imageData']);
-            return $this->getDb()->insert($this->tableName, $data);
         }else{
             $filePath = '/uploads/users/'.time().'.jpg';
             $this->base64_to_jpeg($data['imageData'],__DIR__.'/..'.$filePath);
             unset($data['imageData']);
             $data['image_url'] = $filePath;
 
-            return $this->getDb()->insert($this->tableName, $data);
         }
+
+        if(empty($data['imageDataPosnet'])) {
+            unset($data['imageDataPosnet']);
+        }else{
+
+            $time=time()+3;
+
+            $filePathP = '/uploads/users/'.$time.'.jpg';
+            $this->base64_to_jpeg($data['imageDataPosnet'],__DIR__.'/..'.$filePathP);
+            unset($data['imageDataPosnet']);
+            $data['image_url_posnet'] = $filePathP;
+        }
+
+        return $this->getDb()->insert($this->tableName, $data);
+
     }
+
     function update($id,$data){
 
-        error_log(print_r($data,true));
         if(empty($data['imageData'])) {
             unset($data['imageData']);
-
-            return $this->getDb()->update($this->tableName, $data,['id' => "$id"]);
         }else{
             $filePath = '/uploads/users/'.time().'.jpg';
             $this->base64_to_jpeg($data['imageData'],__DIR__.'/..'.$filePath);
             unset($data['imageData']);
             $data['image_url'] = $filePath;
-
-            return $this->getDb()->update($this->tableName, $data,['id' => "$id"]);
         }
+
+        if(empty($data['imageDataPosnet'])) {
+            unset($data['imageDataPosnet']);
+        }else{
+
+            $time=time()+3;
+
+            $filePathP = '/uploads/users/'.$time.'.jpg';
+            $this->base64_to_jpeg($data['imageDataPosnet'],__DIR__.'/..'.$filePathP);
+            unset($data['imageDataPosnet']);
+            $data['image_url_posnet'] = $filePathP;
+        }
+
+        return $this->getDb()->update($this->tableName, $data,['id' => "$id"]);
+
     }
 
 
@@ -91,3 +116,37 @@ class BoxModel extends BaseModel
 
 }
 
+/*
+ *
+ function save($data){
+        if(empty($data['imageData'])) {
+            unset($data['imageData']);
+            return $this->getDb()->insert($this->tableName, $data);
+        }else{
+            $filePath = '/uploads/users/'.time().'.jpg';
+            $this->base64_to_jpeg($data['imageData'],__DIR__.'/..'.$filePath);
+            unset($data['imageData']);
+            $data['image_url'] = $filePath;
+
+            return $this->getDb()->insert($this->tableName, $data);
+        }
+    }
+
+ function update($id,$data){
+
+        error_log(print_r($data,true));
+        if(empty($data['imageData'])) {
+            unset($data['imageData']);
+
+            return $this->getDb()->update($this->tableName, $data,['id' => "$id"]);
+        }else{
+            $filePath = '/uploads/users/'.time().'.jpg';
+            $this->base64_to_jpeg($data['imageData'],__DIR__.'/..'.$filePath);
+            unset($data['imageData']);
+            $data['image_url'] = $filePath;
+
+            return $this->getDb()->update($this->tableName, $data,['id' => "$id"]);
+        }
+    }
+
+* */

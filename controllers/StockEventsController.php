@@ -10,16 +10,19 @@ require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/StockEventModel.php';
 require_once  __DIR__.'/../models/ProductModel.php';
 require_once  __DIR__.'/../models/ItemFileModel.php';
+require_once  __DIR__.'/../models/IncomeModel.php';
 
 class StockEventsController extends SecureBaseController
 {
     private $products;
     private $items_file;
+    private $incomes;
     function __construct(){
         parent::__construct();
         $this->model = new StockEventModel();
         $this->products = new ProductModel();
         $this->items_file = new ItemFileModel();
+        $this->incomes = new IncomeModel();
     }
 
 
@@ -103,11 +106,16 @@ class StockEventsController extends SecureBaseController
         $filters[] = 'created >= "'.$date.'"';
         $filters[] = 'created < "'.$dateTo.'"';
 
-        $totalAmountItemsFileClientSales=$this->items_file->amountByDay($date,$dateTo);
+      //  $totalAmountItemsFileClientSales=$this->items_file->amountByDay($date,$dateTo);
+
+
+        $totalAmountItemsFileClientSales=$this->items_file->amountByDateEf($date,$dateTo,"efectivo");
+
+        $totalAmountIncomes= $this->incomes->amountByDateEf($date,$dateTo,"efectivo");
 
         $totalAmount=$this->getModel()->amountSaleByDateEf($date,$dateTo,"efectivo");
 
-        $total=array('total' => $totalAmount['total']+$totalAmountItemsFileClientSales['total']);
+        $total=array('total' => $totalAmount['total']+$totalAmountItemsFileClientSales['total']+$totalAmountIncomes['total']);
 
         $this->returnSuccess(200,$total);
     }
@@ -124,9 +132,19 @@ class StockEventsController extends SecureBaseController
         $filters[] = 'created >= "'.$date.'"';
         $filters[] = 'created < "'.$dateTo.'"';
 
+
+        //suma todos los que son distinto a efectivo
+        $totalAmountItemsFileClientCard=$this->items_file->amountByDateCardDeb($date,$dateTo,"efectivo");
+
+        //suma todos los que son distinto a efectivo
+        $totalAmountIncomes=$this->incomes->amountByDateCardDeb($date,$dateTo,"efectivo");
+
+        //suma todos los que son distinto a efectivo
         $totalAmount=$this->getModel()->amountSaleByDateCardDeb($date,$dateTo,"efectivo");
 
-        $this->returnSuccess(200,$totalAmount);
+        $total=array('total' => $totalAmount['total']+$totalAmountItemsFileClientCard['total']+$totalAmountIncomes['total']);
+
+        $this->returnSuccess(200,$total);
     }
 
     function getBalance(){
@@ -164,8 +182,6 @@ class StockEventsController extends SecureBaseController
             $this->model->update($inserted['id'],array('ideal_stock'=> $last));
         }
     }
-
-
 
 
     function updateStockProduct($id,$valueIn,$valueOut){
