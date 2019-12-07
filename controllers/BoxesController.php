@@ -20,6 +20,23 @@ class BoxesController extends SecureBaseController
         $this->extractions = new ExtractionModel();
     }
 
+    function getLastBox(){
+
+
+        $totalAmount=array('total' => 0.0);
+        if(isset($_GET['date']) && isset($_GET['dateTo'])){
+            $totalAmount=$this->extractions->amountByExtractionsDay($_GET['date'],$_GET['dateTo']);
+        }
+
+        $boxes=$this->getModel()->findAllBoxes($this->getFilters());
+
+        $lastBox=$boxes[0];
+
+        $resp=array('lastBox' => $lastBox, 'amountExtractions' => $totalAmount['total']);
+        $this->returnSuccess(200,$resp);
+    }
+
+
 
     function getBoxes(){
         //$this->beforeMethod();

@@ -34,7 +34,7 @@ class ItemsFileEmployeeController extends SecureBaseController
 
     public function get()
     {
-        $this->beforeMethod();
+        //$this->beforeMethod();
         if(isset($_GET['method'])){
             $this->method();
         }else{

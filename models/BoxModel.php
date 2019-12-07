@@ -23,6 +23,11 @@ class BoxModel extends BaseModel
         return $this->getDb()->fetch_all($query);
     }
 
+    function findAllBoxes($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC LIMIT 10 ';
+        return $this->getDb()->fetch_all($query);
+    }
 
     function save($data){
 
