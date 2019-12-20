@@ -18,7 +18,8 @@ class ItemsFileEmployeeController extends SecureBaseController
     function listHours()
     {
         if (isset($_GET['employee_id'])) {
-            $this->returnSuccess(200, $this->model->findAllByEmployeeId(array('employee_id = "' . $_GET['employee_id'] . '"'),$this->getPaginator()));
+           // $this->returnSuccess(200, $this->model->findAllByEmployeeId(array('employee_id = "' . $_GET['employee_id'] . '"'),$this->getPaginator()));
+            $this->returnSuccess(200, $this->model->findAllByEmployeeId($this->getFilters(),$this->getPaginator()));
         } else {
             $this->returnError(404, "ENTITY NOT FOUND");
         }
