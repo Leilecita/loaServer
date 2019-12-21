@@ -13,4 +13,5 @@ class ItemFileEmployeeModel extends BaseModel
         parent::__construct();
         $this->tableName = 'items_employee_file';
     }
+
 }
