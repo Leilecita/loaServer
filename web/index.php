@@ -45,7 +45,7 @@
                     <input type="date" name="fecha_nacimiento" class="form-control" text placeholder=""/>
                 </div>
                 <div class="form-group">
-                    <label for="edad">Edad</label>
+                    <label for="edad">Edad Lela</label>
                     <input type="text" name="edad" class="form-control" text placeholder=""/>
                 </div>
 
