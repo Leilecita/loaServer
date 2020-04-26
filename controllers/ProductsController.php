@@ -152,11 +152,12 @@ class ProductsController extends SecureBaseController
     function createBrand(){
 
         $products_by_brands=$this->model->getProductByBrands();
+        var_dump(count($products_by_brands));
         for ($j = 0; $j < count($products_by_brands); ++$j) {
 
             $colors=$this->colors();
 
-            $newBrand= array('name' => $products_by_brands[$j]['brand'],'color' => $colors[ rand(0,27)]);
+            $newBrand= array('name' => $products_by_brands[$j]['brand'],'color' => $colors[ rand(0,23)]);
             $res=$this->brands->save($newBrand);
             if($res<0){
                 var_dump("error");

@@ -37,14 +37,14 @@ class ProductModel extends BaseModel
     function getSpinnerBrands($filters=array()){
         $conditions = join(' AND ',$filters);
         // $query = 'SELECT DISTINCT '.$type.' FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions );
-        $query = 'SELECT DISTINCT p.brand , color from products p, brands b '.( empty($filters) ? '' : ' WHERE '.$conditions );
+        $query = 'SELECT DISTINCT p.brand , color from products p, brands b '.( empty($filters) ? '' : ' WHERE '.$conditions ).' ORDER BY p.brand DESC';
         return $this->getDb()->fetch_all($query);
     }
 
     function getSpinnerTypes($filters=array()){
         $conditions = join(' AND ',$filters);
         // $query = 'SELECT DISTINCT '.$type.' FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions );
-        $query = 'SELECT DISTINCT p.type , color from products p, types t '.( empty($filters) ? '' : ' WHERE '.$conditions );
+        $query = 'SELECT DISTINCT p.type , color from products p, types t '.( empty($filters) ? '' : ' WHERE '.$conditions ).' ORDER BY p.type DESC';
         return $this->getDb()->fetch_all($query);
     }
 
