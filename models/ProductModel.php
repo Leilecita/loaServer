@@ -49,4 +49,14 @@ class ProductModel extends BaseModel
     }
 
 
+
+    function getSpinnerModel($filters=array(),$type){
+        $conditions = join(' AND ',$filters);
+
+        // $query = 'SELECT DISTINCT '.$type.' FROM '.$this->tableName;
+        $query = 'SELECT DISTINCT '.$type.' FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY '.$type.' ASC';
+        return $this->getDb()->fetch_all($query);
+    }
+
+
 }

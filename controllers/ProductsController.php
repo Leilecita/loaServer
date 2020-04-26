@@ -133,7 +133,7 @@ class ProductsController extends SecureBaseController
         $listType=$this->model->getSpinnerTypes($this->filterType($this->assignFilter()));
 
 
-        $listModel=$this->getModel()->getSpinner($this->assignFilter(),"model");
+        $listModel=$this->model->getSpinnerModel($this->assignFilter(),"model");
 
         $resp=array("items" => $listItems,"brands" => $listBrands,"types" => $listType, "models" => $listModel);
 
