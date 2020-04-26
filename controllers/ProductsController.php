@@ -8,12 +8,30 @@
 
 require_once 'SecureBaseController.php';
 require_once  __DIR__.'/../models/ProductModel.php';
+require_once  __DIR__.'/../models/BrandModel.php';
+require_once  __DIR__.'/../models/TypeModel.php';
+
 
 class ProductsController extends SecureBaseController
 {
+    private $brands;
+    private $types;
+
     function __construct(){
         parent::__construct();
         $this->model = new ProductModel();
+        $this->brands = new BrandModel();
+        $this->types = new TypeModel();
+    }
+
+    function filterBrand($filters){
+        $filters[]='p.brand_id = b.id' ;
+        return $filters;
+    }
+
+    function filterType($filters){
+        $filters[]='p.type_id = t.id' ;
+        return $filters;
     }
 
     function assignFilter(){
@@ -107,8 +125,14 @@ class ProductsController extends SecureBaseController
     function getSpinners(){
 
         $listItems=$this->getModel()->getSpinner($this->assignFilter(),"item");
-        $listBrands=$this->getModel()->getSpinner($this->assignFilter(),"brand");
-        $listType=$this->getModel()->getSpinner($this->assignFilter(),"type");
+
+        //$listBrands=$this->getModel()->getSpinner($this->assignFilter(),"brand");
+        $listBrands=$this->model->getSpinnerBrands($this->filterBrand($this->assignFilter()));
+
+        //$listType=$this->getModel()->getSpinner($this->assignFilter(),"type");
+        $listType=$this->model->getSpinnerTypes($this->filterType($this->assignFilter()));
+
+
         $listModel=$this->getModel()->getSpinner($this->assignFilter(),"model");
 
         $resp=array("items" => $listItems,"brands" => $listBrands,"types" => $listType, "models" => $listModel);
@@ -117,36 +141,115 @@ class ProductsController extends SecureBaseController
 
     }
 
-   /* function getProducts()
-    {
-        $filters = array();
 
-        if ($_GET['brand'] == "Marca" && $_GET['type'] == "Articulo") {
-            $this->returnSuccess(200, $this->getModel()->findAll($this->getFilters(), $this->getPaginator()));
+
+
+    //·················· crear marcas con su color asignado
+
+    //primero creamos las marcas con su color random para cada producto.
+    //luego actualizamos el id de las marcas al producto
+
+    function createBrand(){
+
+        $products_by_brands=$this->model->getProductByBrands();
+        for ($j = 0; $j < count($products_by_brands); ++$j) {
+
+            $colors=$this->colors();
+
+            $newBrand= array('name' => $products_by_brands[$j]['brand'],'color' => $colors[ rand(0,27)]);
+            $res=$this->brands->save($newBrand);
+            if($res<0){
+                var_dump("error");
+            }else{
+                var_dump("correct");
+            }
+        }
+    }
+
+    function loadIdBrandToProduct(){
+        $products_by_brands=$this->model->findAllProducts();
+        for ($j = 0; $j < count($products_by_brands); ++$j) {
+
+            var_dump($products_by_brands[$j]['brand']);
+
+            $brand=$this->brands->find(array('name = "'.$products_by_brands[$j]['brand'].'"' ));
+            if($brand){
+                $this->model->update($products_by_brands[$j]['id'],array('brand_id' => $brand['id']));
+            }
+        }
+    }
+
+    function createType(){
+        $products_by_types=$this->model->getProductByType();
+
+        for ($j = 0; $j < count($products_by_types); ++$j) {
+
+
+            $colors=$this->colors();
+
+            $newType= array('name' => $products_by_types[$j]['type'],'color' => $colors[ rand(0,27)]);
+            $res=$this->types->save($newType);
+
+            if($res<0){
+                var_dump("error");
+            }else{
+                var_dump("correct");
+            }
         }
 
-        if ($_GET['brand'] != "Marca" && $_GET['type'] == "Articulo") {
-            if (isset($_GET['brand'])) {
-                $filters[] = 'brand = "' . $_GET['brand'] . '"';
-            }
-            $this->returnSuccess(200, $this->getModel()->findAll($filters, $this->getPaginator()));
-        }
+    }
+    function loadIdTypeToProduct(){
+        $products=$this->model->findAllProducts();
+        for ($j = 0; $j < count($products); ++$j) {
 
-        if ($_GET['brand'] == "Marca" && $_GET['type'] != "Articulo") {
-            if (isset($_GET['type'])) {
-                $filters[] = 'type = "' . $_GET['type'] . '"';
-            }
-            $this->returnSuccess(200, $this->getModel()->findAll($filters, $this->getPaginator()));
-        }
+            var_dump($products[$j]['type']);
 
-        if ($_GET['brand'] != "Marca" && $_GET['type'] != "Articulo") {
-            if (isset($_GET['type'])) {
-                $filters[] = 'type = "' . $_GET['type'] . '"';
+            $type=$this->types->find(array('name = "'.$products[$j]['type'].'"' ));
+            if($type){
+                $this->model->update($products[$j]['id'],array('type_id' => $type['id']));
             }
-            if (isset($_GET['brand'])) {
-                $filters[] = 'brand = "' . $_GET['brand'] . '"';
-            }
-            $this->returnSuccess(200, $this->getModel()->findAll($filters, $this->getPaginator()));
         }
-    }*/
+    }
+
+
+
+    function colors(){
+
+        $color=array();
+        $color[]=array('#E57373');
+        $color[]=array('#4DD0E1');
+
+        $color[]=array('#64B5F6');
+        $color[]=array('#80CBC4');
+        $color[]=array('#80DEEA');
+
+        $color[]=array('#D4E157');
+        $color[]=array('#FF8A65');
+        $color[]=array('#E57373');
+        $color[]=array('#FFB74D');
+        $color[]=array('#F06292');
+        $color[]=array('#4FC3F7');
+        $color[]=array('#9575CD');
+
+        $color[]=array('#90A4AE');
+        $color[]=array('#FFD54F');
+        $color[]=array('#F9A825');
+        $color[]=array('#CE93D8');
+        $color[]=array('#FF8A65');
+        $color[]=array('#90CAF9');
+        $color[]=array('#4DB6AC');
+
+        $color[]=array('#64B5F6');
+        $color[]=array('#81C784');
+        $color[]=array('#FF8A65');
+        $color[]=array('#9FA8DA');
+        $color[]=array('#B39DDB');
+        $color[]=array('#4FC3F7');
+        $color[]=array('#4DB6AC');
+        $color[]=array('#BA68C8');
+        $color[]=array('#EF9A9A');
+
+        return $color;
+    }
+
 }

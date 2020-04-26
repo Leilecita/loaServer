@@ -63,9 +63,6 @@ abstract class BaseModel
     }
 
 
-
-
-
     function getSpinner($filters=array(),$type){
         $conditions = join(' AND ',$filters);
 
@@ -74,12 +71,7 @@ abstract class BaseModel
         return $this->db->fetch_all($query);
     }
 
-    /*
 
-        SELECT DISTINCT(emp_name) FROM sto_emp_salary_paid
-
-        WHERE emp_sal_paid >= 4500;
-     */
 
     function findAllByDate($filters=array()){
         $conditions = join(' AND ',$filters);
