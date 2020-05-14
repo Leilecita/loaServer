@@ -19,6 +19,10 @@ class ClientsController extends SecureBaseController
         $this->items = new ItemFileModel();
     }
 
+    function getSimpleClient(){
+        $this->returnSuccess(200,$this->model->findAllClientName());
+    }
+
     function getClients(){
 
         if($_GET['order'] == "name"){

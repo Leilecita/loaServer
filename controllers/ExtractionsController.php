@@ -20,12 +20,85 @@ class ExtractionsController extends SecureBaseController
         $this->boxes= new BoxModel();
     }
 
+    function getDatesMonth($data){
+
+        $partsYearMonthDay=explode("-", $data);
+        $partsYearMonthDay[2]=01;
+
+        $date= $partsYearMonthDay[0]."-".$partsYearMonthDay[1]."-".$partsYearMonthDay[2]." 00:00:00";
+
+        $next_month = date('Y-m-d', strtotime( $date.' +1 month'));
+        $dateTo=$next_month." 00:00:00";
+        $result=array('date' => $date, 'dateTo' => $dateTo);
+
+        return $result;
+    }
+
+
+    function getDates($data){
+
+        $parts = explode(" ", $data);
+        $date=$parts[0]." 00:00:00";
+        $next_date = date('Y-m-d', strtotime( $parts[0].' +1 day'));
+        $dateTo=$next_date." 00:00:00";
+        $result=array('date' => $date, 'dateTo' => $dateTo);
+        return $result;
+    }
+
+
+    function filtersType($dates){
+
+        $filters=array();
+
+        if(isset($_GET['type'])) {
+            if ($_GET['type'] != "Todo") {
+                $filters[] = 'type = "' . $_GET['type'] . '"';
+            }
+        }
+
+        $filters[] = 'created >= "'.$dates['date'].'"';
+        $filters[] = 'created < "'.$dates['dateTo'].'"';
+
+        return $filters;
+    }
+
+
+    function getExtractions(){
+
+        if($_GET['groupby'] === "month"){
+            $listDays=$this->model->getMonthsGroup($this->getPaginator());
+        }else{
+            $listDays=$this->model->getDaysGroup($this->getPaginator());
+        }
+
+        $report=array();
+        for ($k = 0; $k < count($listDays); ++$k) {
+
+            if($_GET['groupby'] === "month"){
+
+                $dates=$this->getDatesMonth($listDays[$k]['created']);
+            }else{
+                $dates=$this->getDates($listDays[$k]['created']);
+            }
+           //  $dates=$this->getDates($listDays[$k]['created']);
+
+             $amountByDay=$this->model->amountByExtractionsDay2($this->filtersType($dates));
+
+             $listExtrByDay= $this->model->listAll($this->filtersType($dates));
+
+            $report[]=array('created'=>$listDays[$k]['created'],'amountDay' => $amountByDay['total'],'listExtractions' => $listExtrByDay);
+        }
+        $this->returnSuccess(200,$report);
+    }
+
+
+
     function put(){
         $data = (array) json_decode(file_get_contents("php://input"));
         parent::put();
         $this->updateBox($data);
-
     }
+
     function post()
     {
         $data = (array) json_decode(file_get_contents("php://input"));
@@ -41,7 +114,6 @@ class ExtractionsController extends SecureBaseController
         $this->updateBox($extraction);
 
     }
-
 
     function amountExtractions(){
 

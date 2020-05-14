@@ -116,6 +116,12 @@ class ProductsController extends SecureBaseController
                 $resp=array('res' => "error al crear el prod");
                 $this->returnError(400,$resp);
             }else{
+
+                $createdProduct=$this->model->findById($res);
+                if($createdProduct){
+                    $this->checkExistTypeAndBrand($createdProduct);
+                }
+
                 $resp=array('res' => "creado");
                 $this->returnSuccess(200,$resp);
             }
@@ -143,6 +149,43 @@ class ProductsController extends SecureBaseController
 
 
 
+
+    function checkExistTypeAndBrand($data){
+
+        $brand=$this->brands->find(array('name = "'.$data['brand'].'"' ));
+
+        if($brand){
+            $this->model->update($data['id'],array('brand_id'=> $brand['id']));
+        }else{
+
+            $colors=$this->colors();
+            $newBrand= array('name' => $data['brand'],'color' => $colors[ rand(0,23)]);
+            $res=$this->brands->save($newBrand);
+
+            if($res<0){
+                error_log("error al crear la marca");
+            }else{
+                $this->model->update($data['id'],array('brand_id'=> $res));
+            }
+        }
+
+        $type= $this->types->find(array('name = "'.$data['type'].'"' ));
+
+        if($type){
+            $this->model->update($data['id'],array('type_id'=> $type['id']));
+        }else{
+
+            $colors=$this->colors();
+
+            $newType= array('name' => $data['type'],'color' => $colors[ rand(0,27)]);
+            $res=$this->types->save($newType);
+            if($res<0){
+                error_log("error al crear el tipo de producto");
+            }else{
+                $this->model->update($data['id'],array('type_id'=> $res));
+            }
+        }
+    }
 
     //·················· crear marcas con su color asignado
 

@@ -16,6 +16,12 @@ class ClientModel extends BaseModel
         $this->tableName = 'clients';
     }
 
+
+    function findAllClientName(){
+        $query='SELECT id,name FROM clients order by created desc';
+        return $this->getDb()->fetch_all($query);
+    }
+
     function save($data){
         if(empty($data['imageData'])) {
             unset($data['imageData']);

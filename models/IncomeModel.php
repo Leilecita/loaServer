@@ -16,6 +16,14 @@ class IncomeModel extends BaseModel
         $this->tableName = 'incomes';
     }
 
+    function findAllIncomesEvents($date,$dateTo){
+
+        $query = 'SELECT * FROM incomes WHERE created < \''.$dateTo.'\' and created >= \''.$date.'\' ORDER BY created DESC';
+
+        return $this->getDb()->fetch_all($query);
+    }
+
+
     function findAllIncomes($filters=array()){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC';

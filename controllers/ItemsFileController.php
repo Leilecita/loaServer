@@ -166,9 +166,8 @@ class ItemsFileController extends SecureBaseController
 
             if($res[$i]['value'] >= 0){ //sino solo se esta registrando la deuda de la ficha
                 $report[]=array('name' => $res[$i]['name'],'value' => $res[$i]['value'],'item_file_created' => $res[$i]['item_file_created'],
-                    'description' => $res[$i]['description'],'payment_method' => $res[$i]['payment_method']);
+                    'description' => $res[$i]['description'],'payment_method' => $res[$i]['payment_method'],'retired_product' => $res[$i]['retired_product']);
             }
-
         }
 
         $this->returnSuccess(200,$report);
