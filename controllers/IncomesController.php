@@ -42,6 +42,8 @@ class IncomesController extends SecureBaseController {
 
     function getIncomes(){
 
+
+
         $res=$this->model->findAllIncomes($this->getFiltersIncome());
 
         $this->returnSuccess(200,$res);

@@ -36,6 +36,16 @@ ORDER BY `created`  DESC
     }
 */
 
+    function getEventsGroupByDayEntries($paginator){
+        $query='SELECT * FROM stock_events where detail like '.'"%ingreso compra%"'.' group by DAY(created), MONTH(created), YEAR (created) order by created desc LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->getDb()->fetch_all($query);
+    }
+
+    function getEventsGroupByMonthEntries($paginator){
+        $query='SELECT * FROM stock_events where detail like '.'"%ingreso compra%"'.' group by MONTH(created), YEAR (created) order by created desc LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->getDb()->fetch_all($query);
+    }
+
 
     function getEventsGroupByDay($paginator){
         $query='SELECT * FROM stock_events group by DAY(created), MONTH(created), YEAR (created) order by created desc LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
