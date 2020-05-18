@@ -89,6 +89,16 @@ class StockEventsController extends SecureBaseController
         return $filters;
     }
 
+    function getEvents(){
+
+        $list=$this->model->getAllEvents($this->getFilters(),$this->getPaginator());
+        $listReport=$this->getStockEventReport($list);
+
+        $this->returnSuccess(200,$listReport);
+
+
+    }
+
     function getEntries(){
 
         if($_GET['groupby'] === "month"){
