@@ -74,7 +74,7 @@ abstract class BaseController
     }
 
     function get(){
-        //$this->beforeMethod();
+        $this->beforeMethod();
         if(isset($_GET['method'])){
             $this->method();
         }else if($this->validateId()){

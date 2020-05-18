@@ -117,9 +117,9 @@ class StockEventsController extends SecureBaseController
                 $dates=$this->getDates($days[$i]['created']);
             }
 
-            $listStockEventsByEntries= $this->model->getAllEventsSale($this->filterEntrie($this->filters($dates)));
+            //$listStockEventsByEntries= $this->model->getAllEventsSale($this->filterEntrie($this->filters($dates)));
 
-            $reportStockEventByEntries=$this->getStockEventReport($listStockEventsByEntries);
+            $reportStockEventByEntries=$this->model->getAllEventsSale($this->filterEntrie($this->filters($dates)));
 
             $countEntries= $this->model->countStockEvents($this->filterEntrie($this->filters($dates)));
 
@@ -156,20 +156,18 @@ class StockEventsController extends SecureBaseController
                $dates=$this->getDates($days[$i]['created']);
            }
 
-           $listStockEventsBySale= $this->model->getAllEventsSale($this->filterSale($this->filters($dates)));
+           //$listStockEventsBySale= $this->model->getAllEventsSale($this->filterSale($this->filters($dates)));
+           //$reportStockEventBySale=$this->getStockEventReport($listStockEventsBySale);
 
-           $reportStockEventBySale=$this->getStockEventReport($listStockEventsBySale);
+           $reportStockEventBySale=$this->model->getAllEventsSale($this->filterSale($this->filters($dates)));
 
            $reportItemsFile= $this->items_file->getItemsFileClientEvents($dates['date'],$dates['dateTo']);
-
-         //  $reportIncomes=$this->incomes->findAllIncomesEvents($dates['date'],$dates['dateTo']);
 
            $efectAmount=$this->model->amountSaleByDateEf($dates['date'],$dates['dateTo'],"efectivo");
 
            $cardAmount=$this->model->amountSaleByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
 
 
-           //new
            $efectAmountItemsFileClientSales=$this->items_file->amountByDateEf($dates['date'],$dates['dateTo'],"efectivo");
 
            $cardAmountItemsFileClientCard=$this->items_file->amountByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
@@ -177,8 +175,6 @@ class StockEventsController extends SecureBaseController
            $totalEf=$efectAmount['total']+$efectAmountItemsFileClientSales['total'];
 
            $totalCard= $cardAmount['total']+$cardAmountItemsFileClientCard['total'];
-           //
-
 
            $countSales= $this->model->countStockEvents($this->filterSale($this->filters($dates)));
 

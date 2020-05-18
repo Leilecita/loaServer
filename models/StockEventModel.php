@@ -66,9 +66,19 @@ ORDER BY `created`  DESC
 
     }
 
+    /*
+     * array('item' => $list[$i]['item'],'type' => $list[$i]['type'],'brand' => $list[$i]['brand'],'model' => $list[$i]['model'],
+                'stock_in' => $list[$i]['stock_in'],'stock_out' => $list[$i]['stock_out'],'stock_event_created' => $list[$i]['stock_event_created'],
+                'value' => $list[$i]['value'], 'payment_method'=> $list[$i]['payment_method'], 'detail'=> $list[$i]['detail'],'stock_event_id' => $list[$i]['stock_event_id'],
+                'client_name' => $list[$i]['client_name']
+     */
+
     function getAllEventsSale($filters=array()){
         $conditions = join(' AND ',$filters);
-        $query = 'SELECT *, p.created as product_created, s.created as stock_event_created, s.id as stock_event_id 
+       // $query = 'SELECT *, p.created as product_created, s.created as stock_event_created, s.id as stock_event_id
+        $query = 'SELECT *, p.type as type, p.brand as brand, p.model as model, s.stock_in as stock_in, s.stock_out as stock_out, s.value as value,
+                  s.payment_method as payment_method, s.detail as detail, s.client_name as client_name,
+                   p.created as product_created, s.created as stock_event_created, s.id as stock_event_id 
         FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY stock_event_created DESC';
         return $this->getDb()->fetch_all($query);
 
