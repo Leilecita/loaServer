@@ -327,7 +327,7 @@ class StockEventsController extends SecureBaseController
 
         $product=$this->products->findById($inserted['id_product']);
 
-        $itemFile= array('client_id' => $client_id,'description' => $inserted['detail'], 'brand' => $product['brand'],
+        $itemFile= array('client_file_id'=> 0,'client_id' => $client_id,'description' => $inserted['detail'], 'brand' => $product['brand'],
             'product_kind' => $product['item'],'value' =>$value_for_file*(-1),'retired_product' => "true", 'payment_method' =>$inserted['payment_method'],'settled' => "false");
         $res=$this->items_file->save($itemFile);
     }
