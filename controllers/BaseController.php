@@ -74,7 +74,7 @@ abstract class BaseController
     }
 
     function get(){
-        $this->beforeMethod();
+      //  $this->beforeMethod();
         if(isset($_GET['method'])){
             $this->method();
         }else if($this->validateId()){
@@ -90,7 +90,7 @@ abstract class BaseController
     }
 
     function post(){
-        $this->beforeMethod();
+       // $this->beforeMethod();
         $data = (array)json_decode(file_get_contents("php://input"));
         unset($data['id']);
         $res = $this->getModel()->save($data);

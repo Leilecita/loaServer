@@ -323,6 +323,7 @@ class StockEventsController extends SecureBaseController
         }
     }
 
+
     function createItemFileByClientId($inserted, $client_id,$value_for_file){
 
         $product=$this->products->findById($inserted['id_product']);

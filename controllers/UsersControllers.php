@@ -19,10 +19,11 @@ class UsersControllers extends SecureBaseController
     {
         $this->beforeMethod();
 
-
         $user= $this->getCurrentUser();
         $this->returnSuccess(200,array("token" => $user['token']));
     }
+
+
 }
 
 
