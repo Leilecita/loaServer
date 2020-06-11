@@ -6,7 +6,7 @@
  * Time: 11:34
  */
 date_default_timezone_set('UTC');
-define('PAGE_SIZE',15);
+define('PAGE_SIZE',10);
 abstract class BaseController
 {
     protected $model;

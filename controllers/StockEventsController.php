@@ -134,17 +134,26 @@ class StockEventsController extends SecureBaseController
             $report[]=array('item' => $list[$i]['item'],'type' => $list[$i]['type'],'brand' => $list[$i]['brand'],'model' => $list[$i]['model'],
                 'stock_in' => $list[$i]['stock_in'],'stock_out' => $list[$i]['stock_out'],'stock_event_created' => $list[$i]['stock_event_created'],
                 'value' => $list[$i]['value'], 'payment_method'=> $list[$i]['payment_method'], 'detail'=> $list[$i]['detail'],'stock_event_id' => $list[$i]['stock_event_id'],
-                'client_name' => $list[$i]['client_name']);
+                'client_name' => $list[$i]['client_name'],'observation' => $list[$i]['observation']);
         }
         return $report;
     }
 
-   function getSales(){
+
+    function getPaginatorSales(){
+        $paginator = array('offset' => 0, 'limit' => PAGE_SIZE);
+        if(isset($_GET['page'])){
+            $paginator['offset'] = 4 * $_GET['page'];
+        }
+        return $paginator;
+    }
+
+    function getSales(){
 
         if($_GET['groupby'] === "month"){
-            $days=$this->model->getEventsGroupByMonth($this->getPaginator());
+            $days=$this->model->getEventsGroupByMonth($this->getPaginatorSales());
         }else{
-            $days=$this->model->getEventsGroupByDay($this->getPaginator());
+            $days=$this->model->getEventsGroupByDay($this->getPaginatorSales());
         }
 
        $reportDay=array();
@@ -156,16 +165,17 @@ class StockEventsController extends SecureBaseController
                $dates=$this->getDates($days[$i]['created']);
            }
 
-           //$listStockEventsBySale= $this->model->getAllEventsSale($this->filterSale($this->filters($dates)));
-           //$reportStockEventBySale=$this->getStockEventReport($listStockEventsBySale);
-
            $reportStockEventBySale=$this->model->getAllEventsSale($this->filterSale($this->filters($dates)));
 
            $reportItemsFile= $this->items_file->getItemsFileClientEvents($dates['date'],$dates['dateTo']);
 
-           $efectAmount=$this->model->amountSaleByDateEf($dates['date'],$dates['dateTo'],"efectivo");
+           $efectAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"efectivo");
+           $transfAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"transferencia");
+           $mercPagAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"mercado pago");
 
-           $cardAmount=$this->model->amountSaleByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
+
+           $debitoAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"debito");
+           $creditAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"tarjeta");
 
 
            $efectAmountItemsFileClientSales=$this->items_file->amountByDateEf($dates['date'],$dates['dateTo'],"efectivo");
@@ -174,11 +184,12 @@ class StockEventsController extends SecureBaseController
 
            $totalEf=$efectAmount['total']+$efectAmountItemsFileClientSales['total'];
 
-           $totalCard= $cardAmount['total']+$cardAmountItemsFileClientCard['total'];
+           $totalCard= $debitoAmount['total']+$creditAmount['total']+$cardAmountItemsFileClientCard['total'];
 
            $countSales= $this->model->countStockEvents($this->filterSale($this->filters($dates)));
 
            $reportDay[]=array('created'=>$days[$i]['created'],'countSales' => $countSales, 'efectAmount' => $totalEf, 'cardAmount' => $totalCard ,
+               'transfAmount'=>$transfAmount['total'], 'mercPagoAmount' => $mercPagAmount['total'],
                'listStockEventSale' => $reportStockEventBySale, 'listItems' => $reportItemsFile);
        }
 
@@ -197,7 +208,12 @@ class StockEventsController extends SecureBaseController
             $this->model->update($_GET['id'],array('detail' => $_GET['detail']));
 
             //DEVUELVE SOLO UN EVENTO DE STOCK JOIN CON PRODUCTO_ID
-            $repot_stock_event=$this->model->getEvent($_GET['id']);
+
+           // $repot_stock_event=$this->model->getEvent($_GET['id']);
+
+            $filters=array();
+            $filters[] = 's.id = "'.$_GET['id'].'"';
+            $repot_stock_event=$this->model->getEvent($filters);
 
             $report=array('item' => $repot_stock_event['item'],'type' => $repot_stock_event['type'],'brand' => $repot_stock_event['brand'],'model' => $repot_stock_event['model'],
                 'stock_in' =>$repot_stock_event['stock_in'],'stock_out' => $repot_stock_event['stock_out'],'stock_event_created' => $repot_stock_event['stock_event_created'],

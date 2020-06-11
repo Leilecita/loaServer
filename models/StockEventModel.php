@@ -77,7 +77,7 @@ ORDER BY `created`  DESC
         $conditions = join(' AND ',$filters);
        // $query = 'SELECT *, p.created as product_created, s.created as stock_event_created, s.id as stock_event_id
         $query = 'SELECT *, p.type as type, p.brand as brand, p.model as model, s.stock_in as stock_in, s.stock_out as stock_out, s.value as value,
-                  s.payment_method as payment_method, s.detail as detail, s.client_name as client_name,
+                  s.payment_method as payment_method, s.detail as detail, s.client_name as client_name, s.observation as observation,
                    p.created as product_created, s.created as stock_event_created, s.id as stock_event_id 
         FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY stock_event_created DESC';
         return $this->getDb()->fetch_all($query);
@@ -99,9 +99,16 @@ ORDER BY `created`  DESC
 
 
 
-    function getEvent($id_stock_event){
-        $query = 'SELECT *, p.created as product_created, s.created as stock_event_created, s.id as stock_event_id FROM stock_events s INNER JOIN products p ON '.$id_stock_event.' = s.id ';
+    function getEvent($filters=array()){
+        $conditions = join(' AND ',$filters);
+
+        $query = 'SELECT *, p.type as type, p.brand as brand, p.model as model, s.stock_in as stock_in, s.stock_out as stock_out, s.value as value,
+                  s.payment_method as payment_method, s.detail as detail, s.client_name as client_name, s.observation as observation,
+                   p.created as product_created, s.created as stock_event_created, s.id as stock_event_id 
+        FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY stock_event_created DESC';
         return $this->getDb()->fetch_row($query);
+        //$query = 'SELECT *, p.created as product_created, s.created as stock_event_created, s.id as stock_event_id FROM stock_events s INNER JOIN products p ON '.$id_stock_event.' = s.id ';
+        //return $this->getDb()->fetch_row($query);
 
     }
 
@@ -116,7 +123,7 @@ ORDER BY `created`  DESC
         }
     }
 
-    function amountSaleByDateEf($date1,$date2,$payment_method){
+    function amountSaleByDateByMethodPayment($date1,$date2,$payment_method){
         $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? AND payment_method = ? ORDER BY created DESC',$date1,$date2,$payment_method);
         if($response['total']!=null){
             return $response;

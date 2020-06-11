@@ -75,12 +75,10 @@ class ExtractionsController extends SecureBaseController
         for ($k = 0; $k < count($listDays); ++$k) {
 
             if($_GET['groupby'] === "month"){
-
                 $dates=$this->getDatesMonth($listDays[$k]['created']);
             }else{
                 $dates=$this->getDates($listDays[$k]['created']);
             }
-           //  $dates=$this->getDates($listDays[$k]['created']);
 
              $amountByDay=$this->model->amountByExtractionsDay2($this->filtersType($dates));
 
