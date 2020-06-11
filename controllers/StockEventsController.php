@@ -292,7 +292,7 @@ class StockEventsController extends SecureBaseController
 
         $totalAmountIncomes= $this->incomes->amountByDateEf($date,$dateTo,"efectivo");
 
-        $totalAmount=$this->getModel()->amountSaleByDateEf($date,$dateTo,"efectivo");
+        $totalAmount=$this->model->amountSaleByDateByMethodPayment($date,$dateTo,"efectivo");
 
         $total=array('total' => $totalAmount['total']+$totalAmountItemsFileClientSales['total']+$totalAmountIncomes['total']);
 
@@ -319,7 +319,8 @@ class StockEventsController extends SecureBaseController
         $totalAmountIncomes=$this->incomes->amountByDateCardDeb($date,$dateTo,"efectivo");
 
         //suma todos los que son distinto a efectivo
-        $totalAmount=$this->getModel()->amountSaleByDateCardDeb($date,$dateTo,"efectivo");
+        //POR EL MOMENTO LO DEJAMOS ASI
+        $totalAmount=$this->model->amountSaleByDateCardDeb($date,$dateTo,"efectivo");
 
         $total=array('total' => $totalAmount['total']+$totalAmountItemsFileClientCard['total']+$totalAmountIncomes['total']);
 

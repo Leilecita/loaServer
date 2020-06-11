@@ -28,7 +28,7 @@ class BoxesController extends SecureBaseController
             $totalAmount=$this->extractions->amountByExtractionsDay($_GET['date'],$_GET['dateTo']);
         }
 
-        $boxes=$this->getModel()->findAllBoxes($this->getFilters());
+        $boxes=$this->model->findAllBoxes($this->getFilters());
 
         $lastBox=$boxes[0];
 
