@@ -15,6 +15,64 @@ class ItemsFileEmployeeController extends SecureBaseController
         $this->model = new ItemFileEmployeeModel();
     }
 
+    function getDatesMonth($data){
+
+        $partsYearMonthDay=explode("-", $data);
+        $partsYearMonthDay[2]=01;
+
+        $date= $partsYearMonthDay[0]."-".$partsYearMonthDay[1]."-".$partsYearMonthDay[2]." 00:00:00";
+
+        $next_month = date('Y-m-d', strtotime( $date.' +1 month'));
+        $dateTo=$next_month." 00:00:00";
+        $result=array('date' => $date, 'dateTo' => $dateTo);
+
+        return $result;
+    }
+
+
+    function getDates($data){
+
+        $parts = explode(" ", $data);
+        $date=$parts[0]." 00:00:00";
+        $next_date = date('Y-m-d', strtotime( $parts[0].' +1 day'));
+        $dateTo=$next_date." 00:00:00";
+        $result=array('date' => $date, 'dateTo' => $dateTo);
+        return $result;
+    }
+
+    function filtersType($dates){
+
+        $filters=array();
+
+        $filters[] = 'created >= "'.$dates['date'].'"';
+        $filters[] = 'created < "'.$dates['dateTo'].'"';
+
+        return $filters;
+    }
+
+    function getHoursByMonthEmployee(){
+
+        $listMonths=$this->model->getMonthsGroup($this->getPaginator(),$_GET['employee_id']);
+
+        $report=array();
+        for ($k = 0; $k < count($listMonths); ++$k) {
+
+            $dates=$this->getDatesMonth($listMonths[$k]['created']);
+
+            $amountHoursByMonth=$this->model->amountHoursByMonthItem($this->filtersType($dates));
+
+            $listItemsFile= $this->model->listAll($this->filtersType($dates));
+
+            $report[]=array('created'=>$listMonths[$k]['created'],'amountMonth' => $amountHoursByMonth['total'],'listItemsFile' => $listItemsFile);
+        }
+
+        $this->returnSuccess(200,$report);
+
+    }
+
+
+
+
     function listHours()
     {
         if (isset($_GET['employee_id'])) {
@@ -25,6 +83,7 @@ class ItemsFileEmployeeController extends SecureBaseController
         }
     }
 
+
     function amountHoursByMonth(){
         if(isset($_GET['since']) && isset($_GET['to'])){
 
@@ -34,13 +93,5 @@ class ItemsFileEmployeeController extends SecureBaseController
     }
 
 
-    public function get()
-    {
-        //$this->beforeMethod();
-        if(isset($_GET['method'])){
-            $this->method();
-        }else{
-            parent::get();
-        }
-    }
+
 }
