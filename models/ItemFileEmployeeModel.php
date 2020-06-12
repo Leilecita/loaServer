@@ -27,7 +27,7 @@ class ItemFileEmployeeModel extends BaseModel
 
     function amountHoursByMonthItem($filters){
         $conditions = join(' AND ',$filters);
-        $query ='SELECT SUM(time_worked) AS total FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC ';
+        $query ='SELECT SUM(time_worked+time_worked_aft) AS total FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC ';
         $response = $this->getDb()->fetch_row($query);
 
         if($response['total']!=null){
