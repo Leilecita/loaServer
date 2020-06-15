@@ -143,9 +143,26 @@ class StockEventsController extends SecureBaseController
     function getPaginatorSales(){
         $paginator = array('offset' => 0, 'limit' => PAGE_SIZE);
         if(isset($_GET['page'])){
-            $paginator['offset'] = 4 * $_GET['page'];
+            $paginator['offset'] = 1 * $_GET['page'];
         }
         return $paginator;
+    }
+
+    function getSales2Prueba(){
+        $reportStockEventsBySale=$this->model->getEventsGroupByDayFilters($this->getPaginatorSales(),($this->filterSale(array())));
+        $array=array();
+        for ($i = 0; $i < count($reportStockEventsBySale); ++$i) {
+
+            $porciones = explode(",", $reportStockEventsBySale[$i]['list']);
+            var_dump($porciones);
+
+          //  $json[]=json_encode($reportStockEventsBySale[$i]['list']);
+        }
+
+        //$data = (array)json_decode($reportStockEventsBySale['list']);
+
+        $this->returnSuccess(200,$array);
+
     }
 
     function getSales(){
@@ -186,7 +203,8 @@ class StockEventsController extends SecureBaseController
 
            $totalCard= $debitoAmount['total']+$creditAmount['total']+$cardAmountItemsFileClientCard['total'];
 
-           $countSales= $this->model->countStockEvents($this->filterSale($this->filters($dates)));
+           //$countSales= $this->model->countStockEvents($this->filterSale($this->filters($dates)));
+           $countSales= $this->model->sumSales($this->filterSale($this->filters($dates)));
 
            $reportDay[]=array('created'=>$days[$i]['created'],'countSales' => $countSales, 'efectAmount' => $totalEf, 'cardAmount' => $totalCard ,
                'transfAmount'=>$transfAmount['total'], 'mercPagoAmount' => $mercPagAmount['total'],

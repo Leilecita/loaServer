@@ -58,6 +58,15 @@ ORDER BY `created`  DESC
     }
 
 
+    // GROUP_CONCAT(CONCAT('{type:"', p.type, '", brand:"',p.brand,'"}')) list
+   function getEventsGroupByDayFilters($paginator,$filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query='SELECT s.created , GROUP_CONCAT( CONCAT("type",":",p.type,",","brand",":",p.brand)) as list
+        FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by DAY(s.created), MONTH(s.created), YEAR(s.created) order by s.created desc LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->getDb()->fetch_all($query);
+
+   }
+
     function getAllEvents($filters=array(),$paginator=array()){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT *, p.created as product_created, s.created as stock_event_created, s.id as stock_event_id FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY stock_event_created DESC
@@ -87,6 +96,20 @@ ORDER BY `created`  DESC
     function countStockEvents($filters=array()){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT COUNT(*) as total FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions );
+        $response=$this->getDb()->fetch_row($query);
+        if($response['total'] != null){
+            return $response['total'];
+        }else{
+            $response['total']=0;
+            return   $response['total'];
+        }
+
+    }
+
+
+    function sumSales($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock_out) as total FROM stock_events as s '.( empty($filters) ?  '' : ' WHERE '.$conditions );
         $response=$this->getDb()->fetch_row($query);
         if($response['total'] != null){
             return $response['total'];

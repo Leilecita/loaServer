@@ -22,14 +22,12 @@ class BoxesController extends SecureBaseController
 
     function getLastBox(){
 
-
         $totalAmount=array('total' => 0.0);
         if(isset($_GET['date']) && isset($_GET['dateTo'])){
             $totalAmount=$this->extractions->amountByExtractionsDay($_GET['date'],$_GET['dateTo']);
         }
 
         $boxes=$this->model->findAllBoxes($this->getFilters());
-
         $lastBox=$boxes[0];
 
         $resp=array('lastBox' => $lastBox, 'amountExtractions' => $totalAmount['total']);
@@ -61,6 +59,15 @@ class BoxesController extends SecureBaseController
         }
 */
         $this->returnSuccess(200,$boxes);
+    }
+
+
+
+    function getBoxesByPeriod(){
+
+        $listBoxes=$this->model->findAll($this->getFilters(),$this->getPaginator());
+        $this->returnSuccess(200,$listBoxes);
+
     }
 
     function getAmountExtractions($data){
@@ -106,7 +113,6 @@ class BoxesController extends SecureBaseController
         }
 
 
-       // $this->returnSuccess(200, $this->getModel()->getAmountBoxByMonth($this->getFilters(),$this->getPaginator()));
         $this->returnSuccess(200, $list);
 
 
