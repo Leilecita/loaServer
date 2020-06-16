@@ -22,7 +22,7 @@ class ClientModel extends BaseModel
         return $this->getDb()->fetch_all($query);
     }
 
-    function save($data){
+   /* function save($data){
         if(empty($data['imageData'])) {
             unset($data['imageData']);
             return $this->getDb()->insert($this->tableName, $data);
@@ -50,6 +50,6 @@ class ClientModel extends BaseModel
 
             return $this->getDb()->update($this->tableName, $data,['id' => "$id"]);
         }
-    }
+    }*/
 
 }
