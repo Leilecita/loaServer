@@ -45,7 +45,7 @@ class ClientsController extends SecureBaseController
     function get(){
 
        $this->beforeMethod();
-        error_log("ale");
+        //error_log("ale");
         //error_log("SERVER: ".print_r($_SERVER,true));
         if(isset($_GET['method'])){
             $this->method();

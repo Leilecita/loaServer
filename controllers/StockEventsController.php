@@ -121,9 +121,9 @@ class StockEventsController extends SecureBaseController
 
             $reportStockEventByEntries=$this->model->getAllEventsSale($this->filterEntrie($this->filters($dates)));
 
-            $countEntries= $this->model->countStockEvents($this->filterEntrie($this->filters($dates)));
+            $sumEntries= $this->model->sumEntries($this->filterEntrie($this->filters($dates)));
 
-            $reportDay[]=array('created'=>$days[$i]['created'],'listEntries' => $reportStockEventByEntries,'countEntries' => $countEntries);
+            $reportDay[]=array('created'=>$days[$i]['created'],'listEntries' => $reportStockEventByEntries,'countEntries' => $sumEntries);
         }
              $this->returnSuccess(200,$reportDay);
 

@@ -106,6 +106,19 @@ ORDER BY `created`  DESC
 
     }
 
+    function sumEntries($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock_in) as total FROM stock_events as s '.( empty($filters) ?  '' : ' WHERE '.$conditions );
+        $response=$this->getDb()->fetch_row($query);
+        if($response['total'] != null){
+            return $response['total'];
+        }else{
+            $response['total']=0;
+            return   $response['total'];
+        }
+
+    }
+
 
     function sumSales($filters=array()){
         $conditions = join(' AND ',$filters);
