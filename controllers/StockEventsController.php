@@ -62,6 +62,14 @@ class StockEventsController extends SecureBaseController
        }
    }
 
+   function filterSum($dates){
+       $filters=array();
+
+       $filters[] = 's.created >= "'.$dates['date'].'"';
+       $filters[] = 's.created < "'.$dates['dateTo'].'"';
+
+       return $filters;
+   }
 
     function filters($dates){
 
@@ -203,7 +211,7 @@ class StockEventsController extends SecureBaseController
 
            $totalCard= $debitoAmount['total']+$creditAmount['total']+$cardAmountItemsFileClientCard['total'];
 
-           //$countSales= $this->model->countStockEvents($this->filterSale($this->filters($dates)));
+         //  $countSales= $this->model->countStockEvents($this->filterSale($this->filters($dates)));
            $countSales= $this->model->sumSales($this->filterSale($this->filters($dates)));
 
            $reportDay[]=array('created'=>$days[$i]['created'],'countSales' => $countSales, 'efectAmount' => $totalEf, 'cardAmount' => $totalCard ,

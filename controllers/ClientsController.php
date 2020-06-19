@@ -26,11 +26,12 @@ class ClientsController extends SecureBaseController
     function getClients(){
 
         if($_GET['order'] == "name"){
-            $list_clients=$this->getModel()->findAllByName($this->getFilters(),$this->getPaginator());
+            $list_clients=$this->model->findAllByName($this->getFilters(),$this->getPaginator());
+        }else if($_GET['order'] == "debt"){
+            $list_clients=$this->model->findAllByDebt($this->getFilters(),$this->getPaginator());
         }else{
-            $list_clients=$this->getModel()->findAllByDebt($this->getFilters(),$this->getPaginator());
+            $list_clients=$this->model->findAllClients($this->getFilters(),$this->getPaginator());
         }
-
 
         for ($i = 0; $i < count($list_clients); ++$i) {
 

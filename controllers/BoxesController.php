@@ -40,33 +40,29 @@ class BoxesController extends SecureBaseController
         //$this->beforeMethod();
 
         $boxes=$this->getModel()->findAll($this->getFilters(),$this->getPaginator());
-       /* for ($i = 0; $i < count($boxes); ++$i) {
 
-            $created=$boxes[$i]['created'];
-
-            $parts = explode(" ", $created);
-            $date=$parts[0]." 00:00:00";
-
-            $next_date = date('Y-m-d', strtotime( $parts[0].' +1 day'));
-
-
-            $dateTo=$next_date." 00:00:00";
-
-            $totalAmount=$this->extractions->amountByExtractionsDay($date,$dateTo);
-
-            $this->model->update($boxes[$i]['id'],array('deposit' => $totalAmount));
-
-        }
-*/
         $this->returnSuccess(200,$boxes);
     }
-
-
 
     function getBoxesByPeriod(){
 
         $listBoxes=$this->model->findAll($this->getFilters(),$this->getPaginator());
         $this->returnSuccess(200,$listBoxes);
+
+    }
+
+    function sumBoxesByPeriod(){
+
+        $ctdo=$this->model->amountByColumnBox($_GET['since'],$_GET['to'],"counted_sale");
+        $card=$this->model->amountByColumnBox($_GET['since'],$_GET['to'],"credit_card");
+        $tot_box=$this->model->amountByColumnBox($_GET['since'],$_GET['to'],"total_box");
+        $rest_box=$this->model->amountByColumnBox($_GET['since'],$_GET['to'],"rest_box");
+        $depo=$this->model->amountByColumnBox($_GET['since'],$_GET['to'],"deposit");
+
+        $result=array('tot_ctdo' => $ctdo['total'], 'tot_card' => $card['total'], 'tot_box' => $tot_box['total'],
+            'tot_rest_box' => $rest_box['total'],'tot_dep' =>$depo['total']);
+
+        $this->returnSuccess(200,$result);
 
     }
 
@@ -112,10 +108,7 @@ class BoxesController extends SecureBaseController
             'listBoxesByMonth' => $listBoxes);
         }
 
-
         $this->returnSuccess(200, $list);
-
-
     }
 
     function getListBoxesByMonth(){

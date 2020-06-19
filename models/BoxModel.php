@@ -84,8 +84,17 @@ class BoxModel extends BaseModel
 
     }
 
+    function amountByColumnBox($date1,$date2,$column){
+        $response = $this->getDb()->fetch_row('SELECT SUM('.$column.') AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? ORDER BY created DESC',$date1,$date2);
+        if($response['total']!=null){
+            return $response;
+        }else{
+            $response['total']=0;
+            return $response;
+        }
+    }
 
-    function amountSaleByMonth($date1,$date2){
+    function amountSale($date1,$date2){
         $response = $this->getDb()->fetch_row('SELECT SUM(counted_sale) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? ORDER BY created DESC',$date1,$date2);
         if($response['total']!=null){
             return $response;
@@ -95,15 +104,6 @@ class BoxModel extends BaseModel
         }
     }
 
-    function amountCardByMonth($date1,$date2){
-        $response = $this->getDb()->fetch_row('SELECT SUM(credit_card) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? ORDER BY created DESC',$date1,$date2);
-        if($response['total']!=null){
-            return $response;
-        }else{
-            $response['total']=0;
-            return $response;
-        }
-    }
 
     function getAmountBoxByMonth($filters=array(),$paginator=array()){
         $query = 'SELECT sum(counted_sale) as sale,sum(credit_card) as card,sum(deposit) as dep, EXTRACT(YEAR FROM created) as y, EXTRACT(MONTH FROM created) as m FROM '.$this->tableName.'
