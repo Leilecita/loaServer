@@ -61,7 +61,7 @@ ORDER BY `created`  DESC
     // GROUP_CONCAT(CONCAT('{type:"', p.type, '", brand:"',p.brand,'"}')) list
    function getEventsGroupByDayFilters($paginator,$filters=array()){
         $conditions = join(' AND ',$filters);
-        $query='SELECT s.created , GROUP_CONCAT( CONCAT("type",":",p.type,",","brand",":",p.brand)) as list
+        $query='SELECT s.created , GROUP_CONCAT( CONCAT("item",":",p.item,"type",":",p.type,",","brand",":",p.brand)) as list
         FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by DAY(s.created), MONTH(s.created), YEAR(s.created) order by s.created desc LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
         return $this->getDb()->fetch_all($query);
 

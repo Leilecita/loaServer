@@ -164,12 +164,13 @@ class StockEventsController extends SecureBaseController
             $porciones = explode(",", $reportStockEventsBySale[$i]['list']);
            // var_dump($porciones);
 
+
           //  $json[]=json_encode($reportStockEventsBySale[$i]['list']);
         }
 
         //$data = (array)json_decode($reportStockEventsBySale['list']);
 
-        $this->returnSuccess(200,$array);
+        $this->returnSuccess(200,$reportStockEventsBySale);
 
     }
 
