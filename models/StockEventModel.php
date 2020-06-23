@@ -86,8 +86,8 @@ ORDER BY `created`  DESC
         $conditions = join(' AND ',$filters);
        // $query = 'SELECT *, p.created as product_created, s.created as stock_event_created, s.id as stock_event_id
         $query = 'SELECT *, p.type as type, p.brand as brand, p.model as model, s.stock_in as stock_in, s.stock_out as stock_out, s.value as value,
-                  s.payment_method as payment_method, s.detail as detail, s.client_name as client_name, s.observation as observation,
-                   p.created as product_created, s.created as stock_event_created, s.id as stock_event_id
+                  s.payment_method as payment_method, s.detail as detail, s.client_name as client_name,s.client_id as client_id ,s.observation as observation,
+                   p.created as product_created, s.created as stock_event_created,s.today_created_client as today_created_client ,s.id as stock_event_id
         FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY stock_event_created DESC';
         return $this->getDb()->fetch_all($query);
 

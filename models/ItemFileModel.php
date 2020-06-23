@@ -24,7 +24,7 @@ class ItemFileModel extends BaseModel
     }
 
     function getItemsFileClientEvents($dateSince,$dateTo){
-        $query = 'SELECT *, c1.created as client_created, i.created as item_file_created FROM clients c1 inner JOIN items_file i ON i.client_id = c1.id where
+        $query = 'SELECT *, c1.created as client_created, i.created as item_file_created , i.product_type as product_type FROM clients c1 inner JOIN items_file i ON i.client_id = c1.id where
  i.created < \''.$dateTo.'\' and i.created >= \''.$dateSince.'\' and description != "Salida ficha" ORDER BY item_file_created DESC';
 
         return $this->getDb()->fetch_all($query);

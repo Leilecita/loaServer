@@ -51,7 +51,6 @@ class StockEventsController extends SecureBaseController
 
 
 
-
    function getItemFileClientReport($listItemsFile){
 
        for ($i = 0; $i < count($listItemsFile); ++$i) {
@@ -62,14 +61,6 @@ class StockEventsController extends SecureBaseController
        }
    }
 
-   function filterSum($dates){
-       $filters=array();
-
-       $filters[] = 's.created >= "'.$dates['date'].'"';
-       $filters[] = 's.created < "'.$dates['dateTo'].'"';
-
-       return $filters;
-   }
 
     function filters($dates){
 
@@ -124,8 +115,6 @@ class StockEventsController extends SecureBaseController
             }else{
                 $dates=$this->getDates($days[$i]['created']);
             }
-
-            //$listStockEventsByEntries= $this->model->getAllEventsSale($this->filterEntrie($this->filters($dates)));
 
             $reportStockEventByEntries=$this->model->getAllEventsSale($this->filterEntrie($this->filters($dates)));
 
@@ -212,7 +201,6 @@ class StockEventsController extends SecureBaseController
 
            $totalCard= $debitoAmount['total']+$creditAmount['total']+$cardAmountItemsFileClientCard['total'];
 
-         //  $countSales= $this->model->countStockEvents($this->filterSale($this->filters($dates)));
            $countSales= $this->model->sumSales($this->filterSale($this->filters($dates)));
 
            $reportDay[]=array('created'=>$days[$i]['created'],'countSales' => $countSales, 'efectAmount' => $totalEf, 'cardAmount' => $totalCard ,
@@ -252,7 +240,81 @@ class StockEventsController extends SecureBaseController
     }
 
 
-    //TO DELETE
+    function getBalance(){
+        $this->returnSuccess(200,$this->getModel()->findAll($this->getFilters(),$this->getPaginator()));
+    }
+
+    function checkClientId($client_id,$inserted,$value_for_file){
+        if($client_id >= 0){
+            $this->createItemFileByClientId($inserted,$client_id,$value_for_file);
+        }
+    }
+
+    function createItemFileByClientId($inserted, $client_id,$value_for_file){
+
+        $product=$this->products->findById($inserted['id_product']);
+
+        $itemFile= array('client_file_id'=> 0,'client_id' => $client_id,'description' => $inserted['detail'], 'brand' => $product['brand'],
+            'product_kind' => $product['item'],'value' =>$value_for_file*(-1),'retired_product' => "true", 'payment_method' =>$inserted['payment_method'],'settled' => "false"
+          ,'product_type' => $product['type'],'product_model' => $product['model'] );
+
+        $res=$this->items_file->save($itemFile);
+    }
+
+    function post(){
+        $data = (array)json_decode(file_get_contents("php://input"));
+
+        $this->updateStockProduct($data['id_product'],$data['stock_in'],$data['stock_out']);
+
+        $client_id=$data['client_id'];
+       // unset($data['client_id']);
+
+        $value_for_file=$data['value_for_file'];
+        unset($data['value_for_file']);
+
+        unset($data['id']);
+        $res = $this->getModel()->save($data);
+
+        if($res<0){
+            $this->returnError(404,null);
+        }else{
+            $inserted = $this->getModel()->findById($res);
+
+            $this->checkClientId($client_id,$inserted,$value_for_file);
+
+            if($_GET['balance'] == "balance"){
+                $this->loadIdealStock($inserted);
+            }
+            $this->returnSuccess(201,$inserted);
+        }
+    }
+
+
+    function loadIdealStock($inserted){
+
+        $filters= array();
+        $filters[] = 'id_product = "'.$inserted['id_product'].'"';
+        $stock_events= $this->getModel()->findAllByDate($filters);
+
+        if(count($stock_events) > 1){
+            $last=$stock_events[1]['ideal_stock'];
+            $this->model->update($inserted['id'],array('ideal_stock'=> $last));
+        }
+    }
+
+
+    function updateStockProduct($id,$valueIn,$valueOut){
+
+       $prod= $this->products->findById($id);
+        if($prod){
+            $val=$valueIn + $prod['stock'] - $valueOut;
+            $this->products->update($id,array('stock'=> $val ));
+        }
+    }
+
+    /*
+     *
+       //TO DELETE
     function filterEventsOut($filters){
         $filters[] = 'detail like "%'."salida".'%"';
         return $filters;
@@ -356,79 +418,7 @@ class StockEventsController extends SecureBaseController
 
 
     // fin to delete
-
-    function getBalance(){
-        $this->returnSuccess(200,$this->getModel()->findAll($this->getFilters(),$this->getPaginator()));
-    }
-
-    function checkClientId($client_id,$inserted,$value_for_file){
-        if($client_id >= 0){
-            $this->createItemFileByClientId($inserted,$client_id,$value_for_file);
-        }
-    }
-
-
-    function createItemFileByClientId($inserted, $client_id,$value_for_file){
-
-        $product=$this->products->findById($inserted['id_product']);
-
-        $itemFile= array('client_file_id'=> 0,'client_id' => $client_id,'description' => $inserted['detail'], 'brand' => $product['brand'],
-            'product_kind' => $product['item'],'value' =>$value_for_file*(-1),'retired_product' => "true", 'payment_method' =>$inserted['payment_method'],'settled' => "false");
-        $res=$this->items_file->save($itemFile);
-    }
-
-    function post(){
-        $data = (array)json_decode(file_get_contents("php://input"));
-
-
-        $this->updateStockProduct($data['id_product'],$data['stock_in'],$data['stock_out']);
-
-        $client_id=$data['client_id'];
-        unset($data['client_id']);
-
-        $value_for_file=$data['value_for_file'];
-        unset($data['value_for_file']);
-
-        unset($data['id']);
-        $res = $this->getModel()->save($data);
-
-        if($res<0){
-            $this->returnError(404,null);
-        }else{
-            $inserted = $this->getModel()->findById($res);
-
-            $this->checkClientId($client_id,$inserted,$value_for_file);
-
-            if($_GET['balance'] == "balance"){
-                $this->loadIdealStock($inserted);
-            }
-            $this->returnSuccess(201,$inserted);
-        }
-    }
-
-
-    
-    function loadIdealStock($inserted){
-
-        $filters= array();
-        $filters[] = 'id_product = "'.$inserted['id_product'].'"';
-        $stock_events= $this->getModel()->findAllByDate($filters);
-
-        if(count($stock_events) > 1){
-            $last=$stock_events[1]['ideal_stock'];
-            $this->model->update($inserted['id'],array('ideal_stock'=> $last));
-        }
-    }
-
-
-    function updateStockProduct($id,$valueIn,$valueOut){
-
-       $prod= $this->products->findById($id);
-        if($prod){
-            $val=$valueIn + $prod['stock'] - $valueOut;
-            $this->products->update($id,array('stock'=> $val ));
-        }
-    }
+     */
 }
 
 /* function getAll(){

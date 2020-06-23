@@ -31,7 +31,6 @@ class ItemsFileController extends SecureBaseController
             $list_operations = $this->model->findAllByClientId(array('client_id = "' . $_GET['client_id'] . '"'),$this->getPaginator());
             for ($i = 0; $i < count($list_operations); ++$i) {
 
-
                 $client = $this->clients->findById($list_operations[$i]['client_id']);
 
                 $previous_balance=$this->calculatePreviousBalance($client['id'],$list_operations[$i]['created']);
@@ -44,7 +43,9 @@ class ItemsFileController extends SecureBaseController
                     'size'=> $list_operations[$i]['size'],
                     'previous_balance'=>$previous_balance['total'],
                     'product_kind'=> $list_operations[$i]['product_kind'],'settled' =>$list_operations[$i]['settled'],
-                    'client_id' =>$list_operations[$i]['client_id']);
+                    'client_id' =>$list_operations[$i]['client_id'],
+                    'product_type' => $list_operations[$i]['product_type'],
+                    'product_model' => $list_operations[$i]['product_model']);
             }
             $this->returnSuccess(200, $operationsReport);
         } else {
@@ -166,6 +167,7 @@ class ItemsFileController extends SecureBaseController
 
             if($res[$i]['value'] >= 0){ //sino solo se esta registrando la deuda de la ficha
                 $report[]=array('name' => $res[$i]['name'],'value' => $res[$i]['value'],'item_file_created' => $res[$i]['item_file_created'],
+                    'product_type' => $res[$i]['product_type'],'product_model' => $res[$i]['product_model'],
                     'description' => $res[$i]['description'],'payment_method' => $res[$i]['payment_method'],'retired_product' => $res[$i]['retired_product']);
             }
         }
