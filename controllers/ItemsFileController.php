@@ -130,10 +130,9 @@ class ItemsFileController extends SecureBaseController
 
         $client= $this->clients->findById($data['client_id']);
         $value=$data['value'];
-        $desc=$client['name']."".$data['observation']." ".$data['product_kind']." ".$data['brand']." ".$data['size']." ".$data['code'];
+        $desc=$client['name']." ".$data['product_kind']." ".$data['brand'];
         $this->logEvent($client['employee_creator_id'],$desc,$value,$previous_descr,$previous_value,$state,$data['client_id'],$modify);
     }
-
 
 
     function getFiltersItemsFile(){

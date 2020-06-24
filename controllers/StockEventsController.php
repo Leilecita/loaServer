@@ -138,7 +138,7 @@ class StockEventsController extends SecureBaseController
 
 
     function getPaginatorSales(){
-        $paginator = array('offset' => 0, 'limit' => PAGE_SIZE);
+        $paginator = array('offset' => 0, 'limit' => 2);
         if(isset($_GET['page'])){
             $paginator['offset'] = 1 * $_GET['page'];
         }
@@ -232,7 +232,8 @@ class StockEventsController extends SecureBaseController
 
             $report=array('item' => $repot_stock_event['item'],'type' => $repot_stock_event['type'],'brand' => $repot_stock_event['brand'],'model' => $repot_stock_event['model'],
                 'stock_in' =>$repot_stock_event['stock_in'],'stock_out' => $repot_stock_event['stock_out'],'stock_event_created' => $repot_stock_event['stock_event_created'],
-                'value' => $repot_stock_event['value'], 'payment_method'=> $repot_stock_event['payment_method'], 'detail'=> $repot_stock_event['detail'],'stock_event_id' => $repot_stock_event['stock_event_id']);
+                'value' => $repot_stock_event['value'], 'payment_method'=> $repot_stock_event['payment_method'], 'detail'=> $repot_stock_event['detail'],'stock_event_id' => $repot_stock_event['stock_event_id'],
+                'today_created_client' => $repot_stock_event['today_created_client'], 'client_id' => $repot_stock_event['client_id']);
             $this->returnSuccess(200,$report);
         }else{
             $this->returnError(400, "entity not found");

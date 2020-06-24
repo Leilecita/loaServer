@@ -89,4 +89,5 @@ class ParallelMoneyMovementsController extends SecureBaseController
         }
         $this->returnSuccess(200,$report);
     }
+
 }
