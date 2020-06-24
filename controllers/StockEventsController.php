@@ -180,7 +180,7 @@ class StockEventsController extends SecureBaseController
                $dates=$this->getDates($days[$i]['created']);
            }
 
-          // $reportStockEventBySale=$this->model->getAllEventsSale($this->filterSale($this->filters($dates)));
+           $reportStockEventBySale=$this->model->getAllEventsSale($this->filterSale($this->filters($dates)));
 
            $reportItemsFile= $this->items_file->getItemsFileClientEvents($dates['date'],$dates['dateTo']);
 
@@ -205,7 +205,7 @@ class StockEventsController extends SecureBaseController
 
            $reportDay[]=array('created'=>$days[$i]['created'],'countSales' => $countSales, 'efectAmount' => $totalEf, 'cardAmount' => $totalCard ,
                'transfAmount'=>$transfAmount['total'], 'mercPagoAmount' => $mercPagAmount['total'],
-               'listStockEventSale' => array(), 'listItems' => $reportItemsFile);
+               'listStockEventSale' => $reportStockEventBySale, 'listItems' => $reportItemsFile);
        }
 
        $this->returnSuccess(200,$reportDay);
