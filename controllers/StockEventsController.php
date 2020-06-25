@@ -145,23 +145,6 @@ class StockEventsController extends SecureBaseController
         return $paginator;
     }
 
-    function getSales2Prueba(){
-        $reportStockEventsBySale=$this->model->getEventsGroupByDayFilters($this->getPaginatorSales(),($this->filterSale(array())));
-        $array=array();
-        for ($i = 0; $i < count($reportStockEventsBySale); ++$i) {
-
-            $porciones = explode(",", $reportStockEventsBySale[$i]['list']);
-           // var_dump($porciones);
-
-
-          //  $json[]=json_encode($reportStockEventsBySale[$i]['list']);
-        }
-
-        //$data = (array)json_decode($reportStockEventsBySale['list']);
-
-        $this->returnSuccess(200,$reportStockEventsBySale);
-
-    }
 
     function getSales(){
 
@@ -211,9 +194,64 @@ class StockEventsController extends SecureBaseController
        $this->returnSuccess(200,$reportDay);
    }
 
-   function getAllSales(){
-       $dates=$this->getDates($_GET['created']);
+    function getSales2(){
 
+        if($_GET['groupby'] === "month"){
+            $days=$this->model->getEventsGroupByMonth($this->getPaginatorSales());
+        }else{
+            $days=$this->model->getEventsGroupByDay($this->getPaginatorSales());
+        }
+
+        $reportDay=array();
+        for ($i = 0; $i < count($days); ++$i) {
+
+            if($_GET['groupby'] === "month"){
+                $dates=$this->getDatesMonth($days[$i]['created']);
+            }else{
+                $dates=$this->getDates($days[$i]['created']);
+            }
+
+         //   $reportStockEventBySale=$this->model->getAllEventsSale($this->filterSale($this->filters($dates)));
+
+            $reportItemsFile= $this->items_file->getItemsFileClientEvents($dates['date'],$dates['dateTo']);
+
+            $efectAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"efectivo");
+            $transfAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"transferencia");
+            $mercPagAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"mercado pago");
+
+
+            $debitoAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"debito");
+            $creditAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"tarjeta");
+
+
+            $efectAmountItemsFileClientSales=$this->items_file->amountByDateEf($dates['date'],$dates['dateTo'],"efectivo");
+
+            $cardAmountItemsFileClientCard=$this->items_file->amountByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
+
+            $totalEf=$efectAmount['total']+$efectAmountItemsFileClientSales['total'];
+
+            $totalCard= $debitoAmount['total']+$creditAmount['total']+$cardAmountItemsFileClientCard['total'];
+
+            $countSales= $this->model->sumSales($this->filterSale($this->filters($dates)));
+
+            $reportDay[]=array('created'=>$days[$i]['created'],'countSales' => $countSales, 'efectAmount' => $totalEf, 'cardAmount' => $totalCard ,
+                'transfAmount'=>$transfAmount['total'], 'mercPagoAmount' => $mercPagAmount['total'],
+                'listStockEventSale' => array(), 'listItems' => $reportItemsFile);
+        }
+
+        $this->returnSuccess(200,$reportDay);
+    }
+
+    function getAllSales(){
+
+        if($_GET['groupby'] === "month"){
+            $dates=$this->getDatesMonth($_GET['created']);
+        }else{
+            $dates=$this->getDates($_GET['created']);
+        }
+
+
+      // $this->returnSuccess(200,$this->model->getAllEventsSaleByPage($this->filterSale($this->filters($dates)),$this->getPaginator()));
        $this->returnSuccess(200,$this->model->getAllEventsSale($this->filterSale($this->filters($dates))));
    }
 
@@ -311,7 +349,6 @@ class StockEventsController extends SecureBaseController
 
         //  $totalAmountItemsFileClientSales=$this->items_file->amountByDay($date,$dateTo);
 
-
         $totalAmountItemsFileClientSales=$this->items_file->amountByDateEf($date,$dateTo,"efectivo");
 
         $totalAmountIncomes= $this->incomes->amountByDateEf($date,$dateTo,"efectivo");
@@ -335,7 +372,6 @@ class StockEventsController extends SecureBaseController
         $filters[] = 'created >= "'.$date.'"';
         $filters[] = 'created < "'.$dateTo.'"';
 
-
         //suma todos los que son distinto a efectivo
         $totalAmountItemsFileClientCard=$this->items_file->amountByDateCardDeb($date,$dateTo,"efectivo");
 
@@ -350,6 +386,8 @@ class StockEventsController extends SecureBaseController
 
         $this->returnSuccess(200,$total);
     }
+
+    //lo usa cierre de caja  --
 
 
     function loadIdealStock($inserted){
