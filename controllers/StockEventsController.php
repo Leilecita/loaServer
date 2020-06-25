@@ -140,7 +140,7 @@ class StockEventsController extends SecureBaseController
     function getPaginatorSales(){
         $paginator = array('offset' => 0, 'limit' => 2);
         if(isset($_GET['page'])){
-            $paginator['offset'] = 1 * $_GET['page'];
+            $paginator['offset'] = 2 * $_GET['page'];
         }
         return $paginator;
     }
@@ -194,7 +194,7 @@ class StockEventsController extends SecureBaseController
        $this->returnSuccess(200,$reportDay);
    }
 
-    function getSales2(){
+  /*  function getSales2(){
 
         if($_GET['groupby'] === "month"){
             $days=$this->model->getEventsGroupByMonth($this->getPaginatorSales());
@@ -241,7 +241,7 @@ class StockEventsController extends SecureBaseController
 
         $this->returnSuccess(200,$reportDay);
     }
-
+*/
     function getAllSales(){
 
         if($_GET['groupby'] === "month"){
