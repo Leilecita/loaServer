@@ -18,10 +18,6 @@ class LoginController extends BaseController
         $this->model = new UserModel();
     }
 
-    function getUser(){
-
-
-    }
 
     function login(){
 

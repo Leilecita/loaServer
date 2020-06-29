@@ -103,7 +103,6 @@ class BoxesController extends SecureBaseController
         for ($i = 0; $i < count($boxesByMonth); ++$i) {
 
             $listBoxes= $this->model->getBoxesByMonthYear($boxesByMonth[$i]['m'],$boxesByMonth[$i]['y']);
-
             $list[]=array('y' => $boxesByMonth[$i]['y'], 'm' =>$boxesByMonth[$i]['m'], 'card' => $boxesByMonth[$i]['card'],'sale'=> $boxesByMonth[$i]['sale'],'dep' => $boxesByMonth[$i]['dep'],
             'listBoxesByMonth' => $listBoxes);
         }

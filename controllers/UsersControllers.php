@@ -14,7 +14,6 @@ class UsersControllers extends SecureBaseController
         $this->model = new UserModel();
     }
 
-
     public function get()
     {
         $this->beforeMethod();
@@ -22,7 +21,6 @@ class UsersControllers extends SecureBaseController
         $user= $this->getCurrentUser();
         $this->returnSuccess(200,array("token" => $user['token']));
     }
-
 
 }
 

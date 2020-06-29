@@ -8,6 +8,7 @@
 
 require_once 'BaseModel.php';
 
+
 class UserModel extends BaseModel
 {
     public function __construct()
@@ -15,4 +16,5 @@ class UserModel extends BaseModel
         parent::__construct();
         $this->tableName = 'users';
     }
+
 }

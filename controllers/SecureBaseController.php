@@ -32,7 +32,19 @@ abstract class SecureBaseController extends BaseController
         }
     }
 
+    function getUser(){
+        $this->currentUser = SessionHelper::getCurrentUser();
+        if($this->getCurrentUser() == null) {
+           return null;
+        }else{
+            return $this->getCurrentUser();
+        }
+    }
+
     function getCurrentUser(){
         return $this->currentUser;
     }
+
+
+
 }

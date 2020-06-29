@@ -46,9 +46,10 @@ ORDER BY `created`  DESC
         return $this->getDb()->fetch_all($query);
     }
 
-
     function getEventsGroupByDay($paginator){
-        $query='SELECT * FROM stock_events group by DAY(created), MONTH(created), YEAR (created) order by created desc LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+       // $query='SELECT * FROM stock_events group by DAY(created), MONTH(created), YEAR (created) order by created desc LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+       // $query="(".'SELECT id,created FROM stock_events group by DAY(created), MONTH(created), YEAR (created)'.")".'UNION '."(".' SELECT id,created FROM items_file group by DAY(created), MONTH(created), YEAR (created)'.")".' order by created desc LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        $query='SELECT id,created FROM '."(".'SELECT id,created as created FROM stock_events UNION ALL SELECT id,created as created FROM items_file '.")".' data group by DAY(created), MONTH(created), YEAR (created) order by created desc LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
         return $this->getDb()->fetch_all($query);
     }
 
