@@ -128,7 +128,6 @@ ORDER BY `created`  DESC
             $response['total']=0;
             return   $response['total'];
         }
-
     }
 
 
@@ -142,10 +141,7 @@ ORDER BY `created`  DESC
             $response['total']=0;
             return   $response['total'];
         }
-
     }
-
-
 
     function getEvent($filters=array()){
         $conditions = join(' AND ',$filters);

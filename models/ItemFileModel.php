@@ -24,8 +24,10 @@ class ItemFileModel extends BaseModel
     }
 
     function getItemsFileClientEvents($dateSince,$dateTo){
+        //balance es cuando ingresas un valor a la ficha que nose refleja en la caja del dia.
+
         $query = 'SELECT *, c1.created as client_created, i.created as item_file_created , i.product_type as product_type FROM clients c1 inner JOIN items_file i ON i.client_id = c1.id where
- i.created < \''.$dateTo.'\' and i.created >= \''.$dateSince.'\' and description != "Salida ficha" ORDER BY item_file_created DESC';
+ i.created < \''.$dateTo.'\' and i.created >= \''.$dateSince.'\' and description != "Salida ficha" and balance = "false" ORDER BY item_file_created DESC';
 
         return $this->getDb()->fetch_all($query);
 
@@ -35,12 +37,17 @@ class ItemFileModel extends BaseModel
         $query = 'SELECT *, c1.created as client_created, i.created as item_file_created FROM clients c1 JOIN items_file i ON i.client_id = c1.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY item_file_created DESC';
 
         return $this->getDb()->fetch_all($query);
-
     }
 
 
+
+
+    //ESTO ES PARA LA PARTE DE VENTAS, STOCK_EVENTS ->
+
+    //balance = false se usa para los eventos de stock,
+    // porque solo se muestra en la planilla de ventas los movimientos que repercutene n la caja de dia.
     function amountByDay($date1,$date2){
-        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? ORDER BY created DESC',0.0,$date1,$date2);
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND balance = ? ORDER BY created DESC',0.0,$date1,$date2,"false");
         if($response['total']!=null){
             return $response;
         }else{
@@ -50,7 +57,8 @@ class ItemFileModel extends BaseModel
     }
 
     function amountByDateEf($date1,$date2,$payment_method){
-        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method);
+
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method = ? AND balance = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method,"false");
         if($response['total']!=null){
             return $response;
         }else{
@@ -58,11 +66,9 @@ class ItemFileModel extends BaseModel
             return $response;
         }
     }
-
-
 
     function amountByDateCardDeb($date1,$date2,$payment_method){
-        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method != ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method);
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method != ? AND balance = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method,"false");
         if($response['total']!=null){
             return $response;
         }else{
@@ -70,5 +76,7 @@ class ItemFileModel extends BaseModel
             return $response;
         }
     }
+
+    //<-
 
 }

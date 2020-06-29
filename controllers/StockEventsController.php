@@ -98,6 +98,17 @@ class StockEventsController extends SecureBaseController
 
     }
 
+
+    function getAllEntries(){
+
+        if($_GET['groupby'] === "month"){
+            $dates=$this->getDatesMonth($_GET['created']);
+        }else{
+            $dates=$this->getDates($_GET['created']);
+        }
+        $this->returnSuccess(200,$this->model->getAllEventsSale($this->filterEntrie($this->filters($dates))));
+    }
+
     function getEntries(){
 
         if($_GET['groupby'] === "month"){
@@ -116,11 +127,11 @@ class StockEventsController extends SecureBaseController
                 $dates=$this->getDates($days[$i]['created']);
             }
 
-            $reportStockEventByEntries=$this->model->getAllEventsSale($this->filterEntrie($this->filters($dates)));
+            //$reportStockEventByEntries=$this->model->getAllEventsSale($this->filterEntrie($this->filters($dates)));
 
             $sumEntries= $this->model->sumEntries($this->filterEntrie($this->filters($dates)));
 
-            $reportDay[]=array('created'=>$days[$i]['created'],'listEntries' => $reportStockEventByEntries,'countEntries' => $sumEntries);
+            $reportDay[]=array('created'=>$days[$i]['created'],'listEntries' => array(),'countEntries' => $sumEntries);
         }
              $this->returnSuccess(200,$reportDay);
 
@@ -184,6 +195,7 @@ class StockEventsController extends SecureBaseController
 
        $this->returnSuccess(200,$reportDay);
    }
+
 
     function getAllSales(){
 
