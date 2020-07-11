@@ -11,7 +11,6 @@ require_once  __DIR__.'/../models/ProductModel.php';
 require_once  __DIR__.'/../models/BrandModel.php';
 require_once  __DIR__.'/../models/TypeModel.php';
 
-
 class ProductsController extends SecureBaseController
 {
     private $brands;
@@ -87,6 +86,10 @@ class ProductsController extends SecureBaseController
         $this->returnSuccess(200, $this->getModel()->findAll($this->assignFilter(), $this->getPaginator()));
     }
 
+    function getProductsByItemType(){
+        $this->returnSuccess(200, $this->model->findAllProducts($this->assignFilter()));
+    }
+
     function sumAllStock(){
         $this->returnSuccess(200, $this->getModel()->sumAll($this->assignFilter(), $this->getPaginator()));
     }
@@ -148,7 +151,15 @@ class ProductsController extends SecureBaseController
     }
 
 
+    function getProductsByItem(){
 
+        $this->returnSuccess(200,$this->model->getProductsByDistintctItem());
+    }
+
+    function getProductsByType(){
+
+        $this->returnSuccess(200,$this->model->getProductsByDistintctType($this->filterType($this->assignFilter())));
+    }
 
     function checkExistTypeAndBrand($data){
 
@@ -254,7 +265,6 @@ class ProductsController extends SecureBaseController
             }
         }
     }
-
 
 
     function colors(){

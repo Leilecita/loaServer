@@ -91,7 +91,7 @@ abstract class BaseController
     }
 
     function post(){
-        $this->beforeMethod();
+        //$this->beforeMethod();
         $data = (array)json_decode(file_get_contents("php://input"));
         unset($data['id']);
         $res = $this->getModel()->save($data);

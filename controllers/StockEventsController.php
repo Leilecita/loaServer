@@ -208,6 +208,7 @@ class StockEventsController extends SecureBaseController
        $this->returnSuccess(200,$this->model->getAllEventsSale($this->filterSale($this->filters($dates))));
    }
 
+
     function getAllItemsFile(){
 
         if($_GET['groupby'] === "month"){

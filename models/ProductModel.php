@@ -16,8 +16,18 @@ class ProductModel extends BaseModel
     }
 
     function getProductByBrands(){
-
         $query='SELECT * FROM products group by brand order by created desc ';
+        return $this->getDb()->fetch_all($query);
+    }
+
+    function getProductsByDistintctItem(){
+        $query='SELECT DISTINCT item from products order by created asc ';
+        return $this->getDb()->fetch_all($query);
+    }
+
+    function getProductsByDistintctType($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query='SELECT DISTINCT p.type , color from products p, types t '.( empty($filters) ? '' : ' WHERE '.$conditions ).'  order by p.type desc ';
         return $this->getDb()->fetch_all($query);
     }
 
