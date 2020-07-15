@@ -79,7 +79,7 @@ class StockEventsController extends SecureBaseController
     }
 
     function filterSale($filters){
-        $filters[] = '(detail like "%'."salida".'%" OR detail like "%'."Ingreso dev".'%")';
+        $filters[] = '(detail like "%'."salida".'%" OR detail like "%'."Ingreso dev".'%" OR detail like "%'."Suma por error anterior".'%")';
         return $filters;
     }
 
