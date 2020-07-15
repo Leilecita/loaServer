@@ -18,7 +18,7 @@ class ClientModel extends BaseModel
 
 
     function findAllClientName(){
-        $query='SELECT id,name,created FROM clients order by created desc';
+        $query='SELECT id,name,created FROM clients where alive = "true" order by created desc';
         return $this->getDb()->fetch_all($query);
     }
 
