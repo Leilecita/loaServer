@@ -15,6 +15,12 @@ class ProductModel extends BaseModel
         $this->tableName = 'products';
     }
 
+    function findAllProductsJoinPrevPrices($filters=array(),$paginator=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT *,pe.id as event_price_id, p.id as product_id, p.created as product_created, pe.created as event_price_created FROM products as p JOIN price_events as pe ON p.id = pe.product_id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY event_price_created DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->getDb()->fetch_all($query);
+    }
+
     function getProductByBrands(){
         $query='SELECT * FROM products group by brand order by created desc ';
         return $this->getDb()->fetch_all($query);

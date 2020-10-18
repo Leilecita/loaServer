@@ -23,7 +23,6 @@ abstract class BaseController
 
     }
 
-
     function getPaginator(){
         $paginator = array('offset' => 0, 'limit' => PAGE_SIZE);
         if(isset($_GET['page'])){
@@ -74,7 +73,7 @@ abstract class BaseController
     }
 
     function get(){
-       // $this->beforeMethod();
+        $this->beforeMethod();
 
         if(isset($_GET['method'])){
             $this->method();
@@ -91,7 +90,7 @@ abstract class BaseController
     }
 
     function post(){
-        //$this->beforeMethod();
+        $this->beforeMethod();
         $data = (array)json_decode(file_get_contents("php://input"));
         unset($data['id']);
         $res = $this->getModel()->save($data);
