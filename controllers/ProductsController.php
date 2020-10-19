@@ -63,6 +63,11 @@ class ProductsController extends SecureBaseController
         if(isset($_GET['deleted'])) {
             $filters[] = 'deleted = "' . $_GET['deleted'] . '"';
         }
+
+        if(isset($_GET['query']) && !empty($_GET['query'])){
+            $filters[] = '(brand like "%'.$_GET['query'].'%" OR model like "%'.$_GET['query'].'%" OR type like "%'.$_GET['query'].'%")';
+        }
+
         return $filters;
     }
 
