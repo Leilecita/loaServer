@@ -317,13 +317,13 @@ class ProductsController extends SecureBaseController
 
         if($data['price'] != $previous_data['price']){
 
-            $this->generatePriceEvent($data['id'], $previous_data['price'], $data['price']);
+            $this->generatePriceEvent($data['id'], $previous_data['price'], $data['price'],0);
 
         }
 
     }
 
-    function generatePriceEvent($product_id, $previous_price, $actual_price){
+    function generatePriceEvent($product_id, $previous_price, $actual_price, $percentage){
         $user = $this->getUser();
 
         if($user != null){
@@ -335,22 +335,52 @@ class ProductsController extends SecureBaseController
         $date = new DateTime("now", new DateTimeZone('America/Argentina/Buenos_Aires') );
         $created = $date->format('Y-m-d H:i:s');
 
+        $per =0;
+        if($percentage != 0){
+            $per = $percentage;
+        }
+
         $price_event = array('user_id' => $user_id ,'product_id' => $product_id, 'previous_price' => $previous_price, 'actual_price' => $actual_price,
-            'created' => $created);
+            'created' => $created, 'percentage' => $per);
 
         $this->priceEvents->save($price_event);
 
     }
+
+
+    function redondear_a_10($valor) {
+
+        //VER FUNCION CEIL PHP
+
+        // Convertimos $valor a entero
+        $valor = intval($valor);
+
+        // Redondeamos al múltiplo de 10 más cercano
+        $n = round($valor, -1);
+
+        // Si el resultado $n es menor, quiere decir que redondeo hacia abajo
+        // por lo tanto sumamos 10. Si no, lo devolvemos así.
+        return $n < $valor ? $n + 10 : $n;
+    }
+
+    function roundUp($final_price){
+
+        $div = explode(".",$final_price);
+
+        $integer_part = $div[0];
+
+        error_log('redondear a 10 '. $this->redondear_a_10($integer_part));
+
+        return $this->redondear_a_10($integer_part);
+    }
+
 
     function updatePrices(){
 
         $selected_products = $_GET['selected_products'];
         $percentege = $_GET['number'];
 
-        //error_log($selected_products);
-
         $array = explode(";", $selected_products);
-        error_log(count($array));
 
         foreach ($array as $value)
         {
@@ -363,11 +393,13 @@ class ProductsController extends SecureBaseController
             $product_percentege = $product['price']*$percentege/100;
             $final_price = $product['price'] + $product_percentege;
 
-            error_log('precio '.$product['price'].' nuevo precio '.$final_price);
+            $round_up_final_price = $this->roundUp($final_price);
 
-            $this->generatePriceEvent($product['id'], $product['price'], $final_price);
+            error_log('precio '.$product['price'].' nuevo precio '.$final_price.'rounded up '.$round_up_final_price);
 
-            $this->model->update($product['id'], array('price' => $final_price));
+            $this->generatePriceEvent($product['id'], $product['price'], $round_up_final_price, $percentege);
+
+            $this->model->update($product['id'], array('price' => $round_up_final_price));
 
         }
 
@@ -375,6 +407,7 @@ class ProductsController extends SecureBaseController
 
         $this->returnSuccess(200,$resp);
     }
+
 
     function colors(){
 

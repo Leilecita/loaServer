@@ -38,6 +38,7 @@ class PriceEventsController extends SecureBaseController
                 'brand' => $list[$i]['brand'],
                 'type' => $list[$i]['type'],
                 'model' => $list[$i]['model'],
+                'percentage' => $list[$i]['percentage'],
                 'created' => $list[$i]['price_event_created']);
         }
 
