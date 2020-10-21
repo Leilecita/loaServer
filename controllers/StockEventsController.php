@@ -61,6 +61,72 @@ class StockEventsController extends SecureBaseController
        }
    }
 
+   function statisticsFilters(){
+       $filters=array();
+
+       if(isset($_GET['model'])){
+           if ($_GET['model'] != "Todos") {
+               $filters[] = 'model = "' . $_GET['model'] . '"';
+           }
+       }
+
+       if(isset($_GET['brand'])){
+           if ($_GET['brand'] != "Todos") {
+               $filters[] = 'brand = "' . $_GET['brand'] . '"';
+           }
+       }
+       if(isset($_GET['type'])) {
+           if ($_GET['type'] != "Todos") {
+               $filters[] = 'type = "' . $_GET['type'] . '"';
+           }
+       }
+       if(isset($_GET['item'])) {
+           if ($_GET['item'] != "Todos") {
+               $filters[] = 'item = "' . $_GET['item'] . '"';
+           }
+       }
+
+       if(isset($_GET['date'])) {
+           if ($_GET['date'] != "Todos") {
+               $filters[] = 's.created >= "' . $_GET['date'] . '"';
+           }
+       }
+
+       if(isset($_GET['dateTo'])) {
+           if ($_GET['dateTo'] != "Todos") {
+               $filters[] = 's.created < "' . $_GET['dateTo'] . '"';
+           }
+       }
+
+      // $filters[] = 's.created >= "'.$dates['date'].'"';
+       //$filters[] = 's.created < "'.$dates['dateTo'].'"';
+
+       return $filters;
+
+   }
+
+   function getStatisticsSales(){
+        $listEvents = $this->model->getAllEvents($this->statisticsFilters(),$this->getPaginator());
+       $listReport=$this->getStockEventReport($listEvents);
+
+
+        $this->returnSuccess(200,$listReport);
+
+    }
+
+    function getStatisticsValues(){
+
+        $sumSales = $this->model->sumSales($this->statisticsFilters());
+        $sumEntries = $this->model->sumEntries($this->statisticsFilters());
+
+        $report = array('sum_sales' => $sumSales, 'sum_entries' => $sumEntries);
+
+
+        $this->returnSuccess(200,$report);
+    }
+
+
+
 
     function filters($dates){
 
@@ -94,8 +160,6 @@ class StockEventsController extends SecureBaseController
         $listReport=$this->getStockEventReport($list);
 
         $this->returnSuccess(200,$listReport);
-
-
     }
 
 
@@ -126,8 +190,6 @@ class StockEventsController extends SecureBaseController
             }else{
                 $dates=$this->getDates($days[$i]['created']);
             }
-
-            //$reportStockEventByEntries=$this->model->getAllEventsSale($this->filterEntrie($this->filters($dates)));
 
             $sumEntries= $this->model->sumEntries($this->filterEntrie($this->filters($dates)));
 
@@ -165,18 +227,13 @@ class StockEventsController extends SecureBaseController
                $dates=$this->getDates($days[$i]['created']);
            }
 
-         //  $reportStockEventBySale=$this->model->getAllEventsSale($this->filterSale($this->filters($dates)));
-
-          // $reportItemsFile= $this->items_file->getItemsFileClientEvents($dates['date'],$dates['dateTo']);
 
            $efectAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"efectivo");
            $transfAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"transferencia");
            $mercPagAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"mercado pago");
 
-
            $debitoAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"debito");
            $creditAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"tarjeta");
-
 
            $efectAmountItemsFileClientSales=$this->items_file->amountByDateEf($dates['date'],$dates['dateTo'],"efectivo");
 
@@ -204,7 +261,6 @@ class StockEventsController extends SecureBaseController
         }else{
             $dates=$this->getDates($_GET['created']);
         }
-       //$this->returnSuccess(200,$this->model->getAllEventsSaleByPage($this->filterSale($this->filters($dates)),$this->getPaginator()));
        $this->returnSuccess(200,$this->model->getAllEventsSale($this->filterSale($this->filters($dates))));
    }
 
@@ -361,89 +417,6 @@ class StockEventsController extends SecureBaseController
         }
     }
 
-    /*
-     *
-       //TO DELETE
-    function filterEventsOut($filters){
-        $filters[] = 'detail like "%'."salida".'%"';
-        return $filters;
-    }
 
-    function getStockEventsDay(){
-        $res= $this->model->getAllEvents($this->filterEventsOut($this->getFiltersEvents()),$this->getPaginator());
-
-        $report=array();
-        for ($i = 0; $i < count($res); ++$i) {
-            $report[]=array('item' => $res[$i]['item'],'type' => $res[$i]['type'],'brand' => $res[$i]['brand'],'model' => $res[$i]['model'],
-                'stock_in' => $res[$i]['stock_in'],'stock_out' => $res[$i]['stock_out'],'stock_event_created' => $res[$i]['stock_event_created'],
-                'value' => $res[$i]['value'], 'payment_method'=> $res[$i]['payment_method'], 'detail'=> $res[$i]['detail'],'stock_event_id' => $res[$i]['stock_event_id']);
-        }
-
-        $this->returnSuccess(200,$report);
-    }
-
-    function getFiltersEvents(){
-        $filters= array();
-        if(isset($_GET['since_s'])){
-
-            $created=$_GET['since_s'];
-
-            $parts = explode(" ", $created);
-            $date=$parts[0]." 00:00:00";
-            $filters[] = 's.created >= "'.$date.'"';
-        }
-        if(isset($_GET['to_s'])){
-
-            $created=$_GET['to_s'];
-            $parts = explode(" ", $created);
-            $date=$parts[0]." 00:00:00";
-
-            $filters[] = 's.created < "'.$date.'"';
-        }
-
-        if(isset($_GET['item'])) {
-            if ($_GET['item'] != "Todos") {
-                $filters[] = 'item = "' . $_GET['item'] . '"';
-            }
-        }
-
-        $filters[] = 'detail like "%'."salida".'%"';
-        return $filters;
-    }
-
-
-
-
-
-    // fin to delete
-     */
 }
 
-/* function getAll(){
-     $days=$this->model->getEventsGroupByDay($this->getPaginator());
-
-     $reportDay=array();
-     for ($i = 0; $i < count($days); ++$i) {
-         $dates=$this->getDates($days[$i]['created']);
-
-         $list=$this->model->getAll($this->filterSale($this->filters($dates),$this->filters($dates),$this->filters($dates)));
-
-         $reportEvents=array();
-         $reportItems=array();
-         $reportIncomes=array();
-         for($j = 0; $i < count($list); ++$j){
-
-             if($list[$j]['TYPE'] == 1){
-                 $stock_event = $this->model->findById($list[$j]['stock_id']);
-                 $reportEvents[]=array('item' => $stock_event['item'],'type' => $stock_event['type'],'brand' =>$stock_event['brand'],'model' => $stock_event['model'],
-                     'stock_in' => $stock_event['stock_in'],'stock_out' => $stock_event['stock_out'],'stock_event_created' => $stock_event['stock_event_created'],
-                     'value' => $stock_event['value'], 'payment_method'=> $stock_event['payment_method'], 'detail'=> $stock_event['detail'],'stock_event_id' => $stock_event['stock_event_id'],
-                     'client_name' => $stock_event['client_name']);
-             }
-         }
-
-
-     }
-
-     $this->returnSuccess(200,$reportDay);
- }*/
