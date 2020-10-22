@@ -81,7 +81,7 @@ class ParallelMoneyMovementsController extends SecureBaseController
                 $dates=$this->getDates($listDays[$k]['created']);
             }
 
-            $amountByDay=$this->model->amountByDay($this->filtersType($dates));
+            $amountByDay=$this->model->amountMoney($this->filtersType($dates));
 
             $listExtrByDay= $this->model->listAll($this->filtersType($dates));
 

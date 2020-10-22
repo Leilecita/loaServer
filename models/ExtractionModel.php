@@ -38,7 +38,7 @@ class ExtractionModel extends BaseModel
         return $this->getDb()->fetch_all($query);
     }
 
-    function amountByExtractionsDay2($filters){
+    function amountExtractions($filters){
         $conditions = join(' AND ',$filters);
         $query ='SELECT SUM(value) AS total FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC ';
         $response = $this->getDb()->fetch_row($query);

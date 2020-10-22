@@ -80,7 +80,7 @@ class ExtractionsController extends SecureBaseController
                 $dates=$this->getDates($listDays[$k]['created']);
             }
 
-             $amountByDay=$this->model->amountByExtractionsDay2($this->filtersType($dates));
+             $amountByDay=$this->model->amountExtractions($this->filtersType($dates));
 
              $listExtrByDay= $this->model->listAll($this->filtersType($dates));
 

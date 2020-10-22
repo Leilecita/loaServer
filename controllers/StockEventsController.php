@@ -11,18 +11,24 @@ require_once  __DIR__.'/../models/StockEventModel.php';
 require_once  __DIR__.'/../models/ProductModel.php';
 require_once  __DIR__.'/../models/ItemFileModel.php';
 require_once  __DIR__.'/../models/IncomeModel.php';
+require_once  __DIR__.'/../models/ExtractionModel.php';
+require_once  __DIR__.'/../models/ParallelMoneyMovementModel.php';
 
 class StockEventsController extends SecureBaseController
 {
     private $products;
     private $items_file;
     private $incomes;
+    private $extractions;
+    private $parallelMovemens;
     function __construct(){
         parent::__construct();
         $this->model = new StockEventModel();
         $this->products = new ProductModel();
         $this->items_file = new ItemFileModel();
         $this->incomes = new IncomeModel();
+        $this->extractions = new ExtractionModel();
+        $this->parallelMovemens = new ParallelMoneyMovementModel();
     }
 
     function getDatesMonth($data){
@@ -98,11 +104,27 @@ class StockEventsController extends SecureBaseController
            }
        }
 
-      // $filters[] = 's.created >= "'.$dates['date'].'"';
-       //$filters[] = 's.created < "'.$dates['dateTo'].'"';
+       return $filters;
+   }
+
+   function statisticsOutcomesFilers($type){
+       $filters=array();
+
+       if(isset($_GET['date'])) {
+           if ($_GET['date'] != "Todos") {
+               $filters[] = 'created >= "' . $_GET['date'] . '"';
+           }
+       }
+
+       if(isset($_GET['dateTo'])) {
+           if ($_GET['dateTo'] != "Todos") {
+               $filters[] = 'created < "' . $_GET['dateTo'] . '"';
+           }
+       }
+
+       $filters[] = 'type = "' .$type. '"';
 
        return $filters;
-
    }
 
    function getStatisticsSales(){
@@ -118,8 +140,18 @@ class StockEventsController extends SecureBaseController
 
         $sumSales = $this->model->sumSales($this->statisticsFilters());
         $sumEntries = $this->model->sumEntries($this->statisticsFilters());
+        $sumAmountMoneySales = $this->model->sumAmountMoneySales($this->statisticsFilters());
 
-        $report = array('sum_sales' => $sumSales, 'sum_entries' => $sumEntries);
+        $sumLocalExtractions = $this->extractions->amountExtractions($this->statisticsOutcomesFilers('Gasto local'));
+        $sumSalarieOutcomes = $this->parallelMovemens->amountMoney($this->statisticsOutcomesFilers('Pago Sueldo'));
+        $sumMercaderiaOutcomes = $this->parallelMovemens->amountMoney($this->statisticsOutcomesFilers('Pago mercaderia'));
+
+        $report = array('sum_sales' => $sumSales, 'sum_entries' => $sumEntries,
+            'sum_money_sales' => $sumAmountMoneySales,
+            'sum_local_extractions' => $sumLocalExtractions['total'],
+            'sum_salaries_outcomes' => $sumSalarieOutcomes['total'],
+            'sum_mercaderia_outcomes' => $sumMercaderiaOutcomes['total'],
+            );
 
 
         $this->returnSuccess(200,$report);

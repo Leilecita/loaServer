@@ -145,6 +145,18 @@ ORDER BY `created`  DESC
         }
     }
 
+    function sumAmountMoneySales($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(value) as total FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions );
+        $response=$this->getDb()->fetch_row($query);
+        if($response['total'] != null){
+            return $response['total'];
+        }else{
+            $response['total']=0;
+            return   $response['total'];
+        }
+    }
+
     function getEvent($filters=array()){
         $conditions = join(' AND ',$filters);
 
