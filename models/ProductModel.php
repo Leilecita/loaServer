@@ -31,6 +31,7 @@ class ProductModel extends BaseModel
         return $this->getDb()->fetch_all($query);
     }
 
+
     function getProductsByDistintctType($filters=array()){
         $conditions = join(' AND ',$filters);
         $query='SELECT DISTINCT p.type , color from products p, types t '.( empty($filters) ? '' : ' WHERE '.$conditions ).'  order by p.type desc ';

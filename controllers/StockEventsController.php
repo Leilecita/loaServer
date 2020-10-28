@@ -104,8 +104,40 @@ class StockEventsController extends SecureBaseController
            }
        }
 
+       if( isset($_GET['details']) && $_GET['details'] != ""){
+           return $this->filtersDetail($filters);
+       }
+
        return $filters;
    }
+
+    function statisticsProductFilters(){
+        $filters=array();
+
+        if(isset($_GET['model'])){
+            if ($_GET['model'] != "Todos") {
+                $filters[] = 'model = "' . $_GET['model'] . '"';
+            }
+        }
+
+        if(isset($_GET['brand'])){
+            if ($_GET['brand'] != "Todos") {
+                $filters[] = 'brand = "' . $_GET['brand'] . '"';
+            }
+        }
+        if(isset($_GET['type'])) {
+            if ($_GET['type'] != "Todos") {
+                $filters[] = 'type = "' . $_GET['type'] . '"';
+            }
+        }
+        if(isset($_GET['item'])) {
+            if ($_GET['item'] != "Todos") {
+                $filters[] = 'item = "' . $_GET['item'] . '"';
+            }
+        }
+
+        return $filters;
+    }
 
    function statisticsOutcomesFilers($type){
        $filters=array();
@@ -133,7 +165,11 @@ class StockEventsController extends SecureBaseController
 
 
         $this->returnSuccess(200,$listReport);
+    }
 
+    function getDistinctDetails(){
+
+        $this->returnSuccess(200,$this->model->getDistinctsEventsDetail());
     }
 
     function getStatisticsValues(){
@@ -142,17 +178,19 @@ class StockEventsController extends SecureBaseController
         $sumEntries = $this->model->sumEntries($this->statisticsFilters());
         $sumAmountMoneySales = $this->model->sumAmountMoneySales($this->statisticsFilters());
 
+        $sumStockProduct = $this->model->sumStock($this->statisticsProductFilters());
+
         $sumLocalExtractions = $this->extractions->amountExtractions($this->statisticsOutcomesFilers('Gasto local'));
         $sumSalarieOutcomes = $this->parallelMovemens->amountMoney($this->statisticsOutcomesFilers('Pago Sueldo'));
         $sumMercaderiaOutcomes = $this->parallelMovemens->amountMoney($this->statisticsOutcomesFilers('Pago mercaderia'));
 
         $report = array('sum_sales' => $sumSales, 'sum_entries' => $sumEntries,
+            'sum_stock_product' => $sumStockProduct,
             'sum_money_sales' => $sumAmountMoneySales,
             'sum_local_extractions' => $sumLocalExtractions['total'],
             'sum_salaries_outcomes' => $sumSalarieOutcomes['total'],
             'sum_mercaderia_outcomes' => $sumMercaderiaOutcomes['total'],
             );
-
 
         $this->returnSuccess(200,$report);
     }
@@ -447,6 +485,22 @@ class StockEventsController extends SecureBaseController
             $val=$valueIn + $prod['stock'] - $valueOut;
             $this->products->update($id,array('stock'=> $val ));
         }
+    }
+
+    function filtersDetail($filters){
+
+        $array = explode(";", $_GET['details']);
+
+        foreach ($array as $value)
+        {
+            error_log($value);
+
+            $filters[] = 'detail != "' .$value. '"';
+
+        }
+
+        return $filters;
+
     }
 
 

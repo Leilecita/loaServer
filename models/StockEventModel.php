@@ -15,26 +15,10 @@ class StockEventModel extends BaseModel
         $this->tableName = 'stock_events';
     }
 
-    /*
-     * SELECT id as stock_id,created , 1 as TYPE FROM stock_events where created > "2020-04-12"
-UNION
-SELECT id as item_id ,created, 2 as TYPE FROM items_file where created > "2020-04-12"
-UNION
-SELECT id as income_id, created, 3 as TYPE FROM incomes where created > "2020-04-12"
-ORDER BY `created`  DESC
-     */
-
-  /*  function getAll( $filterEvents=array(), $filtersItems=array(), $filterIncomes=array()){
-        $conditionsE = join(' AND ',$filterEvents);
-        $conditionsI = join(' AND ',$filtersItems);
-        $conditionsIn = join(' AND ',$filterIncomes);
-
-        $query='SELECT id as stock_id, created, 1 as TYPE FROM stock_events '.( empty($filtersEvents) ?  '' : ' WHERE '.$conditionsE ).' UNION SELECT id as item_id ,created, 2 as TYPE FROM items_file '.( empty($filtersItems) ?  '' : ' WHERE '.$conditionsI ).' 
- UNION SELECT id as income_id, created, 3 as TYPE FROM incomes '.( empty($filtersIncomes) ?  '' : ' WHERE '.$conditionsIn ).' order by created desc ';
-
+    function getDistinctsEventsDetail(){
+        $query='SELECT DISTINCT detail from stock_events order by detail desc ';
         return $this->getDb()->fetch_all($query);
     }
-*/
 
 
 
@@ -123,6 +107,18 @@ ORDER BY `created`  DESC
     function sumEntries($filters=array()){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT SUM(stock_in) as total FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions );
+        $response=$this->getDb()->fetch_row($query);
+        if($response['total'] != null){
+            return $response['total'];
+        }else{
+            $response['total']=0;
+            return   $response['total'];
+        }
+    }
+
+    function sumStock($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock) as total FROM products '.( empty($filters) ?  '' : ' WHERE '.$conditions );
         $response=$this->getDb()->fetch_row($query);
         if($response['total'] != null){
             return $response['total'];
