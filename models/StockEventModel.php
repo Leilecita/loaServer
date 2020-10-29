@@ -15,8 +15,9 @@ class StockEventModel extends BaseModel
         $this->tableName = 'stock_events';
     }
 
-    function getDistinctsEventsDetail(){
-        $query='SELECT DISTINCT detail from stock_events order by detail desc ';
+    function getDistinctsEventsDetail($filters){
+        $conditions = join(' AND ',$filters);
+        $query='SELECT DISTINCT detail from stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' order by detail desc ';
         return $this->getDb()->fetch_all($query);
     }
 

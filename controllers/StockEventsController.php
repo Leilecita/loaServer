@@ -161,7 +161,7 @@ class StockEventsController extends SecureBaseController
 
    function getStatisticsSales(){
         $listEvents = $this->model->getAllEvents($this->statisticsFilters(),$this->getPaginator());
-       $listReport=$this->getStockEventReport($listEvents);
+        $listReport=$this->getStockEventReport($listEvents);
 
 
         $this->returnSuccess(200,$listReport);
@@ -169,7 +169,7 @@ class StockEventsController extends SecureBaseController
 
     function getDistinctDetails(){
 
-        $this->returnSuccess(200,$this->model->getDistinctsEventsDetail());
+        $this->returnSuccess(200,$this->model->getDistinctsEventsDetail($this->statisticsFilters()));
     }
 
     function getStatisticsValues(){
@@ -194,8 +194,6 @@ class StockEventsController extends SecureBaseController
 
         $this->returnSuccess(200,$report);
     }
-
-
 
 
     function filters($dates){
