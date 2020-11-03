@@ -108,6 +108,10 @@ class StockEventsController extends SecureBaseController
            return $this->filtersDetail($filters);
        }
 
+       if( isset($_GET['detailsToSee']) && $_GET['detailsToSee'] != ""){
+           return $this->filtersDetailToSee($filters);
+       }
+
        return $filters;
    }
 
@@ -496,6 +500,33 @@ class StockEventsController extends SecureBaseController
             $filters[] = 'detail != "' .$value. '"';
 
         }
+
+        return $filters;
+
+    }
+
+    function filtersDetailToSee($filters){
+
+        $array = explode(";", $_GET['detailsToSee']);
+
+
+       // $filters[] = '(comcli like "%'.$_GET['query'].'%" OR nomcli like "%'.$_GET['query'].'%" OR dircli like "%'.$_GET['query'].'%")';
+
+        $filtersOr = array();
+
+        foreach ($array as $value)
+        {
+
+            $filtersOr[] = 'detail = "' .$value. '"';
+           // $filters[] = 'detail = "' .$value. '"';
+
+        }
+
+        $conditions = join(' OR ',$filtersOr);
+
+        error_log($conditions);
+
+        $filters[] = $conditions;
 
         return $filters;
 
