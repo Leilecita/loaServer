@@ -526,7 +526,9 @@ class StockEventsController extends SecureBaseController
 
         error_log($conditions);
 
-        $filters[] = $conditions;
+      //  '(comcli like "%'.$_GET['query'].'%" OR nomcli like "%'.$_GET['query'].'%" OR dircli like "%'.$_GET['query'].'%")';
+
+        $filters[] = "(".$conditions.")";
 
         return $filters;
 
