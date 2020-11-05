@@ -178,7 +178,7 @@ class StockEventModel extends BaseModel
         }
     }
 
-    function amountSaleByDateByMethodPayment($date1,$date2,$payment_method){
+    function amountSaleByDateByMethodPaymentSales($date1, $date2, $payment_method){
         $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? AND payment_method = ? ORDER BY created DESC',$date1,$date2,$payment_method);
         if($response['total']!=null){
             return $response;
@@ -186,6 +186,19 @@ class StockEventModel extends BaseModel
             $response['total']=0;
             return $response;
         }
+    }
+
+    function amountSaleByDateByMethodPaymentOnlySales($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(value) as total FROM stock_events '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY created DESC';
+        $response=$this->getDb()->fetch_row($query);
+        if($response['total'] != null){
+            return $response['total'];
+        }else{
+            $response['total']=0;
+            return   $response['total'];
+        }
+
     }
 
     function amountSaleByDateCardDeb($date1,$date2,$payment_method){

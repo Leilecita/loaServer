@@ -226,6 +226,7 @@ class StockEventsController extends SecureBaseController
         return $filters;
     }
 
+
     function getEvents(){
 
         $list=$this->model->getAllEvents($this->getFilters(),$this->getPaginator());
@@ -299,13 +300,12 @@ class StockEventsController extends SecureBaseController
                $dates=$this->getDates($days[$i]['created']);
            }
 
+           $efectAmount=$this->model->amountSaleByDateByMethodPaymentSales($dates['date'],$dates['dateTo'],"efectivo");
+           $transfAmount=$this->model->amountSaleByDateByMethodPaymentSales($dates['date'],$dates['dateTo'],"transferencia");
+           $mercPagAmount=$this->model->amountSaleByDateByMethodPaymentSales($dates['date'],$dates['dateTo'],"mercado pago");
 
-           $efectAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"efectivo");
-           $transfAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"transferencia");
-           $mercPagAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"mercado pago");
-
-           $debitoAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"debito");
-           $creditAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"tarjeta");
+           $debitoAmount=$this->model->amountSaleByDateByMethodPaymentSales($dates['date'],$dates['dateTo'],"debito");
+           $creditAmount=$this->model->amountSaleByDateByMethodPaymentSales($dates['date'],$dates['dateTo'],"tarjeta");
 
            $efectAmountItemsFileClientSales=$this->items_file->amountByDateEf($dates['date'],$dates['dateTo'],"efectivo");
 
@@ -438,11 +438,27 @@ class StockEventsController extends SecureBaseController
         $totalAmountIncomes= $this->incomes->amountByDateEf($dates['date'],$dates['dateTo'],"efectivo");
 
        // $totalAmount=$this->model->amountSaleByDateByMethodPayment($date,$dateTo,"efectivo");
-        $totalAmount=$this->model->amountSaleByDateByMethodPayment($dates['date'],$dates['dateTo'],"efectivo");
+        $totalAmount=$this->model->amountSaleByDateByMethodPaymentSales($dates['date'],$dates['dateTo'],"efectivo");
 
         $total=array('total' => $totalAmount['total']+$totalAmountItemsFileClientSales['total']+$totalAmountIncomes['total']);
 
         $this->returnSuccess(200,$total);
+    }
+
+
+
+    function filterSumSale($dates){
+        //nos vamos a guiar si es un pago que se quiere ver reflejado en la caja, sabiendo que tipo de pago utilizó-
+
+        $filters=array();
+        $filters[] = 'created >= "'.$dates['date'].'"';
+        $filters[] = 'created < "'.$dates['dateTo'].'"';
+
+       // $filters[] = '(detail like "%'."salida".'%" OR detail like "%'."Ingreso dev".'%" OR detail like "%'."Suma por error anterior".'%")';
+
+        $filters[] = '(payment_method like "%'."transferencia".'%" OR payment_method like "%'."mercado pago".'%" OR payment_method like "%'."debito".'%" OR payment_method like "%'."credito".'%")';
+
+        return $filters;
     }
 
     function getAmountSaleByDateCard(){
@@ -457,12 +473,18 @@ class StockEventsController extends SecureBaseController
 
         //suma todos los que son distinto a efectivo
         //POR EL MOMENTO LO DEJAMOS ASI
-        $totalAmount=$this->model->amountSaleByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
+       // $totalAmount=$this->model->amountSaleByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
+
+
+        //suma de transfr, credito, debito y mercado pago.
+        $totalAmount = $this->model->amountSaleByDateByMethodPaymentOnlySales($this->filterSumSale($dates));
 
         $total=array('total' => $totalAmount['total']+$totalAmountItemsFileClientCard['total']+$totalAmountIncomes['total']);
 
         $this->returnSuccess(200,$total);
     }
+
+
 
     //lo usa cierre de caja  --
 
@@ -518,7 +540,6 @@ class StockEventsController extends SecureBaseController
         {
 
             $filtersOr[] = 'detail = "' .$value. '"';
-           // $filters[] = 'detail = "' .$value. '"';
 
         }
 
@@ -531,9 +552,6 @@ class StockEventsController extends SecureBaseController
         $filters[] = "(".$conditions.")";
 
         return $filters;
-
     }
-
-
 }
 
