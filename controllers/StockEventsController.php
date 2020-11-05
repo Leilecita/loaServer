@@ -456,7 +456,9 @@ class StockEventsController extends SecureBaseController
 
        // $filters[] = '(detail like "%'."salida".'%" OR detail like "%'."Ingreso dev".'%" OR detail like "%'."Suma por error anterior".'%")';
 
-        $filters[] = '(payment_method like "%'."transferencia".'%" OR payment_method like "%'."mercado pago".'%" OR payment_method like "%'."debito".'%" OR payment_method like "%'."credito".'%")';
+        //$filters[] = '(payment_method like "%'."transferencia".'%" OR payment_method like "%'."mercado pago".'%" OR payment_method like "%'."debito".'%" OR payment_method like "%'."credito".'%")';
+
+
 
         return $filters;
     }
@@ -472,14 +474,15 @@ class StockEventsController extends SecureBaseController
         $totalAmountIncomes=$this->incomes->amountByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
 
         //suma todos los que son distinto a efectivo
+
         //POR EL MOMENTO LO DEJAMOS ASI
-       // $totalAmount=$this->model->amountSaleByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
+        $totalAmount=$this->model->amountSaleByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
 
 
         //suma de transfr, credito, debito y mercado pago.
-        $totalAmount = $this->model->amountSaleByDateByMethodPaymentOnlySales($this->filterSumSale($dates));
+       // $totalAmount = $this->model->amountSaleByDateByMethodPaymentOnlySales($this->filterSumSale($dates));
 
-        $total=array('total' => $totalAmount['total']+$totalAmountItemsFileClientCard['total']+$totalAmountIncomes['total']);
+        $total=array('total' => $totalAmount['total'] + $totalAmountItemsFileClientCard['total']+$totalAmountIncomes['total']);
 
         $this->returnSuccess(200,$total);
     }
