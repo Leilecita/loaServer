@@ -11,12 +11,14 @@ require_once  __DIR__.'/../models/ProductModel.php';
 require_once  __DIR__.'/../models/BrandModel.php';
 require_once  __DIR__.'/../models/TypeModel.php';
 require_once __DIR__ . '/../models/PriceEventModel.php';
+require_once __DIR__ . '/../models/StockEventModel.php';
 
 class ProductsController extends SecureBaseController
 {
     private $brands;
     private $types;
     private $priceEvents;
+    private $stockEvents;
 
     function __construct(){
         parent::__construct();
@@ -24,6 +26,7 @@ class ProductsController extends SecureBaseController
         $this->brands = new BrandModel();
         $this->types = new TypeModel();
         $this->priceEvents = new PriceEventModel();
+        $this->stockEvents = new StockEventModel();
     }
 
     function filterBrand($filters){
@@ -139,6 +142,8 @@ class ProductsController extends SecureBaseController
         $filters2[] = 'model = "' . $_GET['model'] . '"';
         $filters2[] = 'deleted = "false"';
 
+        $detailEvent = $_GET['detail'];
+
         $res=$this->getModel()->findAll($filters2, $this->getPaginator());
         if(count($res)>0){
 
@@ -147,7 +152,7 @@ class ProductsController extends SecureBaseController
 
         }else{
 
-            $product=array('item' => $_GET['item'] ,'type' => $_GET['type'],'brand' => $_GET['brand'],'model' => $_GET['model'] ,'stock' => 0, 'deleted' => "false");
+            $product=array('item' => $_GET['item'] ,'type' => $_GET['type'],'brand' => $_GET['brand'],'model' => $_GET['model'] ,'stock' => $_GET['stock'], 'deleted' => "false");
 
             $res = $this->getModel()->save($product);
             if($res<0){
@@ -162,9 +167,23 @@ class ProductsController extends SecureBaseController
                 }
 
                 $resp=array('res' => "creado");
+
+                $this->createStockEvent($createdProduct,$detailEvent);
+
                 $this->returnSuccess(200,$resp);
             }
+
+
         }
+    }
+
+    function createStockEvent($product, $detail){
+
+        $stockEvent= array('id_product' => $product['id'], 'stock_in' => $product['stock'], 'stock_out' => 0,'ideal_stock' => 0 , 'detail' => $detail, 'value' => 0,
+            'payment_method' => "", 'client_id' => -1,'today_created_client' => "false", 'observation' => "");
+
+        $this->stockEvents->save($stockEvent);
+
     }
 
     function getSpinners(){
