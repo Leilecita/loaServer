@@ -172,7 +172,9 @@ class ProductsController extends SecureBaseController
 
                 $this->createStockEvent($createdProduct,$detailEvent);
 
-                $this->generatePriceEvent($createdProduct['id'], 0, $createdProduct['price'],0);
+                if($createdProduct['price'] > 0){
+                    $this->generatePriceEvent($createdProduct['id'], 0, $createdProduct['price'],0);
+                }
 
                 $this->returnSuccess(200,$resp);
             }
