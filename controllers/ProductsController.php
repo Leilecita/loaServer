@@ -143,6 +143,7 @@ class ProductsController extends SecureBaseController
         $filters2[] = 'deleted = "false"';
 
         $detailEvent = $_GET['detail'];
+        $productPrice = $_GET['price'];
 
         $res=$this->getModel()->findAll($filters2, $this->getPaginator());
         if(count($res)>0){
@@ -152,7 +153,8 @@ class ProductsController extends SecureBaseController
 
         }else{
 
-            $product=array('item' => $_GET['item'] ,'type' => $_GET['type'],'brand' => $_GET['brand'],'model' => $_GET['model'] ,'stock' => $_GET['stock'], 'deleted' => "false");
+            $product=array('item' => $_GET['item'] ,'type' => $_GET['type'],'brand' => $_GET['brand'],'model' => $_GET['model'] ,'stock' => $_GET['stock'],
+                'deleted' => "false", 'price' => $productPrice);
 
             $res = $this->getModel()->save($product);
             if($res<0){
@@ -170,9 +172,10 @@ class ProductsController extends SecureBaseController
 
                 $this->createStockEvent($createdProduct,$detailEvent);
 
+                $this->generatePriceEvent($createdProduct['id'], 0, $createdProduct['price'],0);
+
                 $this->returnSuccess(200,$resp);
             }
-
 
         }
     }
