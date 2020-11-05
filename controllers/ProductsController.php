@@ -179,7 +179,7 @@ class ProductsController extends SecureBaseController
 
     function createStockEvent($product, $detail){
 
-        $stockEvent= array('id_product' => $product['id'], 'stock_in' => $product['stock'], 'stock_out' => 0,'ideal_stock' => 0 , 'detail' => $detail, 'value' => 0,
+        $stockEvent= array('id_product' => $product['id'], 'stock_in' => $product['stock'], 'stock_out' => 0,'stock_ant' => 0,'ideal_stock' => 0 , 'detail' => $detail, 'value' => 0,
             'payment_method' => "", 'client_id' => -1,'today_created_client' => "false", 'observation' => "");
 
         $this->stockEvents->save($stockEvent);
