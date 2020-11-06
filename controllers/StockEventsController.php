@@ -13,6 +13,7 @@ require_once  __DIR__.'/../models/ItemFileModel.php';
 require_once  __DIR__.'/../models/IncomeModel.php';
 require_once  __DIR__.'/../models/ExtractionModel.php';
 require_once  __DIR__.'/../models/ParallelMoneyMovementModel.php';
+require_once  __DIR__.'/../models/UserModel.php';
 
 class StockEventsController extends SecureBaseController
 {
@@ -21,6 +22,8 @@ class StockEventsController extends SecureBaseController
     private $incomes;
     private $extractions;
     private $parallelMovemens;
+    private $users;
+
     function __construct(){
         parent::__construct();
         $this->model = new StockEventModel();
@@ -29,6 +32,7 @@ class StockEventsController extends SecureBaseController
         $this->incomes = new IncomeModel();
         $this->extractions = new ExtractionModel();
         $this->parallelMovemens = new ParallelMoneyMovementModel();
+        $this->users = new UserModel();
     }
 
     function getDatesMonth($data){
@@ -274,10 +278,12 @@ class StockEventsController extends SecureBaseController
     function getStockEventReport($list){
         $report=array();
         for ($i = 0; $i < count($list); ++$i) {
+
             $report[]=array('item' => $list[$i]['item'],'type' => $list[$i]['type'],'brand' => $list[$i]['brand'],'model' => $list[$i]['model'],
                 'stock_in' => $list[$i]['stock_in'],'stock_out' => $list[$i]['stock_out'],'stock_event_created' => $list[$i]['stock_event_created'],
                 'value' => $list[$i]['value'], 'payment_method'=> $list[$i]['payment_method'], 'detail'=> $list[$i]['detail'],'stock_event_id' => $list[$i]['stock_event_id'],
-                'client_name' => $list[$i]['client_name'],'observation' => $list[$i]['observation']);
+                'client_name' => $list[$i]['client_name'],'observation' => $list[$i]['observation'],
+                'user_name' => $list[$i]['user_name']);
         }
         return $report;
     }

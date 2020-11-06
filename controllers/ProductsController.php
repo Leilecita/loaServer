@@ -82,6 +82,11 @@ class ProductsController extends SecureBaseController
 
         $this->createStockEvent($product,"Eliminado", $_GET['observation']);
 
+        $date = new DateTime("now", new DateTimeZone('America/Argentina/Buenos_Aires') );
+        $time = $date->format('Y-m-d H:i:s');
+
+        $this->model->update($_GET['id'],array('deleted_time' => $time));
+
         $resp=array('brand'=>"ok");
         $this->returnSuccess(200,$resp);
     }
@@ -185,9 +190,14 @@ class ProductsController extends SecureBaseController
     }
 
     function createStockEvent($product, $detail, $observation){
+        $user = $this->getUser();
+        $user_name = "";
+        if($user != null){
+            $user_name = $user['name'];
+        }
 
         $stockEvent= array('id_product' => $product['id'], 'stock_in' => $product['stock'], 'stock_out' => 0,'stock_ant' => 0,'ideal_stock' => 0 , 'detail' => $detail, 'value' => 0,
-            'payment_method' => "", 'client_id' => -1,'today_created_client' => "false", 'observation' => $observation);
+            'payment_method' => "", 'client_id' => -1,'today_created_client' => "false", 'observation' => $observation, 'user_name' => $user_name);
 
         $this->stockEvents->save($stockEvent);
 
@@ -343,14 +353,26 @@ class ProductsController extends SecureBaseController
         }
     }
 
-    function generatePriceEvent($product_id, $previous_price, $actual_price, $percentage){
+    function getUserId(){
         $user = $this->getUser();
+
+        if($user != null){
+            return $user['id'];
+        }else{
+           return -1;
+        }
+
+    }
+
+
+    function generatePriceEvent($product_id, $previous_price, $actual_price, $percentage){
+        /*$user = $this->getUser();
 
         if($user != null){
             $user_id = $user['id'];
         }else{
             $user_id = -1;
-        }
+        }*/
 
         $date = new DateTime("now", new DateTimeZone('America/Argentina/Buenos_Aires') );
         $created = $date->format('Y-m-d H:i:s');
@@ -360,7 +382,7 @@ class ProductsController extends SecureBaseController
             $per = $percentage;
         }
 
-        $price_event = array('user_id' => $user_id ,'product_id' => $product_id, 'previous_price' => $previous_price, 'actual_price' => $actual_price,
+        $price_event = array('user_id' => $this->getUserId() ,'product_id' => $product_id, 'previous_price' => $previous_price, 'actual_price' => $actual_price,
             'created' => $created, 'percentage' => $per);
 
         $this->priceEvents->save($price_event);
