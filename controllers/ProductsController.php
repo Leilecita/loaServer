@@ -78,6 +78,10 @@ class ProductsController extends SecureBaseController
     {
         $this->model->update($_GET['id'],array('deleted' => 'true'));
 
+        $product = $this->model->findById($_GET['id']);
+
+        $this->createStockEvent($product,"Eliminado", $_GET['observation']);
+
         $resp=array('brand'=>"ok");
         $this->returnSuccess(200,$resp);
     }
@@ -106,8 +110,6 @@ class ProductsController extends SecureBaseController
         for ($j = 0; $j < count($list); ++$j) {
 
             $event_prices = $this->priceEvents->findAllEvents(array('product_id = "'.$list[$j]['id'].'"' ));
-
-          //  error_log(count($event_prices));
 
             $actual_price = 0;
             $previous_price = 0;
@@ -170,7 +172,7 @@ class ProductsController extends SecureBaseController
 
                 $resp=array('res' => "creado");
 
-                $this->createStockEvent($createdProduct,$detailEvent);
+                $this->createStockEvent($createdProduct,$detailEvent,"");
 
                 if($createdProduct['price'] > 0){
                     $this->generatePriceEvent($createdProduct['id'], 0, $createdProduct['price'],0);
@@ -182,10 +184,10 @@ class ProductsController extends SecureBaseController
         }
     }
 
-    function createStockEvent($product, $detail){
+    function createStockEvent($product, $detail, $observation){
 
         $stockEvent= array('id_product' => $product['id'], 'stock_in' => $product['stock'], 'stock_out' => 0,'stock_ant' => 0,'ideal_stock' => 0 , 'detail' => $detail, 'value' => 0,
-            'payment_method' => "", 'client_id' => -1,'today_created_client' => "false", 'observation' => "");
+            'payment_method' => "", 'client_id' => -1,'today_created_client' => "false", 'observation' => $observation);
 
         $this->stockEvents->save($stockEvent);
 
@@ -338,9 +340,7 @@ class ProductsController extends SecureBaseController
         if($data['price'] != $previous_data['price']){
 
             $this->generatePriceEvent($data['id'], $previous_data['price'], $data['price'],0);
-
         }
-
     }
 
     function generatePriceEvent($product_id, $previous_price, $actual_price, $percentage){

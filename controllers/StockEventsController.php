@@ -456,7 +456,7 @@ class StockEventsController extends SecureBaseController
 
        // $filters[] = '(detail like "%'."salida".'%" OR detail like "%'."Ingreso dev".'%" OR detail like "%'."Suma por error anterior".'%")';
 
-        //$filters[] = '(payment_method like "%'."transferencia".'%" OR payment_method like "%'."mercado pago".'%" OR payment_method like "%'."debito".'%" OR payment_method like "%'."credito".'%")';
+        $filters[] = '(payment_method like "%'."transferencia".'%" OR payment_method like "%'."mercado pago".'%" OR payment_method like "%'."debito".'%" OR payment_method like "%'."tarjeta".'%")';
 
 
 
@@ -476,13 +476,13 @@ class StockEventsController extends SecureBaseController
         //suma todos los que son distinto a efectivo
 
         //POR EL MOMENTO LO DEJAMOS ASI
-        $totalAmount=$this->model->amountSaleByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
+       // $totalAmount=$this->model->amountSaleByDateCardDeb($dates['date'],$dates['dateTo'],"efectivo");
 
 
         //suma de transfr, credito, debito y mercado pago.
-       // $totalAmount = $this->model->amountSaleByDateByMethodPaymentOnlySales($this->filterSumSale($dates));
+        $totalAmount = $this->model->amountSaleByDateByMethodPaymentOnlySales($this->filterSumSale($dates));
 
-        $total=array('total' => $totalAmount['total'] + $totalAmountItemsFileClientCard['total']+$totalAmountIncomes['total']);
+        $total=array('total' => $totalAmount + $totalAmountItemsFileClientCard['total']+$totalAmountIncomes['total']);
 
         $this->returnSuccess(200,$total);
     }
@@ -520,12 +520,8 @@ class StockEventsController extends SecureBaseController
 
         foreach ($array as $value)
         {
-            error_log($value);
-
             $filters[] = 'detail != "' .$value. '"';
-
         }
-
         return $filters;
 
     }
@@ -534,24 +530,15 @@ class StockEventsController extends SecureBaseController
 
         $array = explode(";", $_GET['detailsToSee']);
 
-
-       // $filters[] = '(comcli like "%'.$_GET['query'].'%" OR nomcli like "%'.$_GET['query'].'%" OR dircli like "%'.$_GET['query'].'%")';
-
         $filtersOr = array();
 
         foreach ($array as $value)
         {
-
             $filtersOr[] = 'detail = "' .$value. '"';
 
         }
 
         $conditions = join(' OR ',$filtersOr);
-
-        error_log($conditions);
-
-      //  '(comcli like "%'.$_GET['query'].'%" OR nomcli like "%'.$_GET['query'].'%" OR dircli like "%'.$_GET['query'].'%")';
-
         $filters[] = "(".$conditions.")";
 
         return $filters;
