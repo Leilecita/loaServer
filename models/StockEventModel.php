@@ -210,7 +210,7 @@ class StockEventModel extends BaseModel
 
     function sumStockGroupByItemAndArt($filters=array()){
         $conditions = join(' AND ',$filters);
-        $query = 'SELECT SUM(stock) as total, p.item as descr, p.type as descr2 FROM products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.type order by total DESC LIMIT 10';
+        $query = 'SELECT SUM(stock) as total, p.item as descr, p.type as descr2 FROM products p '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.type order by total DESC LIMIT 10';
         return $this->getDb()->fetch_all($query);
     }
 
