@@ -208,7 +208,7 @@ class StockEventsController extends SecureBaseController
 
         $listEntries = $this->model->sumEntriesGroupByBrand($this->statisticsFilters());
         $listSales = $this->model->sumSalesGroupByBrand($this->statisticsFilters());
-        $listStock = $this->model->sumStockGroupByBrand($this->statisticsFilters());
+        $listStock = $this->model->sumStockGroupByBrand($this->statisticsProductFilters());
 
         $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
         $this->returnSuccess(200,$res);
@@ -218,7 +218,7 @@ class StockEventsController extends SecureBaseController
 
         $listEntries = $this->model->sumEntriesGroupByArt($this->statisticsFilters());
         $listSales = $this->model->sumSalesGroupByArt($this->statisticsFilters());
-        $listStock = $this->model->sumStockGroupByArt($this->statisticsFilters());
+        $listStock = $this->model->sumStockGroupByArt($this->statisticsProductFilters());
 
         $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
         $this->returnSuccess(200,$res);
@@ -237,7 +237,7 @@ class StockEventsController extends SecureBaseController
 
         $listEntries = $this->model->sumEntriesGroupByItemAndart($this->statisticsFilters());
         $listSales = $this->model->sumSalesGroupByItemAndArt($this->statisticsFilters());
-        $listStock = $this->model->sumStockGroupByItemAndArt($this->statisticsFilters());
+        $listStock = $this->model->sumStockGroupByItemAndArt($this->statisticsProductFilters());
 
         $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
         $this->returnSuccess(200,$res);
