@@ -142,6 +142,80 @@ class StockEventModel extends BaseModel
         }
     }
 
+    //statistics
+
+    function sumSalesGroupByBrand($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock_out) as total, p.brand as descr, "" as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.brand order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }
+
+
+    function sumEntriesGroupByBrand($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock_in) as total, p.brand as descr ,  "" as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.brand order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }
+
+
+    function sumStockGroupByBrand($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock) as total, p.brand as descr , "" as descr2 FROM products p '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.brand order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }
+
+    function sumSalesGroupByArt($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock_out) as total, p.type as descr, "" as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.type order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }
+
+
+    function sumEntriesGroupByArt($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock_in) as total, p.type as descr, "" as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.type order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }
+
+    function sumStockGroupByArt($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock) as total, p.type as descr, "" as descr2 FROM products p '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.type order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }
+
+/*
+    function sumEntriesGroupByArtAndBrand($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock_in) as total, p.type as descr, p.brand as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.type, p.brand order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }
+
+    function sumSalesGroupByArtAndBrand($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock_out) as total, p.type as descr, p.brand as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.type, p.brand order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }*/
+
+    function sumSalesGroupByItemAndArt($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock_out) as total, p.item as descr, p.type as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.item, p.type  order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }
+
+    function sumEntriesGroupByItemAndart($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock_in) as total, p.item as descr, p.type as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.type order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }
+
+    function sumStockGroupByItemAndArt($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(stock) as total, p.item as descr, p.type as descr2 FROM products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.type order by total DESC LIMIT 10';
+        return $this->getDb()->fetch_all($query);
+    }
+
+
+
     function sumAmountMoneySales($filters=array()){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT SUM(value) as total FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions );

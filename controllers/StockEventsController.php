@@ -167,6 +167,7 @@ class StockEventsController extends SecureBaseController
        return $filters;
    }
 
+
    function getStatisticsSales(){
         $listEvents = $this->model->getAllEvents($this->statisticsFilters(),$this->getPaginator());
         $listReport=$this->getStockEventReport($listEvents);
@@ -201,6 +202,45 @@ class StockEventsController extends SecureBaseController
             );
 
         $this->returnSuccess(200,$report);
+    }
+
+    function getByBrandStatistics(){
+
+        $listEntries = $this->model->sumEntriesGroupByBrand($this->statisticsFilters());
+        $listSales = $this->model->sumSalesGroupByBrand($this->statisticsFilters());
+        $listStock = $this->model->sumStockGroupByBrand($this->statisticsFilters());
+
+        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
+        $this->returnSuccess(200,$res);
+    }
+
+    function getByArtStatistics(){
+
+        $listEntries = $this->model->sumEntriesGroupByArt($this->statisticsFilters());
+        $listSales = $this->model->sumSalesGroupByArt($this->statisticsFilters());
+        $listStock = $this->model->sumStockGroupByArt($this->statisticsFilters());
+
+        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
+        $this->returnSuccess(200,$res);
+    }
+
+   /* function getByArtAndBrandStatistics(){
+
+        $listEntries = $this->model->sumEntriesGroupByArtAndBrand($this->statisticsFilters());
+        $listSales = $this->model->sumSalesGroupByArtAndBrand($this->statisticsFilters());
+
+        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales);
+        $this->returnSuccess(200,$res);
+    }*/
+
+    function getByItemAndArtStatistics(){
+
+        $listEntries = $this->model->sumEntriesGroupByItemAndart($this->statisticsFilters());
+        $listSales = $this->model->sumSalesGroupByItemAndArt($this->statisticsFilters());
+        $listStock = $this->model->sumStockGroupByItemAndArt($this->statisticsFilters());
+
+        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
+        $this->returnSuccess(200,$res);
     }
 
 
