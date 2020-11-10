@@ -206,9 +206,9 @@ class StockEventsController extends SecureBaseController
 
     function getByBrandStatistics(){
 
-        $listEntries = $this->model->sumEntriesGroupByBrand($this->statisticsFilters());
-        $listSales = $this->model->sumSalesGroupByBrand($this->statisticsFilters());
-        $listStock = $this->model->sumStockGroupByBrand($this->statisticsProductFilters());
+        $listEntries = $this->model->sumEntriesGroupByBrand($this->statisticsFilters(),$_GET['limit']);
+        $listSales = $this->model->sumSalesGroupByBrand($this->statisticsFilters(),$_GET['limit']);
+        $listStock = $this->model->sumStockGroupByBrand($this->statisticsProductFilters(),$_GET['limit']);
 
         $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
         $this->returnSuccess(200,$res);
@@ -216,28 +216,19 @@ class StockEventsController extends SecureBaseController
 
     function getByArtStatistics(){
 
-        $listEntries = $this->model->sumEntriesGroupByArt($this->statisticsFilters());
-        $listSales = $this->model->sumSalesGroupByArt($this->statisticsFilters());
-        $listStock = $this->model->sumStockGroupByArt($this->statisticsProductFilters());
+        $listEntries = $this->model->sumEntriesGroupByArt($this->statisticsFilters(),$_GET['limit']);
+        $listSales = $this->model->sumSalesGroupByArt($this->statisticsFilters(),$_GET['limit']);
+        $listStock = $this->model->sumStockGroupByArt($this->statisticsProductFilters(),$_GET['limit']);
 
         $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
         $this->returnSuccess(200,$res);
     }
 
-   /* function getByArtAndBrandStatistics(){
-
-        $listEntries = $this->model->sumEntriesGroupByArtAndBrand($this->statisticsFilters());
-        $listSales = $this->model->sumSalesGroupByArtAndBrand($this->statisticsFilters());
-
-        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales);
-        $this->returnSuccess(200,$res);
-    }*/
-
     function getByItemAndArtStatistics(){
 
-        $listEntries = $this->model->sumEntriesGroupByItemAndart($this->statisticsFilters());
-        $listSales = $this->model->sumSalesGroupByItemAndArt($this->statisticsFilters());
-        $listStock = $this->model->sumStockGroupByItemAndArt($this->statisticsProductFilters());
+        $listEntries = $this->model->sumEntriesGroupByItemAndart($this->statisticsFilters(),$_GET['limit']);
+        $listSales = $this->model->sumSalesGroupByItemAndArt($this->statisticsFilters(),$_GET['limit']);
+        $listStock = $this->model->sumStockGroupByItemAndArt($this->statisticsProductFilters(),$_GET['limit']);
 
         $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
         $this->returnSuccess(200,$res);
