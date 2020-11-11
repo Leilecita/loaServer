@@ -259,7 +259,7 @@ class StockEventModel extends BaseModel
     }
 
     function amountSaleByDateByMethodPaymentSales($date1, $date2, $payment_method){
-        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? AND payment_method = ? ORDER BY created DESC',$date1,$date2,$payment_method);
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE created >= ? AND created < ? AND payment_method = ? AND detail = ? ORDER BY created DESC',$date1,$date2,$payment_method,"Salida venta");
         if($response['total']!=null){
             return $response;
         }else{

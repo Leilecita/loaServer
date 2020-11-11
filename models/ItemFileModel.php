@@ -47,7 +47,7 @@ class ItemFileModel extends BaseModel
     //balance = false se usa para los eventos de stock,
     // porque solo se muestra en la planilla de ventas los movimientos que repercutene n la caja de dia.
     function amountByDay($date1,$date2){
-        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND balance = ? ORDER BY created DESC',0.0,$date1,$date2,"false");
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND balance = ? AND detail = ? ORDER BY created DESC',0.0,$date1,$date2,"false","Salida venta");
         if($response['total']!=null){
             return $response;
         }else{
@@ -58,7 +58,7 @@ class ItemFileModel extends BaseModel
 
     function amountByDateEf($date1,$date2,$payment_method){
 
-        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method = ? AND balance = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method,"false");
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method = ? AND balance = ? AND detail = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method,"false","Salida venta");
         if($response['total']!=null){
             return $response;
         }else{
@@ -68,7 +68,7 @@ class ItemFileModel extends BaseModel
     }
 
     function amountByDateCardDeb($date1,$date2,$payment_method){
-        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method != ? AND balance = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method,"false");
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method != ? AND balance = ? AND detail = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method,"false","Salida venta");
         if($response['total']!=null){
             return $response;
         }else{
