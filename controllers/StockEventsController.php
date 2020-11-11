@@ -208,9 +208,10 @@ class StockEventsController extends SecureBaseController
 
         $listEntries = $this->model->sumEntriesGroupByBrand($this->statisticsFilters(),$_GET['limit']);
         $listSales = $this->model->sumSalesGroupByBrand($this->statisticsFilters(),$_GET['limit']);
+        $listSalesAmount = $this->model->sumSalesAmountGroupByBrand($this->statisticsFilters(),$_GET['limit']);
         $listStock = $this->model->sumStockGroupByBrand($this->statisticsProductFilters(),$_GET['limit']);
 
-        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
+        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock, 'list_sales_amount' => $listSalesAmount);
         $this->returnSuccess(200,$res);
     }
 
@@ -218,9 +219,10 @@ class StockEventsController extends SecureBaseController
 
         $listEntries = $this->model->sumEntriesGroupByArt($this->statisticsFilters(),$_GET['limit']);
         $listSales = $this->model->sumSalesGroupByArt($this->statisticsFilters(),$_GET['limit']);
+        $listSalesAmount = $this->model->sumSalesAmountGroupByArt($this->statisticsFilters(),$_GET['limit']);
         $listStock = $this->model->sumStockGroupByArt($this->statisticsProductFilters(),$_GET['limit']);
 
-        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
+        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock, 'list_sales_amount' => $listSalesAmount);
         $this->returnSuccess(200,$res);
     }
 
@@ -228,9 +230,10 @@ class StockEventsController extends SecureBaseController
 
         $listEntries = $this->model->sumEntriesGroupByItemAndart($this->statisticsFilters(),$_GET['limit']);
         $listSales = $this->model->sumSalesGroupByItemAndArt($this->statisticsFilters(),$_GET['limit']);
+        $listSalesAmount = $this->model->sumSalesAmountGroupByItemAndArt($this->statisticsFilters(),$_GET['limit']);
         $listStock = $this->model->sumStockGroupByItemAndArt($this->statisticsProductFilters(),$_GET['limit']);
 
-        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock);
+        $res = array('list_entries' => $listEntries, 'list_sales' => $listSales, 'list_stock' => $listStock,'list_sales_amount' => $listSalesAmount);
         $this->returnSuccess(200,$res);
     }
 

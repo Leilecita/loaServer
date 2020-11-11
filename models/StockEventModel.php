@@ -150,6 +150,12 @@ class StockEventModel extends BaseModel
         return $this->getDb()->fetch_all($query);
     }
 
+    function sumSalesAmountGroupByBrand($filters=array(),$limit){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(value) as total, p.brand as descr, "" as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.brand order by total DESC LIMIT '.$limit;
+        return $this->getDb()->fetch_all($query);
+    }
+
 
     function sumEntriesGroupByBrand($filters=array(),$limit){
         $conditions = join(' AND ',$filters);
@@ -170,6 +176,12 @@ class StockEventModel extends BaseModel
         return $this->getDb()->fetch_all($query);
     }
 
+    function sumSalesAmountGroupByArt($filters=array(),$limit){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(value) as total, p.type as descr, "" as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.type order by total DESC LIMIT '.$limit;
+        return $this->getDb()->fetch_all($query);
+    }
+
 
     function sumEntriesGroupByArt($filters=array(),$limit){
         $conditions = join(' AND ',$filters);
@@ -187,6 +199,12 @@ class StockEventModel extends BaseModel
     function sumSalesGroupByItemAndArt($filters=array(),$limit){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT SUM(stock_out) as total, p.item as descr, p.type as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.item, p.type  order by total DESC LIMIT '.$limit;
+        return $this->getDb()->fetch_all($query);
+    }
+
+    function sumSalesAmountGroupByItemAndArt($filters=array(),$limit){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT SUM(value) as total, p.item as descr, p.type as descr2 FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by p.item, p.type  order by total DESC LIMIT '.$limit;
         return $this->getDb()->fetch_all($query);
     }
 
