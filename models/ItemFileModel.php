@@ -58,7 +58,7 @@ class ItemFileModel extends BaseModel
 
     function amountByDateEf($date1,$date2,$payment_method){
 
-        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method = ? AND balance = ? AND detail = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method,"false","Salida venta");
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method = ? AND balance = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method,"false");
         if($response['total']!=null){
             return $response;
         }else{
@@ -68,7 +68,7 @@ class ItemFileModel extends BaseModel
     }
 
     function amountByDateCardDeb($date1,$date2,$payment_method){
-        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method != ? AND balance = ? AND detail = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method,"false","Salida venta");
+        $response = $this->getDb()->fetch_row('SELECT SUM(value) AS total FROM '.$this->tableName.' WHERE value > ? AND created >= ? AND created < ? AND payment_method != ? AND balance = ? ORDER BY created DESC',0.0,$date1,$date2,$payment_method,"false");
         if($response['total']!=null){
             return $response;
         }else{

@@ -494,8 +494,6 @@ class StockEventsController extends SecureBaseController
         $filters[] = 'created >= "'.$dates['date'].'"';
         $filters[] = 'created < "'.$dates['dateTo'].'"';
 
-        $filters[] = 'detail = "'."Salida venta".'"';
-
         $filters[] = '(payment_method like "%'."transferencia".'%" OR payment_method like "%'."mercado pago".'%" OR payment_method like "%'."debito".'%" OR payment_method like "%'."tarjeta".'%")';
 
 
