@@ -15,6 +15,19 @@ class ProductModel extends BaseModel
         $this->tableName = 'products';
     }
 
+    function findAllGroupBy($filters=array(),$paginator=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT *, SUM(stock) as stock, "0.0" as price FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by item, type, brand ORDER BY item, type, brand DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->getDb()->fetch_all($query);
+    }
+
+    function findAllProd($filters=array(),$paginator=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY item, type, brand DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->getDb()->fetch_all($query);
+    }
+
+
     function findAllProductsJoinPrevPrices($filters=array(),$paginator=array()){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT *,pe.id as event_price_id, p.id as product_id, p.created as product_created, pe.created as event_price_created FROM products as p JOIN price_events as pe ON p.id = pe.product_id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY event_price_created DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];

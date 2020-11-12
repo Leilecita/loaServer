@@ -103,7 +103,16 @@ class ProductsController extends SecureBaseController
     }
 
     function getProducts2(){
-        $this->returnSuccess(200, $this->getModel()->findAll($this->assignFilter(), $this->getPaginator()));
+
+        if(isset($_GET['group'])){
+            if($_GET['group'] == "yes"){
+                $this->returnSuccess(200, $this->model->findAllGroupBy($this->assignFilter(), $this->getPaginator()));
+            }else{
+                $this->returnSuccess(200, $this->model->findAllProd($this->assignFilter(), $this->getPaginator()));
+            }
+        }
+
+        $this->returnSuccess(200, $this->model->findAllProd($this->assignFilter(), $this->getPaginator()));
     }
 
     function getProductsWithPreviousPrices(){
