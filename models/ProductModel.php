@@ -17,7 +17,7 @@ class ProductModel extends BaseModel
 
     function findAllGroupBy($filters=array(),$paginator=array()){
         $conditions = join(' AND ',$filters);
-        $query = 'SELECT *, SUM(stock) as stock, "0.0" as price FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by item ORDER BY item DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        $query = 'SELECT *, SUM(stock) as stock, "0.0" as price, "" as model FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' group by item,type,brand ORDER BY item DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
         return $this->getDb()->fetch_all($query);
     }
 
