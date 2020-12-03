@@ -27,6 +27,12 @@ class ProductModel extends BaseModel
         return $this->getDb()->fetch_all($query);
     }
 
+    function findAllDeletedProd($filters=array(),$paginator=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY deleted_time DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->getDb()->fetch_all($query);
+    }
+
 
     function findAllProductsJoinPrevPrices($filters=array(),$paginator=array()){
         $conditions = join(' AND ',$filters);

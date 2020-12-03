@@ -99,7 +99,8 @@ class ProductsController extends SecureBaseController
     }
 
     function getDeletedProducts(){
-        $this->returnSuccess(200, $this->getModel()->findAll($this->assignFilter(), $this->getPaginator()));
+       // $this->returnSuccess(200, $this->getModel()->findAll($this->assignFilter(), $this->getPaginator()));
+        $this->returnSuccess(200, $this->model->findAllDeletedProd($this->assignFilter(), $this->getPaginator()));
     }
 
     function getProducts2(){
