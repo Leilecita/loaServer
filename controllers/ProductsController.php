@@ -80,10 +80,11 @@ class ProductsController extends SecureBaseController
 
         $product = $this->model->findById($_GET['id']);
 
-        $this->createStockEvent($product,"Eliminado", $_GET['observation']);
 
         $date = new DateTime("now", new DateTimeZone('America/Argentina/Buenos_Aires') );
         $time = $date->format('Y-m-d H:i:s');
+
+        $this->createStockEvent($product,"Eliminado", $_GET['observation'],$time);
 
         $this->model->update($_GET['id'],array('deleted_time' => $time));
 
@@ -171,7 +172,7 @@ class ProductsController extends SecureBaseController
         }else{
 
             $product=array('item' => $_GET['item'] ,'type' => $_GET['type'],'brand' => $_GET['brand'],'model' => $_GET['model'] ,'stock' => $_GET['stock'],
-                'deleted' => "false", 'price' => $productPrice);
+                'deleted' => "false", 'price' => $productPrice, 'created' => $this->getActualTime());
 
             $res = $this->getModel()->save($product);
             if($res<0){
@@ -187,7 +188,7 @@ class ProductsController extends SecureBaseController
 
                 $resp=array('res' => "creado");
 
-                $this->createStockEvent($createdProduct,$detailEvent,"");
+                $this->createStockEvent($createdProduct,$detailEvent,"",$createdProduct['created']);
 
                 if($createdProduct['price'] > 0){
                     $this->generatePriceEvent($createdProduct['id'], 0, $createdProduct['price'],0);
@@ -199,7 +200,7 @@ class ProductsController extends SecureBaseController
         }
     }
 
-    function createStockEvent($product, $detail, $observation){
+    function createStockEvent($product, $detail, $observation, $time){
         $user = $this->getUser();
         $user_name = "";
         if($user != null){
@@ -207,7 +208,7 @@ class ProductsController extends SecureBaseController
         }
 
         $stockEvent= array('id_product' => $product['id'], 'stock_in' => $product['stock'], 'stock_out' => 0,'stock_ant' => 0,'ideal_stock' => 0 , 'detail' => $detail, 'value' => 0,
-            'payment_method' => "", 'client_id' => -1,'today_created_client' => "false", 'observation' => $observation, 'user_name' => $user_name);
+            'payment_method' => "", 'client_id' => -1,'today_created_client' => "false", 'observation' => $observation, 'user_name' => $user_name, 'created' => $time);
 
         $this->stockEvents->save($stockEvent);
 
@@ -374,15 +375,12 @@ class ProductsController extends SecureBaseController
 
     }
 
+    function getActualTime(){
+        $date = new DateTime("now", new DateTimeZone('America/Argentina/Buenos_Aires') );
+        return $date->format('Y-m-d H:i:s');
+    }
 
     function generatePriceEvent($product_id, $previous_price, $actual_price, $percentage){
-        /*$user = $this->getUser();
-
-        if($user != null){
-            $user_id = $user['id'];
-        }else{
-            $user_id = -1;
-        }*/
 
         $date = new DateTime("now", new DateTimeZone('America/Argentina/Buenos_Aires') );
         $created = $date->format('Y-m-d H:i:s');
