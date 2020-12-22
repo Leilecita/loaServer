@@ -16,6 +16,11 @@ class ParallelMoneyMovementModel extends BaseModel
         $this->tableName = 'parallel_money_movements';
     }
 
+    function getDistinctTypes(){
+        $query='SELECT DISTINCT type from parallel_money_movements order by created asc ';
+        return $this->getDb()->fetch_all($query);
+    }
+
 
     function getDaysGroup($paginator){
 

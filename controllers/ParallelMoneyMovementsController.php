@@ -40,6 +40,9 @@ class ParallelMoneyMovementsController extends SecureBaseController
         return $result;
     }
 
+    function getDistinctTypes(){
+        $this->returnSuccess(200, $this->model->getDistinctTypes());
+    }
 
     function filtersType($dates){
 

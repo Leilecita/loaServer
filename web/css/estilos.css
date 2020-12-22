@@ -5,6 +5,7 @@ body {
 
 }
 
+
 .background{
 
 	background:linear-gradient(to bottom,rgba(142, 119, 102, 0.55) 0,rgba(92, 77, 66, 0.45) 100%), url(../img/fondoloa3.jpg);
@@ -23,6 +24,10 @@ body {
 
 input {
 	width: 50%;
+}
+
+.panel-heading{
+	font-size: 26px;
 }
 
 .form-control{
@@ -71,4 +76,19 @@ fieldset{
 .btn-primary{
 
 	position: center;
+}
+
+.loa-header {
+	background-color: #b7dfc2;
+	border-bottom: #b7dfc2;
+	border-top: #b7dfc2;
+	color: #4c5455;
+}
+
+.loa-card {
+	border-color: #b7dfc2;
+}
+
+.loa-text{
+	color: #4c5455;
 }

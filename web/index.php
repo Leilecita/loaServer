@@ -30,11 +30,11 @@
                 <legend><h4>Datos alumno</h4></legend>
                 <div class="form-group">
                     <label for="nombre" class="col-form-label">Nombre</label>
-                    <input type="text" name="nombre" class="form-control" required placeholder=""/>
+                    <input type="text" name="nombre" class="form-control" required placeholder="" />
                 </div>
                 <div class="form-group">
                    <label for="apellido">Apellido</label>
-                    <input type="text" name="apellido" class="form-control"  placeholder=""/>
+                    <input type="text" name="apellido" class="form-control"  placeholder="" />
                 </div>
                 <div class="form-group">
                     <label for="dni">DNI</label>
@@ -77,60 +77,73 @@
                     <input type="text" name="facebook_adulto" class="form-control"  placeholder=""/>
                 </div>
 
-                <div class="row">
-                    <div class="col-sm-6 col-xs-12">
-                        <legend>Datos Mamá</legend>
-                        <div class="form-group">
-                            <label for="nombre_mama" class="col-form-label">Nombre</label>
-                            <input type="text" name="nombre_mama" class="form-control"  placeholder=""/>
-                        </div>
-                        <div class="form-group">
-                            <label for="tel_mama">Telefono</label>
-                            <input type="text" name="tel_mama" class="form-control"  placeholder=""/>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="email_mama" class="col-form-label">Email</label>
-                            <input type="email" name="email_mama" class="form-control"  placeholder=""/>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="instagram_mama">Instagram</label>
-                            <input type="text" name="instagram_mama" class="form-control"  placeholder=""/>
-                        </div>
+
+
+                    <div class="custom-control custom-checkbox" data-toggle="collapse" data-target="#demo">
+                        <input type="checkbox" class="custom-control-input" id="defaultChecked2" >
+                            <label class="custom-control-label" for="defaultChecked2">Soy menor de edad</label>
+
                     </div>
-                    <div class="col-md-6 col-sm-12">
-                        <legend>Datos Papá</legend>
-                        <div class="form-group">
-                            <label for="nombre_papa" class="col-form-label">Nombre </label>
-                            <input type="text" name="nombre_papa" class="form-control"  placeholder=""/>
+                    <div id="demo" class="collapse">
+
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            <legend>Datos Mamá</legend>
+                            <div class="form-group">
+                                <label for="nombre_mama" class="col-form-label">Nombre</label>
+                                <input type="text" name="nombre_mama" class="form-control"  placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label for="tel_mama">Telefono</label>
+                                <input type="text" name="tel_mama" class="form-control"  placeholder=""/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email_mama" class="col-form-label">Email</label>
+                                <input type="email" name="email_mama" class="form-control"  placeholder=""/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instagram_mama">Instagram</label>
+                                <input type="text" name="instagram_mama" class="form-control"  placeholder=""/>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="tel_papa">Telefono </label>
-                            <input type="text" name="tel_papa" class="form-control"  placeholder=""/>
+                        <div class="col-md-6 col-sm-12">
+                            <legend>Datos Papá</legend>
+                            <div class="form-group">
+                                <label for="nombre_papa" class="col-form-label">Nombre </label>
+                                <input type="text" name="nombre_papa" class="form-control"  placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label for="tel_papa">Telefono </label>
+                                <input type="text" name="tel_papa" class="form-control"  placeholder=""/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email_papa" class="col-form-label">Email</label>
+                                <input type="email" name="email_papa" class="form-control"  placeholder=""/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instagram_papa">Instagram</label>
+                                <input type="text" name="instagram_papa" class="form-control"  placeholder=""/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="email_papa" class="col-form-label">Email</label>
-                            <input type="email" name="email_papa" class="form-control"  placeholder=""/>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="instagram_papa">Instagram</label>
-                            <input type="text" name="instagram_papa" class="form-control"  placeholder=""/>
-                        </div>
                     </div>
-                </div>
+
+                    </div>
 
 
 
-                </fieldset>
-
-
-
-
+            </fieldset>
 
             </p>
+
+
             <button type="submit" class="btn btn-primary">Suscribirse</button>
         </form>
     </div>
@@ -143,7 +156,10 @@
 </html>
 
 <!--
-
+ <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" required>
+                    <label class="custom-control-label" for="defaultChecked2">Default checked</label>
+                </div>
  <fieldset class="form-group">
                     <legend>Checkboxes</legend>
                     <div class="form-check">
