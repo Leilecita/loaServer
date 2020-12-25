@@ -2,7 +2,6 @@
 
 include __DIR__ . '/../config/config.php';
 require __DIR__ . '/../libs/dbhelper.php';
-include __DIR__ . '/../generatepdf.php';
 
 
 global $DBCONFIG;
