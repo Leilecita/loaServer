@@ -50,6 +50,18 @@ class ItemsFileEmployeeController extends SecureBaseController
         return $filters;
     }
 
+    function filtersTypeWithEmployeeId($dates,$employee_id){
+
+        $filters=array();
+
+        $filters[] = 'created >= "'.$dates['date'].'"';
+        $filters[] = 'created < "'.$dates['dateTo'].'"';
+        $filters[] = 'employee_id = "'.$employee_id.'"';
+
+        return $filters;
+
+    }
+
     function getHoursByMonthEmployee(){
 
         $listMonths=$this->model->getMonthsGroup($this->getPaginator(),$_GET['employee_id']);
@@ -59,9 +71,11 @@ class ItemsFileEmployeeController extends SecureBaseController
 
             $dates=$this->getDatesMonth($listMonths[$k]['created']);
 
-            $amountHoursByMonth=$this->model->amountHoursByMonthItem($this->filtersType($dates));
+           // $amountHoursByMonth=$this->model->amountHoursByMonthItem($this->filtersType($dates));
+            $amountHoursByMonth=$this->model->amountHoursByMonthItem($this->filtersTypeWithEmployeeId($dates,$_GET['employee_id']));
 
-            $listItemsFile= $this->model->listAll($this->filtersType($dates));
+            //$listItemsFile= $this->model->listAll($this->filtersType($dates));
+            $listItemsFile= $this->model->listAll($this->filtersTypeWithEmployeeId($dates,$_GET['employee_id']));
 
             $report[]=array('created'=>$listMonths[$k]['created'],'amountMonth' => $amountHoursByMonth['total'],'listItemsFile' => $listItemsFile);
         }
