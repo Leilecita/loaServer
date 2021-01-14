@@ -441,7 +441,11 @@ class StockEventsController extends SecureBaseController
     function post(){
         $data = (array)json_decode(file_get_contents("php://input"));
 
-        $this->updateStockProduct($data['id_product'],$data['stock_in'],$data['stock_out']);
+
+        //lo cambie a que se ejecute solo en el caso de que el evento sea creado , porque si no puede restar stock y si ocurre un error
+        // no ser creado, y puede generar errores porque el encargado piensa que no fue creado y lo vuelve a cargar
+
+        // $this->updateStockProduct($data['id_product'],$data['stock_in'],$data['stock_out']);
 
         $client_id=$data['client_id'];
        // unset($data['client_id']);
@@ -455,6 +459,9 @@ class StockEventsController extends SecureBaseController
         if($res<0){
             $this->returnError(404,null);
         }else{
+
+            $this->updateStockProduct($data['id_product'],$data['stock_in'],$data['stock_out']);
+
             $inserted = $this->getModel()->findById($res);
 
             $this->checkClientId($client_id,$inserted,$value_for_file);
