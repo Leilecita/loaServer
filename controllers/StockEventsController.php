@@ -393,6 +393,9 @@ class StockEventsController extends SecureBaseController
 
         if($stock_event){
 
+            //aca guarda el valor antes de ser editado asi sabemos que valor habia sido cargado como precio de venta del prod
+            $this->model->update($_GET['id'], array('value_before_edited' => $stock_event['value']));
+
             $this->model->update($_GET['id'],array('created' => $_GET['date']));
             $this->model->update($_GET['id'],array('value' => $_GET['value']));
             $this->model->update($_GET['id'],array('payment_method' => $_GET['payment_method']));

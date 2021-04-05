@@ -42,6 +42,12 @@ class ProductsController extends SecureBaseController
     function assignFilter(){
         $filters = array();
 
+        if(isset($_GET['stockcero'])){
+            if ($_GET['stockcero'] != "false") {
+                $filters[] = 'stock != "'.'0'.'"';
+            }
+        }
+
         if(isset($_GET['model'])){
             if ($_GET['model'] != "Todos") {
                 $filters[] = 'model = "' . $_GET['model'] . '"';
