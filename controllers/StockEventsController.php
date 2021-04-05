@@ -412,7 +412,8 @@ class StockEventsController extends SecureBaseController
             $report=array('item' => $repot_stock_event['item'],'type' => $repot_stock_event['type'],'brand' => $repot_stock_event['brand'],'model' => $repot_stock_event['model'],
                 'stock_in' =>$repot_stock_event['stock_in'],'stock_out' => $repot_stock_event['stock_out'],'stock_event_created' => $repot_stock_event['stock_event_created'],
                 'value' => $repot_stock_event['value'], 'payment_method'=> $repot_stock_event['payment_method'], 'detail'=> $repot_stock_event['detail'],'stock_event_id' => $repot_stock_event['stock_event_id'],
-                'today_created_client' => $repot_stock_event['today_created_client'], 'client_id' => $repot_stock_event['client_id']);
+                'today_created_client' => $repot_stock_event['today_created_client'], 'client_id' => $repot_stock_event['client_id'],
+                'value_before_edited' => $repot_stock_event['value_before_edited']);
             $this->returnSuccess(200,$report);
         }else{
             $this->returnError(400, "entity not found");

@@ -240,7 +240,7 @@ class StockEventModel extends BaseModel
 
         $query = 'SELECT *, p.type as type, p.brand as brand, p.model as model, s.stock_in as stock_in, s.stock_out as stock_out, s.value as value,
                   s.payment_method as payment_method, s.detail as detail, s.client_name as client_name, s.observation as observation,
-                   p.created as product_created, s.created as stock_event_created, s.id as stock_event_id 
+                   p.created as product_created, s.created as stock_event_created, s.id as stock_event_id, s.value_before_edited as value_before_edited 
         FROM stock_events s JOIN products p ON s.id_product = p.id '.( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY stock_event_created DESC';
         return $this->getDb()->fetch_row($query);
         //$query = 'SELECT *, p.created as product_created, s.created as stock_event_created, s.id as stock_event_id FROM stock_events s INNER JOIN products p ON '.$id_stock_event.' = s.id ';
