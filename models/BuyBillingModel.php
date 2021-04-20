@@ -17,6 +17,14 @@ class BuyBillingModel extends BaseModel
     }
 
 
+    function findAllBillings($filters=array(),$paginator=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY billing_date DESC LIMIT '.$paginator['limit'].' OFFSET '.$paginator['offset'];
+        return $this->getDb()->fetch_all($query);
+    }
+
+
+
     function sumCantArt($filters=array()){
         $conditions = join(' AND ',$filters);
         $query = 'SELECT SUM(art_cant) as total FROM buy_billings '.( empty($filters) ?  '' : ' WHERE '.$conditions );

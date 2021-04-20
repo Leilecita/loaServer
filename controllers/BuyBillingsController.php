@@ -50,7 +50,7 @@ class BuyBillingsController extends SecureBaseController
     function getReportBuyBilling(){
 
 
-        $list = $this->model->findAll($this->filters(),$this->getPaginator());
+        $list = $this->model->findAllBillings($this->filters(),$this->getPaginator());
 
         $tot_art = $this->model->sumCantArt($this->filters());
         $tot_amount = $this->model->sumTotAmount($this->filters());
