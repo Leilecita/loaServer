@@ -20,6 +20,9 @@ class BuyBillingsController extends SecureBaseController
         $this->model = new BuyBillingModel();
     }
 
+    function getDistinctBuisnesName(){
+        $this->returnSuccess(200, $this->model->getDistinctBuisnesName());
+    }
 
 
     function getBuyBilling(){

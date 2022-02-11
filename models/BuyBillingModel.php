@@ -16,6 +16,11 @@ class BuyBillingModel extends BaseModel
         $this->tableName = 'buy_billings';
     }
 
+    function getDistinctBuisnesName(){
+        $query='SELECT DISTINCT business_name as b_name from buy_billings order by created asc ';
+        return $this->getDb()->fetch_all($query);
+    }
+
 
     function findAllBillings($filters=array(),$paginator=array()){
         $conditions = join(' AND ',$filters);

@@ -26,6 +26,12 @@ class StudentsController extends BaseController
             $filters[] = 'nombre like "%'.$_GET['query'].'%"';
         }
 
+        if(isset($_GET['category'])) {
+            if ($_GET['category'] != "todos") {
+                $filters[] = 'category = "' . $_GET['category'] . '"';
+            }
+        }
+
         return $filters;
     }
 
