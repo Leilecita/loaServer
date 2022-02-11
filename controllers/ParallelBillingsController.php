@@ -16,6 +16,10 @@ class ParallelBillingsController extends SecureBaseController
         $this->model = new ParallelBillingModel();
     }
 
+    function getDistinctTypes(){
+        $this->returnSuccess(200, $this->model->getDistinctTypes());
+    }
+
     function getDatesMonth($data){
 
         $partsYearMonthDay=explode("-", $data);

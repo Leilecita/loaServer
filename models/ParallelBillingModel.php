@@ -16,6 +16,10 @@ class ParallelBillingModel extends BaseModel
         $this->tableName = 'parallel_billings';
     }
 
+    function getDistinctTypes(){
+        $query='SELECT DISTINCT type from parallel_billings order by created asc ';
+        return $this->getDb()->fetch_all($query);
+    }
 
     function getDaysGroup($paginator){
 
