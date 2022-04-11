@@ -46,6 +46,7 @@ class ItemsFileController extends SecureBaseController
                     'client_id' =>$list_operations[$i]['client_id'],
                     'product_type' => $list_operations[$i]['product_type'],
                     'product_model' => $list_operations[$i]['product_model'],
+                    'user_name' => $list_operations[$i]['user_name'],
                     'payment_method' => $list_operations[$i]['payment_method']);
             }
             $this->returnSuccess(200, $operationsReport);

@@ -255,7 +255,8 @@ class StockEventsController extends SecureBaseController
     }
 
     function filterSale($filters){
-        $filters[] = '(detail like "%'."salida".'%" OR detail like "%'."Ingreso dev".'%" OR detail like "%'."Suma por error anterior".'%")';
+       // $filters[] = '(detail like "%'."salida".'%" OR detail like "%'."Ingreso dev".'%" OR detail like "%'."Suma por error anterior".'%")';
+        $filters[] = '(detail like "%'."salida".'%" OR detail like "%'."Ingreso dev".'%" OR detail like "%'."Suma por error anterior".'%" OR detail like "%'."Ingreso por cambio".'%" OR detail like "%'."Ingreso devolucion falla".'%" OR detail like "%'."Ingreso por error anterior".'%")';
         return $filters;
     }
 
