@@ -318,7 +318,7 @@ class StockEventsController extends SecureBaseController
                 'stock_in' => $list[$i]['stock_in'],'stock_out' => $list[$i]['stock_out'],'stock_event_created' => $list[$i]['stock_event_created'],
                 'value' => $list[$i]['value'], 'payment_method'=> $list[$i]['payment_method'], 'detail'=> $list[$i]['detail'],'stock_event_id' => $list[$i]['stock_event_id'],
                 'client_name' => $list[$i]['client_name'],'observation' => $list[$i]['observation'],
-                'user_name' => $list[$i]['user_name']);
+                'user_name' => $list[$i]['user_name'], 'two_payment_method' => $list[$i]['two_payment_method']);
         }
         return $report;
     }
@@ -397,7 +397,7 @@ class StockEventsController extends SecureBaseController
             //aca guarda el valor antes de ser editado asi sabemos que valor habia sido cargado como precio de venta del prod
             $this->model->update($_GET['id'], array('value_before_edited' => $stock_event['value']));
 
-            $this->model->update($_GET['id'],array('created' => $_GET['date']));
+           // $this->model->update($_GET['id'],array('created' => $_GET['date']));
             $this->model->update($_GET['id'],array('value' => $_GET['value']));
             $this->model->update($_GET['id'],array('payment_method' => $_GET['payment_method']));
             $this->model->update($_GET['id'],array('detail' => $_GET['detail']));
@@ -414,7 +414,7 @@ class StockEventsController extends SecureBaseController
                 'stock_in' =>$repot_stock_event['stock_in'],'stock_out' => $repot_stock_event['stock_out'],'stock_event_created' => $repot_stock_event['stock_event_created'],
                 'value' => $repot_stock_event['value'], 'payment_method'=> $repot_stock_event['payment_method'], 'detail'=> $repot_stock_event['detail'],'stock_event_id' => $repot_stock_event['stock_event_id'],
                 'today_created_client' => $repot_stock_event['today_created_client'], 'client_id' => $repot_stock_event['client_id'],
-                'value_before_edited' => $repot_stock_event['value_before_edited'],'original_price_product' => $repot_stock_event['original_price_product']);
+                'value_before_edited' => $repot_stock_event['value_before_edited'],'original_price_product' => $repot_stock_event['original_price_product'],'two_payment_method' => $repot_stock_event['two_payment_method']);
             $this->returnSuccess(200,$report);
         }else{
             $this->returnError(400, "entity not found");
