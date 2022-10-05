@@ -419,15 +419,48 @@ class ProductsController extends SecureBaseController
         return $n < $valor ? $n + 10 : $n;
     }
 
+    function redondear_entero($valor) {
+
+        //VER FUNCION CEIL PHP
+
+        if(substr($valor,2) == "50"){
+            return intval($valor);
+        }
+
+        // Convertimos $valor a entero
+        $valor = intval($valor);
+
+        // Redondeamos al múltiplo de 100 más cercano
+        $n = round($valor, -2);
+
+        //error_log("n");
+        //error_log($n);
+        //error_log("valor");
+        //error_log($valor);
+
+        // Si el resultado $n es menor, quiere decir que redondeo hacia abajo
+        // por lo tanto sumamos 100. Si no, lo devolvemos así.
+
+
+        if($n < $valor){
+            return $n;
+        }else{
+            return $n + 100;
+        }
+
+        //return $n < $valor ? $n + 100 : $n;
+    }
+
     function roundUp($final_price){
 
         $div = explode(".",$final_price);
 
         $integer_part = $div[0];
 
-        error_log('redondear a 10 '. $this->redondear_a_10($integer_part));
+        //error_log('redondear a 10 '. $this->redondear_a_10($integer_part));
 
-        return $this->redondear_a_10($integer_part);
+       // return $this->redondear_a_10($integer_part);
+        return $this->redondear_entero($integer_part);
     }
 
 
