@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group">
                     <label for="edad">Edad</label>
-                    <input type="text" name="edad" class="form-control" text placeholder=""/>
+                    <input type="number" name="edad" class="form-control" text placeholder=""/>
                 </div>
 
                <!-- <div class="form-group">
@@ -56,12 +56,13 @@
                     <input type="text" name="direccion" class="form-control" text placeholder=""/>
                 </div> -->
                 <div class="form-group">
-                    <label for="localidad">Localidad</label>
-                    <input type="text" name="localidad" class="form-control" text placeholder=""/>
-                </div>
-                <div class="form-group">
                     <label for="tel_adulto">Telefono</label>
                     <input type="number" name="tel_adulto" class="form-control"  placeholder=""/>
+                </div>
+
+                <div class="form-group">
+                    <label for="localidad">Localidad</label>
+                    <input type="text" name="localidad" class="form-control" text placeholder=""/>
                 </div>
 
                <!-- <div class="form-group">
@@ -98,7 +99,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="tel_mama">Telefono</label>
-                                <input type="text" name="tel_mama" class="form-control"  placeholder=""/>
+                                <input type="number" name="tel_mama" class="form-control"  placeholder=""/>
                             </div>
 
                             <div class="form-group">
@@ -119,7 +120,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="tel_papa">Telefono </label>
-                                <input type="text" name="tel_papa" class="form-control"  placeholder=""/>
+                                <input type="number" name="tel_papa" class="form-control"  placeholder=""/>
                             </div>
 
                             <div class="form-group">
