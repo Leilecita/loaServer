@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <label for="dni">DNI</label>
-                    <input type="text" name="dni" class="form-control" text required placeholder=""/>
+                    <input type="number" name="dni" class="form-control" text required placeholder=""/>
                 </div>
                 <div class="form-group">
                     <label for="fecha_nacimiento">Fecha de nacimiento</label>
@@ -51,10 +51,10 @@
                     <input type="text" name="edad" class="form-control" text placeholder=""/>
                 </div>
 
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label for="direccion">Dirección</label>
                     <input type="text" name="direccion" class="form-control" text placeholder=""/>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label for="localidad">Localidad</label>
                     <input type="text" name="localidad" class="form-control" text placeholder=""/>
@@ -74,10 +74,10 @@
                     <input type="text" name="instagram_adulto" class="form-control"  placeholder=""/>
                 </div>
 
-                <div class="form-group">
+              <!--  <div class="form-group">
                     <label for="facebook_adulto">Facebook</label>
                     <input type="text" name="facebook_adulto" class="form-control"  placeholder=""/>
-                </div>
+                </div> -->
 
 
 

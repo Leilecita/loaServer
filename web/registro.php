@@ -63,7 +63,7 @@ if (mysqli_num_rows($resultado)>0)
     $q = "UPDATE ".$db_table_name." SET nombre = '".$subs_name."', apellido = '".$subs_last."'
      , edad = '".$subs_edad."'
      , fecha_nacimiento = '".$subs_nacimiento."'
-     , direccion = '".$subs_direccion."'
+     , direccion = '".""."'
      , localidad = '".$subs_localidad."'
      , nombre_mama = '".$subs_nombre_mama."'
      , tel_mama = '".$subs_tel_mama."'
@@ -76,7 +76,7 @@ if (mysqli_num_rows($resultado)>0)
      , tel_adulto = '".$subs_tel_adulto."'
      , email_adulto = '".$subs_email_adulto."'
      , instagram_adulto = '".$subs_instagram_adulto."'
-     , facebook_adulto = '".$subs_facebook_adulto."'
+     , facebook_adulto = '".""."'
      , updated_date = '".getActualTime()."'
      WHERE dni = '".$subs_dni."'";
     $retry_value = mysqli_query( $db_connection,$q);
