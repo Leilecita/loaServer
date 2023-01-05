@@ -74,7 +74,7 @@ if (mysqli_num_rows($resultado)>0)
      , email_papa = '".$subs_email_papa."'
      , instagram_papa = '".$subs_instagram_papa."'
      , tel_adulto = '".$subs_tel_adulto."'
-     , email_adulto = '".$subs_email_adulto."'
+     , email_adulto = '".""."'
      , instagram_adulto = '".$subs_instagram_adulto."'
      , facebook_adulto = '".""."'
      , updated_date = '".getActualTime()."'

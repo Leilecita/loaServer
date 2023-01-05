@@ -61,13 +61,13 @@
                 </div>
                 <div class="form-group">
                     <label for="tel_adulto">Telefono</label>
-                    <input type="text" name="tel_adulto" class="form-control"  placeholder=""/>
+                    <input type="number" name="tel_adulto" class="form-control"  placeholder=""/>
                 </div>
 
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label for="email_adulto" class="col-form-label">Email</label>
                     <input type="email" name="email_adulto" class="form-control"  placeholder=""/>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label for="instagram_adulto">Instagram</label>
