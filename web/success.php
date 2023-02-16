@@ -18,6 +18,9 @@
                 Suscripción completa
             </div>
             <div class="card-body">
+                <?php if($form['info'] == "actualizada"){ ?>
+                     <p class="card-text loa-text"> Ya existe un registro con el dni ingresado.</p>
+                <?php } ?>
                 <h5 class="card-title loa-text" > <?php echo ucfirst( $form['name']) ?> <?php echo  ucfirst($form['apellido']) ?></h5>
                 <p class="card-text loa-text"> <?php echo $form['dni'] ?></p>
             </div>

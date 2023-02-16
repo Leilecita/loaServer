@@ -60,7 +60,7 @@ global  $form;
 if (mysqli_num_rows($resultado)>0)
 {
 
-    $q = "UPDATE ".$db_table_name." SET nombre = '".$subs_name."', apellido = '".$subs_last."'
+    /*$q = "UPDATE ".$db_table_name." SET nombre = '".$subs_name."', apellido = '".$subs_last."'
      , edad = '".$subs_edad."'
      , fecha_nacimiento = '".$subs_nacimiento."'
      , direccion = '".""."'
@@ -79,7 +79,7 @@ if (mysqli_num_rows($resultado)>0)
      , facebook_adulto = '".""."'
      , updated_date = '".getActualTime()."'
      WHERE dni = '".$subs_dni."'";
-    $retry_value = mysqli_query( $db_connection,$q);
+    $retry_value = mysqli_query( $db_connection,$q);*/
 
     if (!$retry_value) {
         die('Error: ' . mysqli_error($db_connection));
