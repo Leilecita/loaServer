@@ -81,9 +81,9 @@ if (mysqli_num_rows($resultado)>0)
      WHERE dni = '".$subs_dni."'";
     $retry_value = mysqli_query( $db_connection,$q);*/
 
-    if (!$retry_value) {
+    /*if (!$retry_value) {
         die('Error: ' . mysqli_error($db_connection));
-    }
+    }*/
 
     $form = array('name' => $subs_name, 'apellido' => $subs_last, 'dni' => $subs_dni , 'info' => "actualizada", 'created' => $retry_value['created']);
 
