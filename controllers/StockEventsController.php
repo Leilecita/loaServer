@@ -144,6 +144,8 @@ class StockEventsController extends SecureBaseController
             }
         }
 
+        $filters[] = 'deleted = "' ."false". '"';
+
         return $filters;
     }
 

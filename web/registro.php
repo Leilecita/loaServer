@@ -85,7 +85,7 @@ if (mysqli_num_rows($resultado)>0)
         die('Error: ' . mysqli_error($db_connection));
     }*/
 
-    $form = array('name' => $subs_name, 'apellido' => $subs_last, 'dni' => $subs_dni , 'info' => "actualizada", 'created' => $retry_value['created']);
+    $form = array('name' => $subs_name, 'apellido' => $subs_last, 'dni' => $subs_dni , 'info' => "actualizada");
 
     include "success.php";
 

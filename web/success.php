@@ -15,14 +15,21 @@
         <div class="card text-center loa-card">
 
             <div class="card-header loa-header">
+                <?php if($form['info'] == "actualizada"){ ?>
                 Suscripción completa
+                <?php }else{ ?>
+                <?php } ?>
             </div>
+
             <div class="card-body">
                 <?php if($form['info'] == "actualizada"){ ?>
-                     <p class="card-text loa-text"> Ya existe un registro con el dni ingresado.</p>
+                    <h5 class="card-title loa-text" > Ya existe un registro con el dni <?php echo $form['dni'] ?></h5>
+                    <p class="card-text loa-text"> <?php echo ucfirst( $form['name']) ?> <?php echo  ucfirst($form['apellido']) ?></p>
+                <?php }else{ ?>
+                    <h5 class="card-title loa-text" > <?php echo ucfirst( $form['name']) ?> <?php echo  ucfirst($form['apellido']) ?></h5>
+                    <p class="card-text loa-text"> <?php echo $form['dni'] ?></p>
                 <?php } ?>
-                <h5 class="card-title loa-text" > <?php echo ucfirst( $form['name']) ?> <?php echo  ucfirst($form['apellido']) ?></h5>
-                <p class="card-text loa-text"> <?php echo $form['dni'] ?></p>
+
             </div>
             <div class="card-footer text-muted loa-header">
                 <p class="card-text loa-text">  <?php echo date('d-m-Y') ?></p>
