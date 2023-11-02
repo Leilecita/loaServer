@@ -21,6 +21,11 @@ class ParallelMoneyMovementModel extends BaseModel
         return $this->getDb()->fetch_all($query);
     }
 
+    function getDistinctDescription($filters){
+        $conditions = join(' AND ',$filters);
+        $query='SELECT DISTINCT description as type from parallel_money_movements'.( empty($filters) ?  '' : ' WHERE '.$conditions ).' order by created asc ';
+        return $this->getDb()->fetch_all($query);
+    }
 
     function getDaysGroup($paginator){
 

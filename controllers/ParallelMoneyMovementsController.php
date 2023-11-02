@@ -44,6 +44,15 @@ class ParallelMoneyMovementsController extends SecureBaseController
         $this->returnSuccess(200, $this->model->getDistinctTypes());
     }
 
+    function getDistinctDescriptions(){
+        $filters=array();
+        $filters[] = 'type = "' . "Gastos Mios" . '"';
+
+
+        $this->returnSuccess(200, $this->model->getDistinctDescription($filters));
+    }
+
+
     function filtersType($dates){
 
         $filters=array();
