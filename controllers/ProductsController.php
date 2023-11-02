@@ -483,7 +483,9 @@ class ProductsController extends SecureBaseController
             $final_price = $product['price'] + $product_percentege;
 
            // $round_up_final_price = $this->roundUp($final_price);
-            $round_up_final_price = $final_price;
+
+           // $round_up_final_price = $final_price;
+            $round_up_final_price = round($final_price, -2);
 
             error_log('precio '.$product['price'].' nuevo precio '.$final_price.'rounded up '.$round_up_final_price);
 
