@@ -4,7 +4,7 @@ include __DIR__ . '/../config/config.php';
 require __DIR__ . '/../libs/dbhelper.php';
 
 
-global $DBCONFIG;
+global $DBCONFIG_WEB_ALUMNOS;
 
 function getActualTime(){
     $date = new DateTime("now", new DateTimeZone('America/Argentina/Buenos_Aires') );
@@ -13,10 +13,10 @@ function getActualTime(){
 
 // $this->db->connect('pdo', 'mysql', $DBCONFIG['HOST'], $DBCONFIG['USERNAME'], $DBCONFIG['PASSWORD'],$DBCONFIG['DATABASE'],$DBCONFIG['PORT']);
 
-$db_host=$DBCONFIG['HOST'];
+$db_host= $DBCONFIG_WEB_ALUMNOS['HOST'];
 $db_user="root";
-$db_password= $DBCONFIG['PASSWORD'];
-$db_name=$DBCONFIG['DATABASE'];
+$db_password = $DBCONFIG_WEB_ALUMNOS['PASSWORD'];
+$db_name = $DBCONFIG_WEB_ALUMNOS['DATABASE'];
 $db_table_name="students";
 
 $db_connection = mysqli_connect($db_host, $db_user, $db_password);
