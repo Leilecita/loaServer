@@ -1,7 +1,7 @@
 <?php
 include '../models/ProductModel.php';
 
-
+/*
 $model= new ProductModel();
 
 
@@ -18,7 +18,7 @@ $products = $model->findAllAll($filter);
 
 
 
-
+*/
 ?>
 <!doctype html>
 <html>

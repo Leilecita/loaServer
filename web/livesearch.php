@@ -18,10 +18,44 @@ $filter=array();
 //get the q parameter from URL
 $q = $_GET["q"];
 
+$porciones = explode(" ", $q);
+
 $filter[]='deleted = "' ."false".'"';
 $filter[]='item != "' ."Luz".'"';
 $filter[]='stock > 0 ';
-$filter[] = '(brand like "%'.$_GET['q'].'%" OR model like "%'.$_GET['q'].'%" OR item like "%'.$_GET['q'].'%" OR type like "%'.$_GET['q'].'%")';
+
+if(count($porciones) == 1){
+    $a = $porciones[0];
+    $filter[] = '(brand like "%'.$a.'%" OR model like "%'.$a.'%" OR item like "%'.$a.'%" OR type like "%'.$a.'%")';
+
+
+}else if(count($porciones) == 2){
+    $a = $porciones[0]; //item
+    $b = $porciones[1]; //articulo
+
+
+    $filter[] = ' item like "%'.$a.'%"';
+    $filter[] = ' type like "%'.$b.'%"';
+
+
+}else if(count($porciones) == 3){
+    $a = $porciones[0]; //item
+    $b = $porciones[1]; //articulo
+    $c = $porciones[2]; //marca
+
+
+    $filter[] = ' item like "%'.$a.'%"';
+    $filter[] = ' type like "%'.$b.'%"';
+    $filter[] = ' brand like "%'.$c.'%"';
+
+
+}else{
+
+}
+
+
+
+
 $x = $model->findAllAll($filter);
 
 //lookup all links from the xml file if length of q>0
