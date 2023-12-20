@@ -29,6 +29,7 @@ $products = $model->findAllAll($filter);
     <title>Formulario de Registro LOA</title>
     <link href="css/estilos.css" rel="stylesheet" type="text/css">
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -47,34 +48,27 @@ $products = $model->findAllAll($filter);
 
                     <legend><h4>Datos alumno</h4></legend>
 
-
-                    <div class="container">
-                        <br /><br />
-                        <label>Search Employee Details</label>
-                        <div id="search_area">
-                            <input type="text" name="employee_search" id="employee_search" class="form-control input-lg" autocomplete="off" placeholder="Type Employee Name" />
-                        </div>
-                        <br />
-                        <br />
-                        <div id="employee_data"></div>
-                    </div>
+                    <form>
+                        <input type="text" size="30" onkeyup="showResult(this.value)">
+                        <div id="livesearch"></div>
+                    </form>
 
 
-                  <?php  for ($i = 0; $i < count($products); ++$i) {
+
+              <!--    <?php  for ($i = 0; $i < count($products); ++$i) {
 
                     print($products[$i]['item']." ".$products[$i]['type']." ".$products[$i]['brand']." ".$products[$i]['model'].
                         "       $".$products[$i]['price']."<br>");
 
                     }
 
-                    ?>
+                    ?> -->
 
                 </fieldset>
 
                 </p>
 
 
-                <button type="submit" class="btn btn-primary">Suscribirse</button>
             </form>
         </div>
     </div>
@@ -87,6 +81,21 @@ $products = $model->findAllAll($filter);
 
 
 <script>
-
+    function showResult(str) {
+        if (str.length==0) {
+            document.getElementById("livesearch").innerHTML="";
+            document.getElementById("livesearch").style.border="0px";
+            return;
+        }
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                document.getElementById("livesearch").innerHTML=this.responseText;
+                document.getElementById("livesearch").style.border="1px solid #A5ACB2";
+            }
+        }
+        xmlhttp.open("GET","livesearch.php?q="+str,true);
+        xmlhttp.send();
+    }
 </script>
 
