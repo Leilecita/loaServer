@@ -19,6 +19,8 @@ $filter=array();
 $q = $_GET["q"];
 
 $filter[]='deleted = "' ."false".'"';
+$filter[]='item != "' ."Luz".'"';
+$filter[]='stock > 0 ';
 $filter[] = '(brand like "%'.$_GET['q'].'%" OR model like "%'.$_GET['q'].'%" OR item like "%'.$_GET['q'].'%" OR type like "%'.$_GET['q'].'%")';
 $x = $model->findAllAll($filter);
 
@@ -32,12 +34,13 @@ if (strlen($q)>0) {
         $y=$x[$i]['item'];
         $z=$x[$i]['type'];
         $l=$x[$i]['brand'];
+        $m=$x[$i]['model'];
         $k=$x[$i]['price'];
 
         if ($hint=="") {
-            $hint="<p>" . $y ." ". $z ." ".$l."  $".$k. "</p>";
+            $hint="<p>" . $y ." ". $z ." ".$l." ".$m."  $".$k. "</p>";
         } else {
-            $hint=$hint . "<br/><p>".$y." ".$z." ".$l." $".$k."</p>";
+            $hint=$hint . "<p>".$y." ".$z." ".$l." ".$m." $".$k."</p>";
         }
     }
 }

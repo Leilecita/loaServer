@@ -46,7 +46,7 @@ $products = $model->findAllAll($filter);
                 <fieldset class="withLogo">
                     <img src="img/logoloa.png" class="logoloa" />
 
-                    <legend><h4>Datos alumno</h4></legend>
+                    <legend><h4>Productos</h4></legend>
 
                     <form>
                         <input type="text" size="30" onkeyup="showResult(this.value)">
@@ -91,7 +91,7 @@ $products = $model->findAllAll($filter);
         xmlhttp.onreadystatechange=function() {
             if (this.readyState==4 && this.status==200) {
                 document.getElementById("livesearch").innerHTML=this.responseText;
-                document.getElementById("livesearch").style.border="1px solid #A5ACB2";
+               //    document.getElementById("livesearch").style.border="1px solid #A5ACB2";
             }
         }
         xmlhttp.open("GET","livesearch.php?q="+str,true);
