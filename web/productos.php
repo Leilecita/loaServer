@@ -42,7 +42,6 @@ $products = $model->findAllAll($filter);
 <div class="front container">
     <div class="row">
         <div class="col-sm-8 offset-sm-2 col-xs-10 offset-xs-1">
-            <form  action="registro.php" method="POST" >
                 <fieldset class="withLogo">
                     <img src="img/logoloa.png" class="logoloa" />
 
@@ -53,23 +52,11 @@ $products = $model->findAllAll($filter);
                         <div id="livesearch"></div>
                     </form>
 
-
-
-              <!--    <?php  for ($i = 0; $i < count($products); ++$i) {
-
-                    print($products[$i]['item']." ".$products[$i]['type']." ".$products[$i]['brand']." ".$products[$i]['model'].
-                        "       $".$products[$i]['price']."<br>");
-
-                    }
-
-                    ?> -->
-
                 </fieldset>
 
                 </p>
 
 
-            </form>
         </div>
     </div>
 </div>
