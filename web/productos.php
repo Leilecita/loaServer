@@ -38,7 +38,7 @@ $products = $model->findAllAll($filter);
 
 
 <body>
-<div class="background2" ></div>
+<div class="background" ></div>
 <div class="front container">
     <div class="row">
         <div class="col-sm-8 offset-sm-2 col-xs-10 offset-xs-1">
