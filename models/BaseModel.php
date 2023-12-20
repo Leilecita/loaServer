@@ -47,6 +47,12 @@ abstract class BaseModel
         return $this->db->fetch_all($query);
     }
 
+    function findAllAll($filters=array()){
+        $conditions = join(' AND ',$filters);
+        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY item DESC ';
+        return $this->db->fetch_all($query);
+    }
+
     function sumAll($filters=array(),$paginator=array()){
         $conditions = join(' AND ',$filters);
 
