@@ -72,9 +72,9 @@ if (strlen($q)>0) {
         $k=$x[$i]['price'];
 
         if ($hint=="") {
-            $hint="<p>" . $y ." ". $z ." ".$l." ".$m."  $".$k. "</p>";
+            $hint="<p>" . $y ." ". $z ." ".$l." ".$m."  $".$k. "</p><hr style='background-color: #ffffff;'>";
         } else {
-            $hint=$hint . "<p>".$y." ".$z." ".$l." ".$m." $".$k."</p>";
+            $hint=$hint . "<p>".$y." ".$z." ".$l." ".$m." $".$k."</p><hr style='background-color: #ffffff;'>";
         }
     }
 }

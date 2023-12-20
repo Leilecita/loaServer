@@ -48,7 +48,7 @@ $products = $model->findAllAll($filter);
                     <legend><h4>Productos</h4></legend>
 
                     <form>
-                        <input type="text" size="30" onkeyup="showResult(this.value)">
+                        <input type="text" size="30" placeholder="hombre remera dc" onkeyup="showResult(this.value)">
                         <div id="livesearch"></div>
                     </form>
 

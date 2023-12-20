@@ -49,7 +49,7 @@ abstract class BaseModel
 
     function findAllAll($filters=array()){
         $conditions = join(' AND ',$filters);
-        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY item ASC ';
+        $query = 'SELECT * FROM '.$this->tableName .( empty($filters) ?  '' : ' WHERE '.$conditions ).' ORDER BY item ASC, type ASC, brand ASC ';
         return $this->db->fetch_all($query);
     }
 
