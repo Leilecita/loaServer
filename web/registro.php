@@ -33,7 +33,7 @@ $subs_edad = intval(utf8_decode($_POST['edad']),10);
 $subs_dni = utf8_decode($_POST['dni']);
 
 $subs_direccion = utf8_decode($_POST['direccion']);
-$subs_localidad = utf8_decode($_POST['localidad']);
+$subs_localidad = "";
 $subs_nombre_mama = utf8_decode($_POST['nombre_mama']);
 
 $subs_tel_mama = utf8_decode($_POST['tel_mama']);

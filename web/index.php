@@ -60,10 +60,10 @@
                     <input type="number" name="tel_adulto" class="form-control"  placeholder=""/>
                 </div>
 
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label for="localidad">Localidad</label>
                     <input type="text" name="localidad" class="form-control" text placeholder=""/>
-                </div>
+                </div> -->
 
                <!-- <div class="form-group">
                     <label for="email_adulto" class="col-form-label">Email</label>
