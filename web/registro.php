@@ -70,11 +70,8 @@ global  $form;
 if (mysqli_num_rows($resultado)>0)
 {
 
-    /*$q = "UPDATE ".$db_table_name." SET nombre = '".$subs_name."', apellido = '".$subs_last."'
-     , edad = '".$subs_edad."'
+   /* $q = "UPDATE ".$db_table_name." SET edad = '".$subs_edad."'
      , fecha_nacimiento = '".$subs_nacimiento."'
-     , direccion = '".""."'
-     , localidad = '".$subs_localidad."'
      , nombre_mama = '".$subs_nombre_mama."'
      , tel_mama = '".$subs_tel_mama."'
      , email_mama = '".$subs_email_mama."'
@@ -84,14 +81,12 @@ if (mysqli_num_rows($resultado)>0)
      , email_papa = '".$subs_email_papa."'
      , instagram_papa = '".$subs_instagram_papa."'
      , tel_adulto = '".$subs_tel_adulto."'
-     , email_adulto = '".""."'
      , instagram_adulto = '".$subs_instagram_adulto."'
-     , facebook_adulto = '".""."'
      , updated_date = '".getActualTime()."'
      WHERE dni = '".$subs_dni."'";
-    $retry_value = mysqli_query( $db_connection,$q);*/
+    $retry_value = mysqli_query( $db_connection,$q);
 
-    /*if (!$retry_value) {
+    if (!$retry_value) {
         die('Error: ' . mysqli_error($db_connection));
     }*/
 
