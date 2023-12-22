@@ -81,15 +81,13 @@
                 </div> -->
 
 
-
-
-                    <div class="custom-control custom-checkbox" data-toggle="collapse" data-target="#demo">
+                    <div class="custom-control custom-checkbox  " data-toggle="collapse" data-target="#demo">
                         <input type="checkbox" class="custom-control-input" id="defaultChecked2" >
                             <label class="custom-control-label" for="defaultChecked2">Soy menor de edad</label>
 
                     </div>
-                    <div id="demo" class="collapse">
-
+                <div id="demo" class="collapse">
+                </div>
                     <div class="row">
                         <div class="col-sm-6 col-xs-12">
                             <legend>Datos Mamá</legend>
@@ -137,7 +135,6 @@
 
                     </div>
 
-                    </div>
 
 
 
