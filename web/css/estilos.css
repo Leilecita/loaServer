@@ -22,10 +22,10 @@ body {
 	z-index: 0;
 }
 
-
-input {
+label {
 	width: 50%;
 }
+
 
 
 .panel-heading{

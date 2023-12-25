@@ -19,6 +19,9 @@
                 Suscripción completa
                 <?php }else{ ?>
                 <?php } ?>
+
+
+
             </div>
 
             <div class="card-body">
@@ -29,7 +32,10 @@
                     <h5 class="card-title loa-text" > <?php echo ucfirst( $form['name']) ?> <?php echo  ucfirst($form['apellido']) ?></h5>
                     <p class="card-text loa-text"> <?php echo $form['dni'] ?></p>
                 <?php } ?>
-
+                <p>
+                    Seguinos en
+                    <a href="https://www.instagram.com/loa.surflife" title="instagram"> loa.surflife</a>
+                </p>
             </div>
             <div class="card-footer text-muted loa-header">
                 <p class="card-text loa-text">  <?php echo date('d-m-Y') ?></p>
