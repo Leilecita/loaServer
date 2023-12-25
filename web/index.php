@@ -87,7 +87,7 @@
 
                     </div>
                 <div id="demo" class="collapse">
-                </div>
+
                     <div class="row">
                         <div class="col-sm-6 col-xs-12">
                             <legend>Datos Mamá</legend>
@@ -135,15 +135,34 @@
 
                     </div>
 
+                </div>
+
+                <br>
 
 
+                <div class="custom-control custom-checkbox ">
+                    <input type="checkbox" class="custom-control-input" id="myCheck" >
+                    <label class="custom-control-label" for="myCheck">
 
+                        <p>
+
+                            Por la presente dejo constancia que me hago responsable y autorizo
+                            a mi hijo/a a participar de la escuela de Surf LOA dejando sentado que está en buenas condiciones tanto físicas como psíquicas
+                            para la práctica del deporte, entendiendo que el surf es un deporte de riesgos en su práctica.
+
+
+                        </p>
+                    </label>
+
+                </div>
             </fieldset>
+
+
 
             </p>
 
 
-            <button type="submit" class="btn btn-primary">Suscribirse</button>
+            <button type="submit" onclick="myFunction()" class="btn btn-primary">Suscribirse</button>
         </form>
     </div>
 </div>
@@ -153,6 +172,12 @@
 
 </body>
 </html>
+
+<script>
+    function myFunction() {
+        document.getElementById("myCheck").required = true;
+    }
+</script>
 
 <!--
  <div class="custom-control custom-checkbox">
