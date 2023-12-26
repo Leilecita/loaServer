@@ -44,7 +44,7 @@
 <div class="background" ></div>
 <div class="front container">
 <div class="row">
-    <div class="col-sm-8 offset-sm-2 col-xs-10 offset-xs-1">
+    <div class="col-sm-8 offset-sm-2 col-xs-12">
         <form  action="registro.php" method="POST" >
             <fieldset class="withLogo">
                 <img src="img/logoloa.png" class="logoloa" />
@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <label  for="fecha_nacimiento">Fecha de nacimiento</label>
                     <div class='input-group date'  name="fecha_nacimiento"  id='datetimepicker1'>
-                        <input type='text' inputmode="none" class="form-control" />
+                        <input type='text' inpu class="form-control" />
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
