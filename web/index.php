@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <label  for="fecha_nacimiento">Fecha de nacimiento</label>
                     <div class='input-group date'  name="fecha_nacimiento"  id='datetimepicker1'>
-                        <input type='text' onkeydown="return false" class="form-control" />
+                        <input onkeydown="return false;" type='text'  class="form-control" />
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
