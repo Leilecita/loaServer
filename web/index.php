@@ -84,13 +84,13 @@
                     <label  for="fecha_nacimiento">Fecha de nacimiento</label>
                     <div class="row">
                     <div class="col">
-                        <input type="number" max="34" name="dia" class="form-control" required placeholder="día"/>
+                        <input type="number" min="1" max="31" name="dia" class="form-control" required placeholder="día"/>
                     </div>
                         <div class="col">
-                        <input type="number" name="mes" max="12" class="form-control" required placeholder="mes"/>
+                        <input type="number" name="mes" min="1" max="12" class="form-control" required placeholder="mes"/>
                         </div>
                         <div class="col">
-                            <input type="number" name="anio" max="50" class="form-control" required placeholder="año"/>
+                            <input type="number" name="anio" max="2050" class="form-control" required placeholder="año"/>
                         </div>
                     </div>
 
