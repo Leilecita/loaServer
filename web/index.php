@@ -68,7 +68,7 @@
                             <label  for="fecha_nacimiento">Fecha de nacimiento</label>
 
                             <div class='input-group date'>
-                                <input type='text' style="color: #1b1e21" name="fecha_nacimiento"  class="form-control" id='datetimepicker2' />
+                                <input type='date'  name="fecha_nacimiento"  class="form-control" id='datetimepicker2' />
                             </div>
                         </div>
                     </div>
