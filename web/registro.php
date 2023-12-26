@@ -47,12 +47,12 @@ $subs_localidad = "";
 $subs_nombre_mama = quitar_tildes($_POST['nombre_mama']);
 
 $subs_tel_mama = utf8_decode($_POST['tel_mama']);
-$subs_email_mama = quitar_tildes($_POST['email_mama']);
+$subs_email_mama = "";
 $subs_instagram_mama = quitar_tildes($_POST['instagram_mama']);
 
 $subs_nombre_papa = quitar_tildes($_POST['nombre_papa']);
 $subs_tel_papa = quitar_tildes($_POST['tel_papa']);
-$subs_email_papa = quitar_tildes($_POST['email_papa']);
+$subs_email_papa = "";
 $subs_instagram_papa = quitar_tildes($_POST['instagram_papa']);
 
 $subs_tel_adulto = utf8_decode($_POST['tel_adulto']);

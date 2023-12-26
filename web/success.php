@@ -21,7 +21,6 @@
                 <?php } ?>
 
 
-
             </div>
 
             <div class="card-body">
@@ -32,7 +31,7 @@
                     <h5 class="card-title loa-text" > <?php echo ucfirst( $form['name']) ?> <?php echo  ucfirst($form['apellido']) ?></h5>
                     <p class="card-text loa-text"> <?php echo $form['dni'] ?></p>
                 <?php } ?>
-                <p>
+                <p class="card-text loa-text" >
                     Seguinos en
                     <a href="https://www.instagram.com/loa.surflife" title="instagram"> loa.surflife</a>
                 </p>

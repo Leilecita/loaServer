@@ -17,7 +17,8 @@
 
 
     <!-- Optional theme -->
-   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
 
@@ -26,6 +27,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
 
 </head>
 
@@ -41,18 +43,18 @@
                 <img src="img/logoloa.png" class="logoloa" />
 
 
-     <h3>Datos alumno</h3>
+                <h3>Datos alumno</h3>
 
                 <div class="form-group">
-                    <label style="font-family:'Arial'" for="nombre" class="col-form-label">Nombre</label>
+                    <label  for="nombre" class="col-form-label">Nombre</label>
                     <input type="text" name="nombre" class="form-control" required placeholder="" />
                 </div>
                 <div class="form-group">
-                   <label style="font-family:'Arial'" for="apellido">Apellido</label>
+                   <label  for="apellido">Apellido</label>
                     <input type="text" name="apellido" class="form-control"  placeholder="" />
                 </div>
                 <div class="form-group">
-                    <label style="font-family:'Arial'" for="dni">DNI</label>
+                    <label for="dni">DNI</label>
                     <input type="number" name="dni" class="form-control" text required placeholder=""/>
                 </div>
                <!-- <div class="form-group">
@@ -61,18 +63,18 @@
                 </div> -->
 
                 <div class="row">
-                    <div class='col-sm-6'>
+                    <div class='col-sm-12'>
                         <div class="form-group">
-                            <label style="font-family:'Arial'" for="fecha_nacimiento">Fecha de nacimiento</label>
+                            <label  for="fecha_nacimiento">Fecha de nacimiento</label>
 
                             <div class='input-group date'>
-                                <input type='text' name="fecha_nacimiento"  class="form-control" id='datetimepicker2' />
+                                <input type='text' style="color: #1b1e21" name="fecha_nacimiento"  class="form-control" id='datetimepicker2' />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label style="font-family:'Arial'" for="edad">Edad</label>
+                    <label for="edad">Edad</label>
                     <input type="number" name="edad" class="form-control" text placeholder=""/>
                 </div>
 
@@ -82,7 +84,7 @@
                     <input type="text" name="direccion" class="form-control" text placeholder=""/>
                 </div> -->
                 <div class="form-group">
-                    <label style="font-family:'Arial'" for="tel_adulto">Telefono</label>
+                    <label  for="tel_adulto">Telefono</label>
                     <input type="number" name="tel_adulto" class="form-control"  placeholder=""/>
                 </div>
 
@@ -97,7 +99,7 @@
                 </div> -->
 
                 <div class="form-group">
-                    <label style="font-family:'Arial'" for="instagram_adulto">Instagram</label>
+                    <label  for="instagram_adulto">Instagram</label>
                     <input type="text" name="instagram_adulto" class="form-control"  placeholder=""/>
                 </div>
 
@@ -117,44 +119,44 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12">
 
-                            <legend>Datos Mamá</legend>
+                            <h3>Datos Mamá</h3>
                             <div class="form-group">
                                 <label for="nombre_mama" class="col-form-label">Nombre</label>
                                 <input type="text" name="nombre_mama" class="form-control"  placeholder=""/>
                             </div>
                             <div class="form-group">
-                                <label style="font-family:'Arial'" for="tel_mama">Telefono</label>
+                                <label  for="tel_mama">Telefono</label>
                                 <input type="number" name="tel_mama" class="form-control"  placeholder=""/>
                             </div>
 
-                            <div class="form-group">
-                                <label style="font-family:'Arial'" for="email_mama" class="col-form-label">Email</label>
+                          <!--  <div class="form-group">
+                                <label for="email_mama" class="col-form-label">Email</label>
                                 <input type="email" name="email_mama" class="form-control"  placeholder=""/>
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
-                                <label style="font-family:'Arial'" for="instagram_mama">Instagram</label>
+                                <label for="instagram_mama">Instagram</label>
                                 <input type="text" name="instagram_mama" class="form-control"  placeholder=""/>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <legend>Datos Papá</legend>
+                            <h3>Datos Papá</h3>
                             <div class="form-group">
-                                <label style="font-family:'Arial'" for="nombre_papa" class="col-form-label">Nombre </label>
+                                <label for="nombre_papa" class="col-form-label">Nombre </label>
                                 <input type="text" name="nombre_papa" class="form-control"  placeholder=""/>
                             </div>
                             <div class="form-group">
-                                <label style="font-family:'Arial'" for="tel_papa">Telefono </label>
+                                <label  for="tel_papa">Telefono </label>
                                 <input type="number" name="tel_papa" class="form-control"  placeholder=""/>
                             </div>
 
-                            <div class="form-group">
-                                <label style="font-family:'Arial'" for="email_papa" class="col-form-label">Email</label>
+                           <!-- <div class="form-group">
+                                <label for="email_papa" class="col-form-label">Email</label>
                                 <input type="email" name="email_papa" class="form-control"  placeholder=""/>
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
-                                <label style="font-family:'Arial'" for="instagram_papa">Instagram</label>
+                                <label for="instagram_papa">Instagram</label>
                                 <input type="text" name="instagram_papa" class="form-control"  placeholder=""/>
                             </div>
                         </div>
@@ -166,9 +168,8 @@
 
                 <br>
 
-
-                <div class="custom-control custom-checkbox ">
-                    <input type="checkbox" class="custom-control-input" id="myCheck" >
+                <div class="custom-control custom-checkbox col-sm-12">
+                    <input type="checkbox"  class="custom-control-input" id="myCheck" >
                     <label class="custom-control-label" for="myCheck">
 
                         <p>
@@ -197,6 +198,7 @@
 
 
 </body>
+
 </html>
 
 <script>
@@ -213,6 +215,7 @@
 
 
 </script>
+
 
 <!--
  <div class="custom-control custom-checkbox">
