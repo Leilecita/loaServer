@@ -14,26 +14,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet"/>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet"/>
+     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-
-
-    <!-- Optional theme
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+      Optional theme
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>-->
 
 
 </head>
@@ -64,32 +64,38 @@
                     <label for="dni">DNI</label>
                     <input type="number" name="dni" class="form-control" text required placeholder=""/>
                 </div>
+
                <!-- <div class="form-group">
                     <label for="fecha_nacimiento">Fecha de nacimiento</label>
                     <input type="date" name="fecha_nacimiento" class="form-control" text placeholder=""/>
                 </div> -->
 
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label  for="fecha_nacimiento">Fecha de nacimiento</label>
                     <div class='input-group date'  name="fecha_nacimiento"  id='datetimepicker1'>
-                        <input inputmode="none" type='text'  class="form-control" />
+                        <input inputmode="none" type='date' class="form-control" />
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                     </div>
-                </div>
+                </div> -->
 
-               <!-- <div class="row">
-                    <div class='col-sm-12'>
-                        <div class="form-group">
-                            <label  for="fecha_nacimiento">Fecha de nacimiento</label>
-
-                            <div class='input-group date'>
-                                <input type='date'  name="fecha_nacimiento"  class="form-control" id='datetimepicker2' />
-                            </div>
+                <div class="form-group">
+                    <label  for="fecha_nacimiento">Fecha de nacimiento</label>
+                    <div class="row">
+                    <div class="col">
+                        <input type="number" max="34" name="dia" class="form-control" required placeholder="día"/>
+                    </div>
+                        <div class="col">
+                        <input type="number" name="mes" max="12" class="form-control" required placeholder="mes"/>
+                        </div>
+                        <div class="col">
+                            <input type="number" name="anio" max="50" class="form-control" required placeholder="año"/>
                         </div>
                     </div>
-                </div> -->
+
+                </div>
+
                 <div class="form-group">
                     <label for="edad">Edad</label>
                     <input type="number" name="edad" class="form-control" text placeholder=""/>
@@ -186,7 +192,7 @@
                 <br>
 
                 <div class="custom-control custom-checkbox col-sm-12">
-                    <input type="checkbox"  class="custom-control-input" id="myCheck" >
+                    <input type="checkbox" style="width: 50px;" class="custom-control-input" id="myCheck" >
                     <label class="custom-control-label" for="myCheck">
 
                         <p>
@@ -229,9 +235,7 @@
             format: 'YYYY-MM-DD'
         });
     });
-    $(function () {
-        $('#datetimepicker12').datetimepicker();
-    });
+
 
 </script>
 

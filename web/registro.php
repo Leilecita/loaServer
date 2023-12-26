@@ -38,7 +38,11 @@ if (!$db_connection) {
 $subs_name = quitar_tildes($_POST['nombre']);
 
 $subs_last = quitar_tildes($_POST['apellido']);
-$subs_nacimiento = utf8_decode($_POST['fecha_nacimiento']);
+//$subs_nacimiento = utf8_decode($_POST['fecha_nacimiento']);
+$subs_dia = utf8_decode($_POST['dia']);
+$subs_mes = utf8_decode($_POST['mes']);
+$subs_anio = utf8_decode($_POST['anio']);
+$subs_nacimiento = $subs_anio."-".$subs_mes."-".$subs_dia;
 $subs_edad = intval(utf8_decode($_POST['edad']),10);
 $subs_dni = utf8_decode($_POST['dni']);
 
