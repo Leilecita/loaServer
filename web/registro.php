@@ -49,6 +49,7 @@ $subs_dni = utf8_decode($_POST['dni']);
 $subs_direccion = "";
 $subs_localidad = "";
 $subs_nombre_mama = quitar_tildes($_POST['nombre_mama']);
+$observation = quitar_tildes($_POST['observation']);
 
 $subs_tel_mama = utf8_decode($_POST['tel_mama']);
 $subs_email_mama = "";
@@ -106,7 +107,7 @@ if (mysqli_num_rows($resultado)>0)
      `nombre_mama`, `tel_mama`,`email_mama`,`instagram_mama`, `nombre_papa`, `tel_papa`,`email_papa`,`instagram_papa`,`tel_adulto` , `email_adulto` , `instagram_adulto` , `facebook_adulto`)
       VALUES ("' . $subs_name . '", "' . $subs_last  . '",
      "' . $subs_dni . '", "' . $subs_edad . '",  "' . $subs_nacimiento . '","' . $subs_direccion . '","' . $subs_localidad . '","' . $subs_nombre_mama . '","' . $subs_tel_mama . '","' . $subs_email_mama . '","' . $subs_instagram_mama . '",
-     "' . $subs_nombre_papa . '","' . $subs_tel_papa . '","' . $subs_email_papa . '","' . $subs_instagram_papa . '","' .$subs_tel_adulto.'","'.$subs_email_adulto.'","'.$subs_instagram_adulto.'","'.$subs_facebook_adulto.'")';
+     "' . $subs_nombre_papa  . '","' . $observation . '","' . $subs_tel_papa . '","' . $subs_email_papa . '","' . $subs_instagram_papa . '","' .$subs_tel_adulto.'","'.$subs_email_adulto.'","'.$subs_instagram_adulto.'","'.$subs_facebook_adulto.'")';
     // "' . $subs_nombre_papa . '","' . $subs_tel_papa . '","' . $subs_email_papa . '","' . $subs_instagram_papa . '")';
 
     $retry_value = mysqli_query( $db_connection,$insert_value);

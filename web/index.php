@@ -126,6 +126,11 @@
                     <input type="text" name="instagram_adulto" class="form-control"  placeholder=""/>
                 </div>
 
+                <div class="form-group">
+                    <label  for="observation">Información importante a tener en cuenta </label>
+                    <input type="text" name="observation" maxlength="100" class="form-control"  placeholder=""/>
+                </div>
+
               <!--  <div class="form-group">
                     <label for="facebook_adulto">Facebook</label>
                     <input type="text" name="facebook_adulto" class="form-control"  placeholder=""/>
