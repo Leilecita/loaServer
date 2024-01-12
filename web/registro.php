@@ -143,6 +143,8 @@ if (mysqli_num_rows($resultado)>0)
      "' . $subs_dni . '", "' . $subs_edad . '",  "' . $subs_nacimiento . '","' . $subs_direccion . '","' . $subs_localidad . '","' . $subs_nombre_mama . '","' . $subs_tel_mama . '","' . $subs_email_mama . '","' . $subs_instagram_mama . '",
      "' . $subs_nombre_papa  . '","' . $observation . '","' . $subs_tel_papa . '","' . $subs_email_papa . '","' . $subs_instagram_papa . '","' .$subs_tel_adulto.'","'.$subs_email_adulto.'","'.$subs_instagram_adulto.'","'.$subs_facebook_adulto.'")';
 
+    $retry_value2 = mysqli_query( $db_connection2,$insert_value2);
+
     include "success.php";
 
     //generatePdf(render($subs_name),"leila.pdf");
