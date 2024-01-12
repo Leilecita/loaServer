@@ -5,6 +5,7 @@ require __DIR__ . '/../libs/dbhelper.php';
 
 
 global $DBCONFIG_WEB_ALUMNOS;
+global $DBCONFIG;
 
 function getActualTime(){
     $date = new DateTime("now", new DateTimeZone('America/Argentina/Buenos_Aires') );
@@ -34,6 +35,23 @@ if (!$db_connection) {
     die('No se ha podido conectar a la base de datos');
 }
 
+
+//tabla 2
+$db_host2= $DBCONFIG['HOST'];
+$db_user2="root";
+$db_password2 = $DBCONFIG['PASSWORD'];
+$db_name2 = $DBCONFIG['DATABASE'];
+$db_table_name2="students";
+
+$db_connection2 = mysqli_connect($db_host2, $db_user2, $db_password2);
+mysqli_select_db($db_connection2,$db_name2 );
+
+
+if (!$db_connection2) {
+    die('No se ha podido conectar a la base de datos');
+}
+
+//
 
 $subs_name = quitar_tildes($_POST['nombre']);
 
@@ -118,6 +136,13 @@ if (mysqli_num_rows($resultado)>0)
 
     $form = array('name' => $subs_name, 'apellido' => $subs_last, 'dni' => $subs_dni ,'info' => "creada", 'created' => $retry_value['created']);
 
+
+    $insert_value2 = 'INSERT INTO `' . $db_name2 . '`.`'.$db_table_name2.'` (`nombre` , `apellido` ,`dni` , `edad` ,`fecha_nacimiento`, `direccion`,`localidad`,
+     `nombre_mama`, `tel_mama`,`email_mama`,`instagram_mama`, `nombre_papa`, `observation` ,`tel_papa`,`email_papa`,`instagram_papa`,`tel_adulto` , `email_adulto` , `instagram_adulto` , `facebook_adulto`)
+      VALUES ("' . $subs_name . '", "' . $subs_last  . '",
+     "' . $subs_dni . '", "' . $subs_edad . '",  "' . $subs_nacimiento . '","' . $subs_direccion . '","' . $subs_localidad . '","' . $subs_nombre_mama . '","' . $subs_tel_mama . '","' . $subs_email_mama . '","' . $subs_instagram_mama . '",
+     "' . $subs_nombre_papa  . '","' . $observation . '","' . $subs_tel_papa . '","' . $subs_email_papa . '","' . $subs_instagram_papa . '","' .$subs_tel_adulto.'","'.$subs_email_adulto.'","'.$subs_instagram_adulto.'","'.$subs_facebook_adulto.'")';
+
     include "success.php";
 
     //generatePdf(render($subs_name),"leila.pdf");
@@ -126,4 +151,5 @@ if (mysqli_num_rows($resultado)>0)
 
 
 mysqli_close($db_connection);
+mysqli_close($db_connection2);
 
