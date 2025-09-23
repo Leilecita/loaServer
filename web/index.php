@@ -49,7 +49,8 @@
             <fieldset class="withLogo">
                 <img src="img/logoloa.png" class="logoloa" />
 
-
+               <!-- <a href="https://www.loasurf.com.ar/public/docs/miarchivo.pdf" target="_blank">Descargar PDF</a>
+                <a href="https://http://localhost/loaserver/docs/miarchivo.pdf" target="_blank">Descargar PDF</a>-->
                 <h3>Datos alumno</h3>
 
                 <div class="form-group">
