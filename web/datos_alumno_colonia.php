@@ -97,7 +97,7 @@
 <div class="container">
     <div class="front col-md-8 offset-md-2">
         <form action="registro_colonia.php" method="POST">
-            <img src="img/logoloa.png" class="logoloa" />
+            <img src="img/loa_logo_new.png" class="logoloa" />
             <h3>Datos del alumno</h3>
 
             <!-- Nombre -->
@@ -173,7 +173,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa-brands fa-instagram"></i></span>
                     </div>
-                    <input type="text" name="instagram_mama" class="form-control" placeholder="@usuario" />
+                    <input type="text" name="instagram_mama" class="form-control" placeholder="instagram" />
                 </div>
             </div>
 
@@ -200,7 +200,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa-brands fa-instagram"></i></span>
                     </div>
-                    <input type="text" name="instagram_papa" class="form-control" placeholder="@usuario" />
+                    <input type="text" name="instagram_papa" class="form-control" placeholder="instagram" />
                 </div>
             </div>
 
@@ -212,21 +212,21 @@
             <!-- Autorizado 1 -->
             <div class="form-row mb-2">
                 <div class="col-md-4 mb-2"><input type="text" name="autorizado1_nombre" class="form-control" placeholder="Nombre completo" /></div>
-                <div class="col-md-4 mb-2"><input type="text" name="autorizado1_dni" class="form-control" placeholder="DNI" /></div>
+                <div class="col-md-4 mb-2"><input type="number" name="autorizado1_dni" class="form-control" placeholder="DNI" /></div>
                 <div class="col-md-4 mb-2"><input type="text" name="autorizado1_parentesco" class="form-control" placeholder="Parentesco" /></div>
             </div>
 
             <!-- Autorizado 2 -->
             <div class="form-row mb-2">
                 <div class="col-md-4 mb-2"><input type="text" name="autorizado2_nombre" class="form-control" placeholder="Nombre completo" /></div>
-                <div class="col-md-4 mb-2"><input type="text" name="autorizado2_dni" class="form-control" placeholder="DNI" /></div>
+                <div class="col-md-4 mb-2"><input type="number" name="autorizado2_dni" class="form-control" placeholder="DNI" /></div>
                 <div class="col-md-4 mb-2"><input type="text" name="autorizado2_parentesco" class="form-control" placeholder="Parentesco" /></div>
             </div>
 
             <!-- Autorizado 3 -->
             <div class="form-row mb-2">
                 <div class="col-md-4 mb-2"><input type="text" name="autorizado3_nombre" class="form-control" placeholder="Nombre completo" /></div>
-                <div class="col-md-4 mb-2"><input type="text" name="autorizado3_dni" class="form-control" placeholder="DNI" /></div>
+                <div class="col-md-4 mb-2"><input type="number" name="autorizado3_dni" class="form-control" placeholder="DNI" /></div>
                 <div class="col-md-4 mb-2"><input type="text" name="autorizado3_parentesco" class="form-control" placeholder="Parentesco" /></div>
             </div>
 

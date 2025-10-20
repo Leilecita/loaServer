@@ -120,29 +120,31 @@ global $form;
 
 if (mysqli_num_rows($resultado) > 0) {
 
-    /* $q = "UPDATE ".$db_table_name." SET edad = '".$subs_edad."'
-      , fecha_nacimiento = '".$subs_nacimiento."'
-      , nombre_mama = '".$subs_nombre_mama."'
-      , tel_mama = '".$subs_tel_mama."'
-      , email_mama = '".$subs_email_mama."'
-      , instagram_mama = '".$subs_instagram_mama."'
-      , nombre_papa = '".$subs_nombre_papa."'
-      , tel_papa = '".$subs_tel_papa."'
-      , email_papa = '".$subs_email_papa."'
-      , instagram_papa = '".$subs_instagram_papa."'
-      , tel_adulto = '".$subs_tel_adulto."'
-      , instagram_adulto = '".$subs_instagram_adulto."'
-      , updated_date = '".getActualTime()."'
-      WHERE dni = '".$subs_dni."'";
-     $retry_value = mysqli_query( $db_connection,$q);
+    $row = mysqli_fetch_assoc($resultado);
+    //Autorizados y salud
+    $insert_value_info_complementaria = 'INSERT INTO `' . $db_name . '`.`' . $db_table_name_complementary . '` (
+        `student_id`,
+        `autorizado1_nombre`, `autorizado1_dni`, `autorizado1_parentesco`,
+        `autorizado2_nombre`, `autorizado2_dni`, `autorizado2_parentesco`,
+        `autorizado3_nombre`, `autorizado3_dni`, `autorizado3_parentesco`,
+        `salud`
+    ) VALUES (
+        "' .  $row['id'] . '",
+        "' . $subs_autorizado1_nombre . '", "' . $subs_autorizado1_dni . '", "' . $subs_autorizado1_parentesco . '",
+        "' . $subs_autorizado2_nombre . '", "' . $subs_autorizado2_dni . '", "' . $subs_autorizado2_parentesco . '",
+        "' . $subs_autorizado3_nombre . '", "' . $subs_autorizado3_dni . '", "' . $subs_autorizado3_parentesco . '",
+        "' . $subs_salud . '")';
 
-     if (!$retry_value) {
-         die('Error: ' . mysqli_error($db_connection));
-     }*/
+
+    $retry_value_colonia = mysqli_query($db_connection, $insert_value_info_complementaria);
+
+    if (!$retry_value_colonia) {
+        die('Error: ' . mysqli_error($db_connection));
+    }
 
     $form = array('name' => $subs_name, 'apellido' => $subs_last, 'dni' => $subs_dni, 'info' => "actualizada");
 
-    include "success.php";
+    include "success_colonia.php";
 
     // header('Location: Fail.html');
 
@@ -206,7 +208,7 @@ if (mysqli_num_rows($resultado) > 0) {
 
     $retry_value2 = mysqli_query($db_connection2, $insert_value2);
 
-    include "success.php";
+    include "success_colonia.php";
 }
 
 
