@@ -12,6 +12,12 @@ function getActualTime(){
     return $date->format('Y-m-d H:i:s');
 }
 
+function limpiar_cadena($cadena, $conexion) {
+    $cadena = quitar_tildes($cadena);
+    $cadena = str_replace(["'", '"'], '', $cadena);
+    return mysqli_real_escape_string($conexion, $cadena);
+}
+
 function quitar_tildes($cadena) {
     $no_permitidas= array ("á","é","í","ó","ú","Á","É","Í","Ó","Ú","ñ","À","Ã","Ì","Ò","Ù","Ã™","Ã ","Ã¨","Ã¬","Ã²","Ã¹","ç","Ç","Ã¢","ê","Ã®","Ã´","Ã»","Ã‚","ÃŠ","ÃŽ","Ã”","Ã›","ü","Ã¶","Ã–","Ã¯","Ã¤","«","Ò","Ã","Ã„","Ã‹");
     $permitidas= array ("a","e","i","o","u","A","E","I","O","U","n","N","A","E","I","O","U","a","e","i","o","u","c","C","a","e","i","o","u","A","E","I","O","U","u","o","O","i","a","e","U","I","A","E");
@@ -53,9 +59,9 @@ if (!$db_connection2) {
 
 //
 
-$subs_name = quitar_tildes($_POST['nombre']);
+$subs_name = limpiar_cadena($_POST['nombre'], $db_connection);
 
-$subs_last = quitar_tildes($_POST['apellido']);
+$subs_last = limpiar_cadena($_POST['apellido'], $db_connection);
 //$subs_nacimiento = utf8_decode($_POST['fecha_nacimiento']);
 $subs_dia = utf8_decode($_POST['dia']);
 $subs_mes = utf8_decode($_POST['mes']);
@@ -66,23 +72,26 @@ $subs_dni = utf8_decode($_POST['dni']);
 
 $subs_direccion = "";
 $subs_localidad = "";
-$subs_nombre_mama = quitar_tildes($_POST['nombre_mama']);
-$observation = quitar_tildes($_POST['observation']);
+$subs_nombre_mama = limpiar_cadena($_POST['nombre_mama'], $db_connection);
+$observation = limpiar_cadena($_POST['observation'], $db_connection);
 
 $subs_tel_mama = utf8_decode($_POST['tel_mama']);
 $subs_email_mama = "";
-$subs_instagram_mama = quitar_tildes($_POST['instagram_mama']);
+$subs_instagram_mama = limpiar_cadena($_POST['instagram_mama'], $db_connection);
 
-$subs_nombre_papa = quitar_tildes($_POST['nombre_papa']);
-$subs_tel_papa = quitar_tildes($_POST['tel_papa']);
+$subs_nombre_papa = limpiar_cadena($_POST['nombre_papa'], $db_connection);
+$subs_tel_papa = limpiar_cadena($_POST['tel_papa'], $db_connection);
 $subs_email_papa = "";
-$subs_instagram_papa = quitar_tildes($_POST['instagram_papa']);
+$subs_instagram_papa = limpiar_cadena($_POST['instagram_papa'], $db_connection);
 
 $subs_tel_adulto = utf8_decode($_POST['tel_adulto']);
 $subs_email_adulto = "";
-$subs_instagram_adulto = quitar_tildes($_POST['instagram_adulto']);
+$subs_instagram_adulto = limpiar_cadena($_POST['instagram_adulto'], $db_connection);
 $subs_facebook_adulto = "";
 
+if (empty($subs_dni)) {
+    $subs_dni = "TEMP" . time();
+}
 
 $resultado = mysqli_query($db_connection,"SELECT * FROM ".$db_table_name." WHERE dni = '".$subs_dni."'" );
 
@@ -121,12 +130,15 @@ if (mysqli_num_rows($resultado)>0)
 
 } else {
 
+    /*if (empty($subs_dni)) {
+        $subs_dni = "TEMP" . time(); // ej: TEMP1695470123
+    }*/
+
     $insert_value = 'INSERT INTO `' . $db_name . '`.`'.$db_table_name.'` (`nombre` , `apellido` ,`dni` , `edad` ,`fecha_nacimiento`, `direccion`,`localidad`,
      `nombre_mama`, `tel_mama`,`email_mama`,`instagram_mama`, `nombre_papa`, `observation` ,`tel_papa`,`email_papa`,`instagram_papa`,`tel_adulto` , `email_adulto` , `instagram_adulto` , `facebook_adulto`)
       VALUES ("' . $subs_name . '", "' . $subs_last  . '",
      "' . $subs_dni . '", "' . $subs_edad . '",  "' . $subs_nacimiento . '","' . $subs_direccion . '","' . $subs_localidad . '","' . $subs_nombre_mama . '","' . $subs_tel_mama . '","' . $subs_email_mama . '","' . $subs_instagram_mama . '",
      "' . $subs_nombre_papa  . '","' . $observation . '","' . $subs_tel_papa . '","' . $subs_email_papa . '","' . $subs_instagram_papa . '","' .$subs_tel_adulto.'","'.$subs_email_adulto.'","'.$subs_instagram_adulto.'","'.$subs_facebook_adulto.'")';
-    // "' . $subs_nombre_papa . '","' . $subs_tel_papa . '","' . $subs_email_papa . '","' . $subs_instagram_papa . '")';
 
     $retry_value = mysqli_query( $db_connection,$insert_value);
 
