@@ -189,8 +189,14 @@ if (mysqli_num_rows($resultado) > 0) {
         die('Error: ' . mysqli_error($db_connection));
     }
 
-
-    $form = array('name' => $subs_name, 'apellido' => $subs_last, 'dni' => $subs_dni, 'info' => "creada", 'created' => $retry_value_colonia['created']);
+    $created = date("Y-m-d H:i:s"); // fecha actual
+    $form = array(
+        'name' => $subs_name,
+        'apellido' => $subs_last,
+        'dni' => $subs_dni,
+        'info' => "creada",
+        'created' => $created
+    );
 
     $insert_value2 = 'INSERT INTO `' . $db_name2 . '`.`' . $db_table_name2 . '` (`nombre` , `apellido` ,`dni` , `edad` ,`fecha_nacimiento`, `direccion`,`localidad`,
      `nombre_mama`, `tel_mama`,`email_mama`,`instagram_mama`, `nombre_papa`, `observation` ,`tel_papa`,`email_papa`,`instagram_papa`,`tel_adulto` , `email_adulto` , `instagram_adulto` , `facebook_adulto`)
