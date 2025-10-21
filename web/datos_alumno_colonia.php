@@ -129,8 +129,48 @@
                     <input type="number" name="dni" class="form-control" placeholder="Número de documento" />
                 </div>
             </div>
+            <!-- <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa-solid fa-calendar-days"></i>
+                  </span>
+                    </div>
+                    <input type="date"
+                           class="form-control"
+                           id="fecha_nacimiento"
+                           name="fecha_nacimiento"
+                           required>
+                </div>
+            </div>
 
+            <input type="hidden" id="edad" name="edad">-->
             <!-- Fecha de nacimiento -->
+            <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                           <i class="fa-solid fa-cake-candles"></i>
+                          </span>
+                        </div>
+
+                    <div class="form-row flex-grow-1">
+                        <div class="col-4 pr-1">
+                            <input type="number" min="1" max="31" name="dia" id="dia" class="form-control" placeholder="Día" required />
+                        </div>
+                        <div class="col-4 px-1">
+                            <input type="number" min="1" max="12" name="mes" id="mes" class="form-control" placeholder="Mes" required />
+                        </div>
+                        <div class="col-4 pl-1">
+                            <input type="number" name="anio" id="anio" max="2050" class="form-control" placeholder="Año" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" name="edad" id="edad">
+
+            <!-- Fecha de nacimiento
             <label>Fecha de nacimiento</label>
             <div class="form-row">
                 <div class="col-4 mb-2">
@@ -143,7 +183,7 @@
                     <input type="number" name="anio" id="anio" max="2050" class="form-control" required placeholder="Año" />
                 </div>
             </div>
-            <input type="hidden" name="edad" id="edad" />
+            <input type="hidden" name="edad" id="edad" />-->
 
             <input type="hidden" name="tel_adulto" id="tel_adulto" />
             <input type="hidden" name="instagram_adulto" id="instagram_adulto" />
@@ -243,6 +283,8 @@
         </form>
     </div>
 </div>
+
+
 
 <script>
     function calcularEdad() {
