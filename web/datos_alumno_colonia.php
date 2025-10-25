@@ -160,26 +160,26 @@
             <input type="hidden" id="edad" name="edad">-->
             <!-- Fecha de nacimiento -->
             <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                           <i class="fa-solid fa-cake-candles"></i>
-                          </span>
-                        </div>
-
-                    <div class="form-row flex-grow-1">
-                        <div class="col-4 pr-1">
+                <div class="form-row">
+                    <div class="col-4 pr-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="fa-solid fa-cake-candles"></i>
+                              </span>
+                            </div>
                             <input type="number" min="1" max="31" name="dia" id="dia" class="form-control" placeholder="Día" required />
                         </div>
-                        <div class="col-4 px-1">
-                            <input type="number" min="1" max="12" name="mes" id="mes" class="form-control" placeholder="Mes" required />
-                        </div>
-                        <div class="col-4 pl-1">
-                            <input type="number" name="anio" id="anio" max="2050" class="form-control" placeholder="Año" required />
-                        </div>
+                    </div>
+                    <div class="col-4 px-1">
+                        <input type="number" min="1" max="12" name="mes" id="mes" class="form-control" placeholder="Mes" required />
+                    </div>
+                    <div class="col-4 pl-1">
+                        <input type="number" name="anio" id="anio" max="2050" class="form-control" placeholder="Año" required />
                     </div>
                 </div>
             </div>
+
 
             <input type="hidden" name="edad" id="edad">
 
@@ -286,35 +286,28 @@
             <hr>
 
 
-
-            <h3>Salud</h3>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-            <span class="input-group-text">
+            <br>
+            <!-- SALUD -->
+            <h3 class="titulo-seccion">
                 <i class="fa-solid fa-notes-medical"></i>
-            </span>
-                    </div>
-                    <textarea name="salud" class="form-control" rows="3" placeholder="Detalle aquí cualquier Alergia / Medicamento / Enfermedad / Lesion que sea importante detallar"></textarea>
-                </div>
-            </div>
-            <h3>Deportes</h3>
-
-
-
-            <!-- Actividades deportivas -->
+                Salud
+            </h3>
             <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-            <span class="input-group-text">
+    <textarea name="salud" class="form-control" rows="3"
+              placeholder="Detalle aquí cualquier Alergia / Medicamento / Enfermedad / Lesión que sea importante detallar"></textarea>
+            </div>
+            <br>
+            <!-- ACTIVIDADES Y GUSTOS -->
+            <h3 class="titulo-seccion">
                 <i class="fa-solid fa-person-running"></i>
-            </span>
-                    </div>
-                    <textarea name="deportes" class="form-control" rows="2" placeholder="Detalla brevemente gustos y/o actividades deportivas y artísticas"></textarea>
-                </div>
+                Actividades y gustos
+            </h3>
+            <div class="form-group">
+    <textarea name="deportes" class="form-control" rows="2"
+              placeholder="Detalla brevemente gustos y/o actividades deportivas y artísticas"></textarea>
             </div>
 
-            <!-- Sabe nadar -->
+            <!-- SABE NADAR -->
             <div class="form-group">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
@@ -325,7 +318,9 @@
                     <input type="text" name="sabe_nadar" class="form-control" placeholder="¿Sabe nadar?" />
                 </div>
             </div>
+            <br>
             <button type="submit" class="btn btn-primary btn-block mt-3">Suscribirse</button>
+            <br>
         </form>
     </div>
 </div>
