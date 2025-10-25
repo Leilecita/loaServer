@@ -89,6 +89,19 @@
                 padding: 20px 15px;
             }
         }
+        /* Eliminar la línea vertical entre ícono y campo Día */
+        .input-group-prepend .input-group-text {
+            border-right: none !important;
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
+
+        /* Quitar borde izquierdo y radio del primer campo (día) */
+        .form-row .col-4:first-child .form-control {
+            border-left: none !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
 
     </style>
 </head>
@@ -272,13 +285,46 @@
 
             <hr>
 
-            <!-- Salud -->
+
+
             <h3>Salud</h3>
             <div class="form-group">
-                <label for="salud">Alergias / Medicamentos / Enfermedades</label>
-                <textarea name="salud" class="form-control" rows="3" placeholder="Detalle aquí cualquier alergia, medicación o enfermedad relevante"></textarea>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="fa-solid fa-notes-medical"></i>
+            </span>
+                    </div>
+                    <textarea name="salud" class="form-control" rows="3" placeholder="Detalle aquí cualquier Alergia / Medicamento / Enfermedad / Lesion que sea importante detallar"></textarea>
+                </div>
+            </div>
+            <h3>Deportes</h3>
+
+
+
+            <!-- Actividades deportivas -->
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="fa-solid fa-person-running"></i>
+            </span>
+                    </div>
+                    <textarea name="deportes" class="form-control" rows="2" placeholder="Detalla brevemente gustos y/o actividades deportivas y artísticas"></textarea>
+                </div>
             </div>
 
+            <!-- Sabe nadar -->
+            <div class="form-group">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="fa-solid fa-person-swimming"></i>
+            </span>
+                    </div>
+                    <input type="text" name="sabe_nadar" class="form-control" placeholder="¿Sabe nadar?" />
+                </div>
+            </div>
             <button type="submit" class="btn btn-primary btn-block mt-3">Suscribirse</button>
         </form>
     </div>

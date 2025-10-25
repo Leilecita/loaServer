@@ -108,6 +108,11 @@ $subs_autorizado3_parentesco = limpiar_cadena($_POST['autorizado3_parentesco'], 
 // Salud
 $subs_salud = limpiar_cadena($_POST['salud'], $db_connection);
 
+// deportes
+$subs_deportes = limpiar_cadena($_POST['deportes'], $db_connection);
+
+$subs_sabe_nadar = limpiar_cadena($_POST['sabe_nadar'], $db_connection);
+
 if (empty($subs_dni)) {
     $subs_dni = "TEMP" . time();
 }
@@ -121,19 +126,38 @@ global $form;
 if (mysqli_num_rows($resultado) > 0) {
 
     $row = mysqli_fetch_assoc($resultado);
+
+    $q = "UPDATE ".$db_table_name." SET edad = '".$subs_edad."'
+       , fecha_nacimiento = '".$subs_nacimiento."'
+       , nombre_mama = '".$subs_nombre_mama."'
+       , tel_mama = '".$subs_tel_mama."'
+       , instagram_mama = '".$subs_instagram_mama."'
+       , nombre_papa = '".$subs_nombre_papa."'
+       , tel_papa = '".$subs_tel_papa."'
+       , instagram_papa = '".$subs_instagram_papa."'
+       , tel_adulto = '".$subs_tel_adulto."'
+       , instagram_adulto = '".$subs_instagram_adulto."'
+       , updated_date = '".getActualTime()."'
+       WHERE dni = '".$subs_dni."'";
+      $retry_value = mysqli_query( $db_connection,$q);
+
+      if (!$retry_value) {
+          die('Error: ' . mysqli_error($db_connection));
+      }
+
     //Autorizados y salud
     $insert_value_info_complementaria = 'INSERT INTO `' . $db_name . '`.`' . $db_table_name_complementary . '` (
         `student_id`,
         `autorizado1_nombre`, `autorizado1_dni`, `autorizado1_parentesco`,
         `autorizado2_nombre`, `autorizado2_dni`, `autorizado2_parentesco`,
         `autorizado3_nombre`, `autorizado3_dni`, `autorizado3_parentesco`,
-        `salud`
+        `salud`, `sabe_nadar`, `deportes`
     ) VALUES (
         "' .  $row['id'] . '",
         "' . $subs_autorizado1_nombre . '", "' . $subs_autorizado1_dni . '", "' . $subs_autorizado1_parentesco . '",
         "' . $subs_autorizado2_nombre . '", "' . $subs_autorizado2_dni . '", "' . $subs_autorizado2_parentesco . '",
         "' . $subs_autorizado3_nombre . '", "' . $subs_autorizado3_dni . '", "' . $subs_autorizado3_parentesco . '",
-        "' . $subs_salud . '")';
+        "' . $subs_salud . '", "' . $subs_sabe_nadar . '", "' . $subs_deportes . '")';
 
 
     $retry_value_colonia = mysqli_query($db_connection, $insert_value_info_complementaria);
@@ -176,13 +200,13 @@ if (mysqli_num_rows($resultado) > 0) {
         `autorizado1_nombre`, `autorizado1_dni`, `autorizado1_parentesco`,
         `autorizado2_nombre`, `autorizado2_dni`, `autorizado2_parentesco`,
         `autorizado3_nombre`, `autorizado3_dni`, `autorizado3_parentesco`,
-        `salud`
+               `salud`, `sabe_nadar`, `deportes`
     ) VALUES (
         "' . $student_id . '",
         "' . $subs_autorizado1_nombre . '", "' . $subs_autorizado1_dni . '", "' . $subs_autorizado1_parentesco . '",
         "' . $subs_autorizado2_nombre . '", "' . $subs_autorizado2_dni . '", "' . $subs_autorizado2_parentesco . '",
         "' . $subs_autorizado3_nombre . '", "' . $subs_autorizado3_dni . '", "' . $subs_autorizado3_parentesco . '",
-        "' . $subs_salud . '")';
+           "' . $subs_salud . '", "' . $subs_sabe_nadar . '", "' . $subs_deportes . '")';
 
 
     $retry_value_colonia = mysqli_query($db_connection, $insert_value_info_complementaria);
@@ -210,7 +234,6 @@ if (mysqli_num_rows($resultado) > 0) {
 
     include "success_colonia.php";
 }
-
 
 mysqli_close($db_connection);
 mysqli_close($db_connection2);
