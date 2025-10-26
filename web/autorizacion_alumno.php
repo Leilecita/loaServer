@@ -286,8 +286,13 @@
             pdf.text(dniAcl,130,y+35,{maxWidth:70});
 
             const pdfBlob = pdf.output('blob');
+
+            // Crear URL y abrir en nueva pestaña
             const url = URL.createObjectURL(pdfBlob);
-            window.open(url, '_blank');
+            const win = window.open(url, '_blank');
+            if (!win) {
+                alert("Tu navegador bloqueó la apertura automática. Por favor, permite pop-ups o descarga el PDF manualmente.");
+            }
         }
     });
 </script>
