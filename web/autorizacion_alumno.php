@@ -38,13 +38,15 @@
             color: #093b5e;
         }
         canvas {
-            border:1px solid #000;
-            border-radius: 0.5rem;
+            border: 1px solid #dee2e6; /* borde gris claro como los inputs */
+            border-radius: 0.25rem;
             width: 100%;
             max-width: 600px;
             height: 150px;
             touch-action: none;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.075); /* sombra interna sutil */
         }
+
         .btn-block {
             width: 100%;
         }
@@ -61,6 +63,9 @@
         }
         textarea.form-control {
             resize: none;
+        }
+        br {
+            line-height: 0.5;  /* ajusta la separación vertical */
         }
     </style>
 </head>
@@ -79,7 +84,6 @@
                     </div>
                     <input type="text" id="nombreAlumno" name="nombreAlumno" class="form-control" required placeholder="Nombre del alumno">
                 </div>
-                <br>
                 <!-- DNI -->
                 <label for="dni">DNI</label>
                 <div class="input-group mb-2">
@@ -134,7 +138,6 @@
                 </div>
                 <textarea id="aclaracion" name="aclaracion" class="form-control" rows="1" placeholder="Ingrese aclaración aquí..." required></textarea>
             </div>
-            <br>
 
             <!-- DNI de quien firma -->
             <label for="dniAcl">DNI de quien firma</label>
