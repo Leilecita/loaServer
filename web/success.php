@@ -1,74 +1,115 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link href="css/estilos.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Suscripción completa - LOA</title>
 
+    <!-- Bootstrap 4 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Fuente -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(120deg, #0f4c75, #3282b8);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .front {
+            background-color: #ffffff;
+            color: #333;
+            border-radius: 1rem;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .logoloa {
+            display: block;
+            margin: 0 auto 20px;
+            width: 100px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #0f4c75;
+        }
+
+        .loa-text {
+            font-size: 1rem;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #0f4c75;
+            border-color: #0f4c75;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #3282b8;
+            border-color: #3282b8;
+        }
+
+        .card-footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #ddd;
+            border-radius: 0 0 1rem 1rem;
+            margin-top: 25px;
+            padding: 10px;
+        }
+
+        .fa-instagram {
+            color: #E1306C;
+            margin-right: 5px;
+        }
+
+        .fa-whatsapp {
+            color: #25D366;
+            margin-left: 5px;
+        }
+    </style>
 </head>
 
 <body>
-<div class="background" ></div>
-  <h2><em> </em></h2>
+<div class="front">
+    <img src="img/loa_logo_new.png" class="logoloa" alt="LOA Logo" />
 
-    <div class="col-sm-8 offset-sm-2 col-xs-10 offset-xs-1">
-        <div class="card text-center loa-card">
+    <h3>¡Suscripción completada!</h3>
 
-            <div class="card-header loa-header">
-                <?php if(isset($form['info']) && $form['info'] == "actualizada"){ ?>
-                Suscripción completa
-                <?php }else{ ?>
-                    Suscripción completa
-                <?php } ?>
+    <?php if(isset($form['info']) ){ ?>
+        <p class="loa-text">Gracias por completar la inscripción para el/la alumno/a:</p>
+        <h4 class="loa-text"><strong><?php echo ucfirst($form['name']) ?> <?php echo ucfirst($form['apellido']) ?></strong></h4>
+    <?php } ?>
+    <br>
+    <a href="index.php" class="btn btn-primary btn-block">Volver al inicio</a>
 
-            </div>
+    <br>
+    <p class="loa-text">
+        Sumate a nuestro grupo de
+        <a href="https://chat.whatsapp.com/TU_CODIGO_DE_INVITACION" target="_blank" title="Grupo de WhatsApp">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        para recibir la info de las clases de surf.
+    </p>
 
-            <div class="card-body">
-                <?php if($form['info'] == "actualizada"){ ?>
-                    <h5 class="card-title loa-text" > Ya existe un registro con el dni <?php echo $form['dni'] ?></h5>
-                    <p class="card-text loa-text"> <?php echo ucfirst( $form['name']) ?> <?php echo  ucfirst($form['apellido']) ?></p>
-                <?php }else{ ?>
-                    <h5 class="card-title loa-text" > <?php echo ucfirst( $form['name']) ?> <?php echo  ucfirst($form['apellido']) ?></h5>
-                   <!-- <p class="card-text loa-text"> <?php echo $form['dni'] ?></p> -->
-                <?php } ?>
-                <p class="card-text loa-text">
-
-                    Sumate a nuestro grupo de
-                     <a href="https://chat.whatsapp.com/TU_CODIGO_DE_INVITACION" title="Grupo de WhatsApp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>para recibir la info de las clases de surf
-                </p>
-            </div>
-            <div class="card-footer text-muted loa-header">
-              <!--  <p class="card-text loa-text">  <?php echo date('d-m-Y') ?></p>
-                <p class="card-text loa-text">  Seguinos en <a href="https://www.instagram.com/loa.surflife" title="Instagram" target="_blank">
-                        <i class="fab fa-instagram"></i> loa.surflife
-                    </a></p>-->
-
-                <p class="card-text loa-text">  Seguinos en <i class="fab fa-instagram"></i> loa.surflife
-                   </p>
-
-            </div>
-        </div>
-        <?php echo "" ?>
+    <div class="card-footer">
+        <p class="loa-text">Seguinos en <i class="fab fa-instagram"></i> loa.surflife</p>
+    </div>
+</div>
 </body>
 </html>
-
-<style>
-    .fa-instagram {
-        font-size: 20px;
-        margin-right: 3px;
-        margin-left: 3px;
-    }
-    .fa-whatsapp {
-       /* color: #25D366; */
-        margin-left: 3px;
-    }
-
-
-
-</style>
-
-

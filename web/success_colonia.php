@@ -79,22 +79,22 @@
 <body>
 <div class="front">
     <img src="img/loa_logo_new.png" class="logoloa" />
-    <h3>¡Suscripción completada!</h3>
-
-    <?php if(isset($form['info']) && $form['info'] == "actualizada"){ ?>
-        <p class="loa-text">Ya existe un registro con el DNI <strong><?php echo $form['dni'] ?></strong></p>
-        <p class="loa-text">Se actualizó la información para el/la alumno/a:</p>
-        <p class="loa-text"><strong><?php echo ucfirst($form['name']) ?> <?php echo ucfirst($form['apellido']) ?></strong></p>
-    <?php } else { ?>
-        <p class="loa-text">Gracias por completar la inscripción de:</p>
+    <h3>¡Suscripción completa!</h3>
+    <?php if(isset($form['info'])){ ?>
+        <p class="loa-text">Gracias por completar la inscripción para el/la alumno/a:</p>
         <h4 class="loa-text"><strong><?php echo ucfirst($form['name']) ?> <?php echo ucfirst($form['apellido']) ?></strong></h4>
     <?php } ?>
-
+    <br>
     <a href="datos_alumno_colonia.php" class="btn btn-primary btn-block">Volver al inicio</a>
-
     <div class="card-footer mt-3">
         <p class="loa-text">Seguinos en <i class="fab fa-instagram"></i> loa.surflife</p>
     </div>
 </div>
 </body>
 </html>
+<!--  <?php if(isset($form['info']) && $form['info'] == "actualizada"){ ?>
+        <p class="loa-text">Ya existe un registro con el DNI <strong><?php echo $form['dni'] ?></strong></p>
+        <p class="loa-text">Se actualizó la información para el/la alumno/a:</p>
+        <p class="loa-text"><strong><?php echo ucfirst($form['name']) ?> <?php echo ucfirst($form['apellido']) ?></strong></p>
+    <?php } else { ?>  <?php } ?>
+-->

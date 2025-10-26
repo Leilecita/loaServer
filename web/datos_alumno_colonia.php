@@ -111,6 +111,7 @@
     <div class="front col-md-8 offset-md-2">
         <form action="registro_colonia.php" method="POST">
             <img src="img/loa_logo_new.png" class="logoloa" />
+
             <h3>Datos del alumno</h3>
 
             <!-- Nombre -->
@@ -142,22 +143,7 @@
                     <input type="number" name="dni" class="form-control" placeholder="Número de documento" />
                 </div>
             </div>
-            <!-- <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="fa-solid fa-calendar-days"></i>
-                  </span>
-                    </div>
-                    <input type="date"
-                           class="form-control"
-                           id="fecha_nacimiento"
-                           name="fecha_nacimiento"
-                           required>
-                </div>
-            </div>
 
-            <input type="hidden" id="edad" name="edad">-->
             <!-- Fecha de nacimiento -->
             <div class="form-group">
                 <div class="form-row">
@@ -181,7 +167,7 @@
             </div>
 
 
-            <input type="hidden" name="edad" id="edad">
+                <input type="hidden" name="edad" id="edad">
 
             <!-- Fecha de nacimiento
             <label>Fecha de nacimiento</label>
@@ -286,7 +272,6 @@
             <hr>
 
 
-            <br>
             <!-- SALUD -->
             <h3 class="titulo-seccion">
                 <i class="fa-solid fa-notes-medical"></i>
@@ -296,7 +281,6 @@
     <textarea name="salud" class="form-control" rows="3"
               placeholder="Detalle aquí cualquier Alergia / Medicamento / Enfermedad / Lesión que sea importante detallar"></textarea>
             </div>
-            <br>
             <!-- ACTIVIDADES Y GUSTOS -->
             <h3 class="titulo-seccion">
                 <i class="fa-solid fa-person-running"></i>
@@ -304,7 +288,7 @@
             </h3>
             <div class="form-group">
     <textarea name="deportes" class="form-control" rows="2"
-              placeholder="Detalla brevemente gustos y/o actividades deportivas y artísticas"></textarea>
+              placeholder="Detalle brevemente gustos y/o actividades deportivas y artísticas"></textarea>
             </div>
 
             <!-- SABE NADAR -->
