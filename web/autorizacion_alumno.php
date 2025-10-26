@@ -161,13 +161,16 @@
 
 // Logo
         const imgLogo = new Image();
-        imgLogo.src = 'img/loa_logo_new.png'; // o la URL base64
+        imgLogo.src = 'img/loa_logo_new.png';
         imgLogo.onload = () => {
-            pdf.addImage(imgLogo,'PNG',150,15,40,20);
+            const logoWidth = 25; // ancho deseado en mm
+            const logoHeight = (imgLogo.height / imgLogo.width) * logoWidth; // altura proporcional
+            const xPos = 210 - logoWidth - 15; // margen derecho 15mm en A4 (210mm ancho)
+            const yPos = 15; // desde arriba
+            pdf.addImage(imgLogo, 'PNG', xPos, yPos, logoWidth, logoHeight);
 
             generarPDF();
         };
-
         function generarPDF(){
             const nombre = document.querySelector('input[name="nombreAlumno"]').value || "";
             const fecha = document.querySelector('input[name="fechaHoy"]').value || "";
@@ -177,7 +180,7 @@
             pdf.setFont('helvetica','bold');
             pdf.setFontSize(16);
             pdf.setTextColor(15,76,117);
-            pdf.text("Autorizaciones Escuela / Colonia LOA",105,45,{align:"center"});
+            pdf.text("Autorizaciones Escuela / Colonia LOA",105,35,{align:"center"});
 
             pdf.setFont('helvetica','normal');
             pdf.setFontSize(12);
@@ -218,7 +221,8 @@
             if(aclaracion){
                 pdf.setFont('helvetica','bold');
                 pdf.text("Aclaración: " ,130,y,{maxWidth:70});
-                pdf.text(   aclaracion,140,y+5,{maxWidth:70});
+                pdf.setFont('helvetica','normal');
+                pdf.text(   aclaracion,132,y+15,{maxWidth:70});
             }
 
             pdf.save("autorizaciones_LOA.pdf");
