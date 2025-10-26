@@ -8,10 +8,14 @@
     <!-- Bootstrap 4 -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         body {
             background: linear-gradient(120deg, #0f4c75, #3282b8);
             font-family: 'Montserrat', sans-serif;
+            color: #093b5e;
         }
         .front {
             background-color: #fff;
@@ -29,10 +33,6 @@
             text-align: center;
             margin-bottom: 30px;
         }
-        h2 {
-            margin-top: 25px;
-            margin-bottom: 10px;
-        }
         p {
             text-align: justify;
             color: #093b5e;
@@ -48,6 +48,20 @@
         .btn-block {
             width: 100%;
         }
+        label {
+            color: #0f4c75;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .input-group-text i {
+            color: #0f4c75;
+            font-size: 1rem;
+        }
+        .form-control {
+            padding-left: 12px;
+        }
+        textarea.form-control {
+            resize: none;
+        }
     </style>
 </head>
 <body>
@@ -57,10 +71,26 @@
             <img src="img/loa_logo_new.png" class="d-block mx-auto mb-3" width="100">
 
             <div class="mb-3">
-                <p><strong>Alumno/a:</strong> <input type="text" name="nombreAlumno" class="form-control" placeholder="Nombre del alumno"></p>
-                <p><strong>Fecha:</strong> <input type="text" name="fechaHoy" class="form-control" placeholder="DD/MM/AAAA"></p>
+                <!-- Alumno -->
+                <label for="nombreAlumno">Alumno/a</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                    </div>
+                    <input type="text" id="nombreAlumno" name="nombreAlumno" class="form-control" required placeholder="Nombre del alumno">
+                </div>
+                <br>
+                <!-- DNI -->
+                <label for="dni">DNI</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
+                    </div>
+                    <input type="number" id="dni" name="dni" class="form-control" required placeholder="Número de documento">
+                </div>
+                <br>
             </div>
-            <br>
+
             <h4>1. Autorización de uso de imagen</h4>
             <p>
                 Mi hijo/a podrá ser fotografiado/a o grabado/a durante su participación en la Escuela/Colonia LOA.
@@ -78,27 +108,50 @@
                 Por la presente dejo constancia que me hago responsable y autorizo a mi hijo/a a participar de la Colonia de Playa LOA, dejando sentado que está en buenas condiciones físicas y psíquicas para la práctica del deporte.
                 Entiendo y acepto que mi hijo/a practique todas las actividades deportivas y recreativas del cronograma, siendo que el surf y algunas actividades conllevan riesgos en su práctica.
             </p>
-
+            <br>
             <hr>
+            <br>
+
             <h4>Firma del padre/madre/tutor</h4>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="acepto" required>
+                <label class="form-check-label" for="acepto">Acepto todos los puntos detallados anteriormente</label>
+            </div>
+            <p style="font-size: 0.9rem;">(*) Si no está de acuerdo con alguno de estos puntos, comuníquese con nosotros.</p>
+            <br>
+
             <p>Por favor, firme aquí:</p>
             <canvas id="firmaCanvas" width="400" height="150"></canvas>
             <br>
             <button type="button" id="borrarFirma" class="btn btn-secondary btn-sm mt-2">Borrar firma</button>
             <br><br>
 
+            <!-- Aclaración -->
             <label for="aclaracion">Aclaración </label>
-            <textarea id="aclaracion" name="aclaracion" class="form-control" rows="1" placeholder="Ingrese aclaración aquí..."></textarea>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-pen"></i></span>
+                </div>
+                <textarea id="aclaracion" name="aclaracion" class="form-control" rows="1" placeholder="Ingrese aclaración aquí..." required></textarea>
+            </div>
+            <br>
+
+            <!-- DNI de quien firma -->
+            <label for="dniAcl">DNI de quien firma</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
+                </div>
+                <input type="text" id="dniAcl" name="dniAcl" class="form-control" placeholder="Ingrese DNI aquí..." required>
+            </div>
             <br><br>
 
-            <button type="submit" class="btn btn-primary btn-block mt-3">Generar PDF</button>
+            <button type="submit" class="btn btn-primary btn-block mt-3">Generar PDF a enviar</button>
         </form>
     </div>
 </div>
 
-<!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 <script>
     const canvas = document.getElementById("firmaCanvas");
     const ctx = canvas.getContext("2d");
@@ -120,12 +173,9 @@
 
     function dibujar(e) {
         if(!dibujando) return;
-
-        // Obtener tamaño real y tamaño mostrado
         const rect = canvas.getBoundingClientRect();
         const scaleX = canvas.width / rect.width;
         const scaleY = canvas.height / rect.height;
-
         let x, y;
         if (e.touches) {
             x = (e.touches[0].clientX - rect.left) * scaleX;
@@ -134,7 +184,6 @@
             x = (e.offsetX !== undefined ? e.offsetX : e.layerX) * scaleX;
             y = (e.offsetY !== undefined ? e.offsetY : e.layerY) * scaleY;
         }
-
         ctx.lineWidth = 2;
         ctx.lineCap = "round";
         ctx.strokeStyle = "#000";
@@ -144,7 +193,6 @@
         ctx.moveTo(x, y);
     }
 
-
     document.getElementById("borrarFirma").addEventListener("click", () => {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.beginPath();
@@ -152,50 +200,61 @@
 
     document.getElementById("formulario").addEventListener("submit", (e) => {
         e.preventDefault();
+        if(!document.getElementById("acepto").checked){
+            alert("Debes aceptar todos los puntos para generar el PDF.");
+            return;
+        }
+
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
-
-// Fondo "tarjeta"
         pdf.setFillColor(255,255,255);
         pdf.roundedRect(10,10,190,277,5,5,'F');
 
-// Logo
         const imgLogo = new Image();
         imgLogo.src = 'img/loa_logo_new.png';
         imgLogo.onload = () => {
-            const logoWidth = 25; // ancho deseado en mm
-            const logoHeight = (imgLogo.height / imgLogo.width) * logoWidth; // altura proporcional
-            const xPos = 210 - logoWidth - 15; // margen derecho 15mm en A4 (210mm ancho)
-            const yPos = 15; // desde arriba
-            pdf.addImage(imgLogo, 'PNG', xPos, yPos, logoWidth, logoHeight);
-
+            const logoWidth = 25;
+            const logoHeight = (imgLogo.height / imgLogo.width) * logoWidth;
+            pdf.addImage(imgLogo, 'PNG', 210 - logoWidth - 15, 15, logoWidth, logoHeight);
             generarPDF();
         };
+
         function generarPDF(){
             const nombre = document.querySelector('input[name="nombreAlumno"]').value || "";
-            const fecha = document.querySelector('input[name="fechaHoy"]').value || "";
+            const dniAlumno = document.querySelector('input[name="dni"]').value || "";
             const aclaracion = document.getElementById("aclaracion").value || "";
+            const dniAcl = document.getElementById("dniAcl").value || "";
+            const fechaHoy = new Date();
+            const fechaStr = fechaHoy.toLocaleDateString();
             const imgData = canvas.toDataURL("image/png");
 
             pdf.setFont('helvetica','bold');
             pdf.setFontSize(16);
             pdf.setTextColor(15,76,117);
-            pdf.text("Autorizaciones Escuela / Colonia LOA",105,35,{align:"center"});
-
-            pdf.setFont('helvetica','normal');
+            pdf.text("Autorizaciones Colonia LOA",105,30,{align:"center"});
+            // Alumno
+            pdf.setFont('helvetica','bold');
             pdf.setFontSize(12);
-            pdf.setTextColor(0,0,0);
-            pdf.text(`Alumno/a: ${nombre}`,20,65);
-            pdf.text(`Fecha: ${fecha}`,20,75);
+            pdf.text("Alumno/a:", 20, 55);
+            pdf.setFont('helvetica','normal');
+            pdf.text(nombre, 50, 55);  // ajusta la posición X para que quede después del título
 
-            let y = 90;
+            pdf.setFont('helvetica','bold');
+            pdf.text("DNI:", 20, 65);
+            pdf.setFont('helvetica','normal');
+            pdf.text(dniAlumno, 50, 65);
 
+            pdf.setFont('helvetica','bold');
+            pdf.text("Fecha:", 20, 75);
+            pdf.setFont('helvetica','normal');
+            pdf.text(fechaStr, 50, 75);
+
+            let y = 100;
             const textos = [
                 { titulo:"1. Autorización de uso de imagen", texto:"Mi hijo/a podrá ser fotografiado/a o grabado/a durante su participación en la Escuela/Colonia LOA. Autorizo que estas imágenes se utilicen con fines educativos, informativos y de difusión de las actividades, siempre cuidando su integridad y respeto." },
                 { titulo:"2. Autorización asistencia para el cambiado en playa", texto:"Entiendo que durante las actividades en la playa, mi hijo/a necesitará asistencia para cambiarse de ropa. Autorizo y confío en el personal de la Escuela/Colonia LOA para ayudarlo/a de manera respetuosa y segura, cuidando su privacidad en todo momento." },
                 { titulo:"3. Autorización participación en actividades deportivas", texto:"Por la presente dejo constancia que me hago responsable y autorizo a mi hijo/a a participar de la Colonia de Playa LOA, dejando sentado que está en buenas condiciones físicas y psíquicas para la práctica del deporte. Entiendo y acepto que mi hijo/a practique todas las actividades deportivas y recreativas del cronograma, siendo que el surf y algunas actividades conllevan riesgos en su práctica." }
             ];
-
             textos.forEach(item => {
                 pdf.setFont('helvetica','bold');
                 pdf.setFontSize(14);
@@ -209,25 +268,24 @@
                 y += splitText.length*6 + 10;
             });
 
-            // Firma y aclaración
-            pdf.setFontSize(12);
             pdf.setFont('helvetica','bold');
             pdf.text("Firma del padre/madre/tutor:",20,y);
-
-            // Insertar firma a la izquierda
             pdf.addImage(imgData,'PNG',20,y+5,100,50);
 
-            // Aclaración a la derecha de la firma
-            if(aclaracion){
-                pdf.setFont('helvetica','bold');
-                pdf.text("Aclaración: " ,130,y,{maxWidth:70});
-                pdf.setFont('helvetica','normal');
-                pdf.text(   aclaracion,132,y+15,{maxWidth:70});
-            }
+            pdf.setFont('helvetica','bold');
+            pdf.text("Aclaración:",130,y);
+            pdf.setFont('helvetica','normal');
+            pdf.text(aclaracion,130,y+10,{maxWidth:70});
 
-            pdf.save("autorizaciones_LOA.pdf");
+            pdf.setFont('helvetica','bold');
+            pdf.text("DNI:",130,y+25);
+            pdf.setFont('helvetica','normal');
+            pdf.text(dniAcl,130,y+35,{maxWidth:70});
+
+            const pdfBlob = pdf.output('blob');
+            const url = URL.createObjectURL(pdfBlob);
+            window.open(url, '_blank');
         }
-
     });
 </script>
 </body>
