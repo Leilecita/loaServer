@@ -69,15 +69,20 @@ body {
                 <br>
             </div>
 
-            <h4>1. Autorización de uso de imagen</h4>
+            <h4>Autorización de participación en actividades deportivas</h4>
+            <p>Por la presente dejo constancia que me hago responsable y autorizo a mi hijo/a a participar de la Colonia de Playa LOA, dejando sentado que está en buenas condiciones físicas y psíquicas para la práctica del deporte. Entiendo y acepto que mi hijo/a practique todas las actividades deportivas y recreativas del cronograma, siendo que el surf y algunas actividades conllevan riesgos en su práctica.</p>
+            <br>
+
+            <h4>Autorización de uso de imagen</h4>
             <p>Mi hijo/a podrá ser fotografiado/a o grabado/a durante su participación en la Escuela/Colonia LOA. Autorizo que estas imágenes se utilicen con fines educativos, informativos y de difusión de las actividades, siempre cuidando su integridad y respeto.</p>
             <br>
-            <h4>2. Autorización asistencia para el cambiado en playa</h4>
+
+           <!-- <h4>2. Autorización asistencia para el cambiado en playa</h4>
             <p>Entiendo que durante las actividades en la playa, mi hijo/a necesitará asistencia para cambiarse de ropa. Autorizo y confío en el personal de la Escuela/Colonia LOA para ayudarlo/a de manera respetuosa y segura, cuidando su privacidad en todo momento.</p>
-            <br>
-            <h4>3. Autorización participación en actividades deportivas</h4>
-            <p>Por la presente dejo constancia que me hago responsable y autorizo a mi hijo/a a participar de la Colonia de Playa LOA, dejando sentado que está en buenas condiciones físicas y psíquicas para la práctica del deporte. Entiendo y acepto que mi hijo/a practique todas las actividades deportivas y recreativas del cronograma, siendo que el surf y algunas actividades conllevan riesgos en su práctica.</p>
-            <br><hr><br>
+            <br> -->
+
+            <p style="margin-bottom:2rem;">Nosotros por nuestra parte contamos con seguros de responsibilidad civil y cada alumno cuenta con su seguro de AP deportivo (accidente personal deportivo) ya diseñado especialmente para nuestro formato.</p>
+            <hr><br>
 
             <h4>Firma del padre/madre/tutor</h4>
             <div class="form-group form-check">
@@ -213,10 +218,20 @@ body {
 
             let y = 100;
             const textos = [
-                { titulo:"1. Autorización de uso de imagen", texto:"Mi hijo/a podrá ser fotografiado/a o grabado/a durante su participación en la Escuela/Colonia LOA. Autorizo que estas imágenes se utilicen con fines educativos, informativos y de difusión de las actividades, siempre cuidando su integridad y respeto." },
-                { titulo:"2. Autorización asistencia para el cambiado en playa", texto:"Entiendo que durante las actividades en la playa, mi hijo/a necesitará asistencia para cambiarse de ropa. Autorizo y confío en el personal de la Escuela/Colonia LOA para ayudarlo/a de manera respetuosa y segura, cuidando su privacidad en todo momento." },
-                { titulo:"3. Autorización participación en actividades deportivas", texto:"Por la presente dejo constancia que me hago responsable y autorizo a mi hijo/a a participar de la Colonia de Playa LOA, dejando sentado que está en buenas condiciones físicas y psíquicas para la práctica del deporte. Entiendo y acepto que mi hijo/a practique todas las actividades deportivas y recreativas del cronograma, siendo que el surf y algunas actividades conllevan riesgos en su práctica." }
+                {
+                    titulo: "Autorización de participación en actividades deportivas",
+                    texto: "Por la presente dejo constancia que me hago responsable y autorizo a mi hijo/a a participar de la Colonia de Playa LOA, dejando sentado que está en buenas condiciones físicas y psíquicas para la práctica del deporte. Entiendo y acepto que mi hijo/a practique todas las actividades deportivas y recreativas del cronograma, siendo que el surf y algunas actividades conllevan riesgos en su práctica."
+                },
+                {
+                    titulo: "Autorización de uso de imagen",
+                    texto: "Mi hijo/a podrá ser fotografiado/a o grabado/a durante su participación en la Escuela/Colonia LOA. Autorizo que estas imágenes se utilicen con fines educativos, informativos y de difusión de las actividades, siempre cuidando su integridad y respeto."
+                },
+                {
+                    titulo: "Información sobre seguros",
+                    texto: "Nosotros por nuestra parte contamos con seguros de responsabilidad civil y cada alumno cuenta con su seguro de AP deportivo (accidente personal deportivo) ya diseñado especialmente para nuestro formato."
+                }
             ];
+
             textos.forEach(item => {
                 pdf.setFont('helvetica','bold');
                 pdf.setFontSize(14);
