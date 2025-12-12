@@ -1,3 +1,4 @@
+<?php include 'proteger_pagina.php'; ?>
 <!doctype html>
 <html>
 <head>
