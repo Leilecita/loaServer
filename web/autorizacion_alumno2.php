@@ -194,7 +194,8 @@ body {
             const aclaracion = document.getElementById("aclaracion").value || "";
             const dniAcl = document.getElementById("dniAcl").value || "";
             const fechaStr = new Date().toLocaleDateString();
-            const imgData = canvas.toDataURL("image/png");
+           // const imgData = canvas.toDataURL("image/png");
+            const imgData = canvas.toDataURL("image/jpeg", 0.6);
 
             pdf.setFont('helvetica','bold');
             pdf.setFontSize(16);
@@ -248,7 +249,8 @@ body {
 
             pdf.setFont('helvetica','bold');
             pdf.text("Firma del padre/madre/tutor:",20,y);
-            pdf.addImage(imgData,'PNG',20,y+5,100,50);
+           // pdf.addImage(imgData,'PNG',20,y+5,100,50);
+            pdf.addImage(imgData,'JPEG',20,y+5,100,50);
 
             pdf.setFont('helvetica','bold');
             pdf.text("Aclaración:",130,y);
@@ -262,6 +264,39 @@ body {
 
             const pdfBlob = pdf.output('blob');
             const url = URL.createObjectURL(pdfBlob);
+
+
+            // para guardar
+
+           // const firmaBase64 = canvas.toDataURL("image/png");
+            const firmaBase64 = canvas.toDataURL("image/jpeg", 0.6);
+
+            const pdfBase64 = pdf.output("datauristring").split(',')[1];
+
+
+            const formData = new FormData();
+            formData.append("nombreAlumno", nombre);
+            formData.append("dni", dniAlumno);
+            formData.append("aclaracion", aclaracion);
+            formData.append("dniAcl", dniAcl);
+            formData.append("firma_base64", firmaBase64);
+            formData.append("pdf_base64", pdfBase64);
+
+            fetch("guardar_autorizacion.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.text())
+                .then(resp => {
+                    if (resp === "OK") {
+                        console.log("Autorización guardada");
+                    } else {
+                        alert("Error al guardar autorización");
+                    }
+                })
+                .catch(() => alert("Error de conexión"));
+
+            ////
 
             // Simula bloqueo de ventana para pruebas
             const simulateTest = false;
