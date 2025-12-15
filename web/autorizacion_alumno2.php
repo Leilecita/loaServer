@@ -123,6 +123,8 @@ body {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
+    let enviando = false;
+
     const canvas = document.getElementById("firmaCanvas");
     const ctx = canvas.getContext("2d");
     let dibujando = false;
@@ -169,8 +171,13 @@ body {
 
     document.getElementById("formulario").addEventListener("submit", async (e) => {
                     e.preventDefault();
+
+                    if (enviando) return;
+                    enviando = true;
+
                     if(!document.getElementById("acepto").checked){
                         alert("Debes aceptar todos los puntos para generar el PDF.");
+                        enviando = false;
                         return;
                     }
 
@@ -289,12 +296,17 @@ body {
                 .then(res => res.text())
                 .then(resp => {
                     if (resp === "OK") {
-                        console.log("Autorización guardada");
+                        alert("Autorización guardada correctamente");
+                        resetFormulario();   // ✅ ACA
                     } else {
+                        enviando = false;
                         alert("Error al guardar autorización");
                     }
                 })
-                .catch(() => alert("Error de conexión"));
+                .catch(() => {
+                    enviando = false;
+                    alert("Error de conexión");
+                });
 
             ////
 
@@ -327,6 +339,19 @@ body {
             }
         }
     });
+
+    function resetFormulario() {
+        // Reset inputs del form
+        document.getElementById("formulario").reset();
+
+        // Limpiar firma
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+
+        // Volver a permitir envíos
+        enviando = false;
+    }
+
 </script>
 </body>
 </html>
