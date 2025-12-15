@@ -1,9 +1,11 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    exit('Método no permitido');
+    http_response_code(204); // No Content
+    exit;
 }
-
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', '/var/log/apache2/error.log');
 $required = [
     'nombreAlumno',
     'dni',
