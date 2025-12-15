@@ -1,4 +1,24 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    exit('Método no permitido');
+}
+
+$required = [
+    'nombreAlumno',
+    'dni',
+    'aclaracion',
+    'dniAcl',
+    'firma_base64',
+    'pdf_base64'
+];
+
+foreach ($required as $field) {
+    if (!isset($_POST[$field]) || $_POST[$field] === '') {
+        http_response_code(400);
+        exit("Falta campo: $field");
+    }
+}
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
