@@ -194,8 +194,8 @@ body {
             const aclaracion = document.getElementById("aclaracion").value || "";
             const dniAcl = document.getElementById("dniAcl").value || "";
             const fechaStr = new Date().toLocaleDateString();
-           // const imgData = canvas.toDataURL("image/png");
-            const imgData = canvas.toDataURL("image/jpeg", 0.6);
+            const imgData = canvas.toDataURL("image/png");
+           // const imgData = canvas.toDataURL("image/jpeg", 0.6);
 
             pdf.setFont('helvetica','bold');
             pdf.setFontSize(16);
@@ -268,8 +268,8 @@ body {
 
             // para guardar
 
-           // const firmaBase64 = canvas.toDataURL("image/png");
-            const firmaBase64 = canvas.toDataURL("image/jpeg", 0.6);
+            const firmaBase64 = canvas.toDataURL("image/png");
+           // const firmaBase64 = canvas.toDataURL("image/jpeg", 0.6);
 
             const pdfBase64 = pdf.output("datauristring").split(',')[1];
 
