@@ -33,6 +33,11 @@ $db = mysqli_connect(
     $DBCONFIG_WEB_ALUMNOS['DATABASE']
 );
 
+$res = $db->query("SELECT DATABASE() AS db, @@hostname AS host, CURRENT_USER() AS user");
+$row = $res->fetch_assoc();
+error_log("DB REAL: {$row['db']} | HOST MYSQL: {$row['host']} | USER: {$row['user']}");
+
+
 // datos
 $nombre = $_POST['nombreAlumno'];
 $dni = preg_replace('/\D/', '', $_POST['dni']);
@@ -56,7 +61,6 @@ $pdfBin = base64_decode($pdfBase64);
 $pdfName = 'autorizacion_'.$dni.'_'.time().'.pdf';
 file_put_contents(__DIR__."/autorizaciones/pdfs/$pdfName", $pdfBin);
 
-error_log("DB USADA: " . $DBCONFIG_WEB_ALUMNOS['DATABASE']);
 
 // ---------- BD ----------
 // ---------- BUSCAR STUDENT_ID POR DNI ----------
