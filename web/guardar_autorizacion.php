@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', '/var/log/apache2/error.log');
+error_reporting(E_ALL);
 $required = [
     'nombreAlumno',
     'dni',
@@ -21,9 +22,7 @@ foreach ($required as $field) {
         exit("Falta campo: $field");
     }
 }
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 include __DIR__ . '/../config/config.php';
 global $DBCONFIG_WEB_ALUMNOS;
 global $DBCONFIG;
@@ -36,10 +35,9 @@ $db = mysqli_connect(
 
 // datos
 $nombre = $_POST['nombreAlumno'];
-$dni = $_POST['dni'];
+$dni = preg_replace('/\D/', '', $_POST['dni']);
 $aclaracion = $_POST['aclaracion'];
 $dniAcl = $_POST['dniAcl'];
-var_dump($dni);
 
 $firmaBase64 = $_POST['firma_base64'];
 $pdfBase64   = $_POST['pdf_base64'];
@@ -59,7 +57,6 @@ $pdfName = 'autorizacion_'.$dni.'_'.time().'.pdf';
 file_put_contents(__DIR__."/autorizaciones/pdfs/$pdfName", $pdfBin);
 
 
-var_dump($dni, strlen($dni));
 // ---------- BD ----------
 // ---------- BUSCAR STUDENT_ID POR DNI ----------
 $stmt = $db->prepare("SELECT id FROM students WHERE dni = ?");
