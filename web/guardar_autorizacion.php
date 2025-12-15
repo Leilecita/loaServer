@@ -17,6 +17,7 @@ $nombre = $_POST['nombreAlumno'];
 $dni = $_POST['dni'];
 $aclaracion = $_POST['aclaracion'];
 $dniAcl = $_POST['dniAcl'];
+var_dump($dni);
 
 $firmaBase64 = $_POST['firma_base64'];
 $pdfBase64   = $_POST['pdf_base64'];
@@ -36,14 +37,13 @@ $pdfName = 'autorizacion_'.$dni.'_'.time().'.pdf';
 file_put_contents(__DIR__."/autorizaciones/pdfs/$pdfName", $pdfBin);
 
 
-
+var_dump($dni, strlen($dni));
 // ---------- BD ----------
 // ---------- BUSCAR STUDENT_ID POR DNI ----------
 $stmt = $db->prepare("SELECT id FROM students WHERE dni = ?");
 $stmt->bind_param("s", $dni);
 $stmt->execute();
 $result = $stmt->get_result();
-
 if ($result->num_rows === 0) {
     echo "Alumno no encontrado";
     exit;
@@ -71,5 +71,7 @@ $stmt->bind_param(
 );
 
 $stmt->execute();
-
+if ($stmt->affected_rows === 0) {
+    error_log("No se insertó autorización");
+}
 echo "OK";
