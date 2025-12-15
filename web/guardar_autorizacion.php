@@ -56,6 +56,7 @@ $pdfBin = base64_decode($pdfBase64);
 $pdfName = 'autorizacion_'.$dni.'_'.time().'.pdf';
 file_put_contents(__DIR__."/autorizaciones/pdfs/$pdfName", $pdfBin);
 
+error_log("DB USADA: " . $DBCONFIG_WEB_ALUMNOS['DATABASE']);
 
 // ---------- BD ----------
 // ---------- BUSCAR STUDENT_ID POR DNI ----------
