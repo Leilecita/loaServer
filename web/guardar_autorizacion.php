@@ -95,7 +95,11 @@ $stmt->bind_param(
 );
 
 $stmt->execute();
-if ($stmt->affected_rows === 0) {
-    error_log("No se insertó autorización");
+if (!$stmt->execute()) {
+    error_log("ERROR INSERT AUTORIZACION: " . $stmt->error);
+    http_response_code(500);
+    exit("Error SQL");
 }
+
+
 echo "OK";
