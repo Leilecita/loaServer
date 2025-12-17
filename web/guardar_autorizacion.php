@@ -69,7 +69,10 @@ $stmt->bind_param("s", $dni);
 $stmt->execute();
 $result = $stmt->get_result();
 if ($result->num_rows === 0) {
-    echo "Alumno no encontrado";
+    echo json_encode([
+        'status' => 'dni_not_found',
+        'message' => 'El DNI del alumno no existe en el sistema'
+    ]);
     exit;
 }
 
@@ -94,12 +97,19 @@ $stmt->bind_param(
     $pdfName
 );
 
-$stmt->execute();
-if (!$stmt->execute()) {
+$ok = $stmt->execute();
+
+
+if (!$ok) {
     error_log("ERROR INSERT AUTORIZACION: " . $stmt->error);
-    http_response_code(500);
-    exit("Error SQL");
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Error al guardar la autorización'
+    ]);
+    exit;
 }
 
 
-echo "OK";
+echo json_encode([
+    'status' => 'ok'
+]);

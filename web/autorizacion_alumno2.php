@@ -65,7 +65,9 @@ body {
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
                     </div>
-                    <input type="number" id="dni" name="dni" class="form-control" required placeholder="Número de documento">
+                    <input type="text" id="dni" name="dni" class="form-control"  inputmode="numeric"
+                           pattern="[0-9]*"
+                           maxlength="8" required placeholder="Número de documento">
                 </div>
                 <br>
             </div>
@@ -112,7 +114,9 @@ body {
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
                 </div>
-                <input type="text" id="dniAcl" name="dniAcl" class="form-control" placeholder="Ingrese DNI aquí..." required>
+                <input type="text" id="dniAcl" name="dniAcl" class="form-control" placeholder="Ingrese DNI aquí..." required  inputmode="numeric"
+                       pattern="[0-9]*"
+                       maxlength="8">
             </div>
             <br><br>
 
@@ -136,9 +140,9 @@ body {
     canvas.addEventListener("touchstart", (e) => { dibujando = true; e.preventDefault(); });
     canvas.addEventListener("touchend", (e) => { dibujando = false; ctx.beginPath(); e.preventDefault(); });
     canvas.addEventListener("touchmove", (e) => {
-                    const rect = canvas.getBoundingClientRect();
-                    const touch = e.touches[0];
-                    dibujar({offsetX: touch.clientX - rect.left, offsetY: touch.clientY - rect.top});
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        dibujar({offsetX: touch.clientX - rect.left, offsetY: touch.clientY - rect.top});
         e.preventDefault();
     });
 
@@ -165,23 +169,34 @@ body {
     }
 
     document.getElementById("borrarFirma").addEventListener("click", () => {
-                    ctx.clearRect(0,0,canvas.width,canvas.height);
-                    ctx.beginPath();
-                });
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.beginPath();
+    });
 
     document.getElementById("formulario").addEventListener("submit", async (e) => {
-                    e.preventDefault();
+        e.preventDefault();
 
-                    if (enviando) return;
-                    enviando = true;
+        if (!dniValido) {
+            alert("❌ Verificá el DNI del alumno antes de continuar");
+            enviando = false;
+            return;
+        }
 
-                    if(!document.getElementById("acepto").checked){
-                        alert("Debes aceptar todos los puntos para generar el PDF.");
-                        enviando = false;
-                        return;
-                    }
+        if (enviando) return;
+        enviando = true;
 
-                    const { jsPDF } = window.jspdf;
+        if(!document.getElementById("acepto").checked){
+            alert("Debes aceptar todos los puntos para generar el PDF.");
+            enviando = false;
+            return;
+        }
+
+
+        // nuevo
+
+        //
+
+        const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
         pdf.setFillColor(255,255,255);
         pdf.roundedRect(10,10,190,277,5,5,'F');
@@ -189,11 +204,11 @@ body {
         const imgLogo = new Image();
         imgLogo.src = 'img/loa_logo_new.png';
         imgLogo.onload = () => {
-                        const logoWidth = 25;
-                        const logoHeight = (imgLogo.height / imgLogo.width) * logoWidth;
-                        pdf.addImage(imgLogo, 'PNG', 210 - logoWidth - 15, 15, logoWidth, logoHeight);
-                        generarPDF();
-                    };
+            const logoWidth = 25;
+            const logoHeight = (imgLogo.height / imgLogo.width) * logoWidth;
+            pdf.addImage(imgLogo, 'PNG', 210 - logoWidth - 15, 15, logoWidth, logoHeight);
+            generarPDF();
+        };
 
         function generarPDF(){
             const nombre = document.querySelector('input[name="nombreAlumno"]').value || "";
@@ -225,7 +240,7 @@ body {
             pdf.setFont('helvetica','normal');
             pdf.text(fechaStr, 50, 75);
 
-            let y = 100;
+            let y = 96;
             const textos = [
                 {
                     titulo: "Autorización de participación en actividades deportivas",
@@ -272,7 +287,6 @@ body {
             const pdfBlob = pdf.output('blob');
             const url = URL.createObjectURL(pdfBlob);
 
-
             // para guardar
 
             const firmaBase64 = canvas.toDataURL("image/png");
@@ -293,20 +307,22 @@ body {
                 method: "POST",
                 body: formData
             })
-                .then(res => res.text())
-                .then(resp => {
-                    if (resp === "OK") {
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'ok') {
                         alert("Autorización guardada correctamente");
-                        resetFormulario();   // ✅ ACA
-                    } else {
+                        resetFormulario();
+                    }
+                    else if (data.status === 'dni_not_found') {
                         enviando = false;
-                        alert("Error al guardar autorización");
+                        alert("❌ El DNI del alumno no existe en el sistema");
+                    }
+                    else {
+                        enviando = false;
+                        alert(data.message || "Error al guardar la autorización");
                     }
                 })
-                .catch(() => {
-                    enviando = false;
-                    alert("Error de conexión");
-                });
+
 
             ////
 
@@ -326,7 +342,7 @@ body {
                     alert("Tu navegador bloqueó la apertura automática. Descarga iniciada.");
                     descargarPDF(url);
                 }
-                }
+            }
 
             function descargarPDF(url) {
                 const a = document.createElement('a');
@@ -351,6 +367,60 @@ body {
         // Volver a permitir envíos
         enviando = false;
     }
+
+    let dniValido = false;
+    const dniInput = document.getElementById("dni");
+
+    dniInput.addEventListener("change", validarDNI);
+    dniInput.addEventListener("keyup", () => {
+        if (dniInput.value.length >= 7) {
+            validarDNI();
+        }
+    });
+
+    function validarDNI() {
+        const dni = dniInput.value.trim();
+
+        if (dni.length < 7) {
+            dniValido = false;
+            return;
+        }
+
+        fetch("validar_dni.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "dni=" + encodeURIComponent(dni)
+        })
+            .then(res => res.text())
+            .then(text => {
+                console.log("RESPUESTA DNI:", text);
+
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    alert("⚠️ Error del servidor al validar DNI");
+                    dniValido = false;
+                    return;
+                }
+
+                if (data.status === "dni_not_found") {
+                    dniValido = false;
+                   // alert("❌ El DNI del alumno no existe en el sistema");
+                    dniInput.focus();
+                } else if (data.status === "ok") {
+                    dniValido = true;
+                }
+            })
+            .catch(() => {
+                dniValido = false;
+                alert("❌ Error de conexión al validar DNI");
+            });
+    }
+
+
 
 </script>
 </body>
