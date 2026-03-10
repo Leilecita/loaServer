@@ -242,7 +242,12 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block mt-3">Suscribirse</button>
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+            <div class="g-recaptcha" data-sitekey="6LfhNYYsAAAAAJxBncKDeqrm0Dl8cWGaUWgZdY6Q"></div>
+            <br>
+
+            <button type="submit" class="btn btn-primary btn-block mt-3" onclick="return validarCaptcha()">Suscribirse</button>
         </form>
     </div>
 </div>
@@ -274,6 +279,18 @@
     ["dia", "mes", "anio"].forEach(id => {
         document.getElementById(id).addEventListener("input", calcularEdad);
     });
+
+    function validarCaptcha() {
+
+        var response = grecaptcha.getResponse();
+
+        if(response.length === 0) {
+            alert("Por favor completá el captcha.");
+            return false;
+        }
+
+        return true;
+    }
 </script>
 </body>
 </html>

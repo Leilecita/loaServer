@@ -3,6 +3,25 @@
 include __DIR__ . '/../config/config.php';
 require __DIR__ . '/../libs/dbhelper.php';
 
+//recaptcha
+if (!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
+    die("Debes completar el captcha");
+}
+$secret = "6LfhNYYsAAAAAPsmxSdjvh-fAo4gg2pioVh-f_GS";
+$recaptcha = $_POST['g-recaptcha-response'];
+
+$response = file_get_contents(
+    "https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$recaptcha
+);
+
+$responseKeys = json_decode($response, true);
+
+if(!$responseKeys["success"]) {
+    die("Captcha inválido");
+}
+
+
+//
 
 global $DBCONFIG_WEB_ALUMNOS;
 global $DBCONFIG;
