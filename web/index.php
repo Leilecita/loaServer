@@ -1,4 +1,7 @@
 <?php
+
+global $RECAPTCHA;
+include __DIR__ . '/../config/config.php';
 ?>
 <!doctype html>
 <html lang="es">
@@ -244,7 +247,7 @@
 
             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-            <div class="g-recaptcha" data-sitekey="6LfhNYYsAAAAAJxBncKDeqrm0Dl8cWGaUWgZdY6Q"></div>
+            <div class="g-recaptcha" data-sitekey="<?php echo $RECAPTCHA['SITE_KEY']; ?>"></div>
             <br>
 
             <button type="submit" class="btn btn-primary btn-block mt-3" onclick="return validarCaptcha()">Suscribirse</button>

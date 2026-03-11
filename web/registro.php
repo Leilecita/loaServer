@@ -1,13 +1,15 @@
 <?php
 
+global $RECAPTCHA;
 include __DIR__ . '/../config/config.php';
 require __DIR__ . '/../libs/dbhelper.php';
 
 //recaptcha
+
 if (!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
     die("Debes completar el captcha");
 }
-$secret = "6LfhNYYsAAAAAPsmxSdjvh-fAo4gg2pioVh-f_GS";
+$secret = $RECAPTCHA['SECRET'];;
 $recaptcha = $_POST['g-recaptcha-response'];
 
 $response = file_get_contents(
