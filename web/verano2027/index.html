@@ -521,21 +521,6 @@ body{overflow-x:hidden}.menu-toggle{display:none;border:0;background:transparent
   font-weight:600 !important;
 }
 
-/* Compatibilidad del carrusel de Actividades: scroll/drag natural */
-#actividades .activities-gallery-slider{
-  overflow-x:auto !important;
-  overflow-y:hidden !important;
-  transform:none !important;
-  transition:none !important;
-  scroll-behavior:auto !important;
-  -webkit-overflow-scrolling:touch;
-  touch-action:pan-x pan-y;
-  scrollbar-width:none;
-  cursor:grab;
-}
-#actividades .activities-gallery-slider::-webkit-scrollbar{display:none;}
-
-
 /* =========================================================
    CSS FASE 1 — BASE + HEADER + HERO + ANCHO GENERAL
    Consolidación de reglas ya aprobadas visualmente.
@@ -970,7 +955,7 @@ nav .menu{
 /* Viewport del carrusel */
 #loa .values-slider,
 #actividades .values-slider,
-#actividades .activities-gallery-slider{
+#actividades .values-slider{
   width:100%;
   max-width:100%;
   margin-left:0;
@@ -989,12 +974,12 @@ nav .menu{
 }
 #loa .values-slider::-webkit-scrollbar,
 #actividades .values-slider::-webkit-scrollbar,
-#actividades .activities-gallery-slider::-webkit-scrollbar{
+#actividades .values-slider::-webkit-scrollbar{
   display:none;
 }
 #loa .values-slider.is-dragging,
 #actividades .values-slider.is-dragging,
-#actividades .activities-gallery-slider.is-dragging{
+#actividades .values-slider.is-dragging{
   cursor:grabbing;
 }
 #loa .values-slider.is-dragging img,
@@ -1004,7 +989,7 @@ nav .menu{
 
 /* Track movido por el único motor JS a 35 px/s */
 #loa .values-track,
-#actividades .activities-values-track,
+#actividades .values-track,
 #actividades .values-track{
   display:flex;
   gap:18px;
@@ -1041,7 +1026,7 @@ nav .menu{
 
 /* Controles: debajo y alineados a la derecha */
 #loa .loa-slider-controls,
-#actividades .slider-controls{
+#actividades .loa-slider-controls{
   position:static;
   display:flex;
   justify-content:flex-end;
@@ -1050,7 +1035,7 @@ nav .menu{
   transform:none;
 }
 #loa .loa-slider-controls button,
-#actividades .slider-controls button{
+#actividades .loa-slider-controls button{
   width:38px;
   height:38px;
   border-radius:50%;
@@ -1067,12 +1052,12 @@ nav .menu{
   transition:transform .2s ease, background-color .2s ease;
 }
 #loa .loa-slider-controls button:hover,
-#actividades .slider-controls button:hover{
+#actividades .loa-slider-controls button:hover{
   transform:scale(1.05);
   background:#fff;
 }
 #loa .loa-slider-controls .values-pause,
-#actividades .slider-controls .slider-pause{
+#actividades .loa-slider-controls .values-pause{
   font-size:13px;
   font-weight:900;
 }
@@ -1080,13 +1065,13 @@ nav .menu{
 @media(max-width:800px){
   #loa .values-slider,
   #actividades .values-slider,
-  #actividades .activities-gallery-slider{
+  #actividades .values-slider{
     margin-top:28px;
     scroll-padding-left:0;
   }
 
   #loa .values-track,
-  #actividades .activities-values-track,
+  #actividades .values-track,
   #actividades .values-track{
     gap:12px;
     padding-right:20px;
@@ -1117,24 +1102,24 @@ nav .menu{
   }
 
   #loa .loa-slider-controls,
-  #actividades .slider-controls{
+  #actividades .loa-slider-controls{
     gap:8px;
     margin-top:8px;
   }
   #loa .loa-slider-controls button,
-  #actividades .slider-controls button{
+  #actividades .loa-slider-controls button{
     width:34px;
     height:34px;
   }
 
   /* Conservamos las pequeñas diferencias actuales de iconografía. */
-  #actividades .slider-controls .slider-next{font-size:18px;}
-  #actividades .slider-controls .slider-pause{font-size:12px;}
+  #actividades .loa-slider-controls .values-next{font-size:18px;}
+  #actividades .loa-slider-controls .values-pause{font-size:12px;}
 }
 
 /* FASE 3B · ajuste final aprobado de sliders */
 #loa .loa-slider-controls,
-#actividades .slider-controls{display:none;}
+#actividades .loa-slider-controls{display:none;}
 @media(max-width:800px){
   #loa .value-card img,
   #actividades .value-card img{
@@ -1986,7 +1971,7 @@ nav .menu{
 /* MOBILE · solo los sliders salen del padding horizontal del contenido */
 @media(max-width:800px){
   #loa .values-slider-wrap,
-  #actividades .activities-gallery-slider{
+  #actividades .values-slider-wrap{
     width:calc(100% + 40px);
     max-width:none;
     margin-left:-20px;
@@ -1999,7 +1984,7 @@ nav .menu{
   }
 
   #loa .values-track,
-  #actividades .activities-values-track,
+  #actividades .values-track,
   #actividades .values-track{
     padding-left:0;
     padding-right:0;
@@ -2015,7 +2000,7 @@ nav .menu{
 
 @media(max-width:390px){
   #loa .values-slider-wrap,
-  #actividades .activities-gallery-slider{
+  #actividades .values-slider-wrap{
     width:calc(100% + 32px);
     max-width:none;
     margin-left:-16px;
@@ -2050,26 +2035,26 @@ nav .menu{
 </head><body>
 <nav><div class='logo'><img src='images/logo-home.png' alt='LOA'></div><button class='menu-toggle' type='button' aria-label='Abrir menú' aria-expanded='false'><span></span><span></span><span></span></button><div class='menu'><a href='#loa'>Qué es LOA</a><a href='#actividades'>Actividades y experiencias</a><a href='#formatos'>Formatos y valores</a><a href='#incluye'>Incluye</a><a class='cta' href='#reserva'>Reservá tu lugar</a></div></nav>
 <header class='hero'><div class='content'><div class='eyebrow'>Colonia de playa - 30 años de experiencia</div><h1>el verano que siempre soñaste</h1><p><span class="home-location-inline"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Calle 27 y playa · Santa Teresita</span></span></p><div class='hero-meta'><span>4 a 12 años · Enero y febrero · Lunes a viernes</span></div></div><a class='scroll-arrow' href='#loa' aria-label='Conocé LOA'>↓</a></header>
-<section class='section' id='loa'><div class='wrap intro'><div><div class='kicker'>¿Qué es LOA?</div><h2>Un verano para recordar toda la vida.</h2><p>Loa es un <strong>espacio recreativo, deportivo y educativo,</strong> donde <strong>la playa, el mar y la naturaleza se convierten en el escenario de cada experiencia.</strong></p><p>Un lugar ideal para hacer <strong>amigos, divertirse y disfrutar del verano,</strong> preparado para descubrir y desafiarse de <strong>manera segura</strong> en un ámbito de <strong>respeto</strong> y siempre <strong>cuidados por un equipo calificado de profesores.</strong></p><p><strong>Loa</strong> tiene como <strong>objetivo</strong>, <strong>crear veranos y momentos</strong> que los chicos recuerden toda su vida como un <strong>verano soñado.</strong></p><div class='values-slider-wrap'><div class='values-slider'><div class='values-track'><div class='value-card'><img src='images/loa-1-surf.jpg' alt='Surf' loading='lazy' decoding='async'><strong>Surf</strong></div><div class='value-card'><img src='images/loa-2-Actividades recreativas.jpg' alt='Actividades recreativas' loading='lazy' decoding='async'><strong>Actividades recreativas</strong></div><div class='value-card'><img src='images/loa-3-Diversion.jpg' alt='Diversión' loading='lazy' decoding='async'><strong>Diversión</strong></div><div class='value-card'><img src='images/loa-4-Amistad.jpg' alt='Amistad' loading='lazy' decoding='async'><strong>Amistad</strong></div><div class='value-card'><img src='images/loa-5-Juegos.jpg' alt='Juegos' loading='lazy' decoding='async'><strong>Juegos</strong></div><div class='value-card'><img src='images/loa-6-Naturaleza.jpg' alt='Naturaleza' loading='lazy' decoding='async'><strong>Naturaleza</strong></div><div class='value-card'><img src='images/loa-7-Amor.jpg' alt='Amor' loading='lazy' decoding='async'><strong>Amor</strong></div><div class='value-card'><img src='images/loa-8-.jpg' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-9-Seguridad.jpg' alt='Seguridad' loading='lazy' decoding='async'><strong>Seguridad</strong></div><div class='value-card'><img src='images/loa-10-.jpg' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-10-Respeto.jpg' alt='Respeto' loading='lazy' decoding='async'><strong>Respeto</strong></div><div class='value-card'><img src='images/loa-11-.jpg' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-12-.jpg' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-13-amistad.jpg' alt='Compañerismo' loading='lazy' decoding='async'><strong>Compañerismo</strong></div><div class='value-card'><img src='images/loa-14-.jpg' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-14-Compartir.jpg' alt='Compartir' loading='lazy' decoding='async'><strong>Compartir</strong></div><div class='value-card'><img src='images/loa-15-.jpg' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-16-.jpg' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-17-.jpg' alt='LOA' loading='lazy' decoding='async'></div></div></div><div class='loa-slider-controls'><button class='values-pause' type='button' aria-label='Pausar carrusel'>Ⅱ</button><button class='values-next' type='button' aria-label='Avanzar imágenes'>›</button></div></div></div></section>
-<section class='section' id='actividades'><div class='wrap'><div class='kicker'>Actividades y experiencias</div><h2 class='menu-section-title'> Mar, deporte, amigos y naturaleza.</h2><p> Loa tiene mas de <strong>20 actividades deportivas y recreativas</strong>.</p><div class='experiences unified-experiences'><div class='experience experience-copy'><h3>Diarias</h3><p>Surf, bodyboard, natación, arte, yoga, futbol, juegos, los días feos al gim.</p><h3>Excursiones y campamento</h3><p>Parque acuático, pre campamento y campamento, bomberos, vida en la naturaleza (mar, playa y bosque).</p><h3>Actividades especiales</h3><p>Skate, tenis, basket, taekwondo, circo, carnavales, gimnasia artística, olimpiadas, golf, bicicleteada.</p><h3>Charlas especiales</h3><p>Nutrición, cuidados de la piel, primeros auxilios, vida en la naturaleza, etc.</p></div></div><div class='values-slider activities-gallery-slider'><div class='values-track activities-values-track'>
-<div class='value-card'><img src='images/actividad-1-excursiones.jpg' alt='Excursiones' loading='lazy' decoding='async'><strong>Excursiones</strong></div>
-<div class='value-card'><img src='images/actividad-2-campamento.jpg' alt='Campamento' loading='lazy' decoding='async'><strong>Campamento</strong></div>
-<div class='value-card'><img src='images/actividad-3-Skate.jpg' alt='Skate' loading='lazy' decoding='async'><strong>Skate</strong></div>
-<div class='value-card'><img src='images/actividad-4-Circo.jpg' alt='Circo' loading='lazy' decoding='async'><strong>Circo</strong></div>
-<div class='value-card'><img src='images/actividad-5-Yoga.jpg' alt='Yoga' loading='lazy' decoding='async'><strong>Yoga</strong></div>
-<div class='value-card'><img src='images/actividad-6-sin nombre.jpg' alt='Actividad LOA' loading='lazy' decoding='async'></div>
-<div class='value-card'><img src='images/actividad-7-bodyboard.jpg' alt='Bodyboard' loading='lazy' decoding='async'><strong>Bodyboard</strong></div>
-<div class='value-card'><img src='images/actividad-8-Surf.jpg' alt='Surf' loading='lazy' decoding='async'><strong>Surf</strong></div>
-<div class='value-card'><img src='images/actividad-9-Natacion.jpg' alt='Natación' loading='lazy' decoding='async'><strong>Natación</strong></div>
-<div class='value-card'><img src='images/actividad-10-Olimpiadas.jpg' alt='Olimpiadas' loading='lazy' decoding='async'><strong>Olimpiadas</strong></div>
-<div class='value-card'><img src='images/actividad-11-Tenis.JPG' alt='Tenis' loading='lazy' decoding='async'><strong>Tenis</strong></div>
-<div class='value-card'><img src='images/actividad-12-Golf.JPG' alt='Golf' loading='lazy' decoding='async'><strong>Golf</strong></div>
-<div class='value-card'><img src='images/actividad-13-Gimnasia y deportes.jpg' alt='Gimnasia y deportes' loading='lazy' decoding='async'><strong>Gimnasia y deportes</strong></div>
-<div class='value-card'><img src='images/actividad-14-Medio ambiente.jpg' alt='Medio ambiente' loading='lazy' decoding='async'><strong>Medio ambiente</strong></div>
-<div class='value-card'><img src='images/actividad-15-Vida en la naturaleza.jpg' alt='Vida en la naturaleza' loading='lazy' decoding='async'><strong>Vida en la naturaleza</strong></div>
-<div class='value-card'><img src='images/actividad-16-Surf.jpg' alt='Surf' loading='lazy' decoding='async'><strong>Surf</strong></div>
-<div class='value-card'><img src='images/actividad-18-Skate.JPG' alt='Skate' loading='lazy' decoding='async'><strong>Skate</strong></div>
-</div></div><div class='slider-controls activities-controls'><button type='button' class='slider-pause' aria-label='Pausar carrusel'>Ⅱ</button><button type='button' class='slider-next' aria-label='Siguiente imagen'>›</button></div></div></section>
+<section class='section' id='loa'><div class='wrap intro'><div><div class='kicker'>¿Qué es LOA?</div><h2>Un verano para recordar toda la vida.</h2><p>Loa es un <strong>espacio recreativo, deportivo y educativo,</strong> donde <strong>la playa, el mar y la naturaleza se convierten en el escenario de cada experiencia.</strong></p><p>Un lugar ideal para hacer <strong>amigos, divertirse y disfrutar del verano,</strong> preparado para descubrir y desafiarse de <strong>manera segura</strong> en un ámbito de <strong>respeto</strong> y siempre <strong>cuidados por un equipo calificado de profesores.</strong></p><p><strong>Loa</strong> tiene como <strong>objetivo</strong>, <strong>crear veranos y momentos</strong> que los chicos recuerden toda su vida como un <strong>verano soñado.</strong></p><div class='values-slider-wrap'><div class='values-slider'><div class='values-track'><div class='value-card'><img src='images/loa-1-surf.webp' alt='Surf' loading='lazy' decoding='async'><strong>Surf</strong></div><div class='value-card'><img src='images/loa-2-Actividades recreativas.webp' alt='Actividades recreativas' loading='lazy' decoding='async'><strong>Actividades recreativas</strong></div><div class='value-card'><img src='images/loa-3-Diversion.webp' alt='Diversión' loading='lazy' decoding='async'><strong>Diversión</strong></div><div class='value-card'><img src='images/loa-4-Amistad.webp' alt='Amistad' loading='lazy' decoding='async'><strong>Amistad</strong></div><div class='value-card'><img src='images/loa-5-Juegos.webp' alt='Juegos' loading='lazy' decoding='async'><strong>Juegos</strong></div><div class='value-card'><img src='images/loa-6-Naturaleza.webp' alt='Naturaleza' loading='lazy' decoding='async'><strong>Naturaleza</strong></div><div class='value-card'><img src='images/loa-7-Amor.webp' alt='Amor' loading='lazy' decoding='async'><strong>Amor</strong></div><div class='value-card'><img src='images/loa-8-.webp' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-9-Seguridad.webp' alt='Seguridad' loading='lazy' decoding='async'><strong>Seguridad</strong></div><div class='value-card'><img src='images/loa-10-.webp' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-10-Respeto.webp' alt='Respeto' loading='lazy' decoding='async'><strong>Respeto</strong></div><div class='value-card'><img src='images/loa-11-.webp' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-12-.webp' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-13-amistad.webp' alt='Compañerismo' loading='lazy' decoding='async'><strong>Compañerismo</strong></div><div class='value-card'><img src='images/loa-14-.webp' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-14-Compartir.webp' alt='Compartir' loading='lazy' decoding='async'><strong>Compartir</strong></div><div class='value-card'><img src='images/loa-15-.webp' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-16-.webp' alt='LOA' loading='lazy' decoding='async'></div><div class='value-card'><img src='images/loa-17-.webp' alt='LOA' loading='lazy' decoding='async'></div></div></div><div class='loa-slider-controls'><button class='values-pause' type='button' aria-label='Pausar carrusel'>Ⅱ</button><button class='values-next' type='button' aria-label='Avanzar imágenes'>›</button></div></div></div></section>
+<section class='section' id='actividades'><div class='wrap'><div class='kicker'>Actividades y experiencias</div><h2 class='menu-section-title'> Mar, deporte, amigos y naturaleza.</h2><p> Loa tiene mas de <strong>20 actividades deportivas y recreativas</strong>.</p><div class='experiences unified-experiences'><div class='experience experience-copy'><h3>Diarias</h3><p>Surf, bodyboard, natación, arte, yoga, futbol, juegos, los días feos al gim.</p><h3>Excursiones y campamento</h3><p>Parque acuático, pre campamento y campamento, bomberos, vida en la naturaleza (mar, playa y bosque).</p><h3>Actividades especiales</h3><p>Skate, tenis, basket, taekwondo, circo, carnavales, gimnasia artística, olimpiadas, golf, bicicleteada.</p><h3>Charlas especiales</h3><p>Nutrición, cuidados de la piel, primeros auxilios, vida en la naturaleza, etc.</p></div></div><div class='values-slider-wrap'><div class='values-slider'><div class='values-track'>
+<div class='value-card'><img src='images/actividad-1-excursiones.webp' alt='Excursiones' loading='lazy' decoding='async'><strong>Excursiones</strong></div>
+<div class='value-card'><img src='images/actividad-2-campamento.webp' alt='Campamento' loading='lazy' decoding='async'><strong>Campamento</strong></div>
+<div class='value-card'><img src='images/actividad-3-Skate.webp' alt='Skate' loading='lazy' decoding='async'><strong>Skate</strong></div>
+<div class='value-card'><img src='images/actividad-4-Circo.webp' alt='Circo' loading='lazy' decoding='async'><strong>Circo</strong></div>
+<div class='value-card'><img src='images/actividad-5-Yoga.webp' alt='Yoga' loading='lazy' decoding='async'><strong>Yoga</strong></div>
+<div class='value-card'><img src='images/actividad-6-sin nombre.webp' alt='Actividad LOA' loading='lazy' decoding='async'></div>
+<div class='value-card'><img src='images/actividad-7-bodyboard.webp' alt='Bodyboard' loading='lazy' decoding='async'><strong>Bodyboard</strong></div>
+<div class='value-card'><img src='images/actividad-8-Surf.webp' alt='Surf' loading='lazy' decoding='async'><strong>Surf</strong></div>
+<div class='value-card'><img src='images/actividad-9-Natacion.webp' alt='Natación' loading='lazy' decoding='async'><strong>Natación</strong></div>
+<div class='value-card'><img src='images/actividad-10-Olimpiadas.webp' alt='Olimpiadas' loading='lazy' decoding='async'><strong>Olimpiadas</strong></div>
+<div class='value-card'><img src='images/actividad-11-Tenis.webp' alt='Tenis' loading='lazy' decoding='async'><strong>Tenis</strong></div>
+<div class='value-card'><img src='images/actividad-12-Golf.webp' alt='Golf' loading='lazy' decoding='async'><strong>Golf</strong></div>
+<div class='value-card'><img src='images/actividad-13-Gimnasia y deportes.webp' alt='Gimnasia y deportes' loading='lazy' decoding='async'><strong>Gimnasia y deportes</strong></div>
+<div class='value-card'><img src='images/actividad-14-Medio ambiente.webp' alt='Medio ambiente' loading='lazy' decoding='async'><strong>Medio ambiente</strong></div>
+<div class='value-card'><img src='images/actividad-15-Vida en la naturaleza.webp' alt='Vida en la naturaleza' loading='lazy' decoding='async'><strong>Vida en la naturaleza</strong></div>
+<div class='value-card'><img src='images/actividad-16-Surf.webp' alt='Surf' loading='lazy' decoding='async'><strong>Surf</strong></div>
+<div class='value-card'><img src='images/actividad-18-Skate.webp' alt='Skate' loading='lazy' decoding='async'><strong>Skate</strong></div>
+</div></div><div class='loa-slider-controls'><button class='values-pause' type='button' aria-label='Pausar carrusel'>Ⅱ</button><button class='values-next' type='button' aria-label='Avanzar imágenes'>›</button></div></div></div></section>
 <section class='section' id='formatos' style='background:#eaf6f8'><div class='wrap'><div class='kicker'>Elegí tu formato</div><h2>Formatos y valores.</h2><p style='font-size:18px;max-width:680px;margin:-8px 0 32px'>Elegí una opción para ver edades, horarios y valores de la temporada completa.</p><div class='preventa'>
   <div class='preventa-linea'>PROMO PREVENTA <span class='preventa-dot'>•</span> CUPOS LIMITADOS</div>
   <div class='preventa-fecha'>abonando primera cuota hasta<br><strong>30 DE OCTUBRE</strong></div>
@@ -2378,8 +2363,8 @@ document.addEventListener('DOMContentLoaded', function(){
   );
 
   createCarousel(
-    document.querySelector('#actividades .activities-gallery-slider, #actividades .values-slider'),
-    document.querySelector('#actividades .activities-values-track, #actividades .values-track')
+    document.querySelector('#actividades .values-slider'),
+    document.querySelector('#actividades .values-track')
   );
 })();
 </script>
