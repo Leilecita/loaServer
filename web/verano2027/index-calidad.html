@@ -2389,6 +2389,91 @@ nav .menu{
   }
 }
 </style>
+<style>
+/* FORMATOS · escala tipográfica desktop ajustada */
+@media(min-width:801px){
+
+  #formatos .format h3{
+    font-size:28px !important;
+  }
+
+  #formatos .format-summary{
+    font-size:20px !important;
+  }
+
+  #formatos .format-age-row,
+  #formatos .format-age-row b{
+    font-size:20px !important;
+  }
+
+  #formatos .format-age-row .format-time{
+    font-size:20px !important;
+  }
+
+  #formatos .payment-options-title{
+    font-size:14px !important;
+  }
+
+  #formatos .quota .price{
+    font-size:24px !important;
+  }
+
+  #formatos .quota .price-total{
+    font-size:14px !important;
+  }
+
+  #formatos .subtoggle,
+  #formatos .subtoggle-static{
+    font-size:19px !important;
+  }
+
+  #formatos .subdetails,
+  #formatos .subdetails p,
+  #formatos .subdetails-static,
+  #formatos .subdetails-static p{
+    font-size:16px !important;
+  }
+}
+</style>
+<style>
+/* FORMATOS · alineación comparativa desktop
+   Mañana + tarde centra sus 2 filas dentro del alto de las 3 filas de Solo mañana,
+   para que "Opciones de pago" arranque a la misma altura en ambas tarjetas. */
+@media(min-width:801px){
+
+  /* Mismo ritmo vertical para las filas de edades/horarios */
+  #formatos .format-age-row{
+    min-height:70px;
+    padding-top:20px !important;
+    padding-bottom:20px !important;
+  }
+
+  /* La tarjeta Mañana + tarde tiene una fila menos:
+     repartimos ese espacio arriba y abajo para centrar sus 2 filas. */
+  #formatos .format:nth-child(2) .details-inner > .format-age-row:first-child{
+    margin-top:35px;
+  }
+
+  #formatos .format:nth-child(2) .details-inner > .format-age-row:nth-child(2){
+    margin-bottom:35px;
+  }
+
+  /* Mismo comienzo y separación del bloque de pagos */
+  #formatos .format .pricebox:last-of-type{
+    margin-top:0 !important;
+  }
+
+  #formatos .payment-options-title{
+    margin-top:0 !important;
+    margin-bottom:12px !important;
+  }
+
+  #formatos .quota-first,
+  #formatos .quota-second{
+    margin-top:10px !important;
+  }
+}
+</style>
 </head><body>
 <nav><div class='logo'><img src='images/logo-home.png' alt='LOA'></div><button class='menu-toggle' type='button' aria-label='Abrir menú' aria-expanded='false'><span></span><span></span><span></span></button><div class='menu'><a href='#loa'>Qué es LOA</a><a href='#actividades'>Actividades y experiencias</a><a href='#formatos'>Formatos y valores</a><a href='#incluye'>Incluye</a><a class='cta' href='#reserva'>Reservá tu lugar</a></div></nav>
 <header class='hero'><div class='content'><div class='eyebrow'>Colonia de playa · 30 años de experiencia</div><h1>el verano que siempre soñaste</h1><p><span class="home-location-inline"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Calle 27 y playa · Santa Teresita</span></span></p><div class='hero-meta'><span>4 a 12 años · Enero y febrero · Lun a vie</span></div></div><a class='scroll-arrow' href='#loa' aria-label='Conocé LOA'>↓</a></header>
