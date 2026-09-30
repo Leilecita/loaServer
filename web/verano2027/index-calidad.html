@@ -2580,6 +2580,62 @@ nav .menu{
 }
 </style>
 
+
+<style id="loa-payment-alignment-v2">
+/* Desktop · alineación limpia entre Solo mañana y Mañana + tarde */
+@media(min-width:801px){
+  /* anulamos el centrado artificial anterior */
+  #formatos .format:nth-child(2) .details-inner > .format-age-row:first-child{
+    margin-top:0 !important;
+  }
+
+  #formatos .format:nth-child(2) .details-inner > .format-age-row:nth-child(2){
+    margin-bottom:0 !important;
+  }
+
+  #formatos .format:first-child .pricebox:last-child{
+    margin-top:0 !important;
+  }
+
+  /* fila fantasma para igualar alturas sin desacomodar el diseño */
+  #formatos .format-age-row-placeholder{
+    visibility:hidden;
+    pointer-events:none;
+    user-select:none;
+  }
+}
+
+@media(max-width:800px){
+  #formatos .format-age-row-placeholder{
+    display:none !important;
+  }
+}
+</style>
+
+
+<style id="loa-payment-alignment-v3">
+/* Ajuste fino desktop · Solo mañana baja apenas el bloque de pagos */
+@media(min-width:801px){
+  #formatos .format:first-child .pricebox:last-child{
+    margin-top:10px !important;
+  }
+}
+</style>
+
+
+<style id="loa-payment-alignment-v4">
+/* Ajuste fino desktop · bajar el texto, no la línea, en Solo mañana */
+@media(min-width:801px){
+  #formatos .format:first-child .pricebox:last-child{
+    margin-top:0 !important;
+  }
+
+  #formatos .format:first-child .pricebox:last-child .payment-options-title{
+    margin-top:10px !important;
+  }
+}
+</style>
+
 </head><body>
 <nav><div class='logo'><img src='images/logo-home.png' alt='LOA'></div><button class='menu-toggle' type='button' aria-label='Abrir menú' aria-expanded='false'><span></span><span></span><span></span></button><div class='menu'><a href='#loa'>Qué es LOA</a><a href='#actividades'>Actividades y experiencias</a><a href='#formatos'>Formatos y valores</a><a href='#incluye'>Incluye</a><a class='cta' href='#reserva'>Reservá tu lugar</a></div></nav>
 <header class='hero'><div class='content'><div class='eyebrow'>Colonia de playa · 30 años de experiencia</div><h1>el verano que siempre soñaste</h1><p><span class="home-location-inline"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Calle 27 y playa · Santa Teresita</span></span></p><div class='hero-meta'><span>4 a 12 años · Enero y febrero · Lun a vie</span></div></div><a class='scroll-arrow' href='#loa' aria-label='Conocé LOA'>↓</a></header>
@@ -2630,7 +2686,7 @@ nav .menu{
 </div>
 <div class='formats'>
 <div class='format'><div class='format-head' role='button' tabindex='0' aria-expanded='false'><h3>Solo mañana</h3><p class='format-summary'>Mini · Kids · High</p></div><div class='details'><div class='details-inner'><div class='pricebox format-age-row'><b>Mini · 4 a 6 años</b><span class='format-time'>9:30 a 13:15 hs</span></div><div class='pricebox format-age-row'><b>Kids · 7 a 9 años</b><span class='format-time'>9:15 a 13:00 hs</span></div><div class='pricebox format-age-row'><b>High · 10 a 12 años</b><span class='format-time'>9:15 a 13:00 hs</span></div><div class='pricebox'><div class='payment-options-title'>Opciones de pago</div><div class='quota quota-first'><span class='price'>2 cuotas de $430.000</span><span class='price-total'>Total temporada completa $860.000</span></div><div class='quota quota-second'><span class='price'>3 cuotas de $310.000</span><span class='price-total'>Total temporada completa $930.000</span></div></div></div></div></div>
-<div class='format'><div class='format-head' role='button' tabindex='0' aria-expanded='false'><span class='format-new'>NEW</span><h3>Mañana + tarde</h3><p class='format-summary'>Kids · High</p></div><div class='details'><div class='details-inner'><div class='pricebox format-age-row'><b>Kids · 7 a 9 años</b><span class='format-time'>9:15 a 16:30 hs</span></div><div class='pricebox format-age-row'><b>High · 10 a 12 años</b><span class='format-time'>9:15 a 16:30 hs</span></div><div class='pricebox'><div class='payment-options-title'>Opciones de pago</div><div class='quota quota-first'><span class='price'>2 cuotas de $575.000</span><span class='price-total'>Total temporada completa $1.150.000</span></div><div class='quota quota-second'><span class='price'>3 cuotas de $430.000</span><span class='price-total'>Total temporada completa $1.290.000</span></div></div><div class='subtoggle subtoggle-static'>¿Qué es eso de mañana + tarde?</div><div class='subdetails subdetails-static'><p>A todas las actividades de la mañana, le sumamos por la tarde:</p><p><b>Puro Surf</b> · 2 veces x semana<br><b>Recreación y aventuras</b> · 3 veces x semana</p><p><b>Pagás 1 actividad de la tarde y podés venir a las 2 de lunes a viernes cuando quieras.</b></p></div></div></div></div>
+<div class='format'><div class='format-head' role='button' tabindex='0' aria-expanded='false'><span class='format-new'>NEW</span><h3>Mañana + tarde</h3><p class='format-summary'>Kids · High</p></div><div class='details'><div class='details-inner'><div class='pricebox format-age-row'><b>Kids · 7 a 9 años</b><span class='format-time'>9:15 a 16:30 hs</span></div><div class='pricebox format-age-row'><b>High · 10 a 12 años</b><span class='format-time'>9:15 a 16:30 hs</span></div><div class='pricebox format-age-row format-age-row-placeholder' aria-hidden='true'><b>&nbsp;</b><span class='format-time'>&nbsp;</span></div><div class='pricebox'><div class='payment-options-title'>Opciones de pago</div><div class='quota quota-first'><span class='price'>2 cuotas de $575.000</span><span class='price-total'>Total temporada completa $1.150.000</span></div><div class='quota quota-second'><span class='price'>3 cuotas de $430.000</span><span class='price-total'>Total temporada completa $1.290.000</span></div></div><div class='subtoggle subtoggle-static'>¿Qué es eso de mañana + tarde?</div><div class='subdetails subdetails-static'><p>A todas las actividades de la mañana, le sumamos por la tarde:</p><p><b>Puro Surf</b> · 2 veces x semana<br><b>Recreación y aventuras</b> · 3 veces x semana</p><p><b>Pagás 1 actividad de la tarde y podés venir a las 2 de lunes a viernes cuando quieras.</b></p></div></div></div></div>
 <div class='format format-consulta format-consulta-simple'>
   <div class='format-head format-consulta-head'>
     <div>
