@@ -1540,6 +1540,458 @@
     /* Aclaración de valores de preventa en efectivo */
     #formatos .payment-cash{display:block;margin-top:16px;padding:0;background:none;border:0;border-radius:0;color:#455e68;font-size:14px!important;line-height:1.3;font-weight:400;text-align:left;}
     @media(max-width:800px){#formatos .payment-cash{font-size:15px!important;margin-top:12px;}}
+
+    /* LOA · pistas visibles para descubrir las tarjetas desplegables */
+    #formatos .format-action-hint,
+    #incluye .include-action-hint{
+      display:block;
+      width:max-content;
+      margin-top:9px;
+      color:#075f78;
+      font-size:14px;
+      line-height:1.25;
+      font-weight:700;
+    }
+    #formatos .format-action-hint .hint-open,
+    #incluye .include-action-hint .hint-open{display:none;}
+    #formatos .format.open .format-action-hint .hint-open,
+    #incluye .include-toggle-card.open .include-action-hint .hint-open{display:inline;}
+    #formatos .format.open .format-action-hint .hint-closed,
+    #incluye .include-toggle-card.open .include-action-hint .hint-closed{display:none;}
+    #incluye .include-toggle-card:not(.open){height:94px;min-height:94px;max-height:94px;}
+    #incluye .include-toggle-card:not(.open){display:block!important;padding-top:17px!important;padding-bottom:12px!important;}
+    #incluye .include-toggle-card:not(.open) h3{line-height:1.05!important;}
+    #incluye .include-toggle-card.open .include-action-hint{margin-top:8px;}
+    #incluye .include-toggle-card.open .include-toggle-icon{top:24px;}
+    @media(max-width:800px){
+      #formatos .format-action-hint,
+      #incluye .include-action-hint{font-size:14px;}
+      #incluye .include-toggle-card:not(.open){height:89px;min-height:89px;max-height:89px;padding-top:16px!important;}
+      #incluye .include-toggle-card.open .include-toggle-icon{top:20px;}
+    }
+    /* Animación breve, 2 pequeños movimientos y luego queda quieta */
+    @keyframes loa-cue-arrow{
+      0%,100%{background-position:center center;}
+      42%{background-position:center calc(50% + 4px);}
+      75%{background-position:center center;}
+    }
+    @media(prefers-reduced-motion:no-preference){
+      #formatos .format.is-discoverable:not(.open) .format-head::after,
+      #incluye .include-toggle-card.is-discoverable:not(.open) .include-toggle-icon{
+        animation:loa-cue-arrow .85s ease-in-out 2;
+      }
+    }
+
+    /* Ajuste visual: textos de acción agrupados con su flecha, a la derecha */
+    #formatos .format-action-hint{
+      position:absolute;
+      right:7px;
+      top:85px;
+      width:70px;
+      margin:0;
+      text-align:center;
+      white-space:nowrap;
+      pointer-events:none;
+    }
+    #incluye .include-action-hint,
+    #incluye .include-toggle-card.open .include-action-hint{
+      position:absolute;
+      right:4px;
+      top:57px;
+      width:64px;
+      margin:0;
+      font-size:12px;
+      text-align:center;
+      white-space:nowrap;
+      pointer-events:none;
+    }
+    #incluye .include-toggle-card.open .include-toggle-body{
+      margin-top:38px;
+    }
+    @media(max-width:800px){
+      #formatos .format-action-hint{right:0;top:65px;width:64px;font-size:12px;}
+      #incluye .include-action-hint,
+      #incluye .include-toggle-card.open .include-action-hint{right:0;top:51px;width:58px;font-size:11px;}
+    }
+
+
+    /* Ajuste final · centrar verticalmente el bloque flecha + texto */
+    #formatos .format-head{
+      min-height:170px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding-right:112px;
+    }
+    #formatos .format .format-head::after{
+      top:50% !important;
+      right:28px !important;
+      transform:translateY(-18px) !important;
+    }
+    #formatos .format-action-hint{
+      right:17px !important;
+      top:50% !important;
+      transform:translateY(8px) !important;
+      width:86px !important;
+      margin:0 !important;
+      text-align:center !important;
+    }
+    #incluye .include-toggle-card{
+      min-height:104px;
+    }
+    #incluye .include-toggle-icon{
+      top:50% !important;
+      transform:translateY(-16px) !important;
+    }
+    #incluye .include-action-hint,
+    #incluye .include-toggle-card.open .include-action-hint{
+      top:50% !important;
+      right:2px !important;
+      transform:translateY(9px) !important;
+      width:72px !important;
+    }
+    @media(max-width:800px){
+      #formatos .format-head{
+        min-height:146px;
+        padding-right:96px;
+      }
+      #formatos .format .format-head::after{
+        right:18px !important;
+        transform:translateY(-16px) !important;
+      }
+      #formatos .format-action-hint{
+        right:7px !important;
+        top:50% !important;
+        transform:translateY(8px) !important;
+        width:74px !important;
+        font-size:12px !important;
+      }
+      #incluye .include-toggle-card{min-height:96px;}
+      #incluye .include-toggle-icon{
+        top:50% !important;
+        transform:translateY(-14px) !important;
+      }
+      #incluye .include-action-hint,
+      #incluye .include-toggle-card.open .include-action-hint{
+        top:50% !important;
+        right:0 !important;
+        transform:translateY(9px) !important;
+        width:62px !important;
+        font-size:11px !important;
+      }
+    }
+
+
+
+    /* Ajuste final · flecha centrada sobre “Ver más” sin agrandar tarjetas */
+    #formatos .format-head{
+      min-height:auto !important;
+      display:block !important;
+    }
+    #formatos .format-action-hint{
+      margin-top:0 !important;
+      white-space:nowrap !important;
+    }
+    /* Desktop */
+    @media(min-width:801px){
+      #formatos .format-head{
+        padding-right:118px !important;
+      }
+      #formatos .format .format-head::after{
+        top:50% !important;
+        right:56px !important;
+        transform:translateY(-17px) !important;
+      }
+      #formatos .format-action-hint{
+        top:50% !important;
+        right:26px !important;
+        width:84px !important;
+        transform:translateY(7px) !important;
+        text-align:center !important;
+      }
+    }
+    /* Mobile */
+    @media(max-width:800px){
+      #formatos .format-head{
+        padding-right:92px !important;
+      }
+      #formatos .format .format-head::after{
+        top:50% !important;
+        right:41px !important;
+        transform:translateY(-16px) !important;
+      }
+      #formatos .format-action-hint{
+        top:50% !important;
+        right:8px !important;
+        width:70px !important;
+        transform:translateY(6px) !important;
+        text-align:center !important;
+        font-size:12px !important;
+      }
+    }
+    /* Incluye / no incluye: mismo criterio, sin agrandar tarjetas */
+    #incluye .include-toggle-card{
+      min-height:0 !important;
+    }
+    #incluye .include-toggle-icon{
+      top:50% !important;
+    }
+    #incluye .include-action-hint,
+    #incluye .include-toggle-card.open .include-action-hint{
+      text-align:center !important;
+      white-space:nowrap !important;
+    }
+    @media(min-width:801px){
+      #incluye .include-toggle-icon{
+        right:44px !important;
+        transform:translateY(-16px) !important;
+      }
+      #incluye .include-action-hint,
+      #incluye .include-toggle-card.open .include-action-hint{
+        top:50% !important;
+        right:12px !important;
+        width:78px !important;
+        transform:translateY(10px) !important;
+      }
+    }
+    @media(max-width:800px){
+      #incluye .include-toggle-icon{
+        right:31px !important;
+        transform:translateY(-14px) !important;
+      }
+      #incluye .include-action-hint,
+      #incluye .include-toggle-card.open .include-action-hint{
+        top:50% !important;
+        right:2px !important;
+        width:58px !important;
+        transform:translateY(9px) !important;
+        font-size:11px !important;
+      }
+    }
+
+
+
+    /* AJUSTE FINAL · desktop se mantiene / mobile corregido */
+
+    /* Desktop: conservar la versión que ya se ve bien */
+    @media (min-width:801px){
+      #formatos .format-head{
+        padding-right:118px !important;
+      }
+      #formatos .format .format-head::after{
+        top:50% !important;
+        right:56px !important;
+        transform:translateY(-17px) !important;
+      }
+      #formatos .format-action-hint{
+        top:50% !important;
+        right:26px !important;
+        width:84px !important;
+        transform:translateY(7px) !important;
+        text-align:center !important;
+        font-size:14px !important;
+        line-height:1.1 !important;
+      }
+
+      #incluye .include-toggle-icon{
+        right:44px !important;
+        top:50% !important;
+        transform:translateY(-16px) !important;
+      }
+      #incluye .include-action-hint,
+      #incluye .include-toggle-card.open .include-action-hint{
+        top:50% !important;
+        right:12px !important;
+        width:78px !important;
+        transform:translateY(10px) !important;
+        text-align:center !important;
+        font-size:12px !important;
+        line-height:1.1 !important;
+      }
+    }
+
+    /* Mobile: reglas específicas */
+    @media (max-width:800px){
+      /* no cambiar alto de tarjetas */
+      #formatos .format-head{
+        min-height:unset !important;
+        padding-right:90px !important;
+      }
+
+      /* flecha centrada horizontalmente respecto de “Ver más” */
+      #formatos .format .format-head::after{
+        top:50% !important;
+        right:34px !important;
+        width:26px !important;
+        height:26px !important;
+        background-size:19px 11px !important;
+        transform:translateY(-17px) !important;
+      }
+
+      #formatos .format-action-hint{
+        position:absolute !important;
+        top:50% !important;
+        right:5px !important;
+        width:84px !important;
+        margin:0 !important;
+        transform:translateY(6px) !important;
+        text-align:center !important;
+        white-space:nowrap !important;
+        font-size:12px !important;
+        line-height:1.05 !important;
+      }
+
+      /* incluye / no incluye mobile */
+      #incluye .include-toggle-card{
+        min-height:unset !important;
+      }
+      #incluye .include-toggle-icon{
+        top:50% !important;
+        right:28px !important;
+        width:26px !important;
+        height:26px !important;
+        background-size:19px 11px !important;
+        transform:translateY(-15px) !important;
+      }
+      #incluye .include-action-hint,
+      #incluye .include-toggle-card.open .include-action-hint{
+        position:absolute !important;
+        top:50% !important;
+        right:0 !important;
+        width:80px !important;
+        margin:0 !important;
+        transform:translateY(8px) !important;
+        text-align:center !important;
+        white-space:nowrap !important;
+        font-size:11px !important;
+        line-height:1.05 !important;
+      }
+    }
+
+    /* Mobile angosto */
+    @media (max-width:430px){
+      #formatos .format-head{
+        padding-right:86px !important;
+      }
+      #formatos .format .format-head::after{
+        right:31px !important;
+      }
+      #formatos .format-action-hint{
+        right:2px !important;
+        width:78px !important;
+        font-size:11.5px !important;
+      }
+
+      #incluye .include-toggle-icon{
+        right:26px !important;
+      }
+      #incluye .include-action-hint,
+      #incluye .include-toggle-card.open .include-action-hint{
+        width:74px !important;
+        font-size:10.5px !important;
+      }
+    }
+
+
+    /* Afinado visual: pistas discretas, sin alterar dimensiones de tarjetas */
+    @media (min-width:801px){
+      #formatos .format-action-hint{font-size:12px!important;font-weight:600!important;color:#426d7c!important;}
+      #incluye .include-action-hint{font-size:11px!important;font-weight:600!important;color:#426d7c!important;}
+    }
+    @media (max-width:800px){
+      #formatos .format-action-hint{font-size:11px!important;font-weight:600!important;color:#426d7c!important;}
+      #incluye .include-action-hint{font-size:10px!important;font-weight:600!important;color:#426d7c!important;}
+      #formatos .format .format-head::after{background-size:16px 10px!important;}
+      #incluye .include-toggle-icon{background-size:16px 10px!important;}
+    }
+    @media (max-width:430px){
+      #formatos .format-action-hint{font-size:11px!important;}
+      #incluye .include-action-hint{font-size:10px!important;}
+    }
+
+    /* Ajuste de pistas: mismo lenguaje en Formatos e Incluye */
+    #formatos .format-action-hint,
+    #incluye .include-action-hint,
+    #incluye .include-toggle-card.open .include-action-hint{
+      color:#426d7c !important; /* recuperar el azul grisáceo anterior */
+      font-weight:600 !important;
+    }
+    /* Recuperar la altura original de Incluye / No incluye cuando están cerradas */
+    #incluye .include-toggle-card:not(.open){
+      height:76px !important;
+      min-height:76px !important;
+      max-height:76px !important;
+      padding:0 22px !important;
+      display:flex !important;
+      align-items:center !important;
+    }
+    #incluye .include-toggle-card:not(.open) h3{
+      margin:0 !important;
+      line-height:1.05 !important;
+      padding-right:100px !important;
+    }
+    #incluye .include-toggle-card:not(.open) .include-toggle-icon{
+      top:50% !important;
+      right:41px !important;
+      transform:translateY(-17px) !important;
+    }
+    #incluye .include-toggle-card:not(.open) .include-action-hint{
+      position:absolute !important;
+      top:50% !important;
+      right:14px !important;
+      width:80px !important;
+      transform:translateY(7px) !important;
+      margin:0 !important;
+      text-align:center !important;
+      font-size:12px !important;
+      white-space:nowrap !important;
+    }
+    /* Cuando se abren, las pistas siguen junto al título */
+    #incluye .include-toggle-card.open .include-toggle-icon{
+      top:23px !important;
+      right:41px !important;
+      transform:none !important;
+    }
+    #incluye .include-toggle-card.open .include-action-hint{
+      top:48px !important;
+      right:14px !important;
+      width:80px !important;
+      transform:none !important;
+      font-size:12px !important;
+      margin:0 !important;
+      text-align:center !important;
+    }
+    #incluye .include-toggle-card.open .include-toggle-body{margin-top:18px !important;}
+    @media(max-width:800px){
+      #incluye .include-toggle-card:not(.open){
+        height:68px !important;
+        min-height:68px !important;
+        max-height:68px !important;
+        padding:0 16px !important;
+      }
+      #incluye .include-toggle-card:not(.open) h3{padding-right:85px !important;}
+      #incluye .include-toggle-card:not(.open) .include-toggle-icon{
+        right:30px !important;
+        transform:translateY(-15px) !important;
+      }
+      #incluye .include-toggle-card:not(.open) .include-action-hint{
+        right:4px !important;
+        width:73px !important;
+        transform:translateY(7px) !important;
+        font-size:11px !important;
+      }
+      #incluye .include-toggle-card.open .include-toggle-icon{
+        right:30px !important;
+        top:18px !important;
+      }
+      #incluye .include-toggle-card.open .include-action-hint{
+        right:4px !important;
+        top:43px !important;
+        width:73px !important;
+        font-size:11px !important;
+      }
+    }
+
   </style>
 
 </head><body>
@@ -1592,8 +2044,8 @@
     <div class='preventa-fecha'>abonando primera cuota hasta <strong>30 DE OCTUBRE</strong></div>
   </div>
     <div class='formats'>
-      <div class='format'><div class='format-head' role='button' tabindex='0' aria-expanded='false'><h3>Solo mañana</h3><p class='format-summary'>Mini · Kids · High</p></div><div class='details'><div class='details-inner'><div class='pricebox format-age-row'><b>Mini · 4 a 6 años</b><span class='format-time'>9:30 a 13:15 hs</span></div><div class='pricebox format-age-row'><b>Kids · 7 a 9 años</b><span class='format-time'>9:15 a 13:00 hs</span></div><div class='pricebox format-age-row'><b>High · 10 a 12 años</b><span class='format-time'>9:15 a 13:00 hs</span></div><div class='pricebox'><div class='payment-options-title'>Opciones de pago</div><div class='quota quota-first'><span class='price'>2 cuotas de $430.000</span><span class='price-total'>Total temporada completa $860.000</span></div><div class='quota quota-second'><span class='price'>3 cuotas de $310.000</span><span class='price-total'>Total temporada completa $930.000</span></div><div class='payment-cash'>Valores expresados de preventa en efectivo</div></div></div></div></div>
-      <div class='format'><div class='format-head' role='button' tabindex='0' aria-expanded='false'><span class='format-new'>NEW</span><h3>Mañana + tarde</h3><p class='format-summary'>Kids · High</p></div><div class='details'><div class='details-inner'><div class='pricebox format-age-row'><b>Kids · 7 a 9 años</b><span class='format-time'>9:15 a 16:30 hs</span></div><div class='pricebox format-age-row'><b>High · 10 a 12 años</b><span class='format-time'>9:15 a 16:30 hs</span></div><div class='pricebox format-age-row format-age-row-placeholder' aria-hidden='true'><b>&nbsp;</b><span class='format-time'>&nbsp;</span></div><div class='pricebox'><div class='payment-options-title'>Opciones de pago</div><div class='quota quota-first'><span class='price'>2 cuotas de $575.000</span><span class='price-total'>Total temporada completa $1.150.000</span></div><div class='quota quota-second'><span class='price'>3 cuotas de $430.000</span><span class='price-total'>Total temporada completa $1.290.000</span></div><div class='payment-cash'>Valores expresados de preventa en efectivo</div></div><div class='subtoggle subtoggle-static'>¿Qué es eso de mañana + tarde?</div><div class='subdetails subdetails-static'><p>A todas las actividades de la mañana, le sumamos por la tarde:</p><p><b>Puro Surf</b> · 2 veces x semana<br><b>Recreación y aventuras</b> · 3 veces x semana</p><p><b>Pagás 1 actividad de la tarde y podés venir a las 2 de lunes a viernes cuando quieras.</b></p></div></div></div></div>
+      <div class='format'><div class='format-head' role='button' tabindex='0' aria-expanded='false'><h3>Solo mañana</h3><p class='format-summary'>Mini · Kids · High</p><span class='format-action-hint' aria-hidden='true'><span class='hint-closed'>Ver más</span><span class='hint-open'>Cerrar</span></span></div><div class='details'><div class='details-inner'><div class='pricebox format-age-row'><b>Mini · 4 a 6 años</b><span class='format-time'>9:30 a 13:15 hs</span></div><div class='pricebox format-age-row'><b>Kids · 7 a 9 años</b><span class='format-time'>9:15 a 13:00 hs</span></div><div class='pricebox format-age-row'><b>High · 10 a 12 años</b><span class='format-time'>9:15 a 13:00 hs</span></div><div class='pricebox'><div class='payment-options-title'>Opciones de pago</div><div class='quota quota-first'><span class='price'>2 cuotas de $430.000</span><span class='price-total'>Total temporada completa $860.000</span></div><div class='quota quota-second'><span class='price'>3 cuotas de $310.000</span><span class='price-total'>Total temporada completa $930.000</span></div><div class='payment-cash'>Valores expresados de preventa en efectivo</div></div></div></div></div>
+      <div class='format'><div class='format-head' role='button' tabindex='0' aria-expanded='false'><span class='format-new'>NEW</span><h3>Mañana + tarde</h3><p class='format-summary'>Kids · High</p><span class='format-action-hint' aria-hidden='true'><span class='hint-closed'>Ver más</span><span class='hint-open'>Cerrar</span></span></div><div class='details'><div class='details-inner'><div class='pricebox format-age-row'><b>Kids · 7 a 9 años</b><span class='format-time'>9:15 a 16:30 hs</span></div><div class='pricebox format-age-row'><b>High · 10 a 12 años</b><span class='format-time'>9:15 a 16:30 hs</span></div><div class='pricebox format-age-row format-age-row-placeholder' aria-hidden='true'><b>&nbsp;</b><span class='format-time'>&nbsp;</span></div><div class='pricebox'><div class='payment-options-title'>Opciones de pago</div><div class='quota quota-first'><span class='price'>2 cuotas de $575.000</span><span class='price-total'>Total temporada completa $1.150.000</span></div><div class='quota quota-second'><span class='price'>3 cuotas de $430.000</span><span class='price-total'>Total temporada completa $1.290.000</span></div><div class='payment-cash'>Valores expresados de preventa en efectivo</div></div><div class='subtoggle subtoggle-static'>¿Qué es eso de mañana + tarde?</div><div class='subdetails subdetails-static'><p>A todas las actividades de la mañana, le sumamos por la tarde:</p><p><b>Puro Surf</b> · 2 veces x semana<br><b>Recreación y aventuras</b> · 3 veces x semana</p><p><b>Pagás 1 actividad de la tarde y podés venir a las 2 de lunes a viernes cuando quieras.</b></p></div></div></div></div>
       <div class='format format-consulta format-consulta-simple'>
         <div class='format-head format-consulta-head'>
           <div>
@@ -1603,7 +2055,7 @@
         </div>
       </div>
     </div></div></section>
-  <section class="section" id="incluye"><div class="wrap"><div class="kicker">Incluye y no incluye</div><div class="include"><div class="check include-toggle-card"><h3>Qué incluye</h3><button aria-expanded="false" aria-label="Mostrar detalle" class="include-toggle-icon" type="button"></button><div class="include-toggle-body"><div>✓ <strong>40 días de actividades.</strong><span class="secondary">Máximo de 4 días de suspensión por mal tiempo.</span></div><div>✓ <strong>+ gratis adaptación en diciembre</strong><span class="secondary">2 días entre las fiestas</span></div><div>✓ <strong>Seguro del alumno</strong><span class="secondary">con cobertura en todas las actividades<br/>y locaciones.</span></div><div>✓ <strong>Todo el material deportivo de surf</strong><span class="secondary">Material de surf incluido, con tablas soft para mayor seguridad.</span></div><div>✓ <strong>Lycra indentificatoria</strong><span class="secondary">todas con protección para el sol UV 50</span></div><div>✓ <strong>Todas las actividades especiales</strong><span class="secondary">deportes y excursiones</span></div><div>✓ <strong>Pre - campamento</strong></div><div>✓ <strong>Todos los elementos deportivos y recreativos.</strong></div></div></div><div class="check include-toggle-card"><h3>Qué no incluye</h3><button aria-expanded="false" aria-label="Mostrar detalle" class="include-toggle-icon" type="button"></button><div class="include-toggle-body"><div><strong>Tentempié diario</strong></div><div><strong>Poncho cambiador</strong><span class="secondary">de identificación en playa, lo<br/>ofrecemos al costo de fabricación.</span></div><div><strong>Almuerzos jornada extendida</strong><span class="secondary">podés traerlo o te ofrecemos un<br/>menú para comprarlo cuando gustes</span></div><div><strong>Parque acuático Poseidón</strong></div><div><strong>Campamento</strong></div></div></div></div></div></section>
+  <section class="section" id="incluye"><div class="wrap"><div class="kicker">Incluye y no incluye</div><div class="include"><div class="check include-toggle-card"><h3>Qué incluye</h3><span class="include-action-hint" aria-hidden="true"><span class="hint-closed">Ver más</span><span class="hint-open">Cerrar</span></span><button aria-expanded="false" aria-label="Mostrar detalle" class="include-toggle-icon" type="button"></button><div class="include-toggle-body"><div>✓ <strong>40 días de actividades.</strong><span class="secondary">Máximo de 4 días de suspensión por mal tiempo.</span></div><div>✓ <strong>+ gratis adaptación en diciembre</strong><span class="secondary">2 días entre las fiestas</span></div><div>✓ <strong>Seguro del alumno</strong><span class="secondary">con cobertura en todas las actividades<br/>y locaciones.</span></div><div>✓ <strong>Todo el material deportivo de surf</strong><span class="secondary">Material de surf incluido, con tablas soft para mayor seguridad.</span></div><div>✓ <strong>Lycra indentificatoria</strong><span class="secondary">todas con protección para el sol UV 50</span></div><div>✓ <strong>Todas las actividades especiales</strong><span class="secondary">deportes y excursiones</span></div><div>✓ <strong>Pre - campamento</strong></div><div>✓ <strong>Todos los elementos deportivos y recreativos.</strong></div></div></div><div class="check include-toggle-card"><h3>Qué no incluye</h3><span class="include-action-hint" aria-hidden="true"><span class="hint-closed">Ver más</span><span class="hint-open">Cerrar</span></span><button aria-expanded="false" aria-label="Mostrar detalle" class="include-toggle-icon" type="button"></button><div class="include-toggle-body"><div><strong>Tentempié diario</strong></div><div><strong>Poncho cambiador</strong><span class="secondary">de identificación en playa, lo<br/>ofrecemos al costo de fabricación.</span></div><div><strong>Almuerzos jornada extendida</strong><span class="secondary">podés traerlo o te ofrecemos un<br/>menú para comprarlo cuando gustes</span></div><div><strong>Parque acuático Poseidón</strong></div><div><strong>Campamento</strong></div></div></div></div></div></section>
 
   <section class='contact contact-photo' id='reserva'><div class='contact-overlay'></div><div class='wrap contact-content'><div class='contact-top'><div class='eyebrow'>Cupos limitados</div><h2>Reservá tu lugar</h2><p class='contact-help'>Escribinos y te ayudamos a elegir la mejor opción para tu familia.</p></div><div class='contact-bottom'><a class='contact-whatsapp-float' href='https://wa.me/541140432745?text=Hola%2C%20quiero%20recibir%20informaci%C3%B3n%20sobre%20LOA%20Verano%202027.' aria-label="Contactar a LOA por WhatsApp">
     <svg class="whatsapp-cta-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -1994,6 +2446,23 @@
         setTimeout(startBackgroundPreload, 250);
       }, {once:true});
     }
+  })();
+
+  /* Activar la pista sólo una vez cuando la tarjeta entra a la pantalla. */
+  (function(){
+    const cards = document.querySelectorAll('#formatos .format:not(.format-consulta), #incluye .include-toggle-card');
+    if(!('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el=entry.target;
+        observer.unobserve(el);
+        if(el.classList.contains('open')) return;
+        el.classList.add('is-discoverable');
+        window.setTimeout(()=>el.classList.remove('is-discoverable'),1900);
+      });
+    },{threshold:0.4});
+    cards.forEach(card=>observer.observe(card));
   })();
 </script>
 </body>
