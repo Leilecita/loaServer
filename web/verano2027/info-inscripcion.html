@@ -25,14 +25,43 @@
         @media(max-width:740px){.hero{padding:18px 20px 78px}.brand img{width:67px;height:67px}.back{font-size:14px}.hero-content{padding-top:29px}h1{font-size:clamp(39px,10vw,53px)}.hero:after{height:38px}.main{padding:35px 18px 70px}.steps{grid-template-columns:1fr;gap:12px}.step{padding:22px 18px;border-radius:20px}.step h3{font-size:19px}.step p{font-size:15px}.step-number{flex-basis:38px;height:38px;font-size:14px}.separator{margin:62px 0 55px}.beach-head{display:block}.beach-tag{display:inline-block;margin-top:18px}.beach-layout{grid-template-columns:1fr}.packing{padding:8px 18px}.packing li{font-size:16px;padding:15px 0}.side{min-height:260px;padding:28px 25px}.side h3{font-size:31px}}
         @media(max-width:390px){.hero{padding-left:16px;padding-right:16px}.main{padding-left:15px;padding-right:15px}.step{gap:12px}.packing{padding-left:14px;padding-right:14px}.packing label{gap:8px}}
         @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+        /* Encabezado unificado con Profes y Descuentos: distribución, altura y arcos azules. */
+        .hero{background:linear-gradient(120deg,#075f78,#086c83);padding:30px clamp(18px,5vw,72px) 24px;isolation:isolate;overflow:hidden}
+        .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;pointer-events:none;z-index:-1;clip-path:none;background:none;height:auto;left:auto;bottom:auto}
+        .hero:before{width:560px;height:560px;right:-250px;top:-150px;border:18px solid rgba(172,227,238,.15);box-shadow:0 0 0 26px rgba(112,203,222,.12),0 0 0 54px rgba(75,176,201,.11),0 0 0 84px rgba(42,147,176,.10),0 0 0 116px rgba(20,112,139,.08)}
+        .hero:after{width:320px;height:320px;right:auto;left:-150px;top:auto;bottom:-180px;border:14px solid rgba(169,228,238,.10);box-shadow:0 0 0 24px rgba(104,199,219,.09),0 0 0 48px rgba(57,167,193,.08),0 0 0 74px rgba(26,128,158,.07)}
+        .hero-inner{max-width:1180px;margin:0 auto;position:relative;z-index:1}
+        .topbar{position:relative;display:block;height:52px}
+        .back{position:absolute;top:0;left:0;font-size:17px;font-weight:400;display:inline-flex;align-items:center;gap:7px}
+        .brand{position:absolute;right:0;top:34px;display:inline-flex;align-items:center;text-decoration:none;line-height:0}
+        .brand img{width:86px;height:86px}
+        .hero-content{padding:0;max-width:none}
+        .kicker{font-size:15px;font-weight:800;letter-spacing:.08em}
+        .hero h1{font-size:clamp(42px,5.5vw,72px);line-height:1;margin:16px 0 14px}
+        .hero-content p{font-size:clamp(17px,1.75vw,22px);line-height:1.45;max-width:none;color:#fff}
+        @media(max-width:700px){
+            .hero{padding:18px 20px 23px}
+            .hero:before{width:390px;height:390px;right:-190px;top:-120px;border-width:14px;box-shadow:0 0 0 20px rgba(112,203,222,.12),0 0 0 42px rgba(75,176,201,.11),0 0 0 66px rgba(42,147,176,.10),0 0 0 92px rgba(20,112,139,.08)}
+            .hero:after{width:230px;height:230px;left:-115px;bottom:-135px;border-width:11px;box-shadow:0 0 0 18px rgba(104,199,219,.09),0 0 0 35px rgba(57,167,193,.08),0 0 0 55px rgba(26,128,158,.07)}
+            .topbar{height:57px}
+            .brand{top:34px}.brand img{width:68px;height:68px}
+            .back{font-size:14px}
+            .hero-content{padding-top:0}
+            .kicker{font-size:12px}
+            .hero h1{font-size:clamp(35px,9vw,47px);margin:11px 0 12px}
+            .hero-content p{font-size:16px;line-height:1.45}
+        }
+        /* Encabezado sin arcos decorativos */
+        .hero::before,.hero::after{display:none !important}
     </style>
 </head>
 <body>
-<header class="hero"><div class="topbar"><a aria-label="LOA, volver al inicio" class="brand" href="./index.html"><img src="images/loa_logo_new.png" alt="LOA"></a><a class="back" href="./index.html">← Volver al inicio</a></div><div class="hero-content"><div class="kicker">LOA · VERANO 2027</div><h1>¡Preparamos todo<br/><span>para ir a la playa!</span></h1><p>Una guía sencilla para completar la inscripción y tener todo listo para disfrutar cada día en LOA.</p></div></header>
+<header class="hero"><div class="hero-inner"><div class="topbar"><a class="back" href="./index.html">← Volver al inicio</a><a aria-label="LOA, volver al inicio" class="brand" href="./index.html"><img src="images/loa_logo_new.png" alt="LOA"></a></div><div class="hero-content"><div class="kicker">LOA · VERANO 2027</div><h1>¡Preparamos todo<br/><span>para ir a la playa!</span></h1><p>Una guía sencilla para completar la inscripción y tener todo listo para disfrutar cada día en LOA.</p></div></div></header>
 <main class="main">
     <section aria-labelledby="requisitos-titulo"><div class="section-eyebrow">01 · Antes de empezar</div><h2 class="section-title" id="requisitos-titulo">Requisitos de inscripción</h2>
         <div class="steps">
-            <article class="step"><span class="step-number">01</span><div><h3>Certificado de aptitud física</h3><p>Requerido para poder asegurar a los chicos. Se puede presentar hasta el 31 de diciembre y se aceptan certificados del año corriente.</p></div></article>
+            <article class="step"><span class="step-number">01</span><div><h3>Certificado de aptitud física</h3><p><strong>Requerido para poder asegurar a los chicos.</strong> Se puede presentar hasta el 31 de diciembre y se aceptan certificados del año corriente.</p></div></article>
             <article class="step"><span class="step-number">02</span><div><h3>Ficha de datos</h3><p>Detalla la información del alumno que sea importante tener en cuenta.</p><a class="step-link" href="https://www.loasurf.com.ar" rel="noopener noreferrer" target="_blank">Completar ficha de datos <span aria-hidden="true">↗</span></a></div></article>
 
             <article class="step"><span class="step-number">03</span><div><h3>Autorización del alumno</h3><p>Para completar y firmar la autorización, ingresá desde el siguiente enlace.</p><a class="step-link" href="https://www.loasurf.com.ar/autorizacion_alumno2" rel="noopener noreferrer" target="_blank">Completar autorización <span aria-hidden="true">↗</span></a></div></article>
