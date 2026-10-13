@@ -64,6 +64,10 @@
             .main{padding-top:24px}
             .side::after{font-size:82px;right:5px;bottom:16px;color:#ffffff12}
         }
+        /* Lista de playa más compacta, en desktop y mobile. */
+        .packing{padding-top:6px;padding-bottom:6px}
+        .packing li{padding-top:9px;padding-bottom:9px}
+        @media(max-width:740px){.packing{padding-top:5px;padding-bottom:5px}.packing li{padding-top:8px;padding-bottom:8px}}
     </style>
 </head>
 <body>
@@ -81,7 +85,7 @@
         <p class="section-desc">Les dejamos una lista con los elementos que recomendamos llevar. Podés ir marcando lo que ya preparaste.</p>
         <div class="beach-layout"><ul class="packing">
             <li><input id="e1" type="checkbox"/><label for="e1"><span class="emoji">🎒</span><span>Mochila</span></label></li>
-            <li><input id="e2" type="checkbox"/><label for="e2"><span class="emoji">🏖️</span><span>Toalla o poncho cambiador</span></label></li>
+            <li><input id="e2" type="checkbox"/><label for="e2"><span class="emoji">🏖️</span><span>Poncho cambiador identificador de LOA</span></label></li>
             <li><input id="e3" type="checkbox"/><label for="e3"><span class="emoji">👙</span><span>Malla <small>Dos, en lo posible.</small></span></label></li>
             <li><input id="e4" type="checkbox"/><label for="e4"><span class="emoji">🩴</span><span>Ojotas</span></label></li>
             <li><input id="e5" type="checkbox"/><label for="e5"><span class="emoji">🧢</span><span>Gorrita para el sol</span></label></li>
