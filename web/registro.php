@@ -4,6 +4,8 @@ global $RECAPTCHA;
 include __DIR__ . '/../config/config.php';
 require __DIR__ . '/../libs/dbhelper.php';
 
+$origenInscripcion = ($_POST['origen'] ?? '') === 'inscripcion';
+
 //recaptcha
 
 if (!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {

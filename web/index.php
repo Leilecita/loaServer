@@ -100,14 +100,44 @@ include __DIR__ . '/../config/config.php';
         .input-group .form-control {
             border-left: none !important;
         }
+        .volver-inscripcion {
+            display: inline-block;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            margin: 18px 0 0;
+        }
+
+        .volver-inscripcion:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .volver-inscripcion {
+                font-size: 14px;
+            }
+        }
 
     </style>
 </head>
 
 <body>
 <div class="container">
+
+    <?php if (($_GET['origen'] ?? '') === 'inscripcion'): ?>
+        <div class="col-md-8 offset-md-2">
+            <a href="https://loasurf.com.ar/verano2027/info-inscripcion.html"
+               class="volver-inscripcion">
+                ← Volver a inscripción
+            </a>
+        </div>
+    <?php endif; ?>
     <div class="col-md-8 offset-md-2 front">
         <form action="registro.php" method="POST">
+            <?php if (($_GET['origen'] ?? '') === 'inscripcion'): ?>
+                <input type="hidden" name="origen" value="inscripcion">
+            <?php endif; ?>
             <img src="img/loa_logo_new.png" class="logoloa" />
             <h3>Datos del alumno</h3>
 

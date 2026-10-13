@@ -82,10 +82,37 @@
             color: #25D366;
             margin-left: 5px;
         }
+        .volver-inscripcion {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .volver-inscripcion:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .volver-inscripcion {
+                top: 15px;
+                left: 20px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
 <body>
+<?php if (!empty($origenInscripcion)): ?>
+    <a href="https://loasurf.com.ar/verano2027/info-inscripcion.html"
+       class="volver-inscripcion">
+        ← Volver a inscripción
+    </a>
+<?php endif; ?>
 <div class="front">
     <img src="img/loa_logo_new.png" class="logoloa" alt="LOA Logo" />
 
