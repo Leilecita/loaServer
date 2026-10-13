@@ -11,14 +11,14 @@
         html{scroll-behavior:smooth}
         body{margin:0;background:var(--sky);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}
         a{color:inherit}
-        .hero{background:linear-gradient(120deg,#075f78,#086c83);color:white;padding:28px clamp(18px,5vw,72px) 58px}
+        .hero{background:linear-gradient(120deg,#075f78,#086c83);color:white;padding:30px clamp(18px,5vw,72px) 24px}
         .hero-inner{max-width:1180px;margin:auto}
-        .topbar{display:flex;justify-content:space-between;align-items:center;gap:14px}
-        .brand{display:inline-flex;align-items:center;text-decoration:none;line-height:0}
+        .topbar{position:relative;height:52px}
+        .brand{position:absolute;right:0;top:34px;display:inline-flex;align-items:center;text-decoration:none;line-height:0}
         .brand img{display:block;width:86px;height:86px;object-fit:contain}
-        .back{font-size:17px;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+        .back{position:absolute;left:0;top:0;font-size:17px;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
         .back:hover{text-decoration:underline}
-        .hero-copy{padding-top:60px}
+        .hero-copy{padding-top:0}
         .eyebrow{color:var(--orange);font-size:15px;font-weight:800;letter-spacing:.08em}
         .hero h1{font-size:clamp(42px,5.5vw,72px);letter-spacing:-.05em;line-height:1;margin:16px 0 14px}
         .hero p{font-size:clamp(17px,1.75vw,22px);line-height:1.45;margin:0}
@@ -47,7 +47,7 @@
         .footer strong{font-size:26px;font-weight:850}.footer div{letter-spacing:.08em;font-size:13px;margin-top:4px}
         .footer a{display:inline-block;margin-top:17px;text-decoration:none;border:1px solid #80b7c4;border-radius:999px;padding:10px 20px;font-size:14px}
         @media(max-width:700px){
-            .hero{padding:19px 20px 33px}.brand img{width:68px;height:68px}.back{font-size:14px}.hero-copy{padding-top:44px}
+            .hero{padding:18px 20px 23px}.topbar{height:57px}.brand{top:34px}.brand img{width:68px;height:68px}.back{font-size:14px}.hero-copy{padding-top:0}
             .eyebrow{font-size:12px}.hero h1{font-size:clamp(35px,9vw,47px);margin:11px 0 12px}.hero p{font-size:16px;line-height:1.45}
             .main{padding:8px 20px 45px}
             .teacher{padding:24px 0}
@@ -59,7 +59,7 @@
             .teacher-role{font-size:11px;line-height:1.25;letter-spacing:.025em}
             .teacher h2{font-size:clamp(20px,5.5vw,27px);line-height:1.08;margin:7px 0 10px;overflow-wrap:break-word}
             .teacher p{font-size:14px;line-height:1.48}
-            #profe-8 .portrait img{object-position:50% 16%; transform:scale(1.24)} /* Ale más cerca en mobile */
+            #profe-8 .portrait img{object-position:50% 14%; transform:scale(1.32)} /* Ale más cerca en mobile */
             .footer{padding:30px 18px}
         }
         @media(max-width:390px){
@@ -74,7 +74,7 @@
         /* Biografías justificadas en desktop y mobile. */
         .teacher p{text-align:justify;text-justify:inter-word;hyphens:auto}
     </style></head><body>
-<header class="hero"><div class="hero-inner"><div class="topbar"><a class="brand" href="./index.html" aria-label="LOA, volver al inicio"><img src="images/loa_logo_new.png" alt="LOA"></a><a class="back" href="./index.html">← <span>Volver al inicio</span></a></div><div class="hero-copy"><div class="eyebrow">EL EQUIPO LOA</div><h1>Nuestros profes.</h1><p>Conocé a las personas que hacen posible cada verano.</p></div></div></header>
+<header class="hero"><div class="hero-inner"><div class="topbar"><a class="back" href="./index.html">← <span>Volver al inicio</span></a><a class="brand" href="./index.html" aria-label="LOA, volver al inicio"><img src="images/loa_logo_new.png" alt="LOA"></a></div><div class="hero-copy"><div class="eyebrow">EL EQUIPO LOA</div><h1>Nuestros profes.</h1><p>Conocé a las personas que hacen posible cada verano.</p></div></div></header>
 <main class="main">
     <article class="teacher" id="profe-1">
         <div class="portrait" aria-label="Fotografía pendiente de Agustín Mitta"><img src="images/profes/agustin-mitta.jpg" alt="Agustín Mitta" loading="lazy" decoding="async" onload="this.parentNode.classList.add('has-photo')" onerror="this.remove()"><div class="photo-fallback" aria-hidden="true"><span class="photo-wave">〰</span><span class="initials">AM</span><span class="photo-caption">Foto próximamente</span></div></div>
