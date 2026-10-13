@@ -27,13 +27,14 @@
         .teacher .portrait{float:left;width:32%;margin:0 clamp(20px,3.2vw,45px) 12px 0}
         .teacher.reverse .portrait{float:right;margin:0 0 12px clamp(20px,3.2vw,45px)}
         .portrait{position:relative;aspect-ratio:1.12/1;border-radius:24px;overflow:hidden;background:linear-gradient(145deg,#c4e8ee,#d9efee 58%,#b1d8e3)}
-        .portrait img{width:100%;height:100%;object-fit:cover;object-position:center 20%;position:absolute;inset:0;z-index:1;display:block}
-        /* Encuadre por foto: conservamos las tarjetas y priorizamos rostros. */
-        #profe-1 .portrait img{object-position:center 20%}  /* Gucho */
-        #profe-3 .portrait img{object-position:center top}  /* Agustín Martínez */
-        #profe-6 .portrait img{object-position:center 18%}  /* Mati */
-        #profe-7 .portrait img{object-position:center top}  /* Vetto */
-        #profe-9 .portrait img{object-position:center top}  /* Leila */
+        .portrait img{width:100%;height:100%;object-fit:cover;object-position:center 20%;position:absolute;inset:0;z-index:1;display:block;transform-origin:center center}
+        /* Ajustes de encuadre y escala por foto. */
+        #profe-1 .portrait img{object-position:52% 18%; transform:scale(1.03)}  /* Agustín Mitta */
+        #profe-3 .portrait img{object-position:52% 8%; transform:scale(1.04)}   /* Agustín Martínez */
+        #profe-6 .portrait img{object-position:50% 16%; transform:scale(1.03)}  /* Mati */
+        #profe-7 .portrait img{object-position:50% 14%; transform:scale(1.03)}  /* Vetto */
+        #profe-8 .portrait img{object-position:50% 18%; transform:scale(1.12)}  /* Ale */
+        #profe-9 .portrait img{object-position:50% 8%; transform:scale(1.04)}   /* Leila */
         .portrait.has-photo .photo-fallback{display:none}
         .photo-fallback{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;color:#4a8090;text-align:center;padding:6px}
         .photo-wave{font-size:32px;line-height:1;opacity:.5}.initials{font-size:clamp(30px,5vw,52px);font-weight:850}.photo-caption{font-size:10px;font-weight:650;letter-spacing:.06em;text-transform:uppercase}
@@ -50,7 +51,7 @@
             .eyebrow{font-size:12px}.hero h1{font-size:clamp(35px,9vw,47px);margin:11px 0 12px}.hero p{font-size:16px;line-height:1.45}
             .main{padding:8px 20px 45px}
             .teacher{padding:24px 0}
-            .teacher .portrait{width:38%;margin:0 14px 8px 0}
+            .teacher .portrait{width:45.6%;margin:0 14px 8px 0}
             .teacher.reverse .portrait{margin:0 0 8px 14px}
             .portrait{aspect-ratio:1/1;border-radius:18px}
             .photo-wave{font-size:24px}.initials{font-size:34px}.photo-caption{font-size:8px;letter-spacing:0}
@@ -58,6 +59,7 @@
             .teacher-role{font-size:11px;line-height:1.25;letter-spacing:.025em}
             .teacher h2{font-size:clamp(20px,5.5vw,27px);line-height:1.08;margin:7px 0 10px;overflow-wrap:break-word}
             .teacher p{font-size:14px;line-height:1.48}
+            #profe-8 .portrait img{object-position:50% 16%; transform:scale(1.24)} /* Ale más cerca en mobile */
             .footer{padding:30px 18px}
         }
         @media(max-width:390px){
