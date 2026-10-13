@@ -27,7 +27,13 @@
         .teacher .portrait{float:left;width:32%;margin:0 clamp(20px,3.2vw,45px) 12px 0}
         .teacher.reverse .portrait{float:right;margin:0 0 12px clamp(20px,3.2vw,45px)}
         .portrait{position:relative;aspect-ratio:1.12/1;border-radius:24px;overflow:hidden;background:linear-gradient(145deg,#c4e8ee,#d9efee 58%,#b1d8e3)}
-        .portrait img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:1;display:block}
+        .portrait img{width:100%;height:100%;object-fit:cover;object-position:center 20%;position:absolute;inset:0;z-index:1;display:block}
+        /* Encuadre por foto: conservamos las tarjetas y priorizamos rostros. */
+        #profe-1 .portrait img{object-position:center 20%}  /* Gucho */
+        #profe-3 .portrait img{object-position:center top}  /* Agustín Martínez */
+        #profe-6 .portrait img{object-position:center 18%}  /* Mati */
+        #profe-7 .portrait img{object-position:center top}  /* Vetto */
+        #profe-9 .portrait img{object-position:center top}  /* Leila */
         .portrait.has-photo .photo-fallback{display:none}
         .photo-fallback{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;color:#4a8090;text-align:center;padding:6px}
         .photo-wave{font-size:32px;line-height:1;opacity:.5}.initials{font-size:clamp(30px,5vw,52px);font-weight:850}.photo-caption{font-size:10px;font-weight:650;letter-spacing:.06em;text-transform:uppercase}
@@ -66,7 +72,7 @@
         /* Biografías justificadas en desktop y mobile. */
         .teacher p{text-align:justify;text-justify:inter-word;hyphens:auto}
     </style></head><body>
-<header class="hero"><div class="hero-inner"><div class="topbar"><a class="brand" href="./index.html" aria-label="LOA, volver al inicio"><img src="images/logo-home.png" alt="LOA"></a><a class="back" href="./index.html">← <span>Volver al inicio</span></a></div><div class="hero-copy"><div class="eyebrow">EL EQUIPO LOA</div><h1>Nuestros profes.</h1><p>Conocé a las personas que hacen posible cada verano.</p></div></div></header>
+<header class="hero"><div class="hero-inner"><div class="topbar"><a class="brand" href="./index.html" aria-label="LOA, volver al inicio"><img src="images/loa_logo_new.png" alt="LOA"></a><a class="back" href="./index.html">← <span>Volver al inicio</span></a></div><div class="hero-copy"><div class="eyebrow">EL EQUIPO LOA</div><h1>Nuestros profes.</h1><p>Conocé a las personas que hacen posible cada verano.</p></div></div></header>
 <main class="main">
     <article class="teacher" id="profe-1">
         <div class="portrait" aria-label="Fotografía pendiente de Agustín Mitta"><img src="images/profes/agustin-mitta.jpg" alt="Agustín Mitta" loading="lazy" decoding="async" onload="this.parentNode.classList.add('has-photo')" onerror="this.remove()"><div class="photo-fallback" aria-hidden="true"><span class="photo-wave">〰</span><span class="initials">AM</span><span class="photo-caption">Foto próximamente</span></div></div>
