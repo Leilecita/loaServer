@@ -68,6 +68,14 @@
         .packing{padding-top:6px;padding-bottom:6px}
         .packing li{padding-top:9px;padding-bottom:9px}
         @media(max-width:740px){.packing{padding-top:5px;padding-bottom:5px}.packing li{padding-top:8px;padding-bottom:8px}}
+
+        /* Poncho LOA: aclaración importante, visualmente destacada y compacta. */
+        .packing .poncho-title{font-weight:750;color:var(--deep)}
+        .packing .poncho-important{display:block;margin-top:5px;padding:5px 9px;border-left:2px solid #efd6ac;border-radius:0 6px 6px 0;background:#fcfaf7;color:#66818a;font-size:13px;font-weight:400;line-height:1.45}
+        .packing input:checked + label .poncho-important{color:#63818a}
+        /* Ícono del poncho verde en reemplazo de la sombrilla, sin alterar la lista. */
+        .packing .poncho-icon{display:block;width:26px;height:27px;object-fit:contain}
+        @media(max-width:740px){.packing .poncho-icon{width:25px;height:26px}}
     </style>
 </head>
 <body>
@@ -76,16 +84,16 @@
     <section aria-label="Pasos para la inscripción">
         <div class="steps">
             <article class="step"><span class="step-number">1</span><div><h3>Certificado de aptitud física</h3><p><strong>Requerido para poder asegurar a los chicos.</strong> Se puede presentar hasta el 31 de diciembre y se aceptan certificados del año corriente.</p></div></article>
-            <article class="step"><span class="step-number">2</span><div><h3>Ficha de datos</h3><p>Detalla la información del alumno que sea importante tener en cuenta.</p><a class="step-link" href="https://www.loasurf.com.ar/?origen=inscripcion" rel="noopener noreferrer" target="_blank">Completar ficha de datos <span aria-hidden="true">↗</span></a></div></article>
+            <article class="step"><span class="step-number">2</span><div><h3>Ficha de datos</h3><p>Detalla la información del alumno que sea importante tener en cuenta.</p><a class="step-link" href="https://www.loasurf.com.ar/datos-alumnos-colonia?origen=inscripcion" rel="noopener noreferrer" target="_blank">Completar ficha de datos <span aria-hidden="true">↗</span></a></div></article>
 
             <article class="step"><span class="step-number">3</span><div><h3>Autorización del alumno</h3><p>Para completar y firmar la autorización, ingresá desde el siguiente enlace.</p><a class="step-link" href="https://www.loasurf.com.ar/autorizacion_alumno2?origen=inscripcion" rel="noopener noreferrer" target="_blank">Completar autorización <span aria-hidden="true">↗</span></a></div></article>
         </div></section>
     <hr class="separator"/>
     <section aria-labelledby="elementos-titulo"><div class="beach-head"><div><h2 class="section-title" id="elementos-titulo">¿Qué llevamos a la playa?</h2></div><div class="beach-tag">☀️ La mochila LOA</div></div>
-        <p class="section-desc">Les dejamos una lista con los elementos que recomendamos llevar. Podés ir marcando lo que ya preparaste.</p>
+        <p class="section-desc">Les dejamos una lista con los elementos necesarios para asistir a la colonia. Podés ir marcando lo que ya preparaste.</p>
         <div class="beach-layout"><ul class="packing">
             <li><input id="e1" type="checkbox"/><label for="e1"><span class="emoji">🎒</span><span>Mochila</span></label></li>
-            <li><input id="e2" type="checkbox"/><label for="e2"><span class="emoji">🏖️</span><span>Poncho cambiador identificador de LOA</span></label></li>
+            <li><input id="e2" type="checkbox"/><label for="e2"><span class="emoji"><img class="poncho-icon" src="images/poncho-loa-icon.png" alt="" aria-hidden="true"/></span><span><strong class="poncho-title">Poncho cambiador identificador verde de LOA</strong><small class="poncho-important">Pedí el tuyo al costo en el local de LOA. Valor $25.000</small></span></label></li>
             <li><input id="e3" type="checkbox"/><label for="e3"><span class="emoji">👙</span><span>Malla <small>Dos, en lo posible.</small></span></label></li>
             <li><input id="e4" type="checkbox"/><label for="e4"><span class="emoji">🩴</span><span>Ojotas</span></label></li>
             <li><input id="e5" type="checkbox"/><label for="e5"><span class="emoji">🧢</span><span>Gorrita para el sol</span></label></li>
