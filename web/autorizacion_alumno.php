@@ -1,4 +1,4 @@
-<?php include 'proteger_pagina.php'; ?>
+<!-- <?php include 'proteger_pagina.php'; ?> -->
 <!doctype html>
 <html>
 <head>
