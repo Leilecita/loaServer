@@ -2353,35 +2353,7 @@
     );
   })();
 
-  (function(){
-    const CUTOFF = '2026-10-31';
 
-    function argentinaDateISO(){
-      const parts = new Intl.DateTimeFormat('en-CA', {
-        timeZone: 'America/Argentina/Buenos_Aires',
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-      }).formatToParts(new Date());
-
-      const values = {};
-      parts.forEach(part => {
-        if(part.type !== 'literal') values[part.type] = part.value;
-      });
-
-      return `${values.year}-${values.month}-${values.day}`;
-    }
-
-    if(argentinaDateISO() >= CUTOFF){
-      const promo = document.querySelector('#formatos .preventa');
-      if(promo) promo.style.display = 'none';
-
-      document.querySelectorAll('#formatos .payment-options-title').forEach(title => {
-        const priceBox = title.closest('.pricebox');
-        if(priceBox) priceBox.style.display = 'none';
-      });
-    }
-  })();
 
   (function(){
     const contact = document.querySelector('.contact.contact-photo');
