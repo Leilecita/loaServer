@@ -2024,7 +2024,7 @@
 
 
   </style>
-
+  <link rel="stylesheet" href="carrusel-profes.css">
 </head><body>
 <nav aria-label="Navegación principal"><div class='logo'><img src='images/logo-home.png' alt='LOA'></div><a class='profes-shortcut' href='nuestros-profes.html' aria-label='Nuestros profes'><span>Nuestros</span><span>profes</span></a><button class='menu-toggle' type='button' aria-label='Abrir menú' aria-expanded='false' aria-controls='menu-principal'><span></span><span></span><span></span></button><div class='menu' id='menu-principal'><a href='#loa'>Qué es LOA</a><a href='#actividades'>Actividades y experiencias</a><a href='#formatos'>Formatos y valores</a><a href='#incluye'>Incluye</a><a href='nuestros-profes.html'>Nuestros profes</a><a class='cta' href='#reserva'>Reservá tu lugar</a></div></nav>
 <main>
@@ -2087,6 +2087,34 @@
       </div>
     </div></div></section>
   <section class="section" id="incluye"><div class="wrap"><div class="kicker">Incluye y no incluye</div><div class="include"><div class="check include-toggle-card"><h3>Qué incluye</h3><span class="include-action-hint" aria-hidden="true"><span class="hint-closed">Ver más</span><span class="hint-open">Cerrar</span></span><button aria-expanded="false" aria-label="Mostrar detalle" class="include-toggle-icon" type="button"></button><div class="include-toggle-body"><div>✓ <strong>40 días de actividades.</strong><span class="secondary">Máximo de 4 días de suspensión por mal tiempo.</span></div><div>✓ <strong>+ gratis adaptación en diciembre</strong><span class="secondary">2 días entre las fiestas</span></div><div>✓ <strong>Seguro del alumno</strong><span class="secondary">con cobertura en todas las actividades<br/>y locaciones.</span></div><div>✓ <strong>Todo el material deportivo de surf</strong><span class="secondary">Material de surf incluido, con tablas soft para mayor seguridad.</span></div><div>✓ <strong>Lycra indentificatoria</strong><span class="secondary">todas con protección para el sol UV 50</span></div><div>✓ <strong>Todas las actividades especiales</strong><span class="secondary">deportes y excursiones</span></div><div>✓ <strong>Pre - campamento</strong></div><div>✓ <strong>Todos los elementos deportivos y recreativos.</strong></div></div></div><div class="check include-toggle-card"><h3>Qué no incluye</h3><span class="include-action-hint" aria-hidden="true"><span class="hint-closed">Ver más</span><span class="hint-open">Cerrar</span></span><button aria-expanded="false" aria-label="Mostrar detalle" class="include-toggle-icon" type="button"></button><div class="include-toggle-body"><div><strong>Tentempié diario</strong></div><div><strong>Poncho cambiador</strong><span class="secondary">de identificación en playa, lo<br/>ofrecemos al costo de fabricación.</span></div><div><strong>Almuerzos jornada extendida</strong><span class="secondary">podés traerlo o te ofrecemos un<br/>menú para comprarlo cuando gustes</span></div><div><strong>Parque acuático Poseidón</strong></div><div><strong>Campamento</strong></div></div></div></div></div></section>
+
+
+
+  <!-- INICIO CARRUSEL PROFES LOA -->
+  <div id="contenedor-profes"></div>
+
+  <script src="carrusel-profes.js"></script>
+
+  <script>
+    fetch('carrusel-profes.html')
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('No se pudo cargar el carrusel');
+              }
+              return response.text();
+            })
+            .then(html => {
+              document.getElementById('contenedor-profes').innerHTML = html;
+              LOA_initProfes();
+            })
+            .catch(error => {
+              console.error('Error cargando profesores:', error);
+            });
+  </script>
+  <!-- FIN CARRUSEL PROFES LOA -->
+
+
+
 
   <section class='contact contact-photo' id='reserva'><div class='contact-overlay'></div><div class='wrap contact-content'><div class='contact-top'><div class='eyebrow'>Cupos limitados</div><h2>Reservá tu lugar</h2><p class='contact-help'>Escribinos y te ayudamos a elegir la mejor opción para tu familia.</p></div><div class='contact-bottom'><a class='contact-whatsapp-float' href='https://wa.me/541140432745?text=Hola%2C%20quiero%20recibir%20informaci%C3%B3n%20sobre%20LOA%20Verano%202027.' aria-label="Contactar a LOA por WhatsApp">
     <svg class="whatsapp-cta-icon" viewBox="0 0 24 24" aria-hidden="true">
