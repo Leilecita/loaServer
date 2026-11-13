@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Clases de surf · LOA</title>
+    <meta name="description" content="Conocé cómo son las clases y cursos de surf de LOA en Santa Teresita. Horarios, modalidades y paquetes de clases.">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <style>
+        /* LOA · Clases de surf — CSS consolidado y sin estilos obsoletos. */
+        :root{--deep:#06465c;--blue:#075f78;--orange:#f7a51a;--ink:#153b48;--muted:#67818b;--cream:#fbfaf6;--sky:#eaf6f8;--line:#dce8e9;--white:#fff}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+        button,a{font:inherit}
+        a{color:inherit}
+        .wrap{width:80%;max-width:1180px;margin-inline:auto}
+        .hero{min-height:640px;height:88svh;max-height:850px;background:#075f78 url("images/portada.JPG") center 52%/cover;display:flex;align-items:flex-end;position:relative;color:white}
+        .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,35,48,.77),rgba(0,35,48,.33) 68%,rgba(0,35,48,.12)),linear-gradient(0deg,rgba(0,35,48,.6),transparent 55%)}
+        .hero-content{position:relative;padding-bottom:32px}
+        .hero h1{font-size:clamp(56px,8vw,112px);letter-spacing:-.068em;line-height:.92;margin:17px 0 25px}
+        .hero p{font-size:clamp(17px,1.6vw,22px);line-height:1.5;max-width:650px;margin:0 0 30px;color:#f8ffff}
+        section{padding:94px 0}
+        .label{font-size:13px;font-weight:850;letter-spacing:.17em;color:#df900e}
+        .heading{font-size:clamp(37px,4.6vw,64px);letter-spacing:-.055em;line-height:1.02;margin:12px 0 22px;color:var(--deep)}
+        .section-blurb{font-size:17px;line-height:1.65;color:#52717d}
+        .pricing{background:#eaf6f8}
+        .pricing-heading{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:24px}
+        .pricing-heading .heading{margin-bottom:8px}
+        .pricing-heading p{margin:0;font-size:16px;line-height:1.5;color:#5a7982}
+        .finish{background:#084f63;position:relative;color:white;padding:90px 0;overflow:hidden}
+        .finish:after{content:"";position:absolute;right:-80px;bottom:-270px;width:560px;height:560px;border:75px solid #ffffff0b;border-radius:50%}
+        .finish .wrap{position:relative;z-index:1}
+        .finish .heading{color:white;max-width:750px}
+        .finish p{font-size:18px;max-width:670px;line-height:1.65;color:#dbeff2}
+        a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+        @media(max-width:1050px){.wrap{width:auto;margin:0 6vw}}
+        @media(max-width:760px){.wrap{margin:0 20px}.hero{height:78svh;min-height:560px}.hero-content{padding-bottom:24px}.hero h1{font-size:clamp(54px,13vw,78px)}section{padding:66px 0}.pricing-heading{display:block}.finish{padding:77px 0}}
+        @media(max-width:380px){.wrap{margin:0 16px}}
+        @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+        .pricing{background:#eaf6f8}
+        .pricing-heading{margin-bottom:29px;width:100%}
+        .pricing-heading > div{width:100%}
+        .pricing-heading p{max-width:100%;width:100%}
+        .surf-price-list{background:#fff;border:1px solid #d5e6e9;border-radius:20px;overflow:hidden}
+        .surf-price-head,.surf-price-row{display:grid;grid-template-columns:1.15fr 1fr 1fr;align-items:center;column-gap:16px;padding:18px 29px}
+        .surf-price-head{background:#f2f8f9;color:#708b93;font-size:11px;font-weight:850;letter-spacing:.12em}
+        .surf-price-head span:first-child{text-align:left}
+        .surf-price-head span:nth-child(2){text-align:center}
+        .surf-price-head span:nth-child(3){text-align:right}
+        .surf-price-row{min-height:79px;border-top:1px solid #e5edef}
+        .surf-count{text-align:left}
+        .surf-count strong{font-size:20px;color:var(--deep);font-weight:750;white-space:nowrap}
+        .surf-count-word{font-size:.78em;font-weight:650;letter-spacing:-.02em;color:var(--deep)}
+        .surf-total{font-size:20px;color:var(--deep);font-weight:750;text-align:center;letter-spacing:-.035em}
+        .surf-unit{text-align:right;font-size:17px;font-weight:400;color:var(--blue)}
+        .surf-unit span{display:block;font-size:12px;font-weight:400;color:#78919a;margin-top:3px}
+        .surf-availability{font-size:16px;line-height:1.55;color:var(--deep);margin:23px 0 9px}
+        @media(max-width:760px){.surf-price-list{border-radius:16px}.surf-price-head,.surf-price-row{grid-template-columns:1.1fr 1.15fr 1fr;gap:8px;padding:15px 13px}.surf-price-head{font-size:9px;letter-spacing:.015em}.surf-price-row{min-height:72px}.surf-count strong{font-size:16px}.surf-total{font-size:16px;white-space:nowrap}.surf-unit{font-size:14px;white-space:nowrap;font-weight:400}.surf-unit span{font-size:10px}.surf-availability{font-size:15px}}
+        @media(max-width:390px){.surf-price-head,.surf-price-row{padding-left:10px;padding-right:10px;gap:5px}.surf-total{font-size:15px}.surf-unit{font-size:13px}.surf-count strong{font-size:15px}}
+        #horarios .surf-hours-flow{display:block;margin-top:38px}
+        #horarios .surf-hours-group{background:#f1eee6;border:0;box-shadow:none;border-radius:14px;padding:25px 30px}
+        #horarios .surf-hours-line{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0;border-bottom:1px solid #dad9d1}
+        #horarios .surf-hours-line:last-child{border-bottom:0}
+        #horarios .surf-hours-line span{color:var(--deep);font-size:18px;line-height:1.45;font-weight:600}
+        #horarios .surf-hours-line strong{color:var(--deep);font-size:21px;font-weight:750;letter-spacing:-.03em;text-align:right}
+        #horarios .surf-hours-guidance{margin-top:28px}
+        #horarios .surf-hours-guidance h3{margin:0 0 13px;color:var(--deep);font-size:22px;letter-spacing:-.025em}
+        #horarios .surf-hours-guidance p{margin:9px 0;color:var(--ink);font-size:17px;line-height:1.55}
+        #horarios .surf-hours-guidance strong{color:var(--deep)}
+        @media(max-width:700px){#horarios .surf-hours-flow{margin-top:26px}#horarios .surf-hours-group{padding:16px 20px;border-radius:16px}#horarios .surf-hours-line{align-items:flex-start;flex-direction:column;gap:4px;padding:14px 0}#horarios .surf-hours-line span{font-size:16px}#horarios .surf-hours-line strong{font-size:19px;text-align:left}#horarios .surf-hours-guidance h3{font-size:20px}#horarios .surf-hours-guidance p{font-size:15px}}
+        .surf-lesson-section{padding-top:88px;padding-bottom:92px}
+        .surf-lesson-intro{max-width:940px}
+        .surf-lesson-intro .heading{margin-bottom:18px}
+        .surf-lesson-intro .section-blurb{max-width:100%;margin:0;font-size:20px;line-height:1.55;color:#153b48}
+        .surf-lesson-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px;margin-top:53px}
+        .surf-lesson-item{position:relative;min-width:0;padding:0 8px 0 0}
+        .surf-lesson-number{display:flex;align-items:center;gap:15px;font-size:25px;line-height:1;color:#db8a0a;font-weight:750;letter-spacing:-.045em;padding-bottom:22px}
+        .surf-lesson-number span{display:block;height:1px;flex:1;background:#bfd9de}
+        .surf-lesson-item h3{font-size:clamp(20px,2vw,25px);line-height:1.16;letter-spacing:-.04em;color:var(--deep);margin:0 0 11px;font-weight:750}
+        .surf-lesson-item p{margin:0;color:#5c7881;font-size:16px;line-height:1.55}
+        @media(max-width:900px){.surf-lesson-flow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}.surf-lesson-item p{max-width:340px}}
+        @media(max-width:600px){.surf-lesson-section{padding-top:60px;padding-bottom:66px}.surf-lesson-intro .section-blurb{font-size:18px;line-height:1.6}.surf-lesson-flow{grid-template-columns:1fr;gap:0;margin-top:30px}.surf-lesson-item{display:grid;grid-template-columns:51px 1fr;column-gap:15px;padding:18px 0 19px;border-top:1px solid #d3e4e7}.surf-lesson-number{grid-row:1 / span 2;align-items:flex-start;padding:2px 0 0;font-size:21px}.surf-lesson-number span{display:none}.surf-lesson-item h3{margin:0 0 7px;font-size:21px}.surf-lesson-item p{font-size:15px;max-width:none}}
+        .surf-gallery{padding:0 0 80px;background:var(--cream)}
+        .surf-gallery .wrap{position:relative}
+        .surf-gallery-window{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+        .surf-gallery-window::-webkit-scrollbar{display:none}
+        .surf-gallery-track{display:flex;gap:15px;width:max-content;padding-bottom:1px}
+        .surf-gallery-track img{height:300px;width:auto;max-width:82vw;object-fit:cover;display:block;scroll-snap-align:start;flex-shrink:0;user-select:none}
+        .surf-gallery-controls{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+        .surf-gallery-controls button{width:39px;height:39px;display:grid;place-items:center;background:transparent;border:1px solid #b9d5db;border-radius:50%;color:var(--deep);font-size:21px;cursor:pointer}
+        .surf-gallery-controls button:hover{background:#eaf6f8}
+        @media(max-width:760px){.surf-gallery{padding-bottom:55px}.surf-gallery-track{gap:11px}.surf-gallery-track img{height:230px;max-width:84vw}.surf-gallery-controls{margin-top:12px}}
+        .hero{background-position:center 52%}
+        .finish{background:url("images/7.jpg") center 54%/cover no-repeat}
+        .finish:after{display:none}
+        @media(max-width:760px){.hero{background-position:center center}.finish{background-position:center center}}
+        .hero{
+            height:100svh;
+            min-height:720px;
+            max-height:none;
+            padding:100px 0 48px;
+            display:flex;
+            align-items:flex-end;
+        }
+        .hero .hero-content{
+            margin-top:auto;
+            margin-bottom:0;
+            padding-bottom:0;
+        }
+        @media(max-width:760px){.hero{height:100svh;min-height:640px;padding:88px 0 32px}.hero .hero-content{padding-bottom:0}}
+        .finish{min-height:76svh;display:flex;flex-direction:column;justify-content:stretch;padding:78px 0 34px}
+        .finish .surf-finish-content{display:flex;flex-direction:column;flex:1;min-height:calc(76svh - 112px);gap:40px}
+        .finish .surf-finish-copy{flex:0 0 auto}
+        .finish .surf-finish-socials{display:flex;justify-content:center;align-items:center;gap:22px;margin-top:auto;padding-top:24px}
+        .finish .surf-finish-socials a{width:76px;height:76px;display:flex;align-items:center;justify-content:center;border:1.4px solid rgba(255,255,255,.78);border-radius:50%;background:rgba(5,38,49,.18);color:white;text-decoration:none;transition:background .2s,transform .2s}
+        .finish .surf-finish-socials a:hover{background:rgba(5,38,49,.45);transform:translateY(-2px)}
+        .finish .surf-finish-socials svg{width:26px;height:26px;display:block}
+        @media(max-width:760px){.finish{padding:64px 0 26px;min-height:72svh}.finish .surf-finish-content{min-height:calc(72svh - 90px)}.finish .surf-finish-socials{gap:16px}.finish .surf-finish-socials a{width:62px;height:62px}.finish .surf-finish-socials svg{width:23px;height:23px}}
+        @media (max-width:760px){.hero{background-image:url("images/portada mobile.jpg");background-position:50% center;background-size:cover}.hero:before{background:linear-gradient(180deg,rgba(0,35,48,.05) 0%,rgba(0,35,48,.07) 36%,rgba(0,35,48,.52) 66%,rgba(0,35,48,.82) 100%)}}
+        .pricing .pricing-heading p,
+        .pricing .pricing-heading p.surf-availability {
+            font-size:20px;
+            line-height:1.55;
+            color:#153b48;
+            font-weight:400;
+        }
+        .pricing .pricing-heading p.surf-availability{margin-top:12px}
+        .finish{padding-top:42px}
+        .finish .surf-finish-socials{gap:18px}
+        .finish .surf-finish-socials a{width:58px;height:58px}
+        .finish .surf-finish-socials svg{width:22px;height:22px}
+        @media(max-width:760px){.pricing .pricing-heading p,
+        .pricing .pricing-heading p.surf-availability{font-size:18px;line-height:1.6}.finish{padding-top:34px}.finish .surf-finish-socials{gap:14px}.finish .surf-finish-socials a{width:50px;height:50px}.finish .surf-finish-socials svg{width:20px;height:20px}}
+        @media(max-width:760px){.finish{background-image:linear-gradient(180deg,rgba(3,44,58,.42),rgba(3,44,58,.34) 46%,rgba(3,44,58,.67)),url("images/bottom mobile.jpg");background-position:center 47%;background-size:cover}}
+        .hero-content > p {margin-bottom:18px;}
+        @media (max-width:760px) {.finish { min-height: 88svh; }.finish .surf-finish-content { min-height: calc(88svh - 90px); }}
+        @media (min-width:761px) {.finish {
+            background-image: linear-gradient(180deg,
+            rgba(3,44,58,.24) 0%,
+            rgba(3,44,58,.07) 45%,
+            rgba(3,44,58,.03) 70%,
+            rgba(3,44,58,.16) 100%
+            ), url("images/7.jpg");
+        }}
+        @media (min-width:761px) {.hero h1 { font-size:clamp(54px,5vw,76px); }.hero p { max-width:none; }@media (min-width:1250px) {.hero p { white-space:nowrap; }}}
+        #horarios .surf-hours-notice-card{margin-top:28px;background:#fff8ed;border-left:4px solid var(--orange);border-radius:0 16px 16px 0;padding:23px 28px;display:block}
+        #horarios .surf-hours-notice-copy h3{margin:0 0 9px;color:var(--deep);font-size:20px;line-height:1.25;font-weight:750}
+        #horarios .surf-hours-notice-copy p{margin:5px 0;color:var(--ink);font-size:16px;line-height:1.5}
+        #horarios .surf-hours-register{display:inline-flex;align-items:center;gap:8px;margin-top:15px;color:var(--blue);font-size:15px;font-weight:700;text-decoration:none;border-bottom:1px solid #075f7866;padding-bottom:3px}
+        #horarios .surf-hours-register span{color:#d88a00}
+        #horarios .surf-hours-register:hover{border-bottom-color:var(--blue)}
+        @media(max-width:760px){#horarios .surf-hours-notice-card{padding:20px 19px;margin-top:25px}#horarios .surf-hours-notice-copy h3{font-size:18px}#horarios .surf-hours-notice-copy p{font-size:15px}#horarios .surf-hours-register{font-size:14px}.finish{background-image:linear-gradient(180deg,rgba(3,44,58,.24) 0%,rgba(3,44,58,.10) 48%,rgba(3,44,58,.38) 100%),url("images/bottom mobile.jpg");}}
+        .hero::before {
+            display:block;
+            background:linear-gradient(to bottom,
+            rgba(0,35,48,0) 0%,
+            rgba(0,35,48,0) 55%,
+            rgba(0,35,48,.12) 73%,
+            rgba(0,35,48,.35) 100%);
+            pointer-events:none;
+        }
+        @media (max-width:760px) {.hero::before {
+            display:block;
+            background:linear-gradient(to bottom,
+            rgba(0,35,48,0) 0%,
+            rgba(0,35,48,0) 50%,
+            rgba(0,35,48,.18) 70%,
+            rgba(0,35,48,.43) 100%);
+        }}
+        .loa-wa-float{
+            position:fixed;right:28px;bottom:28px;z-index:90;
+            display:inline-flex;align-items:center;justify-content:center;gap:0;
+            width:62px;height:62px;padding:0;border-radius:999px;
+            background:#f7a51a;color:#073f50;text-decoration:none;
+            font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;
+            box-shadow:0 12px 30px rgba(0,35,48,.25);
+            transition:width .35s ease,padding .35s ease,gap .35s ease,background .2s ease;
+            overflow:hidden;
+        }
+        .loa-wa-float svg{width:31px;height:31px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+        .loa-wa-float .wa-phone{fill:currentColor;stroke:none}
+        .loa-wa-float:hover{background:#ffb52e}
+        @media(max-width:760px){.loa-wa-float{right:18px;bottom:22px;width:58px;height:58px;font-size:13px}.loa-wa-float svg{width:29px;height:29px}}
+        @media(prefers-reduced-motion:reduce){.loa-wa-float{transition:none}}
+        .loa-site-nav {
+            position:fixed; z-index:100; top:0; left:0; right:0;
+            height:78px; display:flex; align-items:center;
+            padding:0 max(6vw,calc((100vw - 1180px)/2));
+            background:linear-gradient(180deg,rgba(0,35,48,.48),transparent);
+            border-bottom:0; transition:background .35s ease,box-shadow .35s ease;
+        }
+        .loa-site-nav.loa-nav-scrolled {
+            background:rgba(255,255,255,.94);
+            -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+            box-shadow:0 8px 30px #073f4e12;
+        }
+        .loa-site-logo {
+            position:relative; z-index:2;
+            display:block;width:58px;height:58px;flex:0 0 58px;
+            text-decoration:none;overflow:visible;
+        }
+        .loa-site-logo img {
+            position:absolute;top:8px;left:-16px;
+            width:124px;height:124px;max-width:none;margin:0;
+            object-fit:contain;border-radius:50%;
+            transition:width .3s ease,height .3s ease,top .3s ease,left .3s ease;
+        }
+        .loa-nav-scrolled .loa-site-logo img {top:0;left:0;width:58px;height:58px;}
+        .loa-site-links {display:flex;align-items:center;gap:24px;margin-left:auto;}
+        .loa-site-links a {
+            color:white;text-decoration:none;font-size:17px;font-weight:400;
+            text-shadow:0 1px 12px #00394d88;transition:color .25s ease;
+            white-space:nowrap;
+        }
+        .loa-site-links a:hover{text-decoration:underline;}
+        .loa-nav-scrolled .loa-site-links a {color:#06465c;text-shadow:none;}
+        .loa-site-links a.loa-menu-cta {
+            background:#f7a51a;color:white!important;padding:12px 18px;
+            border-radius:999px;font-weight:600;
+        }
+        .loa-menu-toggle {
+            display:none;position:relative;z-index:102;
+            border:0;background:transparent;padding:8px;
+            cursor:pointer;margin-left:auto;margin-right:8px;
+        }
+        .loa-menu-toggle span {
+            display:block;width:24px;height:2px;background:white;
+            margin:5px 0;border-radius:2px;transition:background .25s ease;
+        }
+        .loa-nav-scrolled .loa-menu-toggle span {background:#06465c;}
+        @media (max-width:1449px){.loa-menu-toggle{display:block;}.loa-site-links {
+                                                                      position:fixed;top:78px;
+                                                                      left:max(18px,6vw);right:max(18px,6vw);
+                                                                      height:auto;display:flex;flex-direction:column;align-items:stretch;
+                                                                      gap:0;padding:10px;margin:0;
+                                                                      background:rgba(255,255,255,.98);
+                                                                      border:1px solid #dcecef;border-radius:18px;
+                                                                      box-shadow:0 18px 50px #073f4e24;
+                                                                      opacity:0;pointer-events:none;transform:translateY(-12px);
+                                                                      transition:transform .22s ease,opacity .22s ease;
+                                                                      z-index:101;
+                                                                  }.loa-site-links.open{opacity:1;pointer-events:auto;transform:none;}.loa-site-links a,.loa-nav-scrolled .loa-site-links a {
+                                                                                                                                          display:block;color:#06465c;text-shadow:none;
+                                                                                                                                          padding:13px 14px;border-radius:12px;font-size:17px;
+                                                                                                                                      }.loa-site-links a.loa-menu-cta {
+                                                                                                                                           margin-top:6px;text-align:center;color:white!important;padding:13px 14px;
+                                                                                                                                       }}
+        @media (max-width:800px){.loa-site-nav{height:68px;padding:0 18px;}.loa-site-logo{width:50px;height:50px;flex-basis:50px;}.loa-site-logo img {top:10px;left:0;width:106px;height:106px;}.loa-nav-scrolled .loa-site-logo img {top:0;left:0;width:50px;height:50px;}.loa-site-links{top:68px;left:12px;right:12px;}.loa-site-links a,.loa-nav-scrolled .loa-site-links a{font-size:18px;}}
+        .loa-wa-float {
+            opacity:0;
+            visibility:hidden;
+            pointer-events:none;
+            transform:translateY(16px) scale(.96);
+            transition:opacity .3s ease, transform .3s ease, visibility .3s ease, background .2s ease;
+        }
+        .loa-wa-float.loa-wa-visible {
+            opacity:1;
+            visibility:visible;
+            pointer-events:auto;
+            transform:translateY(0) scale(1);
+        }
+        @media (prefers-reduced-motion:reduce) {.loa-wa-float{transition:none}}
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link rel="preload" as="image" href="images/portada.JPG" media="(min-width:761px)" fetchpriority="high">
+    <link rel="preload" as="image" href="images/portada mobile.jpg" media="(max-width:760px)" fetchpriority="high">
+</head>
+<body>
+<nav class="loa-site-nav" id="loa-site-nav" aria-label="Navegación principal de LOA">
+    <a href="https://loasurf.com.ar/" class="loa-site-logo" aria-label="LOA, ir al inicio">
+        <img src="images/logoloa.png" alt="LOA">
+    </a>
+    <button class="loa-menu-toggle" id="loa-menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="loa-menu-principal">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="loa-site-links" id="loa-menu-principal">
+        <a href="https://loasurf.com.ar/">Inicio</a>
+        <a href="#la-clase">La clase</a>
+        <a href="#paquetes">Paquetes</a>
+        <a href="#horarios">Horarios</a>
+        <a class="loa-menu-cta" href="https://loasurf.com.ar/verano2027/">Colonia de playa</a>
+    </div>
+</nav>
+<main>
+    <section class="hero" id="inicio"><div class="wrap hero-content"><h1>Aprendé a surfear<br>en LOA.</h1><p>Aprendé a surfear, mejorá tu técnica y disfrutá del mar con el equipo de LOA.</p></div></section>
+    <section id="la-clase" class="surf-lesson-section">
+        <div class="wrap">
+            <div class="surf-lesson-intro">
+                <span class="label">LA CLASE DE SURF</span>
+                <h2 class="heading">Dos horas para conectar con el mar.</h2>
+                <p class="section-blurb">Cada clase dura aproximadamente <strong>2 horas</strong>. Un encuentro para aprender la técnica, preparar el cuerpo, practicar en el mar y seguir mejorando.</p>
+            </div>
+            <div class="surf-lesson-flow" aria-label="Las cuatro etapas de la clase de surf">
+                <article class="surf-lesson-item">
+                    <div class="surf-lesson-number">01<span></span></div>
+                    <h3>Charla técnica</h3>
+                    <p>Aprendés cómo pararte sobre la tabla y las técnicas para desenvolverte en el mar.</p>
+                </article>
+                <article class="surf-lesson-item">
+                    <div class="surf-lesson-number">02<span></span></div>
+                    <h3>Calentamiento</h3>
+                    <p>Activación y preparación física antes de entrar al agua.</p>
+                </article>
+                <article class="surf-lesson-item">
+                    <div class="surf-lesson-number">03<span></span></div>
+                    <h3>Una hora de agua</h3>
+                    <p>Practicás en el mar con el acompañamiento de nuestros instructores.</p>
+                </article>
+                <article class="surf-lesson-item">
+                    <div class="surf-lesson-number">04<span></span></div>
+                    <h3>Devolución</h3>
+                    <p>Conversamos sobre cómo fue la clase y qué aspectos podés seguir mejorando.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="surf-gallery" aria-label="Fotos de las clases de surf LOA">
+        <div class="wrap">
+            <div class="surf-gallery-window" id="surfGallery" tabindex="0" aria-label="Galería de clases de surf, desplazable horizontalmente">
+                <div class="surf-gallery-track">
+                    <img src="images/1aa.jpg" alt="Calentamiento grupal sobre la arena" loading="lazy" decoding="async">
+                    <img src="images/1d.JPG" alt="Calentamiento grupal sobre la arena 2" loading="lazy" decoding="async">
+
+                    <img src="images/1e.JPG" alt="Alumna practicando surf" loading="lazy" decoding="async">
+                    <img src="images/1a.JPG" alt="Alumna disfrutando de una ola" loading="lazy" decoding="async">
+                    <img src="images/IMG_7250.JPG" alt="Grupo con las tablas de surf" loading="lazy" decoding="async">
+                    <img src="images/1f.JPG" alt="Grupo de surf en la orilla" loading="lazy" decoding="async">
+                    <img src="images/1g.JPG" alt="Charla técnica antes de entrar al mar" loading="lazy" decoding="async">
+                    <img src="images/1b.JPG" alt="Grupo de alumnos caminando hacia el mar" loading="lazy" decoding="async">
+                    <img src="images/1c.JPG" alt="Alumna surfeando una ola" loading="lazy" decoding="async">
+                    <img src="images/IMG_8885.JPG" alt="Alumna surfeando con instructor" loading="lazy" decoding="async">
+                    <img src="images/8.JPG" alt="Alumna surfeando" loading="lazy" decoding="async">
+                    <img src="images/1.jpg" alt="Grupo saludando en la playa" loading="lazy" decoding="async">
+                    <img src="images/9.jpg" alt="Alumna llevando una tabla" loading="lazy" decoding="async">
+                    <img src="images/6.jpg" alt="Surf en las olas" loading="lazy" decoding="async">
+                    <img src="images/7.jpg" alt="Equipo de LOA en la orilla" loading="lazy" decoding="async">
+                </div>
+            </div>
+            <div class="surf-gallery-controls" aria-label="Controles de la galería">
+                <button type="button" id="surfGalleryPrev" aria-label="Fotos anteriores">‹</button>
+                <button type="button" id="surfGalleryNext" aria-label="Fotos siguientes">›</button>
+            </div>
+        </div>
+    </section>
+    <section class="pricing" id="paquetes"><div class="wrap">
+        <div class="pricing-heading"><div><span class="label">ELEGÍ TU CURSO</span><h2 class="heading">Cursos de clases</h2><p>Cuantas más clases elegís, más económico es el valor individual.</p><p class="surf-availability">Podés utilizar tus clases durante <strong>Enero y Febrero</strong>, eligiendo los días que prefieras, según disponibilidad de cupos.</p></div></div>
+        <div class="surf-price-list" aria-label="Paquetes de clases de surf">
+            <div class="surf-price-head"><span>CLASES</span><span>PRECIO TOTAL</span><span>VALOR POR CLASE</span></div>
+            <div class="surf-price-row"><div class="surf-count"><strong>1 <span class="surf-count-word">clase</span></strong></div><div class="surf-total">$ 25.000</div><div class="surf-unit">$ 25.000</div></div>
+            <div class="surf-price-row"><div class="surf-count"><strong>2 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 48.000</div><div class="surf-unit">$ 24.000</div></div>
+            <div class="surf-price-row"><div class="surf-count"><strong>3 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 69.000</div><div class="surf-unit">$ 23.000</div></div>
+            <div class="surf-price-row"><div class="surf-count"><strong>5 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 110.000</div><div class="surf-unit">$ 22.000</div></div>
+            <div class="surf-price-row"><div class="surf-count"><strong>7 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 147.000</div><div class="surf-unit">$ 21.000</div></div>
+            <div class="surf-price-row"><div class="surf-count"><strong>10 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 200.000</div><div class="surf-unit">$ 20.000</div></div>
+            <div class="surf-price-row"><div class="surf-count"><strong>15 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 300.000</div><div class="surf-unit">$ 20.000</div></div>
+            <div class="surf-price-row"><div class="surf-count"><strong>20 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 400.000</div><div class="surf-unit">$ 20.000</div></div>
+        </div>
+
+    </div></section>
+    <section id="horarios">
+        <div class="wrap">
+            <span class="label">ORGANIZÁ TU DÍA</span>
+            <h2 class="heading">Horarios de las clases</h2>
+            <div class="surf-hours-flow">
+                <div class="surf-hours-group">
+                    <div class="surf-hours-line"><span>Lunes a sábado</span><strong>9:30 · 12:00 · 14:30 hs</strong></div>
+                    <div class="surf-hours-line"><span>Domingos</span><strong>A confirmar</strong></div>
+                </div>
+            </div>
+            <div class="surf-hours-guidance">
+                <h3>¿Qué horario te recomendamos?</h3>
+                <p><strong>Desde los 14 años:</strong> recomendamos venir a las <strong>9:30 hs</strong>.</p>
+                <p><strong>Menores de 14 años:</strong> las clases son a las <strong>14:30 hs</strong>.</p>
+            </div>
+            <aside class="surf-hours-notice-card" aria-label="Información importante para las clases">
+                <div class="surf-hours-notice-copy">
+                    <h3>Importante</h3>
+                    <p>Trabajamos con cupos limitados. Te recomendamos llegar puntual para aprovechar toda la clase.</p>
+                    <p>Si ya sabés que vas a venir, podés adelantar tu inscripción.</p>
+                    <a class="surf-hours-register" href="https://loasurf.com.ar/" target="_blank" rel="noopener noreferrer">Inscribite acá <span aria-hidden="true">↗</span></a>
+                </div>
+            </aside>
+        </div>
+    </section>
+    <section class="finish" id="contacto">
+        <div class="wrap surf-finish-content">
+            <div class="surf-finish-copy">
+                <h2 class="heading">Nos vemos<br>en el agua.</h2>
+                <p>Estamos en <strong>calle 27 y la playa, Santa Teresita</strong>.</p>
+            </div>
+            <div class="surf-finish-socials" aria-label="Redes sociales y ubicación de LOA">
+                <a href="https://www.instagram.com/loa.surflife/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de LOA">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.7" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@loasurf" target="_blank" rel="noopener noreferrer" aria-label="TikTok de LOA">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 2c.35 2.5 1.7 4 4 4.3v3.3c-1.9-.1-3.4-.7-4.8-1.7v7.3c0 4.1-3.1 6.8-6.7 6.8-3.7 0-6.7-3-6.7-6.6 0-3.8 3-6.8 6.8-6.8.5 0 .9 0 1.4.1v3.5a4 4 0 0 0-1.3-.2 3.3 3.3 0 0 0-3.3 3.4c0 1.9 1.5 3.4 3.3 3.4s3.2-1.5 3.2-3.4V2z"/></svg>
+                </a>
+                <a href="https://maps.app.goo.gl/FHE6J6j1VueGC69E8" target="_blank" rel="noopener noreferrer" aria-label="Cómo llegar a LOA">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    (() => {
+        const gallery = document.getElementById('surfGallery');
+        const prev = document.getElementById('surfGalleryPrev');
+        const next = document.getElementById('surfGalleryNext');
+        if (!gallery || !prev || !next) return;
+        function move(direction) {
+            const photo = gallery.querySelector('img');
+            const step = (photo ? photo.getBoundingClientRect().width : 280) + 15;
+            gallery.scrollBy({left: step * direction, behavior: 'smooth'});
+        }
+        prev.addEventListener('click', () => move(-1));
+        next.addEventListener('click', () => move(1));
+    })();
+</script>
+
+<a class="loa-wa-float" id="loa-wa-float"
+   href="https://wa.me/541140432745?text=Hola%2C%20quiero%20consultar%20por%20las%20clases%20de%20surf%20de%20LOA."
+   target="_blank" rel="noopener noreferrer" aria-label="Consultar clases de surf por WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.2 11.7a8.1 8.1 0 0 1-11.9 7.1L4 20l1.2-4.1a8.1 8.1 0 1 1 15-4.2Z"/>
+        <path class="wa-phone" d="M8.2 7.5c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.9 2c.1.3.1.5-.1.7l-.7.8c-.2.2-.1.4 0 .6.7 1.2 1.7 2.2 2.9 2.8.2.1.4.1.6-.1l.9-1c.2-.2.4-.3.7-.2l2 .9c.3.1.4.3.4.5 0 .4-.2 1.4-.9 1.9-.6.5-1.5.8-2.5.6-1.2-.2-2.7-.8-4.4-2.3-1.5-1.3-2.5-3-3-4.1-.4-1.1-.1-2.3.2-3Z"/>
+    </svg>
+</a>
+<script>
+    /* Navegación idéntica a Colonia: scroll > 45px, menú con hamburguesa y cierre al elegir. */
+    (() => {
+        const nav=document.getElementById('loa-site-nav');
+        const toggle=document.getElementById('loa-menu-toggle');
+        const menu=document.getElementById('loa-menu-principal');
+        if(!nav||!toggle||!menu)return;
+        const setScrolled=()=>nav.classList.toggle('loa-nav-scrolled',window.scrollY>45);
+        const setOpen=(open)=>{
+            menu.classList.toggle('open',open);
+            toggle.setAttribute('aria-expanded',String(open));
+            toggle.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');
+        };
+        toggle.addEventListener('click',()=>setOpen(!menu.classList.contains('open')));
+        menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+        document.addEventListener('click',e=>{
+            if(menu.classList.contains('open')&&!nav.contains(e.target))setOpen(false);
+        });
+        document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+        window.addEventListener('scroll',setScrolled,{passive:true});
+        window.addEventListener('resize',()=>setOpen(false),{passive:true});
+        setScrolled();
+    })();
+</script>
+
+<script>
+    /* El ícono aparece únicamente cuando se alcanza el bottom. */
+    (() => {
+        const bottom = document.getElementById('contacto');
+        const wa = document.getElementById('loa-wa-float');
+        if (!bottom || !wa) return;
+        const observer = new IntersectionObserver(entries => {
+            wa.classList.toggle('loa-wa-visible', entries[0].isIntersecting);
+        }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+        observer.observe(bottom);
+    })();
+</script>
+</body></html>
