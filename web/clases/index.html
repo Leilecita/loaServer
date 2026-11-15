@@ -331,18 +331,18 @@
             .finish .surf-finish-copy .heading { margin:0 0 9px; }
         }
 
-        /* Botón de inscripción compacto: secundario respecto del aviso. */
+        /* Inscribirme: misma forma de píldora que Mensajeá acá, colores originales. */
         #horarios .surf-hours-register {
-            display:inline-flex; align-items:center; justify-content:center; gap:14px;
-            margin-top:17px; padding:10px 16px;
-            min-height:42px; border:1px solid rgba(7,95,120,.38); border-radius:9px;
+            display:inline-flex; align-items:center; justify-content:center;
+            margin-top:17px; padding:0 22px;
+            min-height:54px; border:1px solid rgba(7,95,120,.38); border-radius:999px;
             background:rgba(255,255,255,.58); color:var(--deep);
-            font-size:14px; font-weight:650; line-height:1.2; text-decoration:none;
+            font-size:15px; font-weight:650; line-height:1.2; text-decoration:none;
             transition:border-color .18s ease,background .18s ease;
         }
-        #horarios .surf-hours-register span { color:#c67c0b; font-size:17px; line-height:1; }
+        #horarios .surf-hours-register span { display:inline-block; margin-left:12px; color:#c67c0b; font-size:17px; line-height:1; }
         #horarios .surf-hours-register:hover { background:white; border-color:var(--blue); }
-        @media(max-width:760px){#horarios .surf-hours-register{margin-top:15px;font-size:14px;padding:10px 15px;}}
+        @media(max-width:760px){#horarios .surf-hours-register{margin-top:15px;min-height:50px;font-size:14px;padding:0 18px;}}
 
         /* Ajustes finales: cierre casi a pantalla completa y dirección blanca. */
         .finish { height:90svh; min-height:600px; padding:25px 0 28px; }
@@ -382,6 +382,68 @@
             .surf-gallery-track img.gallery-mobile-only { display:block; }
             .surf-gallery-track img.gallery-desktop-only { display:none; }
         }
+
+        /* Franja destacada VETTO debajo de la galería. */
+        .surf-photo-band{background:#075f78;padding:46px 0}
+        .surf-photo-band-inner{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+        .surf-photo-band-copy{max-width:760px}
+        .surf-photo-band-copy h2{margin:0 0 10px;color:#fff;font-size:clamp(28px,3.2vw,42px);line-height:1.1;letter-spacing:-.04em;font-weight:750}
+        .surf-photo-band-copy p{margin:0;color:rgba(255,255,255,.92);font-size:18px;line-height:1.6}
+        .surf-photo-band-button{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 22px;border-radius:999px;background:#fff;color:#075f78;text-decoration:none;font-size:15px;font-weight:750;white-space:nowrap;transition:transform .2s ease,background .2s ease}
+        .surf-photo-band-button span{display:inline-block;margin-left:12px}
+        .surf-photo-band-button:hover{background:#f4f7f8;transform:translateY(-1px)}
+        @media(max-width:760px){.surf-photo-band{padding:34px 0}.surf-photo-band-inner{align-items:flex-start;gap:20px}.surf-photo-band-copy h2{font-size:31px}.surf-photo-band-copy p{font-size:16px}.surf-photo-band-button{min-height:50px;padding:0 18px;font-size:14px}}
+        .surf-lesson-intro .surf-all-ages{margin-top:15px}
+
+        /* Presentación de la experiencia LOA, inmediatamente después de la portada. */
+        .surf-experience-band { background:#f1eee6; padding:75px 0 78px; }
+        .surf-experience { max-width:900px; }
+        .surf-experience h2 { margin:0 0 24px; color:var(--deep); font-size:clamp(34px,4.2vw,56px); letter-spacing:-.05em; line-height:1.08; font-weight:750; }
+        .surf-experience p { margin:0 0 16px; color:var(--ink); font-size:19px; line-height:1.65; }
+        .surf-experience p:last-child { margin-bottom:0; }
+        @media(max-width:760px) {
+            .surf-experience-band { padding:52px 0 56px; }
+            .surf-experience h2 { font-size:clamp(31px,8vw,41px); margin-bottom:19px; }
+            .surf-experience p { font-size:16px; line-height:1.65; }
+        }
+
+        /* Reseñas auténticas compartidas por alumnos en Google. */
+        .surf-reviews{background:#fbfaf6;padding:82px 0 90px}
+        .surf-reviews .heading{max-width:880px;margin-bottom:14px}
+        .surf-reviews-intro{max-width:660px;margin:0 0 32px;font-size:17px;line-height:1.6;color:#52717d}
+        .surf-reviews-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+        .surf-review-card{background:#fff;border:1px solid #dce8e9;border-radius:18px;padding:27px 25px;display:flex;flex-direction:column;min-height:240px}
+        .surf-review-stars{font-size:19px;letter-spacing:3px;color:#e6a11a;line-height:1.2;margin-bottom:20px}
+        .surf-review-card blockquote{margin:0 0 24px;font-size:17px;line-height:1.55;color:var(--ink);flex:1}
+        .surf-review-author{font-size:14px;font-weight:750;color:var(--deep)}
+        .surf-review-source{font-size:12px;color:#67818b;margin-top:5px}
+        .surf-reviews-link{display:inline-flex;align-items:center;gap:10px;color:var(--deep);font-size:15px;font-weight:700;margin-top:28px;text-underline-offset:4px}
+        @media(max-width:800px){
+            .surf-reviews{padding:64px 0 72px}
+            .surf-reviews-grid{
+                display:flex;
+                overflow-x:auto;
+                overflow-y:hidden;
+                gap:14px;
+                padding:2px 2px 14px;
+                scroll-snap-type:x proximity;
+                scroll-padding-inline:2px;
+                scroll-behavior:smooth;
+                -webkit-overflow-scrolling:touch;
+                overscroll-behavior-x:contain;
+                scrollbar-width:none;
+            }
+            .surf-reviews-grid::-webkit-scrollbar{display:none}
+            .surf-review-card{
+                flex:0 0 min(79vw,325px);
+                scroll-snap-align:start;
+                scroll-snap-stop:normal;
+                padding:23px 21px;
+            }
+            .surf-review-card blockquote{font-size:16px}
+            .surf-reviews-intro{font-size:16px}
+        }
+        @media(prefers-reduced-motion:reduce){.surf-reviews-grid{scroll-behavior:auto}}
     </style>
 
 
@@ -425,12 +487,21 @@
         <div class="hero-photo hero-photo-first is-active" aria-hidden="true"></div>
         <div class="hero-photo hero-photo-second" aria-hidden="true"></div>
         <div class="wrap hero-content"><h1>Aprendé a surfear<br>en LOA.</h1><p>Aprendé a surfear, mejorá tu técnica y disfrutá del mar con el equipo de LOA.</p></div></section>
+    <section class="surf-experience-band" aria-labelledby="surf-experience-title">
+        <div class="wrap">
+            <div class="surf-experience">
+                <h2 id="surf-experience-title">Mucho más que aprender a surfear.</h2>
+                <p>En LOA vas a encontrar mucho más que una clase. Un espacio para divertirte, disfrutar del mar y compartir buenos momentos, acompañado por un excelente equipo de profesores que te va a hacer sentir parte desde el primer día.</p>
+            </div>
+        </div>
+    </section>
     <section id="la-clase" class="surf-lesson-section">
         <div class="wrap">
             <div class="surf-lesson-intro">
                 <span class="label">LA CLASE DE SURF</span>
                 <h2 class="heading">Dos horas para conectar con el mar.</h2>
                 <p class="section-blurb">Cada clase dura aproximadamente <strong>2 horas</strong>. Un encuentro para aprender la técnica, preparar el cuerpo, practicar en el mar y seguir mejorando.</p>
+                <p class="section-blurb surf-all-ages"><strong>Para todas las edades y niveles.</strong> No importa si es tu primera vez sobre una tabla o si ya tenés experiencia: nuestras clases se adaptan a cada persona.</p>
             </div>
             <div class="surf-lesson-flow" aria-label="Las cuatro etapas de la clase de surf">
                 <article class="surf-lesson-item">
@@ -499,6 +570,23 @@
             </div>
         </div>
     </section>
+    <section class="surf-photo-band" aria-labelledby="surf-photo-title">
+        <div class="wrap">
+            <div class="surf-photo-band-inner">
+                <div class="surf-photo-band-copy">
+                    <h2 id="surf-photo-title">Después de surfear, pedile tu foto a VETTO.</h2>
+                    <p>Llevate un recuerdo de tu experiencia en LOA.</p>
+                </div>
+                <!-- WhatsApp de VETTO: +54 9 2246 50-7097 -->
+                <a class="surf-photo-band-button"
+                   href="https://wa.me/5492246507097?text=Hola%20VETTO%2C%20quiero%20consultarte%20por%20mis%20fotos%20surfeando%20en%20LOA."
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Pedir mis fotos a VETTO por WhatsApp">
+                    Mensajeá acá <span aria-hidden="true">↗</span>
+                </a>
+            </div>
+        </div>
+    </section>
     <section class="pricing" id="paquetes"><div class="wrap">
         <div class="pricing-heading"><div><span class="label">ELEGÍ TU CURSO</span><h2 class="heading">Cursos de clases</h2><p>Cuantas más clases elegís, más económico es el valor individual.</p><p class="surf-availability">Podés utilizar tus clases durante <strong>Enero y Febrero</strong>, eligiendo los días que prefieras, según disponibilidad de cupos.</p></div></div>
         <div class="surf-price-list" aria-label="Paquetes de clases de surf">
@@ -532,10 +620,38 @@
             <aside class="surf-hours-notice-card" aria-label="Información importante para las clases">
                 <div class="surf-hours-notice-copy">
                     <h3>Importante</h3>
-                    <p>Las clases tienen cupos limitados. Si ya sabés que vas a venir, podés adelantar tu inscripción para coordinar tu lugar.</p>
+                    <p>Las clases tienen cupos limitados. Si ya sabés que vas a venir, podés adelantar tu inscripción.</p>
                     <a class="surf-hours-register" href="https://loasurf.com.ar/" aria-label="Ir al sitio de inscripción de LOA">Inscribirme <span aria-hidden="true">↗</span></a>
                 </div>
             </aside>
+        </div>
+    </section>
+    <section class="surf-reviews" id="resenas" aria-labelledby="surf-reviews-title">
+        <div class="wrap">
+            <span class="label">OPINIONES EN GOOGLE</span>
+            <h2 class="heading" id="surf-reviews-title">Lo que dicen quienes vivieron LOA.</h2>
+            <p class="surf-reviews-intro">Experiencias compartidas por quienes aprendieron y disfrutaron del mar con nosotros.</p>
+            <div class="surf-reviews-grid" aria-label="Reseñas de Google, desplazables horizontalmente en celular">
+                <article class="surf-review-card">
+                    <div class="surf-review-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+                    <blockquote>“Me pareció un lugar excelente para quien quiera aprender…”</blockquote>
+                    <div class="surf-review-author">Ivan Insaurralde</div>
+                    <div class="surf-review-source">Reseña en Google · Fragmento</div>
+                </article>
+                <article class="surf-review-card">
+                    <div class="surf-review-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+                    <blockquote>“Tanta historia sólo es posible por el amor y la pasión que transmiten en cada metida al agua!!…”</blockquote>
+                    <div class="surf-review-author">Roberto Chiodi</div>
+                    <div class="surf-review-source">Reseña en Google · Fragmento</div>
+                </article>
+                <article class="surf-review-card">
+                    <div class="surf-review-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+                    <blockquote>“Qué hermoso es aprender a surfear con gente tan linda.”</blockquote>
+                    <div class="surf-review-author">candela De Gennaro</div>
+                    <div class="surf-review-source">Reseña en Google · Fragmento</div>
+                </article>
+            </div>
+            <a class="surf-reviews-link" href="https://share.google/2MD6mf1LWHw58lWku" target="_blank" rel="noopener noreferrer">Ver opiniones en Google <span aria-hidden="true">↗</span></a>
         </div>
     </section>
     <section class="finish" id="contacto">
@@ -646,4 +762,3 @@
     })();
 </script>
 </body></html>
-
