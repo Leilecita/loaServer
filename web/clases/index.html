@@ -261,6 +261,40 @@
             transform:translateY(0) scale(1);
         }
         @media (prefers-reduced-motion:reduce) {.loa-wa-float{transition:none}}
+
+        /* Mobile: cuatro etapas de la clase en dos columnas (2 × 2). */
+        @media (max-width:600px) {
+            .surf-lesson-flow {
+                grid-template-columns:repeat(2,minmax(0,1fr));
+                column-gap:18px;
+                row-gap:26px;
+                margin-top:32px;
+            }
+            .surf-lesson-item {
+                display:block;
+                min-width:0;
+                padding:0;
+                border-top:0;
+            }
+            .surf-lesson-number {
+                display:flex;
+                align-items:center;
+                gap:12px;
+                padding:0 0 15px;
+                font-size:22px;
+            }
+            .surf-lesson-number span {display:block;}
+            .surf-lesson-item h3 {
+                font-size:19px;
+                line-height:1.16;
+                margin:0 0 9px;
+            }
+            .surf-lesson-item p {
+                font-size:14px;
+                line-height:1.5;
+                max-width:none;
+            }
+        }
     </style>
 
 
