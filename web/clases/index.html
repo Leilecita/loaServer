@@ -295,6 +295,93 @@
                 max-width:none;
             }
         }
+
+        /* Ajustes del 15/11: precios compactos, aviso simple y cierre más amplio. */
+        .surf-price-head { padding-top:13px; padding-bottom:13px; }
+        .surf-price-row { min-height:64px; padding-top:12px; padding-bottom:12px; }
+
+        /* Aviso más liviano, sin botón ni enlace. */
+        #horarios .surf-hours-notice-card {
+            margin-top:30px; padding:21px 25px;
+            background:#fff8ed; border-left:3px solid var(--orange);
+            border-radius:0 12px 12px 0;
+        }
+        #horarios .surf-hours-notice-copy h3 { font-size:19px; margin-bottom:7px; }
+        #horarios .surf-hours-notice-copy p {
+            margin:0; max-width:830px; font-size:16px; line-height:1.55;
+        }
+
+        /* Cierre: más imagen visible, textos arriba y redes al pie. */
+        .finish { min-height:94svh; padding:24px 0 30px; }
+        .finish .surf-finish-content {
+            min-height:calc(94svh - 54px);
+            gap:28px;
+        }
+        .finish .surf-finish-copy .heading { margin:0 0 10px; }
+        .finish .surf-finish-copy p { margin:0; }
+
+        @media (max-width:760px) {
+            .surf-price-head { padding-top:12px; padding-bottom:12px; }
+            .surf-price-row { min-height:60px; padding-top:10px; padding-bottom:10px; }
+            #horarios .surf-hours-notice-card { padding:18px 19px; }
+            #horarios .surf-hours-notice-copy h3 { font-size:18px; }
+            #horarios .surf-hours-notice-copy p { font-size:15px; }
+            .finish { min-height:100svh; padding:22px 0 24px; }
+            .finish .surf-finish-content { min-height:calc(100svh - 46px); gap:22px; }
+            .finish .surf-finish-copy .heading { margin:0 0 9px; }
+        }
+
+        /* Botón de inscripción compacto: secundario respecto del aviso. */
+        #horarios .surf-hours-register {
+            display:inline-flex; align-items:center; justify-content:center; gap:14px;
+            margin-top:17px; padding:10px 16px;
+            min-height:42px; border:1px solid rgba(7,95,120,.38); border-radius:9px;
+            background:rgba(255,255,255,.58); color:var(--deep);
+            font-size:14px; font-weight:650; line-height:1.2; text-decoration:none;
+            transition:border-color .18s ease,background .18s ease;
+        }
+        #horarios .surf-hours-register span { color:#c67c0b; font-size:17px; line-height:1; }
+        #horarios .surf-hours-register:hover { background:white; border-color:var(--blue); }
+        @media(max-width:760px){#horarios .surf-hours-register{margin-top:15px;font-size:14px;padding:10px 15px;}}
+
+        /* Ajustes finales: cierre casi a pantalla completa y dirección blanca. */
+        .finish { height:90svh; min-height:600px; padding:25px 0 28px; }
+        .finish .surf-finish-content { min-height:0; height:100%; flex:1; gap:24px; }
+        .finish .surf-finish-copy p,
+        .finish .surf-finish-copy p strong { color:#fff; }
+        @media (max-width:760px) {
+            .finish { height:88svh; min-height:560px; padding:22px 0 23px; }
+            .finish .surf-finish-content { min-height:0; height:100%; gap:20px; }
+        }
+
+        /* Dos fotos en la portada: transición suave sin oscurecer los originales. */
+        .hero { isolation:isolate; overflow:hidden; }
+        .hero::before { display:none; } /* No se aplica degradado ni sombra a las fotos. */
+        .hero-photo {
+            position:absolute; inset:0; z-index:-1;
+            background-position:center 52%; background-size:cover; background-repeat:no-repeat;
+            opacity:0; transition:opacity 1.3s ease;
+            pointer-events:none;
+        }
+        .hero-photo.is-active { opacity:1; }
+        .hero-photo-first { background-image:url("images/portada.JPG"); }
+        .hero-photo-second { background-image:url("images/lei.JPG"); }
+        .hero .hero-content { z-index:1; }
+        @media (max-width:760px) {
+            .hero-photo { background-position:center center; }
+            .hero-photo-first { background-image:url("images/portada mobile.jpg"); }
+            .hero-photo-second { background-image:url("images/1a.JPG"); }
+        }
+        @media (prefers-reduced-motion:reduce) {
+            .hero-photo { transition:none; }
+        }
+
+        /* Galería: fotografías exclusivas según tamaño de pantalla. */
+        .surf-gallery-track img.gallery-mobile-only { display:none; }
+        @media (max-width:760px) {
+            .surf-gallery-track img.gallery-mobile-only { display:block; }
+            .surf-gallery-track img.gallery-desktop-only { display:none; }
+        }
     </style>
 
 
@@ -334,7 +421,10 @@
     </div>
 </nav>
 <main>
-    <section class="hero" id="inicio"><div class="wrap hero-content"><h1>Aprendé a surfear<br>en LOA.</h1><p>Aprendé a surfear, mejorá tu técnica y disfrutá del mar con el equipo de LOA.</p></div></section>
+    <section class="hero" id="inicio">
+        <div class="hero-photo hero-photo-first is-active" aria-hidden="true"></div>
+        <div class="hero-photo hero-photo-second" aria-hidden="true"></div>
+        <div class="wrap hero-content"><h1>Aprendé a surfear<br>en LOA.</h1><p>Aprendé a surfear, mejorá tu técnica y disfrutá del mar con el equipo de LOA.</p></div></section>
     <section id="la-clase" class="surf-lesson-section">
         <div class="wrap">
             <div class="surf-lesson-intro">
@@ -370,12 +460,24 @@
         <div class="wrap">
             <div class="surf-gallery-window" id="surfGallery" tabindex="0" aria-label="Galería de clases de surf, desplazable horizontalmente">
                 <div class="surf-gallery-track">
+                    <img src="images/lei.JPG"
+                         class="gallery-mobile-only"
+                         alt="Alumna de LOA"
+                         loading="lazy">
                     <img src="images/1aa.jpg" alt="Calentamiento grupal sobre la arena" loading="lazy" decoding="async">
+                    <img src="images/viole.JPG" alt="Alumna" loading="lazy" decoding="async">
                     <img src="images/1d.JPG" alt="Calentamiento grupal sobre la arena 2" loading="lazy" decoding="async">
 
-                    <img src="images/1e.JPG" alt="Alumna practicando surf" loading="lazy" decoding="async">
-                    <img src="images/1a.JPG" alt="Alumna disfrutando de una ola" loading="lazy" decoding="async">
+
+
+
+                    <img src="images/1e.JPG" alt="Alumna disfrutando de una ola" loading="lazy" decoding="async">
+                    <img src="images/1a.JPG"
+                         class="gallery-desktop-only"
+                         alt="Alumna practicando surf"
+                         loading="lazy">
                     <img src="images/IMG_7250.JPG" alt="Grupo con las tablas de surf" loading="lazy" decoding="async">
+                    <img src="images/high.JPG" alt="Alumna" loading="lazy" decoding="async">
                     <img src="images/1f.JPG" alt="Grupo de surf en la orilla" loading="lazy" decoding="async">
                     <img src="images/1g.JPG" alt="Charla técnica antes de entrar al mar" loading="lazy" decoding="async">
                     <img src="images/1b.JPG" alt="Grupo de alumnos caminando hacia el mar" loading="lazy" decoding="async">
@@ -427,9 +529,8 @@
             <aside class="surf-hours-notice-card" aria-label="Información importante para las clases">
                 <div class="surf-hours-notice-copy">
                     <h3>Importante</h3>
-                    <p>Trabajamos con cupos limitados. Te recomendamos llegar puntual para aprovechar toda la clase.</p>
-                    <p>Si ya sabés que vas a venir, podés adelantar tu inscripción.</p>
-                    <a class="surf-hours-register" href="https://loasurf.com.ar/" target="_blank" rel="noopener noreferrer">Inscribite acá <span aria-hidden="true">↗</span></a>
+                    <p>Las clases tienen cupos limitados. Si ya sabés que vas a venir, podés adelantar tu inscripción para coordinar tu lugar.</p>
+                    <a class="surf-hours-register" href="https://loasurf.com.ar/" aria-label="Ir al sitio de inscripción de LOA">Inscribirme <span aria-hidden="true">↗</span></a>
                 </div>
             </aside>
         </div>
@@ -515,4 +616,31 @@
         observer.observe(bottom);
     })();
 </script>
+
+<script>
+    /* Portada: alterna entre dos fotografías cada 6 segundos.
+       No corre si el usuario prefiere reducir movimiento. */
+    (() => {
+        const photos = document.querySelectorAll('#inicio .hero-photo');
+        if (photos.length !== 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        let current = 0;
+        let interval;
+        const advance = () => {
+            current = (current + 1) % photos.length;
+            photos.forEach((photo, index) => photo.classList.toggle('is-active', index === current));
+        };
+        const start = () => {
+            if (!interval) interval = window.setInterval(advance, 6000);
+        };
+        const stop = () => {
+            window.clearInterval(interval);
+            interval = undefined;
+        };
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) stop(); else start();
+        });
+        start();
+    })();
+</script>
 </body></html>
+
