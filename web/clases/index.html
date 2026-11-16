@@ -8,93 +8,93 @@
     <link rel="apple-touch-icon" href="images/favicon.png">
     <style>
         /* LOA · Clases de surf — CSS consolidado y sin estilos obsoletos. */
-        :root{--deep:#06465c;--blue:#075f78;--orange:#f7a51a;--ink:#153b48;--muted:#67818b;--cream:#fbfaf6;--sky:#eaf6f8;--line:#dce8e9;--white:#fff}
-        *{box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-        button,a{font:inherit}
-        a{color:inherit}
-        .wrap{width:80%;max-width:1180px;margin-inline:auto}
-        .hero{min-height:640px;height:88svh;max-height:850px;background:#075f78 url("images/portada.JPG") center 52%/cover;display:flex;align-items:flex-end;position:relative;color:white}
-        .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,35,48,.77),rgba(0,35,48,.33) 68%,rgba(0,35,48,.12)),linear-gradient(0deg,rgba(0,35,48,.6),transparent 55%)}
-        .hero-content{position:relative;padding-bottom:32px}
-        .hero h1{font-size:clamp(56px,8vw,112px);letter-spacing:-.068em;line-height:.92;margin:17px 0 25px}
-        .hero p{font-size:clamp(17px,1.6vw,22px);line-height:1.5;max-width:650px;margin:0 0 30px;color:#f8ffff}
-        section{padding:94px 0}
-        .label{font-size:13px;font-weight:850;letter-spacing:.17em;color:#df900e}
-        .heading{font-size:clamp(37px,4.6vw,64px);letter-spacing:-.055em;line-height:1.02;margin:12px 0 22px;color:var(--deep)}
-        .section-blurb{font-size:17px;line-height:1.65;color:#52717d}
-        .pricing{background:#eaf6f8}
-        .pricing-heading{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:24px}
-        .pricing-heading .heading{margin-bottom:8px}
-        .pricing-heading p{margin:0;font-size:16px;line-height:1.5;color:#5a7982}
-        .finish{background:#084f63;position:relative;color:white;padding:90px 0;overflow:hidden}
-        .finish:after{content:"";position:absolute;right:-80px;bottom:-270px;width:560px;height:560px;border:75px solid #ffffff0b;border-radius:50%}
-        .finish .wrap{position:relative;z-index:1}
-        .finish .heading{color:white;max-width:750px}
-        .finish p{font-size:18px;max-width:670px;line-height:1.65;color:#dbeff2}
-        a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
-        @media(max-width:1050px){.wrap{width:auto;margin:0 6vw}}
-        @media(max-width:760px){.wrap{margin:0 20px}.hero{height:78svh;min-height:560px}.hero-content{padding-bottom:24px}.hero h1{font-size:clamp(54px,13vw,78px)}section{padding:66px 0}.pricing-heading{display:block}.finish{padding:77px 0}}
-        @media(max-width:380px){.wrap{margin:0 16px}}
-        @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-        .pricing{background:#eaf6f8}
-        .pricing-heading{margin-bottom:29px;width:100%}
-        .pricing-heading > div{width:100%}
-        .pricing-heading p{max-width:100%;width:100%}
-        .surf-price-list{background:#fff;border:1px solid #d5e6e9;border-radius:20px;overflow:hidden}
-        .surf-price-head,.surf-price-row{display:grid;grid-template-columns:1.15fr 1fr 1fr;align-items:center;column-gap:16px;padding:18px 29px}
-        .surf-price-head{background:#f2f8f9;color:#708b93;font-size:11px;font-weight:850;letter-spacing:.12em}
-        .surf-price-head span:first-child{text-align:left}
-        .surf-price-head span:nth-child(2){text-align:center}
-        .surf-price-head span:nth-child(3){text-align:right}
-        .surf-price-row{min-height:79px;border-top:1px solid #e5edef}
-        .surf-count{text-align:left}
-        .surf-count strong{font-size:20px;color:var(--deep);font-weight:750;white-space:nowrap}
-        .surf-count-word{font-size:.78em;font-weight:650;letter-spacing:-.02em;color:var(--deep)}
-        .surf-total{font-size:20px;color:var(--deep);font-weight:750;text-align:center;letter-spacing:-.035em}
-        .surf-unit{text-align:right;font-size:17px;font-weight:400;color:var(--blue)}
-        .surf-unit span{display:block;font-size:12px;font-weight:400;color:#78919a;margin-top:3px}
-        .surf-availability{font-size:16px;line-height:1.55;color:var(--deep);margin:23px 0 9px}
-        @media(max-width:760px){.surf-price-list{border-radius:16px}.surf-price-head,.surf-price-row{grid-template-columns:1.1fr 1.15fr 1fr;gap:8px;padding:15px 13px}.surf-price-head{font-size:9px;letter-spacing:.015em}.surf-price-row{min-height:72px}.surf-count strong{font-size:16px}.surf-total{font-size:16px;white-space:nowrap}.surf-unit{font-size:14px;white-space:nowrap;font-weight:400}.surf-unit span{font-size:10px}.surf-availability{font-size:15px}}
-        @media(max-width:390px){.surf-price-head,.surf-price-row{padding-left:10px;padding-right:10px;gap:5px}.surf-total{font-size:15px}.surf-unit{font-size:13px}.surf-count strong{font-size:15px}}
-        #horarios .surf-hours-flow{display:block;margin-top:38px}
-        #horarios .surf-hours-group{background:#f1eee6;border:0;box-shadow:none;border-radius:14px;padding:25px 30px}
-        #horarios .surf-hours-line{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0;border-bottom:1px solid #dad9d1}
-        #horarios .surf-hours-line:last-child{border-bottom:0}
-        #horarios .surf-hours-line span{color:var(--deep);font-size:18px;line-height:1.45;font-weight:600}
-        #horarios .surf-hours-line strong{color:var(--deep);font-size:21px;font-weight:750;letter-spacing:-.03em;text-align:right}
-        #horarios .surf-hours-guidance{margin-top:28px}
-        #horarios .surf-hours-guidance h3{margin:0 0 13px;color:var(--deep);font-size:22px;letter-spacing:-.025em}
-        #horarios .surf-hours-guidance p{margin:9px 0;color:var(--ink);font-size:17px;line-height:1.55}
-        #horarios .surf-hours-guidance strong{color:var(--deep)}
-        @media(max-width:700px){#horarios .surf-hours-flow{margin-top:26px}#horarios .surf-hours-group{padding:16px 20px;border-radius:16px}#horarios .surf-hours-line{align-items:flex-start;flex-direction:column;gap:4px;padding:14px 0}#horarios .surf-hours-line span{font-size:16px}#horarios .surf-hours-line strong{font-size:19px;text-align:left}#horarios .surf-hours-guidance h3{font-size:20px}#horarios .surf-hours-guidance p{font-size:15px}}
-        .surf-lesson-section{padding-top:88px;padding-bottom:92px}
-        .surf-lesson-intro{max-width:940px}
-        .surf-lesson-intro .heading{margin-bottom:18px}
-        .surf-lesson-intro .section-blurb{max-width:100%;margin:0;font-size:20px;line-height:1.55;color:#153b48}
-        .surf-lesson-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px;margin-top:53px}
-        .surf-lesson-item{position:relative;min-width:0;padding:0 8px 0 0}
-        .surf-lesson-number{display:flex;align-items:center;gap:15px;font-size:25px;line-height:1;color:#db8a0a;font-weight:750;letter-spacing:-.045em;padding-bottom:22px}
-        .surf-lesson-number span{display:block;height:1px;flex:1;background:#bfd9de}
-        .surf-lesson-item h3{font-size:clamp(20px,2vw,25px);line-height:1.16;letter-spacing:-.04em;color:var(--deep);margin:0 0 11px;font-weight:750}
-        .surf-lesson-item p{margin:0;color:#5c7881;font-size:16px;line-height:1.55}
-        @media(max-width:900px){.surf-lesson-flow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}.surf-lesson-item p{max-width:340px}}
-        @media(max-width:600px){.surf-lesson-section{padding-top:60px;padding-bottom:66px}.surf-lesson-intro .section-blurb{font-size:18px;line-height:1.6}.surf-lesson-flow{grid-template-columns:1fr;gap:0;margin-top:30px}.surf-lesson-item{display:grid;grid-template-columns:51px 1fr;column-gap:15px;padding:18px 0 19px;border-top:1px solid #d3e4e7}.surf-lesson-number{grid-row:1 / span 2;align-items:flex-start;padding:2px 0 0;font-size:21px}.surf-lesson-number span{display:none}.surf-lesson-item h3{margin:0 0 7px;font-size:21px}.surf-lesson-item p{font-size:15px;max-width:none}}
-        .surf-gallery{padding:0 0 80px;background:var(--cream)}
-        .surf-gallery .wrap{position:relative}
-        .surf-gallery-window{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
-        .surf-gallery-window::-webkit-scrollbar{display:none}
-        .surf-gallery-track{display:flex;gap:15px;width:max-content;padding-bottom:1px}
-        .surf-gallery-track img{height:390px;width:auto;max-width:82vw;object-fit:cover;display:block;scroll-snap-align:start;flex-shrink:0;user-select:none}
-        .surf-gallery-controls{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
-        .surf-gallery-controls button{width:39px;height:39px;display:grid;place-items:center;background:transparent;border:1px solid #b9d5db;border-radius:50%;color:var(--deep);font-size:21px;cursor:pointer}
-        .surf-gallery-controls button:hover{background:#eaf6f8}
-        @media(max-width:760px){.surf-gallery{padding-bottom:55px}.surf-gallery-track{gap:11px}.surf-gallery-track img{height:310px;max-width:84vw}.surf-gallery-controls{margin-top:12px}}
-        .hero{background-position:center 52%}
-        .finish{background:url("images/7.jpg") center 54%/cover no-repeat}
-        .finish:after{display:none}
-        @media(max-width:760px){.hero{background-position:center center}.finish{background-position:center center}}
+        :root{--deep:#06465c;--blue:#075f78;--orange:#f7a51a;--ink:#153b48;--muted:#67818b;--cream:#fbfaf6;--sky:#eaf6f8;--line:#dce8e9;--white:#fff;}
+        *{box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;}
+        button,a{font:inherit;}
+        a{color:inherit;}
+        .wrap{width:80%;max-width:1180px;margin-inline:auto;}
+        .hero{background:#075f78 url("images/portada.JPG") center 52%/cover;position:relative;color:white;}
+        .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,35,48,.77),rgba(0,35,48,.33) 68%,rgba(0,35,48,.12)),linear-gradient(0deg,rgba(0,35,48,.6),transparent 55%);}
+        .hero-content{position:relative;padding-bottom:32px;}
+        .hero h1{font-size:clamp(56px,8vw,112px);letter-spacing:-.068em;line-height:.92;margin:17px 0 25px;}
+        .hero p{font-size:clamp(17px,1.6vw,22px);line-height:1.5;max-width:650px;margin:0 0 30px;color:#f8ffff;font-weight:600;}
+        section{padding:94px 0;}
+        .label{font-size:13px;font-weight:850;letter-spacing:.17em;color:#df900e;}
+        .heading{font-size:clamp(37px,4.6vw,64px);letter-spacing:-.055em;line-height:1.02;margin:12px 0 22px;color:var(--deep);}
+        .section-blurb{font-size:17px;line-height:1.65;color:#52717d;}
+
+        .pricing-heading{display:flex;justify-content:space-between;align-items:end;gap:30px;}
+        .pricing-heading .heading{margin-bottom:8px;}
+        .pricing-heading p{margin:0;font-size:16px;line-height:1.5;color:#5a7982;}
+        .finish{position:relative;color:white;overflow:hidden;}
+        .finish:after{content:"";position:absolute;right:-80px;bottom:-270px;width:560px;height:560px;border:75px solid #ffffff0b;border-radius:50%;}
+        .finish .wrap{position:relative;z-index:1;}
+        .finish .heading{color:white;max-width:750px;}
+        .finish p{font-size:18px;max-width:670px;line-height:1.65;color:#dbeff2;}
+        a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:3px;}
+        @media(max-width:1050px){.wrap{width:auto;margin:0 6vw;}}
+        @media(max-width:760px){.wrap{margin:0 20px;}.hero-content{padding-bottom:24px;}.hero h1{font-size:clamp(54px,13vw,78px);}section{padding:66px 0;}.pricing-heading{display:block;}}
+        @media(max-width:380px){.wrap{margin:0 16px;}}
+        @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;}}
+        .pricing{background:#eaf6f8;}
+        .pricing-heading{margin-bottom:29px;width:100%;}
+        .pricing-heading > div{width:100%;}
+        .pricing-heading p{max-width:100%;width:100%;}
+        .surf-price-list{background:#fff;border:1px solid #d5e6e9;border-radius:20px;overflow:hidden;}
+        .surf-price-head,.surf-price-row{display:grid;grid-template-columns:1.15fr 1fr 1fr;align-items:center;column-gap:16px;padding:18px 29px;}
+        .surf-price-head{background:#f2f8f9;color:#708b93;font-size:11px;font-weight:850;letter-spacing:.12em;}
+        .surf-price-head span:first-child{text-align:left;}
+        .surf-price-head span:nth-child(2){text-align:center;}
+        .surf-price-head span:nth-child(3){text-align:right;}
+        .surf-price-row{border-top:1px solid #e5edef;}
+        .surf-count{text-align:left;}
+        .surf-count strong{font-size:20px;color:var(--deep);font-weight:750;white-space:nowrap;}
+        .surf-count-word{font-size:.78em;font-weight:650;letter-spacing:-.02em;color:var(--deep);}
+        .surf-total{font-size:20px;color:var(--deep);font-weight:750;text-align:center;letter-spacing:-.035em;}
+        .surf-unit{text-align:right;font-size:17px;font-weight:400;color:var(--blue);}
+        .surf-unit span{display:block;font-size:12px;font-weight:400;color:#78919a;margin-top:3px;}
+        .surf-availability{font-size:16px;line-height:1.55;color:var(--deep);margin:23px 0 9px;}
+        @media(max-width:760px){.surf-price-list{border-radius:16px;}.surf-price-head,.surf-price-row{grid-template-columns:1.1fr 1.15fr 1fr;gap:8px;padding:15px 13px;}.surf-price-head{font-size:9px;letter-spacing:.015em;}.surf-count strong{font-size:16px;}.surf-total{font-size:16px;white-space:nowrap;}.surf-unit{font-size:14px;white-space:nowrap;font-weight:400;}.surf-unit span{font-size:10px;}.surf-availability{font-size:15px;}}
+        @media(max-width:390px){.surf-price-head,.surf-price-row{padding-left:10px;padding-right:10px;gap:5px;}.surf-total{font-size:15px;}.surf-unit{font-size:13px;}.surf-count strong{font-size:15px;}}
+        #horarios .surf-hours-flow{display:block;margin-top:38px;}
+        #horarios .surf-hours-group{background:#f1eee6;border:0;box-shadow:none;border-radius:14px;padding:25px 30px;}
+        #horarios .surf-hours-line{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0;border-bottom:1px solid #dad9d1;}
+        #horarios .surf-hours-line:last-child{border-bottom:0;}
+        #horarios .surf-hours-line span{color:var(--deep);font-size:18px;line-height:1.45;font-weight:600;}
+        #horarios .surf-hours-line strong{color:var(--deep);font-size:21px;font-weight:750;letter-spacing:-.03em;text-align:right;}
+        #horarios .surf-hours-guidance{margin-top:28px;}
+        #horarios .surf-hours-guidance h3{margin:0 0 13px;color:var(--deep);font-size:22px;letter-spacing:-.025em;}
+        #horarios .surf-hours-guidance p{margin:9px 0;color:var(--ink);font-size:17px;line-height:1.55;}
+        #horarios .surf-hours-guidance strong{color:var(--deep);}
+        @media(max-width:700px){#horarios .surf-hours-flow{margin-top:26px;}#horarios .surf-hours-group{padding:16px 20px;border-radius:16px;}#horarios .surf-hours-line{align-items:flex-start;flex-direction:column;gap:4px;padding:14px 0;}#horarios .surf-hours-line span{font-size:16px;}#horarios .surf-hours-line strong{font-size:19px;text-align:left;}#horarios .surf-hours-guidance h3{font-size:20px;}#horarios .surf-hours-guidance p{font-size:15px;}}
+        .surf-lesson-section{padding-top:88px;padding-bottom:92px;}
+        .surf-lesson-intro{max-width:940px;}
+        .surf-lesson-intro .heading{margin-bottom:18px;}
+        .surf-lesson-intro .section-blurb{max-width:100%;margin:0;font-size:20px;line-height:1.55;color:#153b48;}
+        .surf-lesson-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px;margin-top:53px;}
+        .surf-lesson-item{position:relative;min-width:0;padding:0 8px 0 0;}
+        .surf-lesson-number{display:flex;align-items:center;gap:15px;font-size:25px;line-height:1;color:#db8a0a;font-weight:750;letter-spacing:-.045em;padding-bottom:22px;}
+        .surf-lesson-number span{display:block;height:1px;flex:1;background:#bfd9de;}
+        .surf-lesson-item h3{font-size:clamp(20px,2vw,25px);line-height:1.16;letter-spacing:-.04em;color:var(--deep);margin:0 0 11px;font-weight:750;}
+        .surf-lesson-item p{margin:0;color:#5c7881;font-size:16px;line-height:1.55;}
+        @media(max-width:900px){.surf-lesson-flow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px;}.surf-lesson-item p{max-width:340px;}}
+        @media(max-width:600px){.surf-lesson-section{padding-top:60px;padding-bottom:66px;}.surf-lesson-intro .section-blurb{font-size:18px;line-height:1.6;}.surf-lesson-flow{gap:0;}.surf-lesson-item{grid-template-columns:51px 1fr;column-gap:15px;}.surf-lesson-number{grid-row:1 / span 2;}}
+        .surf-gallery{padding:0 0 80px;background:var(--cream);}
+        .surf-gallery .wrap{position:relative;}
+        .surf-gallery-window{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;}
+        .surf-gallery-window::-webkit-scrollbar{display:none;}
+        .surf-gallery-track{display:flex;gap:15px;width:max-content;padding-bottom:1px;}
+        .surf-gallery-track img{height:390px;width:auto;max-width:82vw;object-fit:cover;display:block;scroll-snap-align:start;flex-shrink:0;user-select:none;}
+        .surf-gallery-controls{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;}
+        .surf-gallery-controls button{width:39px;height:39px;display:grid;place-items:center;background:transparent;border:1px solid #b9d5db;border-radius:50%;color:var(--deep);font-size:21px;cursor:pointer;}
+        .surf-gallery-controls button:hover{background:#eaf6f8;}
+        @media(max-width:760px){.surf-gallery{padding-bottom:55px;}.surf-gallery-track{gap:11px;}.surf-gallery-track img{height:310px;max-width:84vw;}.surf-gallery-controls{margin-top:12px;}}
+        .hero{background-position:center 52%;}
+        .finish{background:url("images/7.jpg") center 54%/cover no-repeat;}
+        .finish:after{display:none;}
+
         .hero{
             height:100svh;
             min-height:720px;
@@ -108,16 +108,16 @@
             margin-bottom:0;
             padding-bottom:0;
         }
-        @media(max-width:760px){.hero{height:100svh;min-height:640px;padding:88px 0 32px}.hero .hero-content{padding-bottom:0}}
-        .finish{min-height:76svh;display:flex;flex-direction:column;justify-content:stretch;padding:78px 0 34px}
-        .finish .surf-finish-content{display:flex;flex-direction:column;flex:1;min-height:calc(76svh - 112px);gap:40px}
-        .finish .surf-finish-copy{flex:0 0 auto}
-        .finish .surf-finish-socials{display:flex;justify-content:center;align-items:center;gap:22px;margin-top:auto;padding-top:24px}
-        .finish .surf-finish-socials a{width:76px;height:76px;display:flex;align-items:center;justify-content:center;border:1.4px solid rgba(255,255,255,.78);border-radius:50%;background:rgba(5,38,49,.18);color:white;text-decoration:none;transition:background .2s,transform .2s}
-        .finish .surf-finish-socials a:hover{background:rgba(5,38,49,.45);transform:translateY(-2px)}
-        .finish .surf-finish-socials svg{width:26px;height:26px;display:block}
-        @media(max-width:760px){.finish{padding:64px 0 26px;min-height:72svh}.finish .surf-finish-content{min-height:calc(72svh - 90px)}.finish .surf-finish-socials{gap:16px}.finish .surf-finish-socials a{width:62px;height:62px}.finish .surf-finish-socials svg{width:23px;height:23px}}
-        @media (max-width:760px){.hero{background-image:url("images/portada mobile.jpg");background-position:50% center;background-size:cover}.hero:before{background:linear-gradient(180deg,rgba(0,35,48,.05) 0%,rgba(0,35,48,.07) 36%,rgba(0,35,48,.52) 66%,rgba(0,35,48,.82) 100%)}}
+        @media(max-width:760px){.hero{height:100svh;min-height:640px;padding:88px 0 32px;}.hero .hero-content{padding-bottom:0;}}
+        .finish{display:flex;flex-direction:column;justify-content:stretch;}
+        .finish .surf-finish-content{display:flex;flex-direction:column;}
+        .finish .surf-finish-copy{flex:0 0 auto;}
+        .finish .surf-finish-socials{display:flex;justify-content:center;align-items:center;margin-top:auto;padding-top:24px;}
+        .finish .surf-finish-socials a{display:flex;align-items:center;justify-content:center;border:1.4px solid rgba(255,255,255,.78);border-radius:50%;background:rgba(5,38,49,.18);color:white;text-decoration:none;transition:background .2s,transform .2s;}
+        .finish .surf-finish-socials a:hover{background:rgba(5,38,49,.45);transform:translateY(-2px);}
+        .finish .surf-finish-socials svg{display:block;}
+
+        @media (max-width:760px){.hero{background-image:url("images/portada mobile.jpg");background-position:50% center;background-size:cover;}.hero:before{background:linear-gradient(180deg,rgba(0,35,48,.05) 0%,rgba(0,35,48,.07) 36%,rgba(0,35,48,.52) 66%,rgba(0,35,48,.82) 100%);}}
         .pricing .pricing-heading p,
         .pricing .pricing-heading p.surf-availability {
             font-size:20px;
@@ -125,16 +125,16 @@
             color:#153b48;
             font-weight:400;
         }
-        .pricing .pricing-heading p.surf-availability{margin-top:12px}
-        .finish{padding-top:42px}
-        .finish .surf-finish-socials{gap:18px}
-        .finish .surf-finish-socials a{width:58px;height:58px}
-        .finish .surf-finish-socials svg{width:22px;height:22px}
+        .pricing .pricing-heading p.surf-availability{margin-top:12px;}
+        .finish{padding-top:42px;}
+        .finish .surf-finish-socials{gap:18px;}
+        .finish .surf-finish-socials a{width:58px;height:58px;}
+        .finish .surf-finish-socials svg{width:22px;height:22px;}
         @media(max-width:760px){.pricing .pricing-heading p,
-        .pricing .pricing-heading p.surf-availability{font-size:18px;line-height:1.6}.finish{padding-top:34px}.finish .surf-finish-socials{gap:14px}.finish .surf-finish-socials a{width:50px;height:50px}.finish .surf-finish-socials svg{width:20px;height:20px}}
-        @media(max-width:760px){.finish{background-image:linear-gradient(180deg,rgba(3,44,58,.42),rgba(3,44,58,.34) 46%,rgba(3,44,58,.67)),url("images/bottom mobile.jpg");background-position:center 47%;background-size:cover}}
+        .pricing .pricing-heading p.surf-availability{font-size:18px;line-height:1.6;}.finish{padding-top:34px;}.finish .surf-finish-socials{gap:14px;}.finish .surf-finish-socials a{width:50px;height:50px;}.finish .surf-finish-socials svg{width:20px;height:20px;}}
+        @media(max-width:760px){.finish{background-position:center 47%;background-size:cover;}}
         .hero-content > p {margin-bottom:18px;}
-        @media (max-width:760px) {.finish { min-height: 88svh; }.finish .surf-finish-content { min-height: calc(88svh - 90px); }}
+
         @media (min-width:761px) {.finish {
             background-image: linear-gradient(180deg,
             rgba(3,44,58,.24) 0%,
@@ -144,15 +144,15 @@
             ), url("images/7.jpg");
         }}
         @media (min-width:761px) {.hero h1 { font-size:clamp(54px,5vw,76px); }.hero p { max-width:none; }@media (min-width:1250px) {.hero p { white-space:nowrap; }}}
-        #horarios .surf-hours-notice-card{margin-top:28px;background:#fff8ed;border-left:4px solid var(--orange);border-radius:0 16px 16px 0;padding:23px 28px;display:block}
-        #horarios .surf-hours-notice-copy h3{margin:0 0 9px;color:var(--deep);font-size:20px;line-height:1.25;font-weight:750}
-        #horarios .surf-hours-notice-copy p{margin:5px 0;color:var(--ink);font-size:16px;line-height:1.5}
-        #horarios .surf-hours-register{display:inline-flex;align-items:center;gap:8px;margin-top:15px;color:var(--blue);font-size:15px;font-weight:700;text-decoration:none;border-bottom:1px solid #075f7866;padding-bottom:3px}
-        #horarios .surf-hours-register span{color:#d88a00}
-        #horarios .surf-hours-register:hover{border-bottom-color:var(--blue)}
-        @media(max-width:760px){#horarios .surf-hours-notice-card{padding:20px 19px;margin-top:25px}#horarios .surf-hours-notice-copy h3{font-size:18px}#horarios .surf-hours-notice-copy p{font-size:15px}#horarios .surf-hours-register{font-size:14px}.finish{background-image:linear-gradient(180deg,rgba(3,44,58,.24) 0%,rgba(3,44,58,.10) 48%,rgba(3,44,58,.38) 100%),url("images/bottom mobile.jpg");}}
+        #horarios .surf-hours-notice-card{display:block;}
+        #horarios .surf-hours-notice-copy h3{margin:0 0 9px;color:var(--deep);line-height:1.25;font-weight:750;}
+        #horarios .surf-hours-notice-copy p{color:var(--ink);}
+        #horarios .surf-hours-register{gap:8px;border-bottom:1px solid #075f7866;padding-bottom:3px;}
+
+        #horarios .surf-hours-register:hover{border-bottom-color:var(--blue);}
+        @media(max-width:760px){#horarios .surf-hours-notice-card{margin-top:25px;}.finish{background-image:linear-gradient(180deg,rgba(3,44,58,.24) 0%,rgba(3,44,58,.10) 48%,rgba(3,44,58,.38) 100%),url("images/bottom mobile.jpg");}}
         .hero::before {
-            display:block;
+
             background:linear-gradient(to bottom,
             rgba(0,35,48,0) 0%,
             rgba(0,35,48,0) 55%,
@@ -175,14 +175,14 @@
             background:#f7a51a;color:#073f50;text-decoration:none;
             font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;
             box-shadow:0 12px 30px rgba(0,35,48,.25);
-            transition:width .35s ease,padding .35s ease,gap .35s ease,background .2s ease;
+
             overflow:hidden;
         }
-        .loa-wa-float svg{width:31px;height:31px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-        .loa-wa-float .wa-phone{fill:currentColor;stroke:none}
-        .loa-wa-float:hover{background:#ffb52e}
-        @media(max-width:760px){.loa-wa-float{right:18px;bottom:22px;width:58px;height:58px;font-size:13px}.loa-wa-float svg{width:29px;height:29px}}
-        @media(prefers-reduced-motion:reduce){.loa-wa-float{transition:none}}
+        .loa-wa-float svg{width:31px;height:31px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+        .loa-wa-float .wa-phone{fill:currentColor;stroke:none;}
+        .loa-wa-float:hover{background:#ffb52e;}
+        @media(max-width:760px){.loa-wa-float{right:18px;bottom:22px;width:58px;height:58px;font-size:13px;}.loa-wa-float svg{width:29px;height:29px;}}
+
         .loa-site-nav {
             position:fixed; z-index:100; top:0; left:0; right:0;
             height:78px; display:flex; align-items:center;
@@ -260,7 +260,7 @@
             pointer-events:auto;
             transform:translateY(0) scale(1);
         }
-        @media (prefers-reduced-motion:reduce) {.loa-wa-float{transition:none}}
+        @media (prefers-reduced-motion:reduce) {.loa-wa-float{transition:none;}}
 
         /* Mobile: cuatro etapas de la clase en dos columnas (2 × 2). */
         @media (max-width:600px) {
@@ -312,11 +312,8 @@
         }
 
         /* Cierre: más imagen visible, textos arriba y redes al pie. */
-        .finish { min-height:94svh; padding:24px 0 30px; }
-        .finish .surf-finish-content {
-            min-height:calc(94svh - 54px);
-            gap:28px;
-        }
+
+
         .finish .surf-finish-copy .heading { margin:0 0 10px; }
         .finish .surf-finish-copy p { margin:0; }
 
@@ -326,8 +323,8 @@
             #horarios .surf-hours-notice-card { padding:18px 19px; }
             #horarios .surf-hours-notice-copy h3 { font-size:18px; }
             #horarios .surf-hours-notice-copy p { font-size:15px; }
-            .finish { min-height:100svh; padding:22px 0 24px; }
-            .finish .surf-finish-content { min-height:calc(100svh - 46px); gap:22px; }
+
+
             .finish .surf-finish-copy .heading { margin:0 0 9px; }
         }
 
@@ -370,7 +367,10 @@
         @media (max-width:760px) {
             .hero-photo { background-position:center center; }
             .hero-photo-first { background-image:url("images/portada mobile.jpg"); }
-            .hero-photo-second { background-image:url("images/1a.JPG"); }
+            .hero-photo-second {
+                background-image:url("images/1a.JPG");
+                background-position:58% center;
+            }
         }
         @media (prefers-reduced-motion:reduce) {
             .hero-photo { transition:none; }
@@ -384,16 +384,16 @@
         }
 
         /* Franja destacada VETTO debajo de la galería. */
-        .surf-photo-band{background:#075f78;padding:46px 0}
-        .surf-photo-band-inner{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
-        .surf-photo-band-copy{max-width:760px}
-        .surf-photo-band-copy h2{margin:0 0 10px;color:#fff;font-size:clamp(28px,3.2vw,42px);line-height:1.1;letter-spacing:-.04em;font-weight:750}
-        .surf-photo-band-copy p{margin:0;color:rgba(255,255,255,.92);font-size:18px;line-height:1.6}
-        .surf-photo-band-button{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 22px;border-radius:999px;background:#fff;color:#075f78;text-decoration:none;font-size:15px;font-weight:750;white-space:nowrap;transition:transform .2s ease,background .2s ease}
-        .surf-photo-band-button span{display:inline-block;margin-left:12px}
-        .surf-photo-band-button:hover{background:#f4f7f8;transform:translateY(-1px)}
-        @media(max-width:760px){.surf-photo-band{padding:34px 0}.surf-photo-band-inner{align-items:flex-start;gap:20px}.surf-photo-band-copy h2{font-size:31px}.surf-photo-band-copy p{font-size:16px}.surf-photo-band-button{min-height:50px;padding:0 18px;font-size:14px}}
-        .surf-lesson-intro .surf-all-ages{margin-top:15px}
+        .surf-photo-band{background:#075f78;padding:46px 0;}
+        .surf-photo-band-inner{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
+        .surf-photo-band-copy{max-width:760px;}
+        .surf-photo-band-copy h2{margin:0 0 10px;color:#fff;font-size:clamp(28px,3.2vw,42px);line-height:1.1;letter-spacing:-.04em;font-weight:750;}
+        .surf-photo-band-copy p{margin:0;color:rgba(255,255,255,.92);font-size:18px;line-height:1.6;}
+        .surf-photo-band-button{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 22px;border-radius:999px;background:#fff;color:#075f78;text-decoration:none;font-size:15px;font-weight:750;white-space:nowrap;transition:transform .2s ease,background .2s ease;}
+        .surf-photo-band-button span{display:inline-block;margin-left:12px;}
+        .surf-photo-band-button:hover{background:#f4f7f8;transform:translateY(-1px);}
+        @media(max-width:760px){.surf-photo-band{padding:34px 0;}.surf-photo-band-inner{align-items:flex-start;gap:20px;}.surf-photo-band-copy h2{font-size:31px;}.surf-photo-band-copy p{font-size:16px;}.surf-photo-band-button{min-height:50px;padding:0 18px;font-size:14px;}}
+        .surf-lesson-intro .surf-all-ages{margin-top:15px;}
 
         /* Presentación de la experiencia LOA, inmediatamente después de la portada. */
         .surf-experience-band { background:#f1eee6; padding:75px 0 78px; }
@@ -406,44 +406,6 @@
             .surf-experience h2 { font-size:clamp(31px,8vw,41px); margin-bottom:19px; }
             .surf-experience p { font-size:16px; line-height:1.65; }
         }
-
-        /* Reseñas auténticas compartidas por alumnos en Google. */
-        .surf-reviews{background:#fbfaf6;padding:82px 0 90px}
-        .surf-reviews .heading{max-width:880px;margin-bottom:14px}
-        .surf-reviews-intro{max-width:660px;margin:0 0 32px;font-size:17px;line-height:1.6;color:#52717d}
-        .surf-reviews-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-        .surf-review-card{background:#fff;border:1px solid #dce8e9;border-radius:18px;padding:27px 25px;display:flex;flex-direction:column;min-height:240px}
-        .surf-review-stars{font-size:19px;letter-spacing:3px;color:#e6a11a;line-height:1.2;margin-bottom:20px}
-        .surf-review-card blockquote{margin:0 0 24px;font-size:17px;line-height:1.55;color:var(--ink);flex:1}
-        .surf-review-author{font-size:14px;font-weight:750;color:var(--deep)}
-        .surf-review-source{font-size:12px;color:#67818b;margin-top:5px}
-        .surf-reviews-link{display:inline-flex;align-items:center;gap:10px;color:var(--deep);font-size:15px;font-weight:700;margin-top:28px;text-underline-offset:4px}
-        @media(max-width:800px){
-            .surf-reviews{padding:64px 0 72px}
-            .surf-reviews-grid{
-                display:flex;
-                overflow-x:auto;
-                overflow-y:hidden;
-                gap:14px;
-                padding:2px 2px 14px;
-                scroll-snap-type:x proximity;
-                scroll-padding-inline:2px;
-                scroll-behavior:smooth;
-                -webkit-overflow-scrolling:touch;
-                overscroll-behavior-x:contain;
-                scrollbar-width:none;
-            }
-            .surf-reviews-grid::-webkit-scrollbar{display:none}
-            .surf-review-card{
-                flex:0 0 min(79vw,325px);
-                scroll-snap-align:start;
-                scroll-snap-stop:normal;
-                padding:23px 21px;
-            }
-            .surf-review-card blockquote{font-size:16px}
-            .surf-reviews-intro{font-size:16px}
-        }
-        @media(prefers-reduced-motion:reduce){.surf-reviews-grid{scroll-behavior:auto}}
     </style>
 
 
@@ -531,6 +493,7 @@
         <div class="wrap">
             <div class="surf-gallery-window" id="surfGallery" tabindex="0" aria-label="Galería de clases de surf, desplazable horizontalmente">
                 <div class="surf-gallery-track">
+
                     <img src="images/lei.JPG"
                          class="gallery-mobile-only"
                          alt="Alumna de LOA"
@@ -624,34 +587,6 @@
                     <a class="surf-hours-register" href="https://loasurf.com.ar/" aria-label="Ir al sitio de inscripción de LOA">Inscribirme <span aria-hidden="true">↗</span></a>
                 </div>
             </aside>
-        </div>
-    </section>
-    <section class="surf-reviews" id="resenas" aria-labelledby="surf-reviews-title">
-        <div class="wrap">
-            <span class="label">OPINIONES EN GOOGLE</span>
-            <h2 class="heading" id="surf-reviews-title">Lo que dicen quienes vivieron LOA.</h2>
-            <p class="surf-reviews-intro">Experiencias compartidas por quienes aprendieron y disfrutaron del mar con nosotros.</p>
-            <div class="surf-reviews-grid" aria-label="Reseñas de Google, desplazables horizontalmente en celular">
-                <article class="surf-review-card">
-                    <div class="surf-review-stars" aria-label="5 de 5 estrellas">★★★★★</div>
-                    <blockquote>“Me pareció un lugar excelente para quien quiera aprender…”</blockquote>
-                    <div class="surf-review-author">Ivan Insaurralde</div>
-                    <div class="surf-review-source">Reseña en Google · Fragmento</div>
-                </article>
-                <article class="surf-review-card">
-                    <div class="surf-review-stars" aria-label="5 de 5 estrellas">★★★★★</div>
-                    <blockquote>“Tanta historia sólo es posible por el amor y la pasión que transmiten en cada metida al agua!!…”</blockquote>
-                    <div class="surf-review-author">Roberto Chiodi</div>
-                    <div class="surf-review-source">Reseña en Google · Fragmento</div>
-                </article>
-                <article class="surf-review-card">
-                    <div class="surf-review-stars" aria-label="5 de 5 estrellas">★★★★★</div>
-                    <blockquote>“Qué hermoso es aprender a surfear con gente tan linda.”</blockquote>
-                    <div class="surf-review-author">candela De Gennaro</div>
-                    <div class="surf-review-source">Reseña en Google · Fragmento</div>
-                </article>
-            </div>
-            <a class="surf-reviews-link" href="https://share.google/2MD6mf1LWHw58lWku" target="_blank" rel="noopener noreferrer">Ver opiniones en Google <span aria-hidden="true">↗</span></a>
         </div>
     </section>
     <section class="finish" id="contacto">
@@ -762,3 +697,5 @@
     })();
 </script>
 </body></html>
+
+
