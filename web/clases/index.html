@@ -88,7 +88,7 @@
         .surf-gallery-window.is-dragging{cursor:grabbing;}
         .surf-gallery-window::-webkit-scrollbar{display:none;}
         .surf-gallery-track{display:flex;gap:15px;width:max-content;padding-bottom:1px;will-change:transform;}
-        .surf-gallery-track img{height:390px;width:auto;max-width:82vw;object-fit:cover;display:block;scroll-snap-align:start;flex-shrink:0;user-select:none;}
+        .surf-gallery-track img{height:390px;width:auto;max-width:82vw;object-fit:cover;display:block;scroll-snap-align:start;flex-shrink:0;user-select:none;-webkit-user-drag:none;pointer-events:none;}
         @media(max-width:760px){
             .surf-gallery{padding-bottom:55px;}
             .surf-gallery .wrap{margin-left:6px;margin-right:6px;}
@@ -500,7 +500,7 @@
         <div class="wrap">
             <div class="surf-gallery-window" id="surfGallery" tabindex="0" aria-label="Galería de clases de surf, desplazable horizontalmente">
                 <div class="surf-gallery-track">
-
+                    <img src="images/vivi.jpg" alt="Alumna surfeando" loading="lazy" decoding="async">
                     <img src="images/saludos.jpg" alt="Saludos" loading="lazy" decoding="async">
                     <img src="images/jade.jpg" alt="Surf peque" loading="lazy" decoding="async">
                     <img src="images/1aa.jpg" alt="Calentamiento grupal sobre la arena" loading="lazy" decoding="async">
@@ -516,7 +516,7 @@
                          class="gallery-mobile-only"
                          alt="Alumna practicando surf"
                          loading="lazy">
-                    <img src="images/vivi.jpg" alt="Alumna surfeando" loading="lazy" decoding="async">
+
                     <img src="images/IMG_7250.JPG" alt="Grupo con las tablas de surf" loading="lazy" decoding="async">
                     <img src="images/high.JPG" alt="Alumna" loading="lazy" decoding="async">
                     <img src="images/1g.JPG" alt="Charla técnica antes de entrar al mar" loading="lazy" decoding="async">
@@ -627,6 +627,7 @@
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const originals = [...track.children];
         if (!originals.length) return;
+        originals.forEach(image => { image.draggable = false; });
         track.querySelectorAll('[data-loop-clone="1"]').forEach(clone => clone.remove());
         originals.forEach(image => {
             const clone = image.cloneNode(true);
@@ -707,6 +708,7 @@
                 try { slider.setPointerCapture(event.pointerId); } catch (_) {}
             }
         });
+        slider.addEventListener('dragstart', event => event.preventDefault());
         slider.addEventListener('pointermove', event => {
             if (!dragging) return;
             const dx = event.clientX - startX;
