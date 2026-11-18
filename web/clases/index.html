@@ -91,7 +91,20 @@
         .surf-gallery-controls{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;}
         .surf-gallery-controls button{width:39px;height:39px;display:grid;place-items:center;background:transparent;border:1px solid #b9d5db;border-radius:50%;color:var(--deep);font-size:21px;cursor:pointer;}
         .surf-gallery-controls button:hover{background:#eaf6f8;}
-        @media(max-width:760px){.surf-gallery{padding-bottom:55px;}.surf-gallery-track{gap:11px;}.surf-gallery-track img{height:310px;max-width:84vw;}.surf-gallery-controls{margin-top:12px;}}
+        @media(max-width:760px){
+            .surf-gallery{padding-bottom:55px;}
+            .surf-gallery .wrap{margin-left:6px;margin-right:6px;}
+            .surf-gallery-track{gap:10px;}
+            /* Una imagen completa a lo ancho del carrusel, sin mostrar la siguiente. */
+            .surf-gallery-track img{
+                width:calc(100vw - 12px);
+                min-width:calc(100vw - 12px);
+                max-width:none;
+                height:340px;
+                object-fit:cover;
+            }
+            .surf-gallery-controls{margin-top:12px;margin-right:10px;}
+        }
         .hero{background-position:center 52%;}
         .finish{background:url("images/7.jpg") center 54%/cover no-repeat;}
         .finish:after{display:none;}
@@ -503,10 +516,10 @@
                          alt="Alumna practicando surf"
                          loading="lazy">
                     <img src="images/portadamen.jpg"
-                         class="mobile"
+                         class="gallery-mobile-only"
                          alt="Alumna practicando surf"
                          loading="lazy">
-                    <img src="images/vivi.jpg" alt="Grupo con las tablas de surf" loading="lazy" decoding="async">
+                    <img src="images/vivi.jpg" alt="Alumna surfeando" loading="lazy" decoding="async">
                     <img src="images/IMG_7250.JPG" alt="Grupo con las tablas de surf" loading="lazy" decoding="async">
                     <img src="images/high.JPG" alt="Alumna" loading="lazy" decoding="async">
                     <img src="images/1g.JPG" alt="Charla técnica antes de entrar al mar" loading="lazy" decoding="async">
@@ -696,6 +709,7 @@
     })();
 </script>
 </body></html>
+
 
 
 
