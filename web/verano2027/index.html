@@ -89,9 +89,6 @@
     .surf-gallery-window::-webkit-scrollbar{display:none;}
     .surf-gallery-track{display:flex;gap:15px;width:max-content;padding-bottom:1px;will-change:transform;}
     .surf-gallery-track img{height:390px;width:auto;max-width:82vw;object-fit:cover;display:block;scroll-snap-align:start;flex-shrink:0;user-select:none;}
-    .surf-gallery-controls{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;}
-    .surf-gallery-controls button{width:39px;height:39px;display:grid;place-items:center;background:transparent;border:1px solid #b9d5db;border-radius:50%;color:var(--deep);font-size:21px;cursor:pointer;}
-    .surf-gallery-controls button:hover{background:#eaf6f8;}
     @media(max-width:760px){
       .surf-gallery{padding-bottom:55px;}
       .surf-gallery .wrap{margin-left:6px;margin-right:6px;}
@@ -104,7 +101,6 @@
         height:340px;
         object-fit:cover;
       }
-      .surf-gallery-controls{margin-top:12px;margin-right:10px;}
     }
     .hero{background-position:center 52%;}
     .finish{background:url("images/7.jpg") center 54%/cover no-repeat;}
@@ -539,10 +535,6 @@
                loading="lazy">
         </div>
       </div>
-      <div class="surf-gallery-controls" aria-label="Controles de la galería">
-        <button type="button" id="surfGalleryPrev" aria-label="Fotos anteriores">‹</button>
-        <button type="button" id="surfGalleryNext" aria-label="Fotos siguientes">›</button>
-      </div>
     </div>
   </section>
   <section class="surf-photo-band" aria-labelledby="surf-photo-title">
@@ -627,8 +619,6 @@
   (() => {
     const slider = document.getElementById('surfGallery');
     const track = slider?.querySelector('.surf-gallery-track');
-    const prev = document.getElementById('surfGalleryPrev');
-    const next = document.getElementById('surfGalleryNext');
     if (!slider || !track) return;
 
     // Mismo sistema de transformaciones que el carrusel de Colonia.
@@ -741,16 +731,6 @@
     }
     slider.addEventListener('pointerup', endDrag);
     slider.addEventListener('pointercancel', endDrag);
-
-    // Conservamos los botones de Clases, que Colonia no necesita.
-    function moveByButton(direction) {
-      paused = true;
-      offset = normalize(offset + direction * slider.clientWidth);
-      render();
-      resumeLater();
-    }
-    prev?.addEventListener('click', () => moveByButton(-1));
-    next?.addEventListener('click', () => moveByButton(1));
 
     originals.forEach(image => {
       if (!image.complete) image.addEventListener('load', measure, {once:true});
