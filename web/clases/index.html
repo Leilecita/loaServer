@@ -84,7 +84,7 @@
         @media(max-width:600px){.surf-lesson-section{padding-top:60px;padding-bottom:66px;}.surf-lesson-intro .section-blurb{font-size:18px;line-height:1.6;}.surf-lesson-flow{gap:0;}.surf-lesson-item{grid-template-columns:51px 1fr;column-gap:15px;}.surf-lesson-number{grid-row:1 / span 2;}}
         .surf-gallery{padding:0 0 80px;background:var(--cream);}
         .surf-gallery .wrap{position:relative;}
-        .surf-gallery-window{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;}
+        .surf-gallery-window{overflow-x:auto;scroll-snap-type:none;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:auto;}
         .surf-gallery-window::-webkit-scrollbar{display:none;}
         .surf-gallery-track{display:flex;gap:15px;width:max-content;padding-bottom:1px;}
         .surf-gallery-track img{height:390px;width:auto;max-width:82vw;object-fit:cover;display:block;scroll-snap-align:start;flex-shrink:0;user-select:none;}
@@ -628,13 +628,89 @@
         const prev = document.getElementById('surfGalleryPrev');
         const next = document.getElementById('surfGalleryNext');
         if (!gallery || !prev || !next) return;
+        const track = gallery.querySelector('.surf-gallery-track');
+        if (!track) return;
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const originals = [...track.querySelectorAll('img')];
+        // Repetimos la secuencia para que la vuelta al comienzo sea imperceptible.
+        originals.forEach(image => {
+            const copy = image.cloneNode(true);
+            copy.alt = '';
+            copy.setAttribute('aria-hidden', 'true');
+            copy.classList.add('surf-gallery-clone');
+            track.appendChild(copy);
+        });
+
+        let isVisible = false;
+        let interacting = false;
+        let frameId;
+        let lastTime;
+        let resumeTimer;
+
+        function sequenceWidth() {
+            const first = originals.find(image => getComputedStyle(image).display !== 'none');
+            if (!first) return 0;
+            const copy = [...track.querySelectorAll('.surf-gallery-clone')]
+                .find(image => getComputedStyle(image).display !== 'none');
+            return copy ? copy.offsetLeft - first.offsetLeft : 0;
+        }
+
+        function wrapPosition() {
+            const width = sequenceWidth();
+            if (width > 0 && gallery.scrollLeft >= width) {
+                gallery.scrollLeft -= width;
+            }
+        }
+
+        function animate(time) {
+            if (lastTime !== undefined) {
+                // 32 píxeles por segundo: movimiento continuo y suave.
+                gallery.scrollLeft += 32 * Math.min(time - lastTime, 64) / 1000;
+                wrapPosition();
+            }
+            lastTime = time;
+            frameId = window.requestAnimationFrame(animate);
+        }
+
+        function stop() {
+            window.cancelAnimationFrame(frameId);
+            frameId = undefined;
+            lastTime = undefined;
+        }
+        function start() {
+            if (frameId !== undefined || !isVisible || interacting || document.hidden || reducedMotion.matches) return;
+            frameId = window.requestAnimationFrame(animate);
+        }
+        function pauseForInteraction() {
+            interacting = true;
+            stop();
+            window.clearTimeout(resumeTimer);
+            resumeTimer = window.setTimeout(() => {
+                interacting = false;
+                start();
+            }, 6500);
+        }
+
         function move(direction) {
-            const photo = gallery.querySelector('img');
-            const step = (photo ? photo.getBoundingClientRect().width : 280) + 15;
-            gallery.scrollBy({left: step * direction, behavior: 'smooth'});
+            pauseForInteraction();
+            gallery.scrollBy({left: direction * gallery.clientWidth, behavior: 'smooth'});
         }
         prev.addEventListener('click', () => move(-1));
         next.addEventListener('click', () => move(1));
+        gallery.addEventListener('pointerdown', pauseForInteraction, {passive:true});
+        gallery.addEventListener('wheel', pauseForInteraction, {passive:true});
+        gallery.addEventListener('keydown', pauseForInteraction);
+        gallery.addEventListener('scroll', wrapPosition, {passive:true});
+        document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+        reducedMotion.addEventListener('change', () => reducedMotion.matches ? stop() : start());
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(entries => {
+                isVisible = entries[0].intersectionRatio >= .05;
+                if (isVisible) start(); else stop();
+            }, {threshold:[0, .05, 1]});
+            observer.observe(gallery);
+        }
     })();
 </script>
 
@@ -709,6 +785,7 @@
     })();
 </script>
 </body></html>
+
 
 
 
