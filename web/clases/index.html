@@ -57,6 +57,45 @@
         .surf-total{font-size:20px;color:var(--deep);font-weight:750;text-align:center;letter-spacing:-.035em;}
         .surf-unit{text-align:right;font-size:17px;font-weight:400;color:var(--blue);}
         .surf-price-badge{display:table;margin:3px 0 0 auto;padding:3px 8px;background:#e0f2f5;border-radius:5px;color:#17647b;font-size:10px;font-weight:800;line-height:1.25;letter-spacing:.02em;white-space:nowrap;}
+        .surf-quote{max-width:850px;margin:0 auto;background:#fff;border:1px solid #d5e6e9;border-radius:20px;padding:27px;box-shadow:0 12px 35px rgba(10,68,82,.06);}
+        .surf-quote-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;background:#f2f8f9;border-radius:13px;}
+        .surf-quote-tabs button{border:0;border-radius:10px;background:transparent;padding:13px 8px;color:#52717d;font:inherit;font-size:15px;font-weight:750;cursor:pointer;}
+        .surf-quote-tabs button[aria-selected="true"]{background:#fff;color:var(--deep);box-shadow:0 2px 10px rgba(10,68,82,.10);}
+        .surf-quote-controls{display:grid;grid-template-columns:1fr auto;align-items:end;gap:22px;margin:27px 0;}
+        .surf-quote-label{display:block;font-size:14px;font-weight:750;color:var(--deep);margin-bottom:12px;}
+        .surf-quote-packs{display:flex;flex-wrap:wrap;gap:8px;}
+        .surf-quote-packs button{border:1px solid #c6dce0;background:#fff;color:var(--deep);border-radius:9px;padding:10px 15px;min-width:48px;font:inherit;font-weight:750;cursor:pointer;}
+        .surf-quote-packs button[aria-pressed="true"]{background:var(--deep);border-color:var(--deep);color:#fff;}
+        .surf-quote-stepper{display:flex;align-items:center;gap:12px;}
+        .surf-quote-stepper button{width:39px;height:39px;border:1px solid #c6dce0;border-radius:10px;background:white;color:var(--deep);font-size:23px;cursor:pointer;}
+        .surf-quote-stepper button:disabled{opacity:.35;cursor:default;}
+        .surf-quote-count{min-width:35px;text-align:center;color:var(--deep);font-size:24px;font-weight:800;}
+        .surf-quote-summary{background:#f2f8f9;border-radius:15px;padding:26px;text-align:center;}
+        .surf-quote-summary h3{margin:0 0 12px;color:var(--deep);font-size:clamp(23px,3vw,30px);}
+        .surf-quote-discount{display:inline-block;padding:6px 12px;border-radius:7px;background:#dceef2;color:#17647b;font-size:13px;font-weight:800;}
+        .surf-quote-detail{margin:14px 0;color:#52717d;font-size:15px;}
+        .surf-quote-total-label{display:block;margin:20px 0 5px;color:#52717d;font-size:12px;font-weight:800;letter-spacing:.1em;}
+        .surf-quote-total{display:block;color:var(--deep);font-size:clamp(32px,5vw,46px);font-weight:800;letter-spacing:-.045em;}
+        .surf-quote-copy{display:flex;align-items:center;justify-content:center;width:100%;margin-top:16px;min-height:51px;border:0;border-radius:999px;background:var(--deep);color:white;font:inherit;font-size:15px;font-weight:750;cursor:pointer;}
+        .surf-quote-copy:hover{background:var(--blue);}
+        .surf-quote-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+        .surf-quote-actions .surf-quote-copy{margin-top:0;}
+        .surf-quote-info-button{min-height:51px;border:1px solid #b9d5db;border-radius:999px;background:#fff;color:var(--deep);font:inherit;font-size:15px;font-weight:750;cursor:pointer;}
+        .surf-quote-info-button:hover{background:#f2f8f9;}
+        .surf-info-dialog{width:min(650px,calc(100vw - 28px));max-height:min(80vh,800px);overflow:auto;border:1px solid #d5e6e9;border-radius:18px;padding:25px;background:#fff;color:var(--deep);box-shadow:0 24px 70px rgba(3,44,58,.25);}
+        .surf-info-dialog::backdrop{background:rgba(3,44,58,.58);}
+        .surf-info-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;}
+        .surf-info-title h3{margin:0;font-size:25px;color:var(--deep);}
+        .surf-info-close{width:35px;height:35px;border:1px solid #d5e6e9;border-radius:50%;background:#f2f8f9;color:var(--deep);font-size:23px;cursor:pointer;}
+        .surf-info-dialog h4{font-size:17px;margin:20px 0 9px;color:var(--deep);}
+        .surf-info-table{width:100%;border-collapse:collapse;text-align:right;font-size:14px;}
+        .surf-info-table th,.surf-info-table td{padding:10px 5px;border-bottom:1px solid #e5edef;}
+        .surf-info-table th{font-size:11px;color:#708b93;letter-spacing:.03em;}
+        .surf-info-table th:first-child,.surf-info-table td:first-child{text-align:left;}
+        .surf-info-dialog>p{font-size:13px;color:#52717d;line-height:1.55;}
+        .surf-quote-note{margin:13px 0 0;text-align:center;color:#68848b;font-size:12px;line-height:1.5;}
+        @media(max-width:700px){.surf-quote{padding:16px;border-radius:16px;}.surf-quote-controls{grid-template-columns:minmax(0,1fr) auto;gap:8px;margin:23px 0;}.surf-quote-controls>div{min-width:0;}.surf-quote-label{font-size:12px;min-height:20px;margin-bottom:9px;}.surf-quote-packs{flex-wrap:wrap;gap:5px;}.surf-quote-packs button{min-width:0;padding:8px 9px;font-size:13px;}.surf-quote-stepper{gap:5px;}.surf-quote-stepper button{width:31px;height:36px;font-size:20px;}.surf-quote-count{min-width:25px;font-size:20px;}.surf-quote-summary{padding:25px 12px;}.surf-quote-tabs button{font-size:13px;}}
+        @media(max-width:700px){.surf-quote-actions{gap:7px;}.surf-quote-actions button{font-size:12px;padding:0 8px;}.surf-info-dialog{padding:17px;}.surf-info-table{font-size:12px;}.surf-info-table th{font-size:10px;}}
         .surf-availability{font-size:16px;line-height:1.55;color:var(--deep);margin:23px 0 9px;}
         .surf-prices-coming-soon{padding:28px 30px;background:#fff;border:1px solid #d5e6e9;border-radius:20px;color:var(--deep);font-size:clamp(20px,2.5vw,28px);font-weight:750;line-height:1.3;}
         @media(max-width:760px){.surf-price-list{border-radius:16px;}.surf-price-head,.surf-price-row{grid-template-columns:1.1fr 1.15fr 1fr;gap:8px;padding-left:13px;padding-right:13px;}.surf-price-head{font-size:9px;letter-spacing:.015em;}.surf-price-row{min-height:50px;padding-top:8px;padding-bottom:8px;}.surf-price-residents{padding:13px;font-size:11px;}.surf-residents-discount{font-size:10px;}.surf-count strong{font-size:16px;}.surf-total{font-size:16px;white-space:nowrap;}.surf-unit{font-size:14px;white-space:nowrap;font-weight:400;}.surf-price-badge{font-size:9px;padding:3px 6px;}.surf-availability{font-size:15px;}}
@@ -565,57 +604,180 @@
     </section>
     <section class="pricing" id="paquetes"><div class="wrap">
         <div class="pricing-heading"><div><span class="label">ELEGÍ TU CURSO</span><h2 class="heading">Cursos de clases</h2><p>Cuantas más clases elegís, más económico es el valor individual.</p><p class="surf-availability">Podés utilizar tus clases durante <strong>Enero y Febrero</strong>, eligiendo los días que prefieras, según disponibilidad de cupos.</p></div></div>
-        <div class="surf-prices-coming-soon" role="status" hidden>Los valores para este verano, muy pronto.</div>
-        <!-- Tabla conservada para habilitarla cuando se confirmen los nuevos precios. -->
-        <div class="surf-price-list" aria-label="Paquetes de clases de surf" >
-            <div class="surf-price-head"><span>CLASES</span><span>PRECIO TOTAL</span><span>VALOR POR CLASE</span></div>
-            <div class="surf-price-row"><div class="surf-count"><strong>1 <span class="surf-count-word">clase</span></strong></div><div class="surf-total">$ 35.000</div><div class="surf-unit">$ 35.000</div></div>
-            <div class="surf-price-row"><div class="surf-count"><strong>3 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 95.000</div><div class="surf-unit">$ 32.000<span class="surf-price-badge">10% OFF</span></div></div>
-            <div class="surf-price-row"><div class="surf-count"><strong>6 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 168.000</div><div class="surf-unit">$ 28.000<span class="surf-price-badge">20% OFF</span></div></div>
-            <div class="surf-price-row"><div class="surf-count"><strong>10 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 280.000</div><div class="surf-unit">$ 28.000<span class="surf-price-badge">20% OFF</span></div></div>
-            <div class="surf-price-row"><div class="surf-count"><strong>15 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 394.000</div><div class="surf-unit">$ 26.250<span class="surf-price-badge">25% OFF</span></div></div>
-            <div class="surf-price-row"><div class="surf-count"><strong>20 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 525.000</div><div class="surf-unit">$ 26.250<span class="surf-price-badge">25% OFF</span></div></div>
-            <div class="surf-price-row"><div class="surf-count"><strong>30 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 735.000</div><div class="surf-unit">$ 24.500<span class="surf-price-badge">30% OFF</span></div></div>
-            <div class="surf-price-row"><div class="surf-count"><strong>40 <span class="surf-count-word">clases</span></strong></div><div class="surf-total">$ 980.000</div><div class="surf-unit">$ 24.500<span class="surf-price-badge">30% OFF</span></div></div>
-            <div class="surf-price-residents">
-                <span>DESCUENTO para RESIDENTES</span>
+        <div class="surf-quote" id="surfQuote" aria-label="Cotizador de clases de surf">
+            <div class="surf-quote-tabs" role="tablist" aria-label="Tipo de tarifa">
+                <button type="button" role="tab" data-quote-mode="general" aria-selected="true">General</button>
+                <button type="button" role="tab" data-quote-mode="residentes" aria-selected="false">Residentes</button>
             </div>
-
-            <div class="surf-price-row">
-                <div class="surf-count">
-                    <strong>15 <span class="surf-count-word">clases</span></strong>
+            <div class="surf-quote-controls">
+                <div>
+                    <span class="surf-quote-label">Elegí tu paquete de clases</span>
+                    <div class="surf-quote-packs" id="surfQuotePacks" aria-label="Cantidades sugeridas"></div>
                 </div>
-                <div class="surf-total">$ 342.000</div>
-                <div class="surf-unit">$ 22.750<span class="surf-price-badge">35% OFF</span></div>
-            </div>
-
-            <div class="surf-price-row">
-                <div class="surf-count">
-                    <strong>20 <span class="surf-count-word">clases</span></strong>
+                <div>
+                    <span class="surf-quote-label">Cantidad exacta</span>
+                    <div class="surf-quote-stepper">
+                        <button type="button" id="surfQuoteMinus" aria-label="Restar una clase">−</button>
+                        <output class="surf-quote-count" id="surfQuoteCount" aria-live="polite">10</output>
+                        <button type="button" id="surfQuotePlus" aria-label="Sumar una clase">+</button>
+                    </div>
                 </div>
-                <div class="surf-total">$ 455.000</div>
-                <div class="surf-unit">$ 22.750<span class="surf-price-badge">35% OFF</span></div>
             </div>
-
-            <div class="surf-price-row">
-                <div class="surf-count">
-                    <strong>30 <span class="surf-count-word">clases</span></strong>
-                </div>
-                <div class="surf-total">$ 630.000</div>
-                <div class="surf-unit">$ 21.000<span class="surf-price-badge">40% OFF</span></div>
+            <div class="surf-quote-summary" aria-live="polite">
+                <h3 id="surfQuoteTitle">Pack de 10 clases</h3>
+                <span class="surf-quote-discount" id="surfQuoteDiscount">20% de descuento</span>
+                <p class="surf-quote-detail" id="surfQuoteDetail">$ 28.000 por clase</p>
+                <span class="surf-quote-total-label">PRECIO TOTAL</span>
+                <strong class="surf-quote-total" id="surfQuoteTotal">$ 280.000</strong>
             </div>
-
-            <div class="surf-price-row">
-                <div class="surf-count">
-                    <strong>40 <span class="surf-count-word">clases</span></strong>
-                </div>
-                <div class="surf-total">$ 840.000</div>
-                <div class="surf-unit">$ 21.000<span class="surf-price-badge">40% OFF</span></div>
+            <div class="surf-quote-actions">
+                <button type="button" class="surf-quote-copy" id="surfQuoteShare">Compartir presupuesto</button>
+                <button type="button" class="surf-quote-info-button" id="surfQuoteInfo">Ver cuadro informativo</button>
             </div>
-
+            <p class="surf-quote-note">Clases válidas durante enero y febrero, sujetas a disponibilidad de cupos.</p>
         </div>
+        <dialog class="surf-info-dialog" id="surfQuoteDialog" aria-labelledby="surfInfoTitle">
+            <div class="surf-info-title"><h3 id="surfInfoTitle">Valores de las clases</h3><button type="button" class="surf-info-close" id="surfInfoClose" aria-label="Cerrar cuadro informativo">×</button></div>
+            <h4>General</h4>
+            <table class="surf-info-table"><thead><tr><th>Clases</th><th>Precio total</th><th>Descuento</th></tr></thead><tbody>
+            <tr><td>1</td><td>$ 35.000</td><td>—</td></tr>
+            <tr><td>3</td><td>$ 95.000</td><td>10% aprox.</td></tr>
+            <tr><td>6</td><td>$ 168.000</td><td>20%</td></tr>
+            <tr><td>10</td><td>$ 280.000</td><td>20%</td></tr>
+            <tr><td>15</td><td>$ 394.000</td><td>25% aprox.</td></tr>
+            <tr><td>20</td><td>$ 525.000</td><td>25%</td></tr>
+            <tr><td>30</td><td>$ 735.000</td><td>30%</td></tr>
+            <tr><td>40</td><td>$ 980.000</td><td>30%</td></tr>
+            </tbody></table>
+            <h4>Residentes</h4>
+            <table class="surf-info-table"><thead><tr><th>Clases</th><th>Precio total</th><th>Descuento</th></tr></thead><tbody>
+            <tr><td>15</td><td>$ 342.000</td><td>35% aprox.</td></tr>
+            <tr><td>20</td><td>$ 455.000</td><td>35%</td></tr>
+            <tr><td>30</td><td>$ 630.000</td><td>40%</td></tr>
+            <tr><td>40</td><td>$ 840.000</td><td>40%</td></tr>
+            </tbody></table>
+            <p>Los precios indicados corresponden a los paquetes definidos. Podés elegir cantidades intermedias con el cotizador. Los descuentos se calculan sobre una clase individual de $35.000.</p>
+        </dialog>
 
     </div></section>
+    <script>
+        (() => {
+            const quote = document.getElementById('surfQuote');
+            if (!quote) return;
+            const exact = {
+                general: {1:35000,3:95000,6:168000,10:280000,15:394000,20:525000,30:735000,40:980000},
+                residentes: {15:342000,20:455000,30:630000,40:840000}
+            };
+            const choices = {general:[1,3,6,10,20,30],residentes:[15,20,30,40]};
+            const unitPrice = (mode, n) => mode === 'residentes'
+                ? (n >= 30 ? 21000 : 22750)
+                : (n >= 30 ? 24500 : n >= 15 ? 26250 : n >= 6 ? 28000 : n >= 3 ? 32000 : 35000);
+            const money = value => '$ ' + Math.round(value).toLocaleString('es-AR');
+            let mode = 'general';
+            let count = 10;
+            const packs = document.getElementById('surfQuotePacks');
+            const minus = document.getElementById('surfQuoteMinus');
+            const plus = document.getElementById('surfQuotePlus');
+            const share = document.getElementById('surfQuoteShare');
+            const infoDialog = document.getElementById('surfQuoteDialog');
+            document.getElementById('surfQuoteInfo').addEventListener('click', () => infoDialog.showModal());
+            document.getElementById('surfInfoClose').addEventListener('click', () => infoDialog.close());
+            infoDialog.addEventListener('click', event => { if (event.target === infoDialog) infoDialog.close(); });
+            function calculation() {
+                const total = exact[mode][count] ?? count * unitPrice(mode, count);
+                const average = total / count;
+                const discount = Math.round((1 - average / 35000) * 100);
+                return {total, average, discount};
+            }
+            function render() {
+                const {total, average, discount} = calculation();
+                quote.querySelectorAll('[data-quote-mode]').forEach(button => {
+                    button.setAttribute('aria-selected', String(button.dataset.quoteMode === mode));
+                });
+                packs.replaceChildren();
+                choices[mode].forEach(n => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.textContent = n;
+                    button.setAttribute('aria-label', `${n} ${n === 1 ? 'clase' : 'clases'}`);
+                    button.setAttribute('aria-pressed', String(count === n));
+                    button.addEventListener('click', () => { count = n; render(); });
+                    packs.appendChild(button);
+                });
+                document.getElementById('surfQuoteCount').textContent = count;
+                document.getElementById('surfQuoteTitle').textContent = `Pack de ${count} ${count === 1 ? 'clase' : 'clases'}`;
+                document.getElementById('surfQuoteDiscount').textContent = discount > 0 ? `${discount}% de descuento` : 'Precio individual';
+                document.getElementById('surfQuoteDetail').textContent = `${money(average)} por clase${average % 1 ? ' (aprox.)' : ''}`;
+                document.getElementById('surfQuoteTotal').textContent = money(total);
+                minus.disabled = count <= (mode === 'residentes' ? 15 : 1);
+                plus.disabled = count >= 40;
+                share.textContent = 'Compartir presupuesto';
+            }
+            quote.querySelectorAll('[data-quote-mode]').forEach(button => button.addEventListener('click', () => {
+                mode = button.dataset.quoteMode;
+                count = mode === 'residentes' ? 15 : 10;
+                render();
+            }));
+            minus.addEventListener('click', () => { count = Math.max(mode === 'residentes' ? 15 : 1, count - 1); render(); });
+            plus.addEventListener('click', () => { count = Math.min(40, count + 1); render(); });
+            share.addEventListener('click', async () => {
+                const {total, average, discount} = calculation();
+                const canvas = document.createElement('canvas');
+                canvas.width = 1080;
+                canvas.height = 1080;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+                const rect = (x,y,w,h,r,color) => {
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+                    ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+                    ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+                    ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+                    ctx.fill();
+                };
+                const line = (value,y,font,color) => {
+                    ctx.font = font; ctx.fillStyle = color; ctx.textAlign = 'center';
+                    ctx.fillText(value,540,y);
+                };
+                ctx.fillStyle = '#eaf6f8'; ctx.fillRect(0,0,1080,1080);
+                rect(55,55,970,970,48,'#ffffff');
+                line('LOA',180,'800 75px Arial, sans-serif','#09465a');
+                line('CLASES DE SURF',225,'700 24px Arial, sans-serif','#52717d');
+                rect(165,270,750,615,32,'#f2f8f9');
+                line(mode === 'general' ? 'TARIFA GENERAL' : 'TARIFA RESIDENTES',335,'700 25px Arial, sans-serif','#52717d');
+                line(`${count} ${count === 1 ? 'clase' : 'clases'} de surf`,420,'800 54px Arial, sans-serif','#09465a');
+                rect(350,454,380,60,16,'#dceef2');
+                line(discount > 0 ? `${discount}% DE DESCUENTO` : 'PRECIO INDIVIDUAL',493,'800 26px Arial, sans-serif','#17647b');
+                line(`${money(average)} por clase${average % 1 ? ' (aprox.)' : ''}`,577,'400 30px Arial, sans-serif','#52717d');
+                line('PRECIO TOTAL',667,'700 25px Arial, sans-serif','#52717d');
+                line(money(total),763,'800 82px Arial, sans-serif','#09465a');
+                line('Enero y febrero · Sujeto a disponibilidad de cupos',952,'400 24px Arial, sans-serif','#52717d');
+                try {
+                    const blob = await new Promise(resolve => canvas.toBlob(resolve,'image/png'));
+                    if (!blob) throw new Error('No se pudo crear la imagen');
+                    const filename = `LOA-presupuesto-${mode}-${count}-clases.png`;
+                    const file = new File([blob],filename,{type:'image/png'});
+                    if (navigator.share && navigator.canShare?.({files:[file]})) {
+                        try {
+                            await navigator.share({files:[file],title:'Presupuesto LOA · Clases de Surf'});
+                            share.textContent = 'Compartir presupuesto';
+                            return;
+                        } catch (error) {
+                            if (error.name === 'AbortError') return;
+                        }
+                    }
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url; link.download = filename;
+                    document.body.appendChild(link); link.click(); link.remove();
+                    setTimeout(() => URL.revokeObjectURL(url),30000);
+                    share.textContent = '¡Imagen descargada!';
+                } catch (_) { share.textContent = 'No se pudo compartir'; }
+            });
+            render();
+        })();
+    </script>
     <section id="horarios">
         <div class="wrap">
             <span class="label">ORGANIZÁ TU DÍA</span>
@@ -859,3 +1021,5 @@
     })();
 </script>
 </body></html>
+
+
