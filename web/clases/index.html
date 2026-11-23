@@ -608,7 +608,7 @@
         <div class="surf-quote" id="surfQuote" aria-label="Cotizador de clases de surf">
             <div class="surf-quote-tabs" role="tablist" aria-label="Tipo de tarifa">
                 <button type="button" role="tab" data-quote-mode="general" aria-selected="true">General</button>
-                <button type="button" role="tab" data-quote-mode="residentes" aria-selected="false">Residentes</button>
+                <button type="button" role="tab" data-quote-mode="residentes" aria-selected="false">Preventa residentes</button>
             </div>
             <div class="surf-quote-controls">
                 <div>
@@ -641,17 +641,17 @@
             <h4>General</h4>
             <table class="surf-info-table"><thead><tr><th>Clases</th><th>Precio total</th><th>Descuento</th></tr></thead><tbody>
             <tr><td>1</td><td>$ 35.000</td><td>—</td></tr>
-            <tr><td>3</td><td>$ 95.000</td><td>10% aprox.</td></tr>
+            <tr><td>3</td><td>$ 95.000</td><td>10%</td></tr>
             <tr><td>6</td><td>$ 168.000</td><td>20%</td></tr>
             <tr><td>10</td><td>$ 280.000</td><td>20%</td></tr>
-            <tr><td>15</td><td>$ 394.000</td><td>25% aprox.</td></tr>
+            <tr><td>15</td><td>$ 394.000</td><td>25%</td></tr>
             <tr><td>20</td><td>$ 525.000</td><td>25%</td></tr>
             <tr><td>30</td><td>$ 735.000</td><td>30%</td></tr>
             <tr><td>40</td><td>$ 980.000</td><td>30%</td></tr>
             </tbody></table>
-            <h4>Residentes</h4>
+            <h4>Preventa residentes</h4>
             <table class="surf-info-table"><thead><tr><th>Clases</th><th>Precio total</th><th>Descuento</th></tr></thead><tbody>
-            <tr><td>15</td><td>$ 342.000</td><td>35% aprox.</td></tr>
+            <tr><td>15</td><td>$ 342.000</td><td>35%</td></tr>
             <tr><td>20</td><td>$ 455.000</td><td>35%</td></tr>
             <tr><td>30</td><td>$ 630.000</td><td>40%</td></tr>
             <tr><td>40</td><td>$ 840.000</td><td>40%</td></tr>
@@ -707,7 +707,7 @@
                 document.getElementById('surfQuoteCount').textContent = count;
                 document.getElementById('surfQuoteTitle').textContent = `Pack ${count} ${count === 1 ? 'clase' : 'clases'}`;
                 document.getElementById('surfQuoteDiscount').textContent = discount > 0 ? `${discount}% de descuento` : 'Precio individual';
-                document.getElementById('surfQuoteDetail').textContent = `${money(average)} por clase${average % 1 ? ' (aprox.)' : ''}`;
+                document.getElementById('surfQuoteDetail').textContent = `${money(average)} por clase`;
                 document.getElementById('surfQuoteTotal').textContent = money(total);
                 minus.disabled = count <= (mode === 'residentes' ? 15 : 1);
                 plus.disabled = count >= 40;
@@ -745,11 +745,11 @@
                 line('LOA',180,'800 75px Arial, sans-serif','#09465a');
                 line('CLASES DE SURF',225,'700 24px Arial, sans-serif','#52717d');
                 rect(165,270,750,615,32,'#f2f8f9');
-                line(mode === 'general' ? 'TARIFA GENERAL' : 'TARIFA RESIDENTES',335,'700 25px Arial, sans-serif','#52717d');
+                line(mode === 'general' ? 'TARIFA GENERAL' : 'PREVENTA RESIDENTES',335,'700 25px Arial, sans-serif','#52717d');
                 line(`${count} ${count === 1 ? 'clase' : 'clases'} de surf`,420,'800 54px Arial, sans-serif','#09465a');
                 rect(350,454,380,60,16,'#dceef2');
                 line(discount > 0 ? `${discount}% DE DESCUENTO` : 'PRECIO INDIVIDUAL',493,'800 26px Arial, sans-serif','#17647b');
-                line(`${money(average)} por clase${average % 1 ? ' (aprox.)' : ''}`,577,'400 30px Arial, sans-serif','#52717d');
+                line(`${money(average)} por clase`,577,'400 30px Arial, sans-serif','#52717d');
                 line('PRECIO TOTAL',667,'700 25px Arial, sans-serif','#52717d');
                 line(money(total),763,'800 82px Arial, sans-serif','#09465a');
                 line('Enero y febrero · Sujeto a disponibilidad de cupos',952,'400 24px Arial, sans-serif','#52717d');
@@ -1021,4 +1021,3 @@
     })();
 </script>
 </body></html>
-
