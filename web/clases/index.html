@@ -199,12 +199,15 @@
             overflow:hidden;
             opacity:0;visibility:hidden;pointer-events:none;
             transform:translateY(12px) scale(.96);
-            transition:opacity .25s ease,transform .25s ease,visibility .25s ease,background .2s ease;
+            transition:opacity .25s ease,transform .25s ease,visibility .25s ease,background .2s ease,width .25s ease;
         }
         .loa-wa-float.loa-wa-visible{opacity:1;visibility:visible;pointer-events:auto;transform:none;}
         .loa-wa-float svg{width:32px;height:32px;flex:none;display:block;fill:currentColor;}
+        .loa-wa-float .loa-wa-label{display:none;}
+        .loa-wa-float.loa-wa-book{width:214px;gap:12px;padding:0 16px;}
+        .loa-wa-float.loa-wa-book .loa-wa-label{display:inline;}
         .loa-wa-float:hover{background:#1ebe5d;}
-        @media(max-width:760px){.loa-wa-float{right:28px;bottom:calc(30px + env(safe-area-inset-bottom,0px));width:58px;height:58px;font-size:13px;}.loa-wa-float svg{width:29px;height:29px;}}
+        @media(max-width:760px){.loa-wa-float{right:28px;bottom:calc(30px + env(safe-area-inset-bottom,0px));width:58px;height:58px;font-size:13px;}.loa-wa-float svg{width:29px;height:29px;}.loa-wa-float.loa-wa-book{width:190px;gap:9px;padding:0 13px;}}
 
         .loa-site-nav {
             position:fixed; z-index:100; top:0; left:0; right:0;
@@ -414,6 +417,23 @@
         }
     </style>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <link rel="preload" as="image" href="images/portadamen.jpg" media="(min-width:761px)" fetchpriority="high">
     <link rel="preload" as="image" href="images/portadaleimobile.png" media="(max-width:760px)" fetchpriority="high">
 </head>
@@ -442,7 +462,7 @@
         <div class="wrap">
             <div class="surf-experience">
                 <h2 id="surf-experience-title">Mucho más que aprender a surfear.</h2>
-                <p>En LOA vas a encontrar mucho más que una clase. Un espacio para divertirte, disfrutar del mar y compartir buenos momentos, acompañado por un excelente equipo de profesores que te va a hacer sentir parte desde el primer día.</p>
+                <p>Un espacio para divertirte, disfrutar del mar y compartir buenos momentos, acompañado por un excelente equipo de profesores que te va a hacer sentir parte desde el primer día.</p>
             </div>
         </div>
     </section>
@@ -451,7 +471,7 @@
             <div class="surf-lesson-intro">
                 <span class="label">LA CLASE DE SURF</span>
                 <h2 class="heading">Dos horas para conectar con el mar.</h2>
-                <p class="section-blurb">Cada clase dura aproximadamente <strong>2 horas</strong>. Un encuentro para aprender la técnica, preparar el cuerpo, practicar en el mar y seguir mejorando.</p>
+                <p class="section-blurb">Un encuentro para aprender la técnica, preparar el cuerpo, practicar en el mar y seguir mejorando.</p>
                 <p class="section-blurb surf-all-ages"><strong>Para todas las edades y niveles.</strong> No importa si es tu primera vez sobre una tabla o si ya tenés experiencia: nuestras clases se adaptan a cada persona.</p>
             </div>
             <div class="surf-lesson-flow" aria-label="Las cuatro etapas de la clase de surf">
@@ -564,7 +584,7 @@
                 <button type="button" class="surf-quote-copy" id="surfQuoteShare">Compartir presupuesto</button>
                 <button type="button" class="surf-quote-info-button" id="surfQuoteInfo">Ver cuadro informativo</button>
             </div>
-            <p class="surf-quote-note">Clases válidas durante enero y febrero, sujetas a disponibilidad de cupos.</p>
+            <p class="surf-quote-note">Los packs de 30 clases o más se pueden compartir en familia.</p>
         </div>
         <dialog class="surf-info-dialog" id="surfQuoteDialog" aria-labelledby="surfInfoTitle">
             <div class="surf-info-title"><h3 id="surfInfoTitle">Valores de las clases</h3><button type="button" class="surf-info-close" id="surfInfoClose" aria-label="Cerrar cuadro informativo">×</button></div>
@@ -761,7 +781,7 @@
         if (!slider || !track) return;
 
         // Mismo sistema de transformaciones que el carrusel de Colonia.
-        const AUTO_SPEED = 32; // px/segundo: conservamos la velocidad aprobada.
+        const AUTO_SPEED = 40; // px/segundo: movimiento suave, un poco más rápido.
         const RESUME_DELAY = 700;
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const originals = [...track.children];
@@ -825,10 +845,10 @@
 
         if ('IntersectionObserver' in window) {
             const visibilityObserver = new IntersectionObserver(entries => {
-                const nextVisible = entries[0].intersectionRatio >= .05;
+                const nextVisible = entries[0].intersectionRatio >= .99;
                 if (nextVisible && !isVisible) lastTime = performance.now();
                 isVisible = nextVisible;
-            }, {threshold:[0, .05, 1]});
+            }, {threshold:[0, .99, 1]});
             visibilityObserver.observe(slider);
         } else {
             isVisible = true;
@@ -888,6 +908,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.496.099-.198.05-.372-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.273.297-1.04 1.016-1.04 2.479s1.064 2.876 1.213 3.074c.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.97 9.97 0 0 1-5.031-1.378l-.361-.214-3.741.981.999-3.648-.235-.374a9.96 9.96 0 0 1-1.523-5.317c.002-5.498 4.476-9.972 9.977-9.972a9.91 9.91 0 0 1 7.053 2.92 9.91 9.91 0 0 1 2.918 7.053c-.002 5.499-4.476 9.973-9.976 9.973m8.485-18.457A11.88 11.88 0 0 0 12.053 0C5.495 0 .16 5.334.157 11.893c-.001 2.096.547 4.141 1.588 5.945L.057 24l6.304-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.557 0 11.893-5.335 11.896-11.893a11.82 11.82 0 0 0-3.487-8.427Z"/>
     </svg>
+    <span class="loa-wa-label">Reservá tu clase</span>
 </a>
 <script>
     /* Navegación idéntica a Colonia: scroll > 45px, menú con hamburguesa y cierre al elegir. */
@@ -896,11 +917,15 @@
         const toggle=document.getElementById('loa-menu-toggle');
         const menu=document.getElementById('loa-menu-principal');
         const wa=document.getElementById('loa-wa-float');
+        const pricing=document.getElementById('paquetes');
         if(!nav||!toggle||!menu)return;
         const setScrolled=()=>{
             const scrolled=window.scrollY>45;
             nav.classList.toggle('loa-nav-scrolled',scrolled);
-            if(wa)wa.classList.toggle('loa-wa-visible',scrolled);
+            if(wa){
+                wa.classList.toggle('loa-wa-visible',scrolled);
+                wa.classList.toggle('loa-wa-book',scrolled && !!pricing && pricing.getBoundingClientRect().bottom <= window.innerHeight*.92);
+            }
         };
         const setOpen=(open)=>{
             menu.classList.toggle('open',open);
