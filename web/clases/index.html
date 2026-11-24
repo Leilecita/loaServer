@@ -190,7 +190,7 @@
         }
         @media(max-width:760px){#horarios .surf-hours-notice-card{margin-top:25px;}.finish{background-image:linear-gradient(180deg,rgba(3,44,58,.24) 0%,rgba(3,44,58,.10) 48%,rgba(3,44,58,.38) 100%),url("images/bottom mobile.jpg");}}
         .loa-wa-float{
-            position:fixed;right:38px;bottom:40px;z-index:90;
+            position:fixed;right:38px;bottom:max(40px,var(--wa-social-clearance,0px));z-index:90;
             display:inline-flex;align-items:center;justify-content:center;gap:0;
             width:62px;height:62px;padding:0;border-radius:999px;
             background:#25d366;color:#fff;text-decoration:none;
@@ -207,7 +207,7 @@
         .loa-wa-float.loa-wa-book{width:214px;gap:12px;padding:0 16px;}
         .loa-wa-float.loa-wa-book .loa-wa-label{display:inline;}
         .loa-wa-float:hover{background:#1ebe5d;}
-        @media(max-width:760px){.loa-wa-float{right:28px;bottom:calc(30px + env(safe-area-inset-bottom,0px));width:58px;height:58px;font-size:13px;}.loa-wa-float svg{width:29px;height:29px;}.loa-wa-float.loa-wa-book{width:190px;gap:9px;padding:0 13px;}}
+        @media(max-width:760px){.loa-wa-float{right:28px;bottom:max(calc(30px + env(safe-area-inset-bottom,0px)),var(--wa-social-clearance,0px));width:58px;height:58px;font-size:13px;}.loa-wa-float svg{width:29px;height:29px;}.loa-wa-float.loa-wa-book{width:190px;gap:9px;padding:0 13px;}}
 
         .loa-site-nav {
             position:fixed; z-index:100; top:0; left:0; right:0;
@@ -919,6 +919,7 @@
         const menu=document.getElementById('loa-menu-principal');
         const wa=document.getElementById('loa-wa-float');
         const pricing=document.getElementById('paquetes');
+        const socialIcons=document.querySelector('#contacto .surf-finish-socials a');
         if(!nav||!toggle||!menu)return;
         const setScrolled=()=>{
             const scrolled=window.scrollY>45;
@@ -926,6 +927,10 @@
             if(wa){
                 wa.classList.toggle('loa-wa-visible',scrolled);
                 wa.classList.toggle('loa-wa-book',scrolled && !!pricing && pricing.getBoundingClientRect().bottom <= window.innerHeight*.92);
+                // Al acercarse a las redes del pie, detener el botón antes de que las tape.
+                const socialTop=socialIcons?.getBoundingClientRect().top ?? window.innerHeight;
+                const clearance=Math.max(0,Math.ceil(window.innerHeight-socialTop+20));
+                wa.style.setProperty('--wa-social-clearance',`${clearance}px`);
             }
         };
         const setOpen=(open)=>{
@@ -940,7 +945,7 @@
         });
         document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
         window.addEventListener('scroll',setScrolled,{passive:true});
-        window.addEventListener('resize',()=>setOpen(false),{passive:true});
+        window.addEventListener('resize',()=>{setOpen(false);setScrolled();},{passive:true});
         setScrolled();
     })();
 </script>
@@ -971,4 +976,5 @@
     })();
 </script>
 </body></html>
+
 
